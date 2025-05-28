@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Cysharp.Threading.Tasks;
 using GameLogic;
 using TEngine;
 #pragma warning disable CS0436
@@ -23,7 +24,7 @@ public partial class GameApp
         Log.Warning("======= 看到此条日志代表你成功运行了热更新代码 =======");
         Log.Warning("======= Entrance GameApp =======");
         Utility.Unity.AddDestroyListener(Release);
-        StartGameLogic();
+        OpenMainMenuScene().Forget();
     }
     
     private static void StartGameLogic()
@@ -31,6 +32,15 @@ public partial class GameApp
         GameEvent.Get<ILoginUI>().ShowLoginUI();
         GameModule.UI.ShowUIAsync<BattleMainUI>();
     }
+    
+    private static async UniTaskVoid OpenMainMenuScene()
+    {
+        UIModule.Instance.Active();
+        await GameModule.Scene.LoadSceneAsync("mainMenu");
+        HomeSystem.Instance.LoadHomeSystem().Forget();
+        
+    }
+    
     
     private static void Release()
     {

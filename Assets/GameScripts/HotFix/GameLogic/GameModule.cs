@@ -1,5 +1,6 @@
 ﻿using GameLogic;
 using TEngine;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class GameModule
@@ -114,5 +115,11 @@ public class GameModule
         _scene = null;
         _timer = null;
         _localization = null;
+        
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        return;
     }
 }

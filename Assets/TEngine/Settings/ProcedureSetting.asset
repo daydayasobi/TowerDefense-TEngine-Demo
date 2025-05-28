@@ -20,6 +20,7 @@ MonoBehaviour:
   - Procedure.ProcedureInitPackage
   - Procedure.ProcedureInitResources
   - Procedure.ProcedureLaunch
+  - Procedure.ProcedureLevel
   - Procedure.ProcedureLoadAssembly
   - Procedure.ProcedurePreload
   - Procedure.ProcedureSplash
