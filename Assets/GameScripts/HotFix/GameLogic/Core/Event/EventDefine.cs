@@ -20,5 +20,9 @@ namespace GameLogic
         public static readonly int HideEnemy = RuntimeId.ToRuntimeId("EventDefine.HideEnemy");
         public static readonly int ShowEntityInLevel = RuntimeId.ToRuntimeId("EventDefine.ShowEntityInLevel");
         public static readonly int HideEntityInLevel = RuntimeId.ToRuntimeId("EventDefine.HideEntityInLevel");
+        
+        //entity loder
+        public static readonly int OnShowEntitySuccess = RuntimeId.ToRuntimeId("EventDefine.OnShowEntitySuccess");
+        public static readonly int OnShowEntityFail = RuntimeId.ToRuntimeId("EventDefine.OnShowEntityFail");
     }
 }

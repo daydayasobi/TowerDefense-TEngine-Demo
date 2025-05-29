@@ -1,21 +1,223 @@
 using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityTowerPreview : MonoBehaviour
+    public class EntityTowerPreview : EntityLogic
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField]
+        private float sphereCastRadius = 1;
+        [SerializeField]
+        private float dampSpeed = 5;
+        [SerializeField]
+        private LayerMask ghostWorldPlacementMask;
+        [SerializeField]
+        private LayerMask placementAreaMask;
+        [SerializeField]
+        private Material material;
+        [SerializeField]
+        private Material invalidPositionMaterial;
+
+        private IPlacementArea currentArea;
+        private IntVector2 m_GridPosition;
+
+        private EntityDataTowerPreview entityDataTowerPreview;
+
+        private Vector3 targetPos;
+        private Vector3 moveVel;
+
+        private bool validPos = false;
+        private bool visible = true;
+        private bool canPlace = false;
+
+        private MeshRenderer[] renderers;
         
+        public bool CanPlace
+        {
+            get
+            {
+                return canPlace;
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void OnInit()
         {
+            base.OnInit();
+            
+            Log.Debug("OnInit EntityTowerPreview");
+            renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
+            entityDataTowerPreview = transform.GetComponent<EntityDataTowerPreview>();
+        }
+
+        protected override void OnShow()
+        {
+            base.OnShow();
+            
+            // entityDataTowerPreview = userData as EntityDataTowerPreview;
+            // if (entityDataTowerPreview == null)
+            // {
+            //     Log.Error("EntityDataTowerPreview param is invaild");
+            //     return;
+            // }
+
+            canPlace = false;
+            validPos = false;
+            moveVel = Vector3.zero;
+            SetVisiable(true);
+        }
+
+        protected override void OnHide(bool isShutdown)
+        {
+            base.OnHide(isShutdown);
+        }
+
+        protected override void Update()
+        {
+            if (entityDataTowerPreview == null)
+            {
+                renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
+                entityDataTowerPreview = new EntityDataTowerPreview();
+                return;
+            }
+            
+            MoveGhost(false);
+            
+            Vector3 currentPos = transform.position;
+
+            if (Vector3.SqrMagnitude(currentPos - targetPos) > 0.01f)
+            {
+                currentPos = Vector3.SmoothDamp(currentPos, targetPos, ref moveVel, dampSpeed);
+                transform.position = currentPos;
+            }
+            else
+            {
+                moveVel = Vector3.zero;
+            }
+        }
+
+        private void SetVisiable(bool value)
+        {
+            if (visible == value)
+                return;
+
+            if (visible == false)
+            {
+                moveVel = Vector3.zero;
+                validPos = false;
+            }
+
+            foreach (var item in renderers)
+            {
+                item.enabled = value;
+            }
+
+            visible = value;
+        }
         
+        private void MoveGhost(bool hideWhenInvalid = true)
+        {
+            Camera mainCamera = Camera.main;
+            if (mainCamera == null)
+            {
+                Log.Error("Main Camera not found!");
+                return;
+            }
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, float.MaxValue, placementAreaMask))
+            {
+                MoveGhostWithRaycastHit(hit);
+            }
+            else
+            {
+                MoveGhostOntoWorld(ray, hideWhenInvalid);
+            }
+
+        }
+        
+        private void MoveGhostWithRaycastHit(RaycastHit raycast)
+        {
+            currentArea = raycast.collider.GetComponent<IPlacementArea>();
+
+            if (currentArea == null)
+            {
+                Log.Error("There is not an IPlacementArea attached to the collider found on the m_PlacementAreaMask");
+                return;
+            }
+            m_GridPosition = currentArea.WorldToGrid(raycast.point, new IntVector2(2,2));
+            TowerFitStatus fits = currentArea.Fits(m_GridPosition, new IntVector2(2,2));
+            
+            SetVisiable(true);
+            canPlace = fits == TowerFitStatus.Fits;
+            Move(currentArea.GridToWorld(m_GridPosition, new IntVector2(2,2)),
+                currentArea.transform.rotation,
+                canPlace);
+        }
+
+        private void MoveGhostOntoWorld(Ray ray, bool hideWhenInvalid)
+        {
+            currentArea = null;
+
+            if (!hideWhenInvalid)
+            {
+                RaycastHit hit;
+                // check against all layers that the ghost can be on
+                Physics.SphereCast(ray, sphereCastRadius, out hit, float.MaxValue, ghostWorldPlacementMask);
+                if (hit.collider == null)
+                {
+                    return;
+                }
+                SetVisiable(true);
+                Move(hit.point, hit.collider.transform.rotation, false);
+            }
+            else
+            {
+                SetVisiable(false);
+            }
+        }
+
+        private void Move(Vector3 worldPosition, Quaternion rotation, bool validLocation)
+        {
+            targetPos = worldPosition;
+
+            if (!validPos)
+            {
+                // Immediately move to the given position
+                validPos = true;
+                transform.position = targetPos;
+            }
+
+            transform.rotation = rotation;
+            foreach (MeshRenderer meshRenderer in renderers)
+            {
+                meshRenderer.sharedMaterial = validLocation ? material : invalidPositionMaterial;
+            }
+        }
+
+        public bool TryBuildTower()
+        {
+            if (currentArea == null)
+            {
+                Log.Error("Current area is null");
+                return false;
+            }
+
+            Vector3 position = Vector3.zero;
+            Quaternion rotation = currentArea.transform.rotation;
+
+            TowerFitStatus fits = currentArea.Fits(m_GridPosition, entityDataTowerPreview.TowerData.Dimensions);
+
+            if (fits == TowerFitStatus.Fits)
+            {
+                position = currentArea.GridToWorld(m_GridPosition, entityDataTowerPreview.TowerData.Dimensions);
+                currentArea.Occupy(m_GridPosition, entityDataTowerPreview.TowerData.Dimensions);
+                // GameEntry.Event.Fire(this, BuildTowerEventArgs.Create(entityDataTowerPreview.TowerData, currentArea, m_GridPosition, position, rotation));
+                return true;
+            }
+
+            return false;
         }
     }
 }
