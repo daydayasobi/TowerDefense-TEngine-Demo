@@ -11,7 +11,8 @@ namespace GameLogic
         private CameraInput cameraInput;
         private GameObject roomRoot;
 
-        private EntityLoader entityLoader;
+        // private EntityLoader entityLoader;
+        private EntityLoadCtrl entityLoaderCtrl;
 
         // private DataLevel dataLevel;
         // private DataPlayer dataPlayer;
@@ -27,7 +28,8 @@ namespace GameLogic
         public void OnEnter()
         {
             GameModule.UI.ShowUI<LevelMainInfoUI>();
-            entityLoader = EntityLoader.Create(roomRoot);
+            // entityLoader = EntityLoader.Create(roomRoot);
+            entityLoaderCtrl = EntityLoadCtrl.Create(roomRoot);
         }
 
         public void Update()
@@ -38,52 +40,60 @@ namespace GameLogic
                 {
                     previewTowerEntityLogic.TryBuildTower();
                 }
-                if (Input.GetMouseButtonDown(1))
-                {
-                    HidePreviewTower();
-                }
+                // if (Input.GetMouseButtonDown(1))
+                // {
+                //     HidePreviewTower();
+                // }
             }
             else
             {
             }
         }
 
+        // public void ShowPreviewTower()
+        // {
+        //     previewTowerData = new TowerData();
+        //
+        //     entityLoader.ShowEntity<EntityTowerPreview>(previewTowerData.PreviewEntityId, (entity) =>
+        //         {
+        //             previewTowerEntity = entity;
+        //             previewTowerEntityLogic = entity.Logic as EntityTowerPreview;
+        //             if (previewTowerEntityLogic == null)
+        //             {
+        //                 Log.Error("Entity '{0}' logic type invaild, need EntityTowerPreview", previewTowerEntity.Id);
+        //                 return;
+        //             }
+        //         },
+        //         EntityDataTowerPreview.Create(previewTowerData));
+        //     isBuilding = true;
+        // }
+        //
+        // public void HidePreviewTower()
+        // {
+        //     // if (uiMaskFormSerialId != null)
+        //     //     GameEntry.UI.CloseUIForm((int)uiMaskFormSerialId);
+        //
+        //     // GameEntry.Event.Fire(this, HidePreviewTowerEventArgs.Create(previewTowerData));
+        //
+        //     // if (previewTowerEntity != null)
+        //     //     entityLoader.HideEntity(previewTowerEntity);
+        //     //
+        //     // uiMaskFormSerialId = null;
+        //
+        //     previewTowerEntity = null;
+        //     previewTowerData = null;
+        //
+        //     isBuilding = false;
+        // }
+
         public void ShowPreviewTower()
         {
-            //var gameObject = PoolManager.Instance.GetGameObject("AssaultCannon_Level1", parent: roomRoot.transform);
-
-            previewTowerData = new TowerData();
-
-            entityLoader.ShowEntity<EntityTowerPreview>(previewTowerData.PreviewEntityId, (entity) =>
-                {
-                    previewTowerEntity = entity;
-                    previewTowerEntityLogic = entity.Logic as EntityTowerPreview;
-                    if (previewTowerEntityLogic == null)
-                    {
-                        Log.Error("Entity '{0}' logic type invaild, need EntityTowerPreview", previewTowerEntity.Id);
-                        return;
-                    }
-                },
-                EntityDataTowerPreview.Create(previewTowerData));
-            isBuilding = true;
-        }
-        
-        public void HidePreviewTower()
-        {
-            // if (uiMaskFormSerialId != null)
-            //     GameEntry.UI.CloseUIForm((int)uiMaskFormSerialId);
-
-            // GameEntry.Event.Fire(this, HidePreviewTowerEventArgs.Create(previewTowerData));
-
-            // if (previewTowerEntity != null)
-            //     entityLoader.HideEntity(previewTowerEntity);
-            //
-            // uiMaskFormSerialId = null;
-
-            previewTowerEntity = null;
-            previewTowerData = null;
-
-            isBuilding = false;
+            TowerData towerData = new TowerData();
+            previewTowerData = towerData;
+            entityLoaderCtrl.ShowEntity<EntityTowerPreview>(1, (entity) =>
+            {
+                
+            });
         }
 
         public void StartWave()

@@ -11,12 +11,12 @@ namespace GameLogic
             get;
             private set;
         }
-        
+
         public EntityDataTowerPreview() : base()
         {
             TowerData = null;
         }
-        
+
         public static EntityDataTowerPreview Create(TowerData towerData, object userData = null)
         {
             // EntityDataTowerPreview entityData = ReferencePool.Acquire<EntityDataTowerPreview>();
@@ -24,7 +24,7 @@ namespace GameLogic
             entityData.TowerData = towerData;
             return entityData;
         }
-        
+
         public override void Clear()
         {
             base.Clear();
