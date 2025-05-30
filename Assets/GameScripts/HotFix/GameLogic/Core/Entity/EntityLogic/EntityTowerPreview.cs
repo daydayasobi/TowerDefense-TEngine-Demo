@@ -23,7 +23,7 @@ namespace GameLogic
         private IPlacementArea currentArea;
         private IntVector2 m_GridPosition;
 
-        private EntityDataTowerPreview entityDataTowerPreview;
+        private EntityDataCtrlTowerPreview entityDataCtrlTowerPreview;
 
         private Vector3 targetPos;
         private Vector3 moveVel;
@@ -45,22 +45,20 @@ namespace GameLogic
         public override void OnInit()
         {
             base.OnInit();
-            
-            Log.Debug("OnInit EntityTowerPreview");
+            Log.Debug("EntityTowerPreview OnInit");
             renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
-            entityDataTowerPreview = transform.GetComponent<EntityDataTowerPreview>();
         }
 
-        protected override void OnShow()
+        public override void OnShow(object userData)
         {
-            base.OnShow();
-            
-            // entityDataTowerPreview = userData as EntityDataTowerPreview;
-            // if (entityDataTowerPreview == null)
-            // {
-            //     Log.Error("EntityDataTowerPreview param is invaild");
-            //     return;
-            // }
+            base.OnShow(userData);
+            Debug.Log("EntityTowerPreview OnShow");
+            entityDataCtrlTowerPreview = userData as EntityDataCtrlTowerPreview;
+            if (entityDataCtrlTowerPreview == null)
+            {
+                Log.Error("EntityDataTowerPreview param is invalid");
+                return;
+            }
 
             canPlace = false;
             validPos = false;
@@ -68,17 +66,11 @@ namespace GameLogic
             SetVisiable(true);
         }
 
-        protected override void OnHide(bool isShutdown)
-        {
-            base.OnHide(isShutdown);
-        }
-
         protected override void Update()
         {
-            if (entityDataTowerPreview == null)
+            if (entityDataCtrlTowerPreview == null)
             {
-                renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
-                entityDataTowerPreview = new EntityDataTowerPreview();
+                Log.Debug("entityDataCtrlTowerPreview is null, return");
                 return;
             }
             
@@ -95,6 +87,22 @@ namespace GameLogic
             {
                 moveVel = Vector3.zero;
             }
+        }
+
+        protected void OnHide(bool isShutdown, object userData)
+        {
+            base.OnHide(isShutdown, userData);
+            
+            if (entityDataCtrlTowerPreview != null)
+            {
+                entityDataCtrlTowerPreview.Clear();
+                PoolReference.Release(entityDataCtrlTowerPreview);
+                entityDataCtrlTowerPreview = null;
+            }
+
+            SetVisiable(false);
+            currentArea = null;
+            m_GridPosition = IntVector2.zero;
         }
 
         private void SetVisiable(bool value)
@@ -118,12 +126,6 @@ namespace GameLogic
         
         private void MoveGhost(bool hideWhenInvalid = true)
         {
-            Camera mainCamera = Camera.main;
-            if (mainCamera == null)
-            {
-                Log.Error("Main Camera not found!");
-                return;
-            }
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, float.MaxValue, placementAreaMask))
@@ -146,12 +148,12 @@ namespace GameLogic
                 Log.Error("There is not an IPlacementArea attached to the collider found on the m_PlacementAreaMask");
                 return;
             }
-            m_GridPosition = currentArea.WorldToGrid(raycast.point, new IntVector2(2,2));
-            TowerFitStatus fits = currentArea.Fits(m_GridPosition, new IntVector2(2,2));
+            m_GridPosition = currentArea.WorldToGrid(raycast.point, entityDataCtrlTowerPreview.TowerData.Dimensions);
+            TowerFitStatus fits = currentArea.Fits(m_GridPosition,  entityDataCtrlTowerPreview.TowerData.Dimensions);
             
             SetVisiable(true);
             canPlace = fits == TowerFitStatus.Fits;
-            Move(currentArea.GridToWorld(m_GridPosition, new IntVector2(2,2)),
+            Move(currentArea.GridToWorld(m_GridPosition,  entityDataCtrlTowerPreview.TowerData.Dimensions),
                 currentArea.transform.rotation,
                 canPlace);
         }
@@ -207,12 +209,12 @@ namespace GameLogic
             Vector3 position = Vector3.zero;
             Quaternion rotation = currentArea.transform.rotation;
 
-            TowerFitStatus fits = currentArea.Fits(m_GridPosition, entityDataTowerPreview.TowerData.Dimensions);
+            TowerFitStatus fits = currentArea.Fits(m_GridPosition, entityDataCtrlTowerPreview.TowerData.Dimensions);
 
             if (fits == TowerFitStatus.Fits)
             {
-                position = currentArea.GridToWorld(m_GridPosition, entityDataTowerPreview.TowerData.Dimensions);
-                currentArea.Occupy(m_GridPosition, entityDataTowerPreview.TowerData.Dimensions);
+                position = currentArea.GridToWorld(m_GridPosition, entityDataCtrlTowerPreview.TowerData.Dimensions);
+                currentArea.Occupy(m_GridPosition, entityDataCtrlTowerPreview.TowerData.Dimensions);
                 // GameEntry.Event.Fire(this, BuildTowerEventArgs.Create(entityDataTowerPreview.TowerData, currentArea, m_GridPosition, position, rotation));
                 return true;
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityDataTowerPreview : EntityData
+    public class EntityDataCtrlTowerPreview : EntityDataCtrl
     {
         public TowerData TowerData
         {
@@ -12,15 +12,14 @@ namespace GameLogic
             private set;
         }
 
-        public EntityDataTowerPreview() : base()
+        public EntityDataCtrlTowerPreview() : base()
         {
             TowerData = null;
         }
 
-        public static EntityDataTowerPreview Create(TowerData towerData, object userData = null)
+        public static EntityDataCtrlTowerPreview Create(TowerData towerData, object userData = null)
         {
-            // EntityDataTowerPreview entityData = ReferencePool.Acquire<EntityDataTowerPreview>();
-            EntityDataTowerPreview entityData = new EntityDataTowerPreview();
+            EntityDataCtrlTowerPreview entityData = PoolReference.Acquire<EntityDataCtrlTowerPreview>();
             entityData.TowerData = towerData;
             return entityData;
         }

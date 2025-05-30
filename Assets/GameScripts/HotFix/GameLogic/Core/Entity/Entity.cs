@@ -66,28 +66,31 @@ namespace GameLogic
         /// <param name="userData">用户自定义数据。</param>
         public void OnInit(int entityId, string entityAssetName, bool isNewInstance, object userData)
         {
-            // m_Id = entityId;
-            // m_EntityAssetName = entityAssetName;
-            //
-            // m_EntityLogic = gameObject.GetComponent(entityLogicType) as EntityLogic;
-            //
-            // if (m_EntityLogic == null)
-            //     m_EntityLogic = gameObject.AddComponent(entityLogicType) as EntityLogic;
-            //
-            // if (m_EntityLogic == null)
-            // {
-            //     Log.Error("Entity '{0}' can not add entity logic.", entityAssetName);
-            //     return;
-            // }
-            //
-            // try
-            // {
-            //     m_EntityLogic.OnInit();
-            // }
-            // catch (Exception exception)
-            // {
-            //     Log.Error("Entity '[{0}]{1}' OnInit with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
-            // }
+            
+            Log.Debug("Entity OnInit: {0}, {1}, {2}, {3}", entityId, entityAssetName, isNewInstance, userData);
+            
+            m_Id = entityId;
+            m_EntityAssetName = entityAssetName;
+
+            m_EntityLogic = gameObject.GetComponent<EntityLogic>();
+            
+            if (m_EntityLogic == null)
+                m_EntityLogic = gameObject.GetComponent<EntityLogic>();
+            
+            if (m_EntityLogic == null)
+            {
+                Log.Error("Entity '{0}' can not add entity logic.", entityAssetName);
+                return;
+            }
+            
+            try
+            {
+                m_EntityLogic.OnInit();
+            }
+            catch (Exception exception)
+            {
+                Log.Error("Entity '[{0}]{1}' OnInit with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
+            }
         }
     }
 }

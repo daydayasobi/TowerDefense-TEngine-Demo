@@ -85,6 +85,14 @@ public class GameModule
     public static ILocalizationModule Localization => _localization ??= Get<ILocalizationModule>();
     
     private static ILocalizationModule _localization;
+    
+    /// <summary>
+    /// 获取实体管理模块。
+    /// </summary>
+    public static IEntityManagerModule EntityManager => _entityManager ??= Get<IEntityManagerModule>();
+    
+    private static IEntityManagerModule _entityManager = null;
+    
     #endregion
     
     /// <summary>
@@ -115,6 +123,7 @@ public class GameModule
         _scene = null;
         _timer = null;
         _localization = null;
+        _entityManager = null;
         
         Application.Quit();
 #if UNITY_EDITOR

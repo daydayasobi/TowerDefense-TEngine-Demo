@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityData : IMemory
+    public class EntityDataCtrl : IMemory
     {
         protected Vector3 m_Position = Vector3.zero;
 
         protected Quaternion m_Rotation = Quaternion.identity;
         
-        public EntityData()
+        public EntityDataCtrl()
         {
             m_Position = Vector3.zero;
             m_Rotation = Quaternion.identity;
@@ -54,34 +54,31 @@ namespace GameLogic
             protected set;
         }
 
-        public static EntityData Create(object userData = null)
+        public static EntityDataCtrl Create(object userData = null)
         {
-            // EntityData entityData = ReferencePool.Acquire<EntityData>();
-            EntityData entityData = new EntityData();
-            entityData.Position = Vector3.zero;
-            entityData.Rotation = Quaternion.identity;
-            entityData.UserData = userData;
-            return entityData;
+            EntityDataCtrl EntityDataCtrl = PoolReference.Acquire<EntityDataCtrl>();
+            EntityDataCtrl.Position = Vector3.zero;
+            EntityDataCtrl.Rotation = Quaternion.identity;
+            EntityDataCtrl.UserData = userData;
+            return EntityDataCtrl;
         }
 
-        public static EntityData Create(Vector3 position, object userData = null)
+        public static EntityDataCtrl Create(Vector3 position, object userData = null)
         {
-            // EntityData entityData = ReferencePool.Acquire<EntityData>();
-            EntityData entityData = new EntityData();
-            entityData.Position = position;
-            entityData.Rotation = Quaternion.identity;
-            entityData.UserData = userData;
-            return entityData;
+            EntityDataCtrl EntityDataCtrl = PoolReference.Acquire<EntityDataCtrl>();
+            EntityDataCtrl.Position = position;
+            EntityDataCtrl.Rotation = Quaternion.identity;
+            EntityDataCtrl.UserData = userData;
+            return EntityDataCtrl;
         }
 
-        public static EntityData Create(Vector3 position, Quaternion quaternion, object userData = null)
+        public static EntityDataCtrl Create(Vector3 position, Quaternion quaternion, object userData = null)
         {
-            // EntityData entityData = ReferencePool.Acquire<EntityData>();
-            EntityData entityData = new EntityData();
-            entityData.Position = position;
-            entityData.Rotation = quaternion;
-            entityData.UserData = userData;
-            return entityData;
+            EntityDataCtrl EntityDataCtrl = PoolReference.Acquire<EntityDataCtrl>();
+            EntityDataCtrl.Position = position;
+            EntityDataCtrl.Rotation = quaternion;
+            EntityDataCtrl.UserData = userData;
+            return EntityDataCtrl;
         }
 
         public virtual void Clear()

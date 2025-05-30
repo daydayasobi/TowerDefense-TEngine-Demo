@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityDataTower : MonoBehaviour
+    public class Targetter : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

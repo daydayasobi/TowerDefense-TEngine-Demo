@@ -1,74 +1,103 @@
 using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
 namespace GameLogic
 {
-    public class TowerData 
+    public class DRTower
     {
-        // private DRTower dRTower;
+        public int Id { get; set; }
+        public int NameId { get; set; }
+        public string Icon { get; set; }
+        public int EntityId { get; set; }
+        public int PreviewEntityId { get; set; }
+        public int ProjectileEntityId { get; set; }
+        public int MaxHP { get; set; }
+        
+        public IntVector2 Dimensions { get; set; }
+        public string Type { get; set; }
+    }
+
+    public class TowerData
+    {
+        private DRTower dRTower;
         private TowerLevelData[] towerLevels;
 
         public int Id
         {
-            get
-            {
-                return 101;
-            }
+            get { return dRTower.Id; }
         }
 
         public string Name
         {
-            get
-            {
-                return "AssaultCannon_Level1";
-            }
+            get { return dRTower.NameId.ToString(); }
         }
 
-        // public string Icon
-        // {
-        //     get
-        //     {
-        //         return dRTower.Icon;
-        //     }
-        // }
+        public string Icon
+        {
+            get { return dRTower.Icon; }
+        }
 
         public int EntityId
         {
-            get
-            {
-                return 1007;
-            }
+            get { return dRTower.EntityId; }
         }
 
         public int PreviewEntityId
         {
-            get
-            {
-                return 1017;
-            }
+            get { return dRTower.PreviewEntityId; }
         }
 
-        public bool IsMultiAttack
+        public int ProjectileEntityId
         {
-            get
-            {
-                return false;
-            }
+            get { return dRTower.ProjectileEntityId; }
         }
+
+        // public string ProjectileType
+        // {
+        //     get { return dRTower.ProjectileType; }
+        // }
+        //
+        // public bool IsMultiAttack
+        // {
+        //     get { return dRTower.IsMultiAttack; }
+        // }
 
         public float MaxHP
         {
-            get
-            {
-                return 5;
-            }
+            get { return dRTower.MaxHP; }
+        }
+
+        public IntVector2 Dimensions { get; private set; }
+
+        public string Type
+        {
+            get { return dRTower.Type; }
+        }
+
+        public TowerData(DRTower dRTower, TowerLevelData[] towerLevels)
+        {
+            this.dRTower = dRTower;
+            this.towerLevels = towerLevels;
         }
         
-        public IntVector2 Dimensions
+        public TowerData(DRTower dRTower)
         {
-            get;
-            private set;
+            this.dRTower = dRTower;
+        }
+
+        public TowerLevelData GetTowerLevelData(int level)
+        {
+            if (towerLevels == null || level > GetMaxLevel())
+                return null;
+
+            return towerLevels[level];
+        }
+
+        public int GetMaxLevel()
+        {
+            return towerLevels == null ? 0 : towerLevels.Length - 1;
         }
     }
 }

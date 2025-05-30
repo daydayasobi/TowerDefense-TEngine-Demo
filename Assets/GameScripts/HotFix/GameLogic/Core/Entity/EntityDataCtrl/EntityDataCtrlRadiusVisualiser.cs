@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityDataRadiusVisualiser : EntityData
+    public class EntityDataCtrlRadiusVisualiser : EntityData
     {
         public float Radius
         {
@@ -12,15 +12,14 @@ namespace GameLogic
             private set;
         }
 
-        public EntityDataRadiusVisualiser() : base()
+        public EntityDataCtrlRadiusVisualiser() : base()
         {
             Radius = 0f;
         }
 
-        public static EntityDataRadiusVisualiser Create(float radius, object userData = null)
+        public static EntityDataCtrlRadiusVisualiser Create(float radius, object userData = null)
         {
-            // EntityDataRadiusVisualiser entityData = ReferencePool.Acquire<EntityDataRadiusVisualiser>();
-            EntityDataRadiusVisualiser entityData = new EntityDataRadiusVisualiser();
+            EntityDataCtrlRadiusVisualiser entityData = PoolReference.Acquire<EntityDataCtrlRadiusVisualiser>();
             entityData.Radius = radius;
             return entityData;
         }

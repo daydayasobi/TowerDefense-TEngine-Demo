@@ -4,26 +4,21 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityLogic : MonoBehaviour
+    public class EntityLogic : Entity
     {
-
-        
         public virtual void OnInit()
         {
-            
         }
 
         protected virtual void Update()
         {
-            
         }
 
-        protected virtual void OnShow()
+        public virtual void OnShow(object userData)
         {
-            
         }
-        
-        protected virtual void OnHide(bool isShutdown)
+
+        protected virtual void OnHide(bool isShutdown, object userData)
         {
             // Cleanup logic if needed
         }
