@@ -5,7 +5,10 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class LevelControl
+    /// <summary>
+    /// 关卡控制类，负责管理关卡中的各种逻辑，如塔的创建、敌人的生成、暂停、重启等。
+    /// </summary>
+    public class LevelControl: IMemory
     {
         private LevelManager levelManager;
         private CameraInput cameraInput;

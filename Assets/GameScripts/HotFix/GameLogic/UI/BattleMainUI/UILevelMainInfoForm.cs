@@ -1,0 +1,97 @@
+using UnityEngine;
+using UnityEngine.UI;
+using TEngine;
+
+namespace GameLogic
+{
+    [Window(UILayer.UI)]
+    class UILevelMainInfoForm : UIWindow
+    {
+        #region 脚本工具生成的代码
+        private Text m_textHP;
+        private Text m_textEnergy;
+        private GameObject m_goWaveInfo;
+        private Text m_textWave;
+        private Image m_imgSliderForeground;
+        private Button m_btnStartWaveButton;
+        private Button m_btnDebugAddCurrency;
+        private Text m_textCurrencyAmount;
+        private Button m_btnButtonPause;
+        protected override void ScriptGenerator()
+        {
+            m_textHP = FindChildComponent<Text>("PlayerInfo/m_textHP");
+            m_textEnergy = FindChildComponent<Text>("PlayerInfo/m_textEnergy");
+            m_goWaveInfo = FindChild("m_goWaveInfo").gameObject;
+            m_textWave = FindChildComponent<Text>("m_goWaveInfo/Background/m_textWave");
+            m_imgSliderForeground = FindChildComponent<Image>("m_goWaveInfo/Background/SliderBackground/m_imgSliderForeground");
+            m_btnStartWaveButton = FindChildComponent<Button>("m_btnStartWaveButton");
+            m_btnDebugAddCurrency = FindChildComponent<Button>("m_btnDebugAddCurrency");
+            m_textCurrencyAmount = FindChildComponent<Text>("m_btnDebugAddCurrency/Label/m_textCurrencyAmount");
+            m_btnButtonPause = FindChildComponent<Button>("m_btnButtonPause");
+            m_btnStartWaveButton.onClick.AddListener(OnClickStartWaveButtonBtn);
+            m_btnDebugAddCurrency.onClick.AddListener(OnClickDebugAddCurrencyBtn);
+            m_btnButtonPause.onClick.AddListener(OnClickButtonPauseBtn);
+        }
+        #endregion
+
+        #region 事件
+        // 开始波次按钮点击事件处理
+        private void OnClickStartWaveButtonBtn()
+        {
+            GameEvent.Send(LevelEvent.OnGameStartWave);
+        }
+        // 调试增加货币按钮点击事件处理
+        private void OnClickDebugAddCurrencyBtn()
+        {
+
+        }
+        // 暂停按钮点击事件处理
+        private void OnClickButtonPauseBtn()
+        {
+
+        }
+        #endregion
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+            GameEvent.AddEventListener<int>(LevelEvent.OnPlayerHPChange, OnPlayerHPChange);
+            GameEvent.AddEventListener(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.AddEventListener<int, int, float>(LevelEvent.OnWaveUpdate, OnWaveUpdate);
+            GameEvent.AddEventListener<int>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
+        }
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+        }
+        // 设置波次信息
+        private void SetWaveInfo(int currentWave, int totalWave, float progress)
+        {
+           m_textWave.text = string.Format("{0}/{1}", currentWave, totalWave);
+            m_imgSliderForeground.fillAmount = progress;
+        }
+
+        // 玩家生命值变化事件处理
+        private void OnPlayerHPChange(int CurrentHP)
+        {
+            m_textHP.text = CurrentHP.ToString();
+        }
+
+        // 玩家能量变化事件处理
+        private void OnPlayerEnergyChange(int CurrentEnergy)
+        {
+            m_textEnergy.text = CurrentEnergy.ToString();
+        }
+
+        // 关卡状态变化事件处理
+        private void OnLevelStateChange()
+        {
+
+        }
+
+        // 波次信息更新事件处理
+        private void OnWaveUpdate(int currentWave, int totalWave, float CurrentWaveProgress)
+        {
+            SetWaveInfo(currentWave,totalWave,currentWave);
+        }
+    }
+}

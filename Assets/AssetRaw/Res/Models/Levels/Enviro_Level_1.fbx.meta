@@ -1,83 +1,221 @@
 fileFormatVersion: 2
 guid: 4a4f98795c1bb4f299e0a3d35e32dc0e
-timeCreated: 1501852756
-licenseType: Store
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: Level01_Environment
-    100004: Level01_Environment_MeshPart0
-    100006: Level01_Environment_MeshPart1
-    100008: Level01_Road
-    100010: Level04_Pt1_Enviro
-    100012: Level04_Pt1_Road
-    100014: Level04_Pt2_Enviro
-    100016: Level04_Pt2_Road
-    100018: Level04_Pt3_Enviro
-    100020: Level04_Pt3_Road
-    100022: Level04_Pt4_Enviro
-    100024: Level04_Pt4_Road
-    100026: Level04_Pt5_Enviro
-    100028: Level04_Pt6_Enviro
-    400000: //RootNode
-    400002: Level01_Environment
-    400004: Level01_Environment_MeshPart0
-    400006: Level01_Environment_MeshPart1
-    400008: Level01_Road
-    400010: Level04_Pt1_Enviro
-    400012: Level04_Pt1_Road
-    400014: Level04_Pt2_Enviro
-    400016: Level04_Pt2_Road
-    400018: Level04_Pt3_Enviro
-    400020: Level04_Pt3_Road
-    400022: Level04_Pt4_Enviro
-    400024: Level04_Pt4_Road
-    400026: Level04_Pt5_Enviro
-    400028: Level04_Pt6_Enviro
-    2300000: Level01_Environment_MeshPart0
-    2300002: Level01_Environment_MeshPart1
-    2300004: Level01_Road
-    2300006: Level04_Pt1_Enviro
-    2300008: Level04_Pt1_Road
-    2300010: Level04_Pt2_Enviro
-    2300012: Level04_Pt2_Road
-    2300014: Level04_Pt3_Enviro
-    2300016: Level04_Pt3_Road
-    2300018: Level04_Pt4_Enviro
-    2300020: Level04_Pt4_Road
-    2300022: Level04_Pt5_Enviro
-    2300024: Level04_Pt6_Enviro
-    3300000: Level01_Environment_MeshPart0
-    3300002: Level01_Environment_MeshPart1
-    3300004: Level01_Road
-    3300006: Level04_Pt1_Enviro
-    3300008: Level04_Pt1_Road
-    3300010: Level04_Pt2_Enviro
-    3300012: Level04_Pt2_Road
-    3300014: Level04_Pt3_Enviro
-    3300016: Level04_Pt3_Road
-    3300018: Level04_Pt4_Enviro
-    3300020: Level04_Pt4_Road
-    3300022: Level04_Pt5_Enviro
-    3300024: Level04_Pt6_Enviro
-    4300000: Level01_Road
-    4300002: Level01_Environment_MeshPart0
-    4300004: Level01_Environment_MeshPart1
-    4300006: Level04_Pt1_Enviro
-    4300008: Level04_Pt2_Enviro
-    4300010: Level04_Pt4_Enviro
-    4300012: Level04_Pt5_Enviro
-    4300014: Level04_Pt6_Enviro
-    4300016: Level04_Pt1_Road
-    4300018: Level04_Pt2_Road
-    4300020: Level04_Pt3_Road
-    4300022: Level04_Pt4_Road
-    4300024: Level04_Pt3_Enviro
-    9500000: //RootNode
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Level01_Environment
+  - first:
+      1: 100004
+    second: Level01_Environment_MeshPart0
+  - first:
+      1: 100006
+    second: Level01_Environment_MeshPart1
+  - first:
+      1: 100008
+    second: Level01_Road
+  - first:
+      1: 100010
+    second: Level04_Pt1_Enviro
+  - first:
+      1: 100012
+    second: Level04_Pt1_Road
+  - first:
+      1: 100014
+    second: Level04_Pt2_Enviro
+  - first:
+      1: 100016
+    second: Level04_Pt2_Road
+  - first:
+      1: 100018
+    second: Level04_Pt3_Enviro
+  - first:
+      1: 100020
+    second: Level04_Pt3_Road
+  - first:
+      1: 100022
+    second: Level04_Pt4_Enviro
+  - first:
+      1: 100024
+    second: Level04_Pt4_Road
+  - first:
+      1: 100026
+    second: Level04_Pt5_Enviro
+  - first:
+      1: 100028
+    second: Level04_Pt6_Enviro
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Level01_Environment
+  - first:
+      4: 400004
+    second: Level01_Environment_MeshPart0
+  - first:
+      4: 400006
+    second: Level01_Environment_MeshPart1
+  - first:
+      4: 400008
+    second: Level01_Road
+  - first:
+      4: 400010
+    second: Level04_Pt1_Enviro
+  - first:
+      4: 400012
+    second: Level04_Pt1_Road
+  - first:
+      4: 400014
+    second: Level04_Pt2_Enviro
+  - first:
+      4: 400016
+    second: Level04_Pt2_Road
+  - first:
+      4: 400018
+    second: Level04_Pt3_Enviro
+  - first:
+      4: 400020
+    second: Level04_Pt3_Road
+  - first:
+      4: 400022
+    second: Level04_Pt4_Enviro
+  - first:
+      4: 400024
+    second: Level04_Pt4_Road
+  - first:
+      4: 400026
+    second: Level04_Pt5_Enviro
+  - first:
+      4: 400028
+    second: Level04_Pt6_Enviro
+  - first:
+      23: 2300000
+    second: Level01_Environment_MeshPart0
+  - first:
+      23: 2300002
+    second: Level01_Environment_MeshPart1
+  - first:
+      23: 2300004
+    second: Level01_Road
+  - first:
+      23: 2300006
+    second: Level04_Pt1_Enviro
+  - first:
+      23: 2300008
+    second: Level04_Pt1_Road
+  - first:
+      23: 2300010
+    second: Level04_Pt2_Enviro
+  - first:
+      23: 2300012
+    second: Level04_Pt2_Road
+  - first:
+      23: 2300014
+    second: Level04_Pt3_Enviro
+  - first:
+      23: 2300016
+    second: Level04_Pt3_Road
+  - first:
+      23: 2300018
+    second: Level04_Pt4_Enviro
+  - first:
+      23: 2300020
+    second: Level04_Pt4_Road
+  - first:
+      23: 2300022
+    second: Level04_Pt5_Enviro
+  - first:
+      23: 2300024
+    second: Level04_Pt6_Enviro
+  - first:
+      33: 3300000
+    second: Level01_Environment_MeshPart0
+  - first:
+      33: 3300002
+    second: Level01_Environment_MeshPart1
+  - first:
+      33: 3300004
+    second: Level01_Road
+  - first:
+      33: 3300006
+    second: Level04_Pt1_Enviro
+  - first:
+      33: 3300008
+    second: Level04_Pt1_Road
+  - first:
+      33: 3300010
+    second: Level04_Pt2_Enviro
+  - first:
+      33: 3300012
+    second: Level04_Pt2_Road
+  - first:
+      33: 3300014
+    second: Level04_Pt3_Enviro
+  - first:
+      33: 3300016
+    second: Level04_Pt3_Road
+  - first:
+      33: 3300018
+    second: Level04_Pt4_Enviro
+  - first:
+      33: 3300020
+    second: Level04_Pt4_Road
+  - first:
+      33: 3300022
+    second: Level04_Pt5_Enviro
+  - first:
+      33: 3300024
+    second: Level04_Pt6_Enviro
+  - first:
+      43: 4300000
+    second: Level01_Road
+  - first:
+      43: 4300002
+    second: Level01_Environment_MeshPart0
+  - first:
+      43: 4300004
+    second: Level01_Environment_MeshPart1
+  - first:
+      43: 4300006
+    second: Level04_Pt1_Enviro
+  - first:
+      43: 4300008
+    second: Level04_Pt2_Enviro
+  - first:
+      43: 4300010
+    second: Level04_Pt4_Enviro
+  - first:
+      43: 4300012
+    second: Level04_Pt5_Enviro
+  - first:
+      43: 4300014
+    second: Level04_Pt6_Enviro
+  - first:
+      43: 4300016
+    second: Level04_Pt1_Road
+  - first:
+      43: 4300018
+    second: Level04_Pt2_Road
+  - first:
+      43: 4300020
+    second: Level04_Pt3_Road
+  - first:
+      43: 4300022
+    second: Level04_Pt4_Road
+  - first:
+      43: 4300024
+    second: Level04_Pt3_Enviro
+  - first:
+      95: 9500000
+    second: //RootNode
   externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -86,6 +224,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -94,6 +233,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -108,32 +248,49 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 0
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -143,14 +300,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
