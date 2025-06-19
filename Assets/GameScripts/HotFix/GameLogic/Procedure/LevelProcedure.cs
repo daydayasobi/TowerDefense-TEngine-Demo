@@ -25,7 +25,7 @@ namespace GameLogic
                 Log.Error("Can not find CameraInput instance in scene");
                 return;
             }
-            // levelControl = LevelControl.Create(LevelDataManger.Instance.CurrentLevel, levelPathManager, cameraInput);
+            levelControl = LevelControl.Create(LevelDataManger.Instance.CurrentLevel, levelPathManager, cameraInput);
             GameModule.UI.ShowUI<UILevelMainInfoForm>();
             
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法
@@ -43,7 +43,7 @@ namespace GameLogic
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.AddEventListener(LevelEvent.OnGameStartWave, OnStartWave);
             // GameModule.UI.ShowUI<UITowerListForm>();
-            levelControl.OnEnter();
+            // levelControl.OnEnter();
         }
 
         protected override void OnUpdate(IFsm<IProcedureModule> procedureOwner, float elapseSeconds, float realElapseSeconds)

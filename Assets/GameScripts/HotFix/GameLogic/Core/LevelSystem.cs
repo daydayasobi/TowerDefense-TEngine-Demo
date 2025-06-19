@@ -38,7 +38,7 @@ namespace GameLogic
                 return;
             }
 
-            levelControl = LevelControl.Create(_roomRoot, levelPathManager, cameraInput);
+            // levelControl = LevelControl.Create(_roomRoot, levelPathManager, cameraInput);
 
             // 监听游戏事件
             GameEvent.AddEventListener(EventDefine.ChangeScene, OnChangeScene);
