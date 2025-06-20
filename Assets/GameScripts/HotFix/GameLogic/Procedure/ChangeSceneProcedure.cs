@@ -36,6 +36,7 @@ namespace GameLogic
 
         private async UniTaskVoid TestLevel1()
         {
+            LevelDataManger.Instance.LoadLevel(1);
             await GameModule.Scene.LoadSceneAsync("Level1");
             ChangeState<LevelProcedure>(procedureOwner);
         }

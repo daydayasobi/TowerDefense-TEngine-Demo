@@ -61,8 +61,8 @@ namespace GameLogic
 
         public void Update()
         {
-            if (levelControl != null)
-                levelControl.Update();
+            // if (levelControl != null)
+            //     levelControl.Update();
         }
 
         private void OnChangeScene()
@@ -83,7 +83,7 @@ namespace GameLogic
 
         private void OnShowPreviewTower()
         {
-            levelControl.ShowPreviewTower();
+            // levelControl.ShowPreviewTower();
         }
     }
 }

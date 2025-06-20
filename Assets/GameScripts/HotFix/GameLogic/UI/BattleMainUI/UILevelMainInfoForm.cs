@@ -1,3 +1,4 @@
+using GameConfig;
 using UnityEngine;
 using UnityEngine.UI;
 using TEngine;
@@ -43,7 +44,16 @@ namespace GameLogic
         // 调试增加货币按钮点击事件处理
         private void OnClickDebugAddCurrencyBtn()
         {
-
+            Log.Debug("On Click Debug Add Currency Button");
+            TowerData towerData = TowerDataManger.Instance.GetItemConfig(101);
+            if (towerData != null)
+            {
+                GameEvent.Send(LevelEvent.OnShowPreviewTower, towerData);
+            }
+            else
+            {
+                Log.Error("TowerData with ID 1 not found.");
+            }
         }
         // 暂停按钮点击事件处理
         private void OnClickButtonPauseBtn()

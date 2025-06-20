@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameConfig;
 using TEngine;
 using UnityEngine;
 
@@ -43,15 +44,15 @@ namespace GameLogic
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.AddEventListener(LevelEvent.OnGameStartWave, OnStartWave);
             // GameModule.UI.ShowUI<UITowerListForm>();
-            // levelControl.OnEnter();
+            levelControl.OnEnter();
         }
 
         protected override void OnUpdate(IFsm<IProcedureModule> procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
             
-            // if (levelControl != null)
-            //     levelControl.Update(elapseSeconds, realElapseSeconds);
+            if (levelControl != null)
+                levelControl.Update(elapseSeconds, realElapseSeconds);
         }
 
         protected override void OnLeave(IFsm<IProcedureModule> procedureOwner, bool isShutdown)
@@ -71,7 +72,7 @@ namespace GameLogic
             GameEvent.RemoveEventListener(LevelEvent.OnShowEntityInLevel, OnShowEntityInLevel);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.RemoveEventListener(LevelEvent.OnGameStartWave, OnStartWave);
-            // levelControl.Quick();
+            levelControl.Quick();
             MemoryPool.Release(levelControl);
             levelControl = null;
         }
@@ -124,7 +125,7 @@ namespace GameLogic
         private void OnShowPreviewTower(TowerData towerData)
         {
             // 处理显示塔预览的逻辑
-            // levelControl.ShowPreviewTower(towerData);
+            levelControl.ShowPreviewTower(towerData);
         }
 
         /// <summary>

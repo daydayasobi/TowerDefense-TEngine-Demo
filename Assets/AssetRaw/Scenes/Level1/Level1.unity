@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 432130120}
   - component: {fileID: 432130122}
   - component: {fileID: 432130123}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1950277df7e163b4c82dd652c41155ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 8676843343471619049, guid: c707bc95ab948454ca1e378dce5e9358,
+    type: 3}
   dimensions:
     x: 3
     y: 10
@@ -800,7 +801,7 @@ GameObject:
   - component: {fileID: 726079707}
   - component: {fileID: 726079708}
   - component: {fileID: 726079709}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: SinglePlacement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,7 +856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ccb5d56568044d9402a58348779ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 4721340074197276091, guid: faa270e3d0214c242bcbde40d8acb7a9,
+    type: 3}
 --- !u!4 &1242468553
 Transform:
   m_ObjectHideFlags: 0
@@ -998,7 +1000,7 @@ GameObject:
   - component: {fileID: 1511873282}
   - component: {fileID: 1511873284}
   - component: {fileID: 1511873285}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1053,7 +1055,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1950277df7e163b4c82dd652c41155ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 8676843343471619049, guid: c707bc95ab948454ca1e378dce5e9358,
+    type: 3}
   dimensions:
     x: 8
     y: 3
@@ -1140,7 +1143,7 @@ GameObject:
   - component: {fileID: 1663309666}
   - component: {fileID: 1663309667}
   - component: {fileID: 1663309668}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: SinglePlacement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1195,7 +1198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ccb5d56568044d9402a58348779ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 4721340074197276091, guid: faa270e3d0214c242bcbde40d8acb7a9,
+    type: 3}
 --- !u!1 &1705981836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,7 +1211,7 @@ GameObject:
   - component: {fileID: 1705981837}
   - component: {fileID: 1705981838}
   - component: {fileID: 1705981839}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: SinglePlacement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,7 +1266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ccb5d56568044d9402a58348779ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 4721340074197276091, guid: faa270e3d0214c242bcbde40d8acb7a9,
+    type: 3}
 --- !u!1 &1798036066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1336,7 @@ GameObject:
   - component: {fileID: 1824065850}
   - component: {fileID: 1824065852}
   - component: {fileID: 1824065853}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1386,7 +1391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1950277df7e163b4c82dd652c41155ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 8676843343471619049, guid: c707bc95ab948454ca1e378dce5e9358,
+    type: 3}
   dimensions:
     x: 2
     y: 10
@@ -1402,7 +1408,7 @@ GameObject:
   - component: {fileID: 1971323305}
   - component: {fileID: 1971323306}
   - component: {fileID: 1971323307}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: SinglePlacement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1457,7 +1463,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ccb5d56568044d9402a58348779ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 4721340074197276091, guid: faa270e3d0214c242bcbde40d8acb7a9,
+    type: 3}
 --- !u!1001 &2072545715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1703,7 +1710,7 @@ GameObject:
   - component: {fileID: 2141937631}
   - component: {fileID: 2141937633}
   - component: {fileID: 2141937634}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: SinglePlacement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ccb5d56568044d9402a58348779ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 4721340074197276091, guid: faa270e3d0214c242bcbde40d8acb7a9,
+    type: 3}
 --- !u!1 &2146286131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,7 +1778,7 @@ GameObject:
   - component: {fileID: 1242468553}
   - component: {fileID: 2146286133}
   - component: {fileID: 2146286134}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1810,7 +1818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1950277df7e163b4c82dd652c41155ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 8676843343471619049, guid: c707bc95ab948454ca1e378dce5e9358,
+    type: 3}
   dimensions:
     x: 2
     y: 8
