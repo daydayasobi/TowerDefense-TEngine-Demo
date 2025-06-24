@@ -5,24 +5,24 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class PoolObject : MonoBehaviour
+    public class PoolManager : MonoBehaviour
     {
-        private static PoolObject _instance;
+        private static PoolManager _instance;
 
-        public static PoolObject Instance
+        public static PoolManager Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = FindObjectOfType<PoolObject>();
+                    _instance = FindObjectOfType<PoolManager>();
                 }
 
                 if (_instance == null)
                 {
                     GameObject gameObject = new GameObject();
-                    gameObject.name = nameof(PoolObject);
-                    _instance = gameObject.AddComponent<PoolObject>();
+                    gameObject.name = nameof(PoolManager);
+                    _instance = gameObject.AddComponent<PoolManager>();
                     _instance.poolRootObj = gameObject;
                     DontDestroyOnLoad(_instance);
                 }

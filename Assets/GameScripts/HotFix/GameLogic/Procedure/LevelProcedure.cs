@@ -134,7 +134,7 @@ namespace GameLogic
         private void OnBuildTower(TowerData towerData, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
         {
             // 处理建造塔的逻辑
-            // levelControl.CreateTower(towerData,placementArea,placeGrid,position,rotation);
+            levelControl.CreateTower(towerData,placementArea,placeGrid,position,rotation);
         }
 
         /// <summary>

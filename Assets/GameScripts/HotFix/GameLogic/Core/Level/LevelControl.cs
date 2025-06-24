@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
+using GameLogic.Data;
 using GameLogic.View;
 using TEngine;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace GameLogic
 
         // private Level Level;
         private EntityTowerPreview previewTowerEntityLogic; // 预览塔的逻辑组件
+        private EntityRadiusVisualizerView entityRadiusVisualizerView;  //炮塔的半径可视化组件
 
         private EntityPlayer player;
 
@@ -101,10 +103,21 @@ namespace GameLogic
             if (towerData == null)
                 return;
 
+            // TODO: 需要优化成对象池
             previewTowerData = towerData;
             string PreviewName = AssetsDataManger.Instance.GetItemConfig(towerData.PreviewEntityid).ResourcesName;
             previewTowerEntityLogic = GameModule.Resource.LoadGameObject(PreviewName).GetComponent<EntityTowerPreview>();
             previewTowerEntityLogic.OnShow(EntityDataTowerPreview.Create(towerData));
+            
+            TowerLevelData towerLevelData = TowerLevelDataManger.Instance.GetItemConfig(towerData.Levels[0]);
+            if (towerLevelData == null)
+            {
+                Log.Error("Tower '{0}' Level '{1}' data is null.", towerData.NameId, 0);
+            }
+            EntityRadiusVisualiserData entityRadiusVisualiserData = EntityRadiusVisualiserData.Create(towerLevelData.Range);
+            entityRadiusVisualizerView = GameModule.Resource.LoadGameObject("RadiusVisualiser").GetComponent<EntityRadiusVisualizerView>();
+            entityRadiusVisualizerView.OnAttachTo(previewTowerEntityLogic.transform, entityRadiusVisualiserData);
+            
             isBuilding = true;
         }
 
@@ -113,6 +126,7 @@ namespace GameLogic
         /// </summary>
         public void HidePreviewTower()
         {
+            // TODO: 应该用对象池回收
             GameObject.Destroy(previewTowerEntityLogic.gameObject);
             previewTowerEntityLogic = null;
             isBuilding = false;
@@ -123,14 +137,14 @@ namespace GameLogic
         /// </summary>
         public void CreateTower(TowerData towerData, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
         {
-            // // 1. 通过EntityControl创建塔实体
-            // entityloader.AddEntityTower(towerData.Id, position, rotation);
-            //
-            // // 2. 隐藏预览塔
-            // HidePreviewTower();
+            // 1. 通过EntityControl创建塔实体
+            entityloader.AddEntityTower(towerData.Id, position, rotation);
+            
+            // 2. 隐藏预览塔
+            HidePreviewTower();
 
             // 3. 记录调试日志
-            // Log.Debug($"创建塔 [{towerData.NameId}] 在位置 {position}");
+            Log.Debug($"创建塔 [{towerData.NameId}] 在位置 {position}");
         }
 
         /// <summary>

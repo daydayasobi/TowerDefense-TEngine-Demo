@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TEngine;
@@ -70,6 +71,11 @@ namespace GameLogic
         private void Start()
         {
             renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
+            
+                        
+            // TODO: 测试用 手动剔除一个，剔除的是半径
+            // 移除最后一个元素
+            Array.Resize(ref renderers, renderers.Length - 1);
         }
         
         // 显示方法
@@ -93,7 +99,6 @@ namespace GameLogic
         // 更新方法
         protected  void Update()
         {
-
             // 如果没有预览塔数据，则直接返回
             if (entityDataTowerPreview == null)
                 return;
@@ -119,7 +124,6 @@ namespace GameLogic
         // 隐藏方法
         protected void OnHide(bool isShutdown, object userData)
         {
-
             // 清理状态
             currentArea = null;
             m_GridPosition = IntVector2.zero;
