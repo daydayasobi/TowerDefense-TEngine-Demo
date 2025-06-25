@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
-namespace GameLogic.Data
+namespace GameLogic
 {
     [Serializable]
-    public class EntityRadiusVisualiserData : EntityData
+    public class EntityDataRadiusVisualiser : EntityData
     {
         public float Radius
         {
@@ -14,15 +15,15 @@ namespace GameLogic.Data
             private set;
         }
 
-        public EntityRadiusVisualiserData() : base()
+        public EntityDataRadiusVisualiser() : base()
         {
             Radius = 0f;
         }
 
-        public static EntityRadiusVisualiserData Create(float radius, object userData = null)
+        public static EntityDataRadiusVisualiser Create(float radius, object userData = null)
         {
-            // EntityRadiusVisualiserData entityData = ReferencePool.Acquire<EntityRadiusVisualiserData>();
-            EntityRadiusVisualiserData entityData = PoolManager.Instance.GetObject<EntityRadiusVisualiserData>();
+            EntityDataRadiusVisualiser entityData = MemoryPool.Acquire<EntityDataRadiusVisualiser>();
+            // EntityDataRadiusVisualiser entityData = PoolManager.Instance.GetObject<EntityDataRadiusVisualiser>();
             entityData.Radius = radius;
             return entityData;
         }

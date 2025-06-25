@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using GameLogic.Data;
 using TEngine;
 using UnityEngine;
 
@@ -14,20 +13,20 @@ namespace GameLogic.View
 
         public Vector3 localEuler;
 
-        private EntityRadiusVisualiserData entityRadiusVisualiserData;
+        private EntityDataRadiusVisualiser _entityDataRadiusVisualiser;
 
         public void OnShow(object userData)
         {
             radiusVisualizer.localEulerAngles = localEuler;
 
-            entityRadiusVisualiserData = userData as EntityRadiusVisualiserData;
-            if (entityRadiusVisualiserData == null)
+            _entityDataRadiusVisualiser = userData as EntityDataRadiusVisualiser;
+            if (_entityDataRadiusVisualiser == null)
             {
                 Log.Error("EntityDataRadiusVisualiser data is invalid.");
                 return;
             }
 
-            radiusVisualizer.localScale = Vector3.one * entityRadiusVisualiserData.Radius * 2.0f;
+            radiusVisualizer.localScale = Vector3.one * _entityDataRadiusVisualiser.Radius * 2.0f;
 
             var visualizerRenderer = radiusVisualizer.GetComponent<Renderer>();
             if (visualizerRenderer != null)
@@ -38,7 +37,7 @@ namespace GameLogic.View
 
         public void OnHide()
         {
-            entityRadiusVisualiserData = null;
+            _entityDataRadiusVisualiser = null;
             transform.localPosition = Vector3.zero;
             radiusVisualizer.localScale = Vector3.zero;
         }
@@ -47,7 +46,7 @@ namespace GameLogic.View
         {
             transform.SetParent(parentTransform);
             OnShow(userData);
-            transform.localPosition = entityRadiusVisualiserData.Position + new Vector3(0, radiusVisualizerHeight, 0);
+            transform.localPosition = _entityDataRadiusVisualiser.Position + new Vector3(0, radiusVisualizerHeight, 0);
         }
     }
 }

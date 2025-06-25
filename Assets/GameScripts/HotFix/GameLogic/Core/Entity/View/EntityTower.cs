@@ -68,6 +68,7 @@ namespace GameLogic.View
             EntityLevelGoList[0].SetActive(true);
             CreateFsm();
         }
+        
         public void OnHide()
         {
             IsActivation = false;

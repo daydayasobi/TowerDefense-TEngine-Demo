@@ -26,7 +26,14 @@ namespace GameLogic
                 Log.Error("Can not find CameraInput instance in scene");
                 return;
             }
-            levelControl = LevelControl.Create(LevelDataManger.Instance.CurrentLevel, levelPathManager, cameraInput);
+            
+            GameObject entityRoot = GameObject.Find("EntityRoot");
+            if (entityRoot == null)
+            {
+                Log.Error("Can not find EntityRoot in scene");
+                return;
+            }
+            levelControl = LevelControl.Create(LevelDataManger.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
             GameModule.UI.ShowUI<UILevelMainInfoForm>();
             
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLogic.Module
 {
-    public class EntityTower: EntityBase
+    public class EntityTower : EntityBase
     {
         /// <summary>
         /// 释放对象。
@@ -16,6 +16,7 @@ namespace GameLogic.Module
             var Entity = (GameObject)Target;
             GameObject.Destroy(Entity);
         }
+
         /// <summary>
         /// 获取对象回调
         /// </summary>
@@ -26,6 +27,7 @@ namespace GameLogic.Module
             Entity.SetActive(true);
             Entity.GetComponent<GameLogic.View.EntityTower>().OnShow();
         }
+
         /// <summary>
         /// 回收对象回调
         /// </summary>

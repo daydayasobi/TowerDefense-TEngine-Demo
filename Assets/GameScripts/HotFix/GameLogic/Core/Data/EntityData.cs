@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
 
-namespace GameLogic.Data
+namespace GameLogic
 {
     public class EntityData : IMemory
     {
@@ -56,8 +56,8 @@ namespace GameLogic.Data
 
         public static EntityData Create(object userData = null)
         {
-            // EntityData entityData = ReferencePool.Acquire<EntityData>();
-            EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
+            EntityData entityData = PoolReference.Acquire<EntityData>();
+            // EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
             entityData.Position = Vector3.zero;
             entityData.Rotation = Quaternion.identity;
             entityData.UserData = userData;
@@ -66,8 +66,8 @@ namespace GameLogic.Data
 
         public static EntityData Create(Vector3 position, object userData = null)
         {
-            // EntityData entityData = ReferencePool.Acquire<EntityData>();
-            EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
+            EntityData entityData = PoolReference.Acquire<EntityData>();
+            // EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
             entityData.Position = position;
             entityData.Rotation = Quaternion.identity;
             entityData.UserData = userData;
@@ -76,8 +76,8 @@ namespace GameLogic.Data
 
         public static EntityData Create(Vector3 position, Quaternion quaternion, object userData = null)
         {
-            // EntityData entityData = ReferencePool.Acquire<EntityData>();
-            EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
+            EntityData entityData = PoolReference.Acquire<EntityData>();
+            // EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
             entityData.Position = position;
             entityData.Rotation = quaternion;
             entityData.UserData = userData;

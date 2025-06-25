@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
-using GameLogic.Data;
 using GameLogic.View;
 using TEngine;
 using UnityEngine;
@@ -27,12 +26,11 @@ namespace GameLogic
 
         // 预览塔相关数据
         private TowerData previewTowerData; // 当前预览的塔数据
+        private EntityTowerPreview previewTowerEntityLogic; // 预览塔的逻辑组件
 
         private EntityControl entityloader;
 
         // private Level Level;
-        private EntityTowerPreview previewTowerEntityLogic; // 预览塔的逻辑组件
-        private EntityRadiusVisualizerView entityRadiusVisualizerView;  //炮塔的半径可视化组件
 
         private EntityPlayer player;
 
@@ -42,14 +40,14 @@ namespace GameLogic
         }
 
         // 实体的根节点，用于存放塔和敌人的实体
-        private GameObject roomRoot;
+        private GameObject entityRoot;
 
         public void OnEnter()
         {
             // Level = Level.Create(leveldata);
             entityloader = EntityControl.Create();
             player = EntityBase.CreatePlayer(new Vector3(leveldata.PlayerPosition.X, leveldata.PlayerPosition.Y, leveldata.PlayerPosition.Z),
-                new Vector3(leveldata.PlayerQuaternion.X, leveldata.PlayerQuaternion.Y, leveldata.PlayerQuaternion.Z));
+                new Vector3(leveldata.PlayerQuaternion.X, leveldata.PlayerQuaternion.Y, leveldata.PlayerQuaternion.Z), entityRoot.transform);
         }
 
         /// <summary>
@@ -102,22 +100,29 @@ namespace GameLogic
         {
             if (towerData == null)
                 return;
-
-            // TODO: 需要优化成对象池
+            
             previewTowerData = towerData;
-            string PreviewName = AssetsDataManger.Instance.GetItemConfig(towerData.PreviewEntityid).ResourcesName;
-            previewTowerEntityLogic = GameModule.Resource.LoadGameObject(PreviewName).GetComponent<EntityTowerPreview>();
-            previewTowerEntityLogic.OnShow(EntityDataTowerPreview.Create(towerData));
-            
-            TowerLevelData towerLevelData = TowerLevelDataManger.Instance.GetItemConfig(towerData.Levels[0]);
-            if (towerLevelData == null)
+            // string PreviewName = AssetsDataManger.Instance.GetItemConfig(towerData.PreviewEntityid).ResourcesName;
+            // previewTowerEntityLogic = GameModule.Resource.LoadGameObject(PreviewName).GetComponent<EntityTowerPreview>();
+            // previewTowerEntityLogic.OnShow(EntityDataTowerPreview.Create(towerData));
+
+            // entityloader.ShowEntity<EntityTowerPreview>(towerData.PreviewEntityid,entityRoot.transform, EntityDataTowerPreview.Create(towerData));
+            entityloader.ShowTowerPreview(towerData.PreviewEntityid, entityRoot.transform, (previewTower) =>
             {
-                Log.Error("Tower '{0}' Level '{1}' data is null.", towerData.NameId, 0);
-            }
-            EntityRadiusVisualiserData entityRadiusVisualiserData = EntityRadiusVisualiserData.Create(towerLevelData.Range);
-            entityRadiusVisualizerView = GameModule.Resource.LoadGameObject("RadiusVisualiser").GetComponent<EntityRadiusVisualizerView>();
-            entityRadiusVisualizerView.OnAttachTo(previewTowerEntityLogic.transform, entityRadiusVisualiserData);
-            
+                previewTowerEntityLogic = previewTower;
+                previewTowerEntityLogic.OnShow(EntityDataTowerPreview.Create(towerData));
+            });
+
+            // TowerLevelData towerLevelData = TowerLevelDataManger.Instance.GetItemConfig(towerData.Levels[0]);
+            // if (towerLevelData == null)
+            // {
+            //     Log.Error("Tower '{0}' Level '{1}' data is null.", towerData.NameId, 0);
+            // }
+            //
+            // EntityDataRadiusVisualiser entityDataRadiusVisualiser = EntityDataRadiusVisualiser.Create(towerLevelData.Range);
+            // entityRadiusVisualizerView = GameModule.Resource.LoadGameObject("RadiusVisualiser").GetComponent<EntityRadiusVisualizerView>();
+            // entityRadiusVisualizerView.OnAttachTo(previewTowerEntityLogic.transform, entityDataRadiusVisualiser);
+
             isBuilding = true;
         }
 
@@ -126,8 +131,7 @@ namespace GameLogic
         /// </summary>
         public void HidePreviewTower()
         {
-            // TODO: 应该用对象池回收
-            GameObject.Destroy(previewTowerEntityLogic.gameObject);
+            PoolManager.Instance.PushGameObject(previewTowerEntityLogic.gameObject);
             previewTowerEntityLogic = null;
             isBuilding = false;
         }
@@ -138,8 +142,8 @@ namespace GameLogic
         public void CreateTower(TowerData towerData, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
         {
             // 1. 通过EntityControl创建塔实体
-            entityloader.AddEntityTower(towerData.Id, position, rotation);
-            
+            entityloader.AddEntityTower(towerData.Id, position, rotation, entityRoot.transform);
+
             // 2. 隐藏预览塔
             HidePreviewTower();
 
@@ -263,12 +267,13 @@ namespace GameLogic
         }
 
         // 创建关卡控制器
-        public static LevelControl Create(LevelData level, LevelManager levelPathManager, CameraInput cameraInput)
+        public static LevelControl Create(LevelData level, LevelManager levelPathManager, CameraInput cameraInput, GameObject entityRoot)
         {
             var levelControl = MemoryPool.Acquire<LevelControl>();
             levelControl.leveldata = level;
             levelControl.levelManager = levelPathManager;
             levelControl.cameraInput = cameraInput;
+            levelControl.entityRoot = entityRoot;
             return levelControl;
         }
 

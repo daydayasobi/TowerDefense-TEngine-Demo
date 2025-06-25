@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameLogic.View;
 using TEngine;
 using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityTowerPreview : MonoBehaviour
+    public class EntityTowerPreview : EntityLogicWithData
     {
         // 预览塔的碰撞检测半径
         [SerializeField]
@@ -71,11 +72,10 @@ namespace GameLogic
         private void Start()
         {
             renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
-            
                         
             // TODO: 测试用 手动剔除一个，剔除的是半径
             // 移除最后一个元素
-            Array.Resize(ref renderers, renderers.Length - 1);
+            // Array.Resize(ref renderers, renderers.Length - 1);
         }
         
         // 显示方法
