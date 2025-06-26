@@ -5,10 +5,8 @@ using GameConfig;
 using TEngine;
 using UnityEngine;
 
-namespace GameLogic.View
+namespace GameLogic
 {
-    /*
-     
     public class EntityBase : ObjectBase
     {
         public int EntityId;
@@ -16,19 +14,19 @@ namespace GameLogic.View
         
         public static GameLogic.View.EntityPlayer CreatePlayer(Vector3 PlayerPosition, Vector3 PlayereulerAngles, Transform parent)
         {
-            GameObject Entity = GameModule.Resource.LoadGameObject("EntityPlayer");
+            GameObject Entity = PoolManager.Instance.GetGameObject("EntityPlayer");
             Entity.transform.parent = parent;
             Entity.transform.localPosition = PlayerPosition;
             Entity.transform.eulerAngles = PlayereulerAngles;
             return Entity.GetComponent<GameLogic.View.EntityPlayer>();
         }
-        
+
         public static GameLogic.Module.EntityTower CreateTower(int entityid, TowerData data, Vector3 Position, Quaternion rotation, Transform parent)
         {
             Type procedureType = Type.GetType(string.Format("GameLogic.Module.{0}", data.Type));
             GameLogic.Module.EntityTower entitybase = (GameLogic.Module.EntityTower)MemoryPool.Acquire(procedureType);
             entitybase.EntityId = entityid;
-            GameObject Entity = GameModule.Resource.LoadGameObject(data.NameId);
+            GameObject Entity = PoolManager.Instance.GetGameObject(data.NameId);
             Entity.transform.parent = parent;
             var entity= Entity.AddComponent<GameLogic.View.EntityTower>();
             entity.InitialPosition = Position;
@@ -38,16 +36,10 @@ namespace GameLogic.View
             entitybase.Initialize(entityid.ToString(), Entity);
             return entitybase;
         }
-        
-        /// <summary>
-        /// 释放对象
-        /// </summary>
-        /// <param name="isShutdown">是否是关闭对象池时触发</param>
+
         protected override void Release(bool isShutdown)
         {
             
         }
-        
     }
-        */
 }

@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220657895632666}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.00037786682, y: 0.42984027, z: 0.0024437418}
   m_LocalScale: {x: 2.2263768, y: 2.2263768, z: 2.2263768}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4098126089334304}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33411624442238958
 MeshFilter:
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4098126089334304}
   - component: {fileID: 136107846089498568}
   - component: {fileID: 54298539718872334}
-  - component: {fileID: 8030289063932730919}
+  - component: {fileID: 7526483131731436677}
   m_Layer: 9
   m_Name: RocketPlatformPreview
   m_TagString: Untagged
@@ -109,6 +109,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357704856333272}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -117,7 +118,6 @@ Transform:
   - {fileID: 4523323101884906}
   - {fileID: 4772998694377074}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &136107846089498568
 CapsuleCollider:
@@ -127,8 +127,17 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357704856333272}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
+  serializedVersion: 2
   m_Radius: 0.8
   m_Height: 3.22
   m_Direction: 1
@@ -140,16 +149,27 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357704856333272}
-  serializedVersion: 2
+  serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8030289063932730919
+--- !u!114 &7526483131731436677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,19 +178,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1357704856333272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972c887062069ce40b9019c9cebbab0f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bdac15d183766c41bffefded523651e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sphereCastRadius: 1
   dampSpeed: 0.075
   ghostWorldPlacementMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4294967295
   placementAreaMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 256
   material: {fileID: 2100000, guid: 6fe9580bd67b34580977e0aa4eab9755, type: 2}
-  invalidPositionMaterial: {fileID: 2100000, guid: a33edf12f3c0044e8ba582a16ddaae3f, type: 2}
+  invalidPositionMaterial: {fileID: 2100000, guid: a33edf12f3c0044e8ba582a16ddaae3f,
+    type: 2}
 --- !u!1 &1582035826446864
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,13 +217,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582035826446864}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.0031379692, y: 0.0064551267, z: -0.0012619374, w: 0.9999735}
   m_LocalPosition: {x: 0.00031098948, y: 0.8368692, z: -0.00053860055}
   m_LocalScale: {x: 2.2263768, y: 2.2263768, z: 2.2263768}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4098126089334304}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33821748816808092
 MeshFilter:

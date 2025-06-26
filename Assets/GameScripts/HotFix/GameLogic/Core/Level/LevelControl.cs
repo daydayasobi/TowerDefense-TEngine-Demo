@@ -10,7 +10,7 @@ namespace GameLogic
     /// <summary>
     /// 关卡控制类，负责管理关卡中的各种逻辑，如塔的创建、敌人的生成、暂停、重启等。
     /// </summary>
-    public class LevelControl : IMemory
+    partial class LevelControl : IMemory
     {
         // 当前关卡数据
         private LevelData leveldata;
@@ -33,10 +33,13 @@ namespace GameLogic
         // private Level Level;
 
         private EntityPlayer player;
+        
+        private Dictionary<int, TowerInfo> dicTowerInfo;
 
         // 构造函数，初始化字典
         public LevelControl()
         {
+            dicTowerInfo = new Dictionary<int, TowerInfo>();
         }
 
         // 实体的根节点，用于存放塔和敌人的实体
@@ -87,6 +90,11 @@ namespace GameLogic
                     {
                         if (raycastHit.collider != null)
                         {
+                            // EntityTowerBase entityTowerBase = raycastHit.collider.gameObject.GetComponent<EntityTowerBase>();
+                            // if (entityTowerBase != null)
+                            // {
+                            //     entityTowerBase.ShowControlForm();
+                            // }
                         }
                     }
                 }
@@ -141,8 +149,19 @@ namespace GameLogic
         /// </summary>
         public void CreateTower(TowerData towerData, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
         {
+            Tower tower = DataManager.Instance.CreateTower(towerData.Id);
+            
+            if (tower == null)
+            {
+                Log.Error("Create tower fail,Tower data id is '{0}'.", towerData.Id);
+                return;
+            }
+            
+            dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, placementArea, placeGrid));
+            
             // 1. 通过EntityControl创建塔实体
-            entityloader.AddEntityTower(towerData.Id, position, rotation, entityRoot.transform);
+            // entityloader.AddEntityTower(towerData.Id, position, rotation, entityRoot.transform);
+            // entityloader.ShowTowerEntity(towerData.Id, position, rotation, entityRoot.transform);
 
             // 2. 隐藏预览塔
             HidePreviewTower();

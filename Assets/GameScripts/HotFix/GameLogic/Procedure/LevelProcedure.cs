@@ -50,7 +50,7 @@ namespace GameLogic
             GameEvent.AddEventListener(LevelEvent.OnShowEntityInLevel, OnShowEntityInLevel);
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.AddEventListener(LevelEvent.OnGameStartWave, OnStartWave);
-            // GameModule.UI.ShowUI<UITowerListForm>();
+            GameModule.UI.ShowUI<UITowerListForm>();
             levelControl.OnEnter();
         }
 

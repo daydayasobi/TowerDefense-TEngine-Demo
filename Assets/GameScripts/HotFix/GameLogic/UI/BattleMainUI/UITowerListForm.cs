@@ -73,34 +73,34 @@ namespace GameLogic
             dicTowerId2Button.Clear();
             dicSerialId2TowerId.Clear();
 
-            // List<int> allowTowers = currentLevelData.AllowTowers;
-            // foreach (var towers in allowTowers)
-            // {
-            //     TowerBuildButton item = CreateWidgetByPath<TowerBuildButton>(this.transform, "TowerBuildButton", true);
-            //
-            //     item.transform.SetParent(m_goSidebar.transform, false);
-            //     item.transform.localScale = Vector3.one;
-            //     item.transform.eulerAngles = Vector3.zero;
-            //     TowerData towerData = TowerDataManger.Instance.GetItemConfig(towers);
-            //     item.SetTowerBuildButton(towerData, ShowBuildInfo);
-            // }
+            List<int> allowTowers = currentLevelData.AllowTowers;
+            foreach (var towers in allowTowers)
+            {
+                TowerBuildButton item = CreateWidgetByPath<TowerBuildButton>(this.transform, "TowerBuildButton", true);
+            
+                item.transform.SetParent(m_goSidebar.transform, false);
+                item.transform.localScale = Vector3.one;
+                item.transform.eulerAngles = Vector3.zero;
+                TowerData towerData = TowerDataManger.Instance.GetItemConfig(towers);
+                item.SetTowerBuildButton(towerData, ShowBuildInfo);
+            }
         }
         public void ShowBuildInfo(TowerData towerData)
         {
             if (towerData == null)
                 return;
 
-            // TowerLevelData towerLevelData = TowerLevelDataManger.Instance.GetItemConfig(towerData.Levels[0]);
-            // if (towerLevelData == null)
-            //     return;
-            // ProjectileData projectileData = ProjectileDataManger.Instance.GetItemConfig(towerLevelData.ProjectileData);
-            // m_textName.text = towerData.NameId;
-            // float Dps = (projectileData.Damage + projectileData.SplahDamage) * towerLevelData.FireRate;
-            // m_textDps.text = Dps.ToString();
-            // m_textDescription.text = towerLevelData.UpgradeDesid;
-            //
-            // GameEvent.Send(LevelEvent.OnShowPreviewTower, towerData);
-            // showBuildInfo = true;
+            TowerLevelData towerLevelData = TowerLevelDataManger.Instance.GetItemConfig(towerData.Levels[0]);
+            if (towerLevelData == null)
+                return;
+            ProjectileData projectileData = ProjectileDataManger.Instance.GetItemConfig(towerLevelData.ProjectileData);
+            m_textName.text = towerData.NameId;
+            float Dps = (projectileData.Damage + projectileData.SplahDamage) * towerLevelData.FireRate;
+            m_textDps.text = Dps.ToString();
+            m_textDescription.text = towerLevelData.UpgradeDesid;
+            
+            GameEvent.Send(LevelEvent.OnShowPreviewTower, towerData);
+            showBuildInfo = true;
         }
 
         private void HideBuildInfo()

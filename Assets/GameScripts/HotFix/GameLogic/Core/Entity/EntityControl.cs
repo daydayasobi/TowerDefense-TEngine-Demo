@@ -40,24 +40,20 @@ namespace GameLogic
             towerEntity.EntityTypeId = entityTypeId;
         }
 
-        public void ShowEntity<T>(int entityTypeId, Transform parent, object userData = null) where T : EntityLogic
+        public void ShowTowerEntity(int entityTypeId, Vector3 position, Quaternion rotation, Transform parent)
         {
             var towerType = TowerDataManger.Instance.GetItemConfig(entityTypeId);
-            //
-            // Log.Debug("ShowEntity: {0}", entityTypeId);
-            // // EntityBase towerEntity = PoolManager.Instance.GetObject<EntityBase>();
-            //
-            // GameObject entity = PoolManager.Instance.GetGameObject(AssetsDataManger.Instance.GetItemConfig(towerData.PreviewEntityid).ResourcesName, parent: parent).GetOrAddComponent<Entity>();
-            // if (entity.GetComponent<Entity>() != null)
-            // {
-            //     entity.GetComponent<Entity>().OnInit(serialId, "AssaultCannonPreview", true, null);
-            //     // dicSerial2Entity.Add(entityId, obj.GetComponent<Entity>());
-            //     // GameEvent.Send(EventDefine.OnShowEntitySuccess, serialId);
-            // }
-        }
-
-        public void ShowTowerEntity()
-        {
+            
+            EntityBase towerEntity = PoolManager.Instance.GetObject<EntityBase>();
+            towerEntity.Clear();
+            towerEntity = EntityBase.CreateTower(
+                EntityId,
+                towerType,
+                position,
+                rotation,
+                parent
+            );
+            towerEntity.EntityTypeId = entityTypeId;
         }
 
         public void ShowTowerPreview(int entityTypeId, Transform parent, Action<EntityTowerPreview> onShowSuccess)
