@@ -64,7 +64,7 @@ namespace GameLogic
             return dicTowerData[id];
         }
 
-        private int GenrateSerialId()
+        private int GenerateSerialId()
         {
             return ++serialId;
         }
@@ -77,7 +77,7 @@ namespace GameLogic
                 return null;
             }
 
-            int serialId = GenrateSerialId();
+            int serialId = GenerateSerialId();
             Tower tower = Tower.Create(dicTowerData[towerId], serialId, level);
             dicTower.Add(serialId, tower);
 

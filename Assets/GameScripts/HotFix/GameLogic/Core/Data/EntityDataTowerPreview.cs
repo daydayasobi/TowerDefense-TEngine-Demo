@@ -9,7 +9,7 @@ namespace GameLogic
     [Serializable]
     public class EntityDataTowerPreview: IMemory
     {
-        public TowerData TowerData
+        public TowerDataBase TowerData
         {
             get;
             private set;
@@ -17,7 +17,8 @@ namespace GameLogic
 
         public IntVector2 Dimensions
         {
-            get { return new IntVector2(TowerData.Dimensions[0], TowerData.Dimensions[1]); }
+            // get { return new IntVector2(TowerData.Dimensions[0], TowerData.Dimensions[1]); }
+            get { return TowerData.Dimensions; }
             set { }
         }
 
@@ -26,7 +27,7 @@ namespace GameLogic
             TowerData = null;
         }
 
-        public static EntityDataTowerPreview Create(TowerData towerData, object userData = null)
+        public static EntityDataTowerPreview Create(TowerDataBase towerData, object userData = null)
         {
             EntityDataTowerPreview entityData = MemoryPool.Acquire<EntityDataTowerPreview>();
             entityData.TowerData = towerData;

@@ -29,7 +29,7 @@ namespace GameLogic
             var towerType = TowerDataManger.Instance.GetItemConfig(entityTypeId);
 
             EntityBase towerEntity = PoolManager.Instance.GetObject<EntityBase>();
-            towerEntity.Clear();
+            // towerEntity.Clear();
             towerEntity = EntityBase.CreateTower(
                 EntityId,
                 towerType,
@@ -42,18 +42,38 @@ namespace GameLogic
 
         public void ShowTowerEntity(int entityTypeId, Vector3 position, Quaternion rotation, Transform parent)
         {
-            var towerType = TowerDataManger.Instance.GetItemConfig(entityTypeId);
-            
-            EntityBase towerEntity = PoolManager.Instance.GetObject<EntityBase>();
-            towerEntity.Clear();
-            towerEntity = EntityBase.CreateTower(
-                EntityId,
-                towerType,
-                position,
-                rotation,
-                parent
-            );
-            towerEntity.EntityTypeId = entityTypeId;
+            // var towerType = TowerDataManger.Instance.GetItemConfig(entityTypeId);
+            //
+            // EntityBase towerEntity = PoolManager.Instance.GetObject<EntityBase>();
+            // towerEntity.Clear();
+            // towerEntity = EntityBase.CreateTower(
+            //     EntityId,
+            //     towerType,
+            //     position,
+            //     rotation,
+            //     parent
+            // );
+            // towerEntity.EntityTypeId = entityTypeId;
+        }
+
+        public void ShowTowerEntity(int entityId, EntityDataTower entityDataTower, Action<EntityBase> onShowSuccess)
+        {
+            // int serialId = EntityManager.Instance.GenerateSerialId();
+
+            // ShowEntityInfo.Create(entityLogicType, userData);
+
+            EntityBase towerEntity = EntityManager.Instance.ShowTowerEntity(entityId, entityDataTower);
+
+            // EntityBase towerEntity = PoolManager.Instance.GetObject<EntityBase>();
+            // towerEntity.EntityTypeId = entityId;
+
+            // towerEntity.Clear();
+            // towerEntity = EntityBase.CreateTower(
+            //     EntityId,
+            //     userData
+            // );
+
+            onShowSuccess?.Invoke(towerEntity);
         }
 
         public void ShowTowerPreview(int entityTypeId, Transform parent, Action<EntityTowerPreview> onShowSuccess)
@@ -66,6 +86,7 @@ namespace GameLogic
                 Log.Error("Preview tower GameObject is null for entityTypeId: {0}", entityTypeId);
                 return;
             }
+
             onShowSuccess?.Invoke(previewTowerGameObject.GetComponent<EntityTowerPreview>());
         }
 

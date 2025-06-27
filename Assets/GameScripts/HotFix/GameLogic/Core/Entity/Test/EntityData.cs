@@ -57,7 +57,6 @@ namespace GameLogic
         public static EntityData Create(object userData = null)
         {
             EntityData entityData = PoolReference.Acquire<EntityData>();
-            // EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
             entityData.Position = Vector3.zero;
             entityData.Rotation = Quaternion.identity;
             entityData.UserData = userData;
@@ -67,7 +66,6 @@ namespace GameLogic
         public static EntityData Create(Vector3 position, object userData = null)
         {
             EntityData entityData = PoolReference.Acquire<EntityData>();
-            // EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
             entityData.Position = position;
             entityData.Rotation = Quaternion.identity;
             entityData.UserData = userData;
@@ -77,7 +75,6 @@ namespace GameLogic
         public static EntityData Create(Vector3 position, Quaternion quaternion, object userData = null)
         {
             EntityData entityData = PoolReference.Acquire<EntityData>();
-            // EntityData entityData = PoolManager.Instance.GetObject<EntityData>();
             entityData.Position = position;
             entityData.Rotation = quaternion;
             entityData.UserData = userData;

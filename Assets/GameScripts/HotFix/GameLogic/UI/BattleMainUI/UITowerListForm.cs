@@ -79,25 +79,26 @@ namespace GameLogic
                 TowerBuildButton item = CreateWidgetByPath<TowerBuildButton>(this.transform, "TowerBuildButton", true);
             
                 item.transform.SetParent(m_goSidebar.transform, false);
-                item.transform.localScale = Vector3.one;
-                item.transform.eulerAngles = Vector3.zero;
-                TowerData towerData = TowerDataManger.Instance.GetItemConfig(towers);
-                item.SetTowerBuildButton(towerData, ShowBuildInfo);
+                // item.transform.localScale = Vector3.one;
+                // item.transform.eulerAngles = Vector3.zero;
+                // TowerData towerData = TowerDataManger.Instance.GetItemConfig(towers);
+                TowerDataBase towerDataBase = DataManager.Instance.GetTowerData(towers);
+                item.SetTowerBuildButton(towerDataBase, ShowBuildInfo);
             }
         }
-        public void ShowBuildInfo(TowerData towerData)
+        public void ShowBuildInfo(TowerDataBase towerData)
         {
             if (towerData == null)
                 return;
 
-            TowerLevelData towerLevelData = TowerLevelDataManger.Instance.GetItemConfig(towerData.Levels[0]);
+            TowerLevelDataBase towerLevelData = towerData.GetTowerLevelData(0);
             if (towerLevelData == null)
                 return;
-            ProjectileData projectileData = ProjectileDataManger.Instance.GetItemConfig(towerLevelData.ProjectileData);
-            m_textName.text = towerData.NameId;
-            float Dps = (projectileData.Damage + projectileData.SplahDamage) * towerLevelData.FireRate;
+            ProjectileDataBase projectileData = towerLevelData.ProjectileData;
+            m_textName.text = towerData.Name;
+            float Dps = (projectileData.Damage + projectileData.SplashDamage) * towerLevelData.FireRate;
             m_textDps.text = Dps.ToString();
-            m_textDescription.text = towerLevelData.UpgradeDesid;
+            m_textDescription.text = towerLevelData.UpgradeDes;
             
             GameEvent.Send(LevelEvent.OnShowPreviewTower, towerData);
             showBuildInfo = true;

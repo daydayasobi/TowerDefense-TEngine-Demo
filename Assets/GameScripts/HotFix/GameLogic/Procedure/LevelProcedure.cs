@@ -42,8 +42,8 @@ namespace GameLogic
             GameEvent.AddEventListener(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.AddEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.AddEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
-            GameEvent.AddEventListener<TowerData>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
-            GameEvent.AddEventListener<TowerData, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
+            GameEvent.AddEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
+            GameEvent.AddEventListener<TowerDataBase, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
             GameEvent.AddEventListener<int>(LevelEvent.OnSellTower, OnSellTower);
             GameEvent.AddEventListener<int>(LevelEvent.OnSpawnEnemy, OnSpawnEnemy);
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEnemyEntity, OnHideEnemyEntity);
@@ -71,8 +71,8 @@ namespace GameLogic
             GameEvent.RemoveEventListener(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.RemoveEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.RemoveEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
-            GameEvent.RemoveEventListener<TowerData>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
-            GameEvent.RemoveEventListener<TowerData, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
+            GameEvent.RemoveEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
+            GameEvent.RemoveEventListener<TowerDataBase, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnSellTower, OnSellTower);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnSpawnEnemy, OnSpawnEnemy);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnHideEnemyEntity, OnHideEnemyEntity);
@@ -129,7 +129,7 @@ namespace GameLogic
         /// <summary>
         /// 处理显示塔的预览事件
         /// </summary>
-        private void OnShowPreviewTower(TowerData towerData)
+        private void OnShowPreviewTower(TowerDataBase towerData)
         {
             // 处理显示塔预览的逻辑
             levelControl.ShowPreviewTower(towerData);
@@ -138,7 +138,7 @@ namespace GameLogic
         /// <summary>
         /// 处理建造塔事件
         /// </summary>
-        private void OnBuildTower(TowerData towerData, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
+        private void OnBuildTower(TowerDataBase towerData, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
         {
             // 处理建造塔的逻辑
             levelControl.CreateTower(towerData,placementArea,placeGrid,position,rotation);

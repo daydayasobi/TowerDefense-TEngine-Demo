@@ -51,9 +51,9 @@ namespace GameLogic
         #endregion
 
         #region 运行时数据
-        private TowerData towerData;        // 绑定的防御塔配置数据
-        private TowerLevelData towerLevelData;  // 当前防御塔等级数据（0级为建造数据）
-        private Action<TowerData> onClick;  // 点击回调委托
+        private TowerDataBase towerData;        // 绑定的防御塔配置数据
+        private TowerLevelDataBase towerLevelData;  // 当前防御塔等级数据（0级为建造数据）
+        private Action<TowerDataBase> onClick;  // 点击回调委托
         #endregion
 
         /// <summary>
@@ -61,13 +61,13 @@ namespace GameLogic
         /// </summary>
         /// <param name="towerData">防御塔配置数据</param>
         /// <param name="onClick">点击回调函数</param>
-        public void SetTowerBuildButton(TowerData towerData, Action<TowerData> onClick)
+        public void SetTowerBuildButton(TowerDataBase towerData, Action<TowerDataBase> onClick)
         {
             if (towerData == null) return;
 
             // 绑定基础数据
             this.towerData = towerData;
-            this.towerLevelData = TowerLevelDataManger.Instance.GetItemConfig(towerData.Levels[0]);
+            this.towerLevelData = towerData.GetTowerLevelData(0);
             this.onClick = onClick;
 
             // 初始化UI显示

@@ -37,13 +37,13 @@ namespace GameLogic
             }
         }
 
-        // public int EntityId
-        // {
-        //     get
-        //     {
-        //         return dRTower.Entityid;
-        //     }
-        // }
+        public int EntityId
+        {
+            get
+            {
+                return dRTower.Id;
+            }
+        }
 
         public int PreviewEntityId
         {

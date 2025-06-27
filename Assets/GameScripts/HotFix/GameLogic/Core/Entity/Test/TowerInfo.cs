@@ -25,15 +25,15 @@ namespace GameLogic
                 this.PlaceGrid = IntVector2.zero;
             }
 
-            // public static TowerInfo Create(Tower tower, EntityTowerBase entityTower, IPlacementArea placementArea, IntVector2 placeGrid)
-            // {
-            //     TowerInfo towerInfo = PoolReference.Acquire<TowerInfo>();
-            //     towerInfo.Tower = tower;
-            //     towerInfo.EntityTower = entityTower;
-            //     towerInfo.PlacementArea = placementArea;
-            //     towerInfo.PlaceGrid = placeGrid;
-            //     return towerInfo;
-            // }
+            public static TowerInfo Create(Tower tower, EntityTowerBase entityTower, IPlacementArea placementArea, IntVector2 placeGrid)
+            {
+                TowerInfo towerInfo = PoolReference.Acquire<TowerInfo>();
+                towerInfo.Tower = tower;
+                towerInfo.EntityTower = entityTower;
+                towerInfo.PlacementArea = placementArea;
+                towerInfo.PlaceGrid = placeGrid;
+                return towerInfo;
+            }
             
             public static TowerInfo Create(Tower tower, IPlacementArea placementArea, IntVector2 placeGrid)
             {
