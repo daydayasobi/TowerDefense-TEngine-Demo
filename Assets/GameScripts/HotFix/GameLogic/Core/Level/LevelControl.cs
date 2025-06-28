@@ -91,11 +91,13 @@ namespace GameLogic
                     {
                         if (raycastHit.collider != null)
                         {
-                            // EntityTowerBase entityTowerBase = raycastHit.collider.gameObject.GetComponent<EntityTowerBase>();
-                            // if (entityTowerBase != null)
-                            // {
-                            //     entityTowerBase.ShowControlForm();
-                            // }
+                            Log.Debug("0000000000000000000");
+                            EntityTowerBase entityTowerBase = raycastHit.collider.gameObject.GetComponent<EntityTowerBase>();
+                            if (entityTowerBase != null)
+                            {
+                                Log.Debug("1111111111111111");
+                                // entityTowerBase.ShowControlForm();
+                            }
                         }
                     }
                 }
@@ -159,12 +161,10 @@ namespace GameLogic
             }
 
             // 1. 通过EntityControl创建塔实体
-            // entityloader.AddEntityTower(towerData.Id, position, rotation, entityRoot.transform);
-            // entityloader.ShowTowerEntity(towerData.Id, position, rotation, entityRoot.transform);
-            entityloader.ShowTowerEntity(towerData.EntityId, EntityDataTower.Create(tower, position, rotation), (entity) =>
+            entityloader.ShowTowerEntity(towerData.EntityId, EntityDataTower.Create(tower, position, rotation, entityRoot.transform), (entity) =>
             {
-                EntityTowerBase entityTowerBase = entity.Logic as EntityTowerBase;
-                dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBase, placementArea, placeGrid));
+                // EntityTowerBase entityTowerBase = entity.Logic as EntityTowerBase;
+                dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entity, placementArea, placeGrid));
             });
 
             // 2. 隐藏预览塔

@@ -56,24 +56,25 @@ namespace GameLogic
             // towerEntity.EntityTypeId = entityTypeId;
         }
 
-        public void ShowTowerEntity(int entityId, EntityDataTower entityDataTower, Action<EntityBase> onShowSuccess)
+        public void ShowTowerEntity(int entityId, EntityDataTower entityDataTower, Action<EntityTowerBase> onShowSuccess)
         {
             // int serialId = EntityManager.Instance.GenerateSerialId();
 
             // ShowEntityInfo.Create(entityLogicType, userData);
 
-            EntityBase towerEntity = EntityManager.Instance.ShowTowerEntity(entityId, entityDataTower);
+            // EntityTowerBase towerEntity = EntityManager.Instance.ShowTowerEntity(entityId, userData);
 
-            // EntityBase towerEntity = PoolManager.Instance.GetObject<EntityBase>();
-            // towerEntity.EntityTypeId = entityId;
+            var data = TowerDataManger.Instance.GetItemConfig(entityId);
+            int serialId = EntityManager.Instance.GenerateSerialId();
+            GameObject Entity = PoolManager.Instance.GetGameObject(data.NameId);
+            EntityTowerBase entitybase = (EntityTowerBase)PoolReference.Acquire(typeof(EntityTowerBase));
+            var entity = Entity.AddComponent(entitybase.GetType());
+            entitybase.OnInit(entityDataTower);
+            entity.transform.position = entityDataTower.Position;
+            entity.transform.parent = entityDataTower.Parent;
+            entity.transform.rotation = entityDataTower.Rotation;
 
-            // towerEntity.Clear();
-            // towerEntity = EntityBase.CreateTower(
-            //     EntityId,
-            //     userData
-            // );
-
-            onShowSuccess?.Invoke(towerEntity);
+            onShowSuccess?.Invoke(entitybase);
         }
 
         public void ShowTowerPreview(int entityTypeId, Transform parent, Action<EntityTowerPreview> onShowSuccess)

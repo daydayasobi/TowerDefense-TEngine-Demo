@@ -10,6 +10,8 @@ namespace GameLogic
         protected Vector3 m_Position = Vector3.zero;
 
         protected Quaternion m_Rotation = Quaternion.identity;
+        
+        protected Transform m_parent = null;
 
         public EntityData()
         {
@@ -45,6 +47,21 @@ namespace GameLogic
             set
             {
                 m_Rotation = value;
+            }
+        }
+        
+        /// <summary>
+        /// 实体根节点
+        /// </summary>
+        public Transform Parent
+        {
+            get
+            {
+                return m_parent;
+            }
+            set
+            {
+                m_parent = value;
             }
         }
 

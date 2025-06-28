@@ -67,6 +67,11 @@ namespace GameLogic.View
             }
             EntityLevelGoList[0].SetActive(true);
             CreateFsm();
+            
+            //设置位置
+            transform.localPosition = InitialPosition;
+            transform.localRotation = Quaternion.identity;
+            CurrentSlowRate = 1;
         }
         
         public void OnHide()

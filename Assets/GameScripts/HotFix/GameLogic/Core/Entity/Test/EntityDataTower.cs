@@ -26,12 +26,13 @@ namespace GameLogic
             return entityData;
         }
 
-        public static EntityDataTower Create(Tower tower, Vector3 position, Quaternion rotation, object userData = null)
+        public static EntityDataTower Create(Tower tower, Vector3 position, Quaternion rotation,Transform parent, object userData = null)
         {
             EntityDataTower entityData = PoolReference.Acquire<EntityDataTower>();
             entityData.Tower = tower;
             entityData.Position = position;
             entityData.Rotation = rotation;
+            entityData.m_parent = parent;
             return entityData;
         }
 
