@@ -91,12 +91,10 @@ namespace GameLogic
                     {
                         if (raycastHit.collider != null)
                         {
-                            Log.Debug("0000000000000000000");
                             EntityTowerBase entityTowerBase = raycastHit.collider.gameObject.GetComponent<EntityTowerBase>();
                             if (entityTowerBase != null)
                             {
-                                Log.Debug("1111111111111111");
-                                // entityTowerBase.ShowControlForm();
+                                entityTowerBase.ShowControlForm();
                             }
                         }
                     }

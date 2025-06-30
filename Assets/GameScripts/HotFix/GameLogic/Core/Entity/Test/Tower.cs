@@ -247,6 +247,7 @@ namespace GameLogic
                 return GetLevelEntityId(Level);
             }
         }
+        
 
         public Tower()
         {
@@ -278,6 +279,19 @@ namespace GameLogic
             else
             {
                 return towerData.GetTowerLevelData(level).UpgradeDes;
+            }
+        }
+        
+        public int GetLevelId(int level)
+        {
+            if (level < 0 || level > MaxLevel)
+            {
+                Log.Error("Param level '{0} invaild'", level);
+                return 0;
+            }
+            else
+            {
+                return towerData.GetTowerLevelData(level).LevelId;
             }
         }
 

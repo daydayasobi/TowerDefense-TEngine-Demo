@@ -40,39 +40,55 @@ namespace GameLogic
             towerEntity.EntityTypeId = entityTypeId;
         }
 
-        public void ShowTowerEntity(int entityTypeId, Vector3 position, Quaternion rotation, Transform parent)
+        public void ShowTowerLevelEntity(int levelId, Action<EntityLogic> onShowSuccess, object userData = null)
         {
-            // var towerType = TowerDataManger.Instance.GetItemConfig(entityTypeId);
-            //
-            // EntityBase towerEntity = PoolManager.Instance.GetObject<EntityBase>();
-            // towerEntity.Clear();
-            // towerEntity = EntityBase.CreateTower(
-            //     EntityId,
-            //     towerType,
-            //     position,
-            //     rotation,
-            //     parent
-            // );
-            // towerEntity.EntityTypeId = entityTypeId;
+            var data = TowerLevelDataManger.Instance.GetItemConfig(levelId);
+            int serialId = EntityManager.Instance.GenerateSerialId();
+
+            EntityData entityData = null;
+            // TODO: 测试用
+            if (userData.GetType() == typeof(EntityData))
+            {
+                entityData = (EntityData)userData;
+            }
+            
+            string pathName = "";
+            if (levelId == 10101)
+            {
+                pathName = "AssaultCannon_Level1";
+            }
+            else if (levelId == 10102)
+            {
+                pathName = "AssaultCannon_Level2";
+            }
+
+            if (String.IsNullOrEmpty(pathName))
+            {
+                Log.Error("Path name is null or empty for levelId: {0}", levelId);
+                return;
+            }
+
+            GameObject Entity = PoolManager.Instance.GetGameObject(pathName);
+            Entity.transform.position = entityData.Position;
+            Entity.transform.rotation = entityData.Rotation;
+            EntityLogic entityLogic = Entity.GetComponent<EntityLogic>();
+            onShowSuccess?.Invoke(entityLogic);
         }
 
-        public void ShowTowerEntity(int entityId, EntityDataTower entityDataTower, Action<EntityTowerBase> onShowSuccess)
+        public void ShowTowerEntity(int entityId, object userData, Action<EntityTowerBase> onShowSuccess)
         {
             // int serialId = EntityManager.Instance.GenerateSerialId();
-
             // ShowEntityInfo.Create(entityLogicType, userData);
-
             // EntityTowerBase towerEntity = EntityManager.Instance.ShowTowerEntity(entityId, userData);
 
             var data = TowerDataManger.Instance.GetItemConfig(entityId);
             int serialId = EntityManager.Instance.GenerateSerialId();
             GameObject Entity = PoolManager.Instance.GetGameObject(data.NameId);
-            EntityTowerBase entitybase = (EntityTowerBase)PoolReference.Acquire(typeof(EntityTowerBase));
-            var entity = Entity.AddComponent(entitybase.GetType());
-            entitybase.OnInit(entityDataTower);
-            entity.transform.position = entityDataTower.Position;
-            entity.transform.parent = entityDataTower.Parent;
-            entity.transform.rotation = entityDataTower.Rotation;
+            // EntityTowerBase entitybase = (EntityTowerBase)PoolReference.Acquire(typeof(EntityTowerBase));
+            // var entity = Entity.AddComponent(entitybase.GetType());
+            var entity = Entity.AddComponent<EntityTowerBase>();
+            var entitybase = entity.GetComponent<EntityTowerBase>();
+            entitybase.OnInit(userData);
 
             onShowSuccess?.Invoke(entitybase);
         }

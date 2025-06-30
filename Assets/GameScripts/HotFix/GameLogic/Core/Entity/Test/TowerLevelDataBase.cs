@@ -44,6 +44,14 @@ namespace GameLogic
             }
         }
 
+        public int LevelId
+        {
+            get
+            {
+                return dRTowerLevel.Id;
+            }
+        }
+
         public int EntityId
         {
             get
