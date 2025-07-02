@@ -8,12 +8,6 @@ namespace GameLogic
 {
     public class EntityManager : Singleton<EntityManager>
     {
-        private static int serialId = 0;
-
-        public int GenerateSerialId()
-        {
-            return ++serialId;
-        }
 
         // public EntityBase ShowTowerEntity(int entityId, EntityDataTower entityDataTower)
         // {
@@ -34,7 +28,7 @@ namespace GameLogic
         public EntityTowerBase ShowTowerEntity(int entityId, object userData)
         {
             var data = TowerDataManger.Instance.GetItemConfig(entityId);
-            int serialId = GenerateSerialId();
+            // int serialId = GenerateSerialId();
             GameObject Entity = PoolManager.Instance.GetGameObject(data.NameId);
             EntityTowerBase entitybase = (EntityTowerBase)PoolReference.Acquire(typeof(EntityTowerBase));
             var entity = Entity.AddComponent(entitybase.GetType());

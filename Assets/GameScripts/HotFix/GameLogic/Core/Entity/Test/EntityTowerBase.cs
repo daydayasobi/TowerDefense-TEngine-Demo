@@ -9,14 +9,14 @@ namespace GameLogic
     public class EntityTowerBase : EntityLogic
     {
         protected EntityDataTower entityDataTower;
-        protected Entity entityTowerLevel;
-        protected EntityTowerLevel entityLogicTowerLevel;
-        private EntityControl itemLoader;
+        protected Entity entityLevel;
+        protected EntityTowerLevel entityLevelLogic;
 
         protected bool pause = false;
 
         public void OnInit(object userData)
         {
+            base.OnInit(userData);
             if (userData.GetType() == typeof(EntityDataTower))
             {
                 //初始化位置
@@ -31,14 +31,27 @@ namespace GameLogic
             {
                 Log.Info("Invalid userData type in OnInit. Expected EntityDataTower.");
             }
+            
+            GameEvent.AddEventListener<Tower>(LevelEvent.OnUpgradeTower, OnUpgradeTower);
+        }
+
+        public void SetSerialId(int serialId)
+        {
+            if (entityDataTower != null)
+                entityDataTower.SerialId = serialId;
         }
 
         public void OnShow()
         {
         }
 
-        public void OnHide()
+        protected internal override void OnHide(bool isShutdown, object userData)
         {
+            base.OnHide(isShutdown,userData);
+            entityDataTower = null;
+            entityLevel = null;
+            entityLevelLogic = null;
+            GameEvent.RemoveEventListener<Tower>(LevelEvent.OnUpgradeTower, OnUpgradeTower);
         }
 
         private void Update()
@@ -47,15 +60,27 @@ namespace GameLogic
 
         private void ShowTowerLevelEntity(int level)
         {
-            if (entityTowerLevel != null)
-                HideEntity(entityTowerLevel);
+            if (entityLevel != null)
+                HideEntity(entityLevel);
 
             int entityTypeId = entityDataTower.Tower.GetLevelId(level);
-            // GetTowerLevelData
-            //     
-            // towerData.GetTowerLevelData(level)
 
-            ShowEntity(entityTypeId, EntityData.Create(transform.position, transform.rotation));
+            int serialId = EntityControl.Instance.GenerateSerialId();
+            EntityControl.Instance.ShowTowerLevelEntity(entityTypeId, serialId, OnShowTowerLevelSuccess, EntityData.Create(transform.position, transform.rotation, transform));
+        }
+
+        private void OnShowTowerLevelSuccess(Entity entity)
+        {
+            EntityTowerLevel entityLogicTowerLevel = entity.Logic as EntityTowerLevel;
+            if (entityLogicTowerLevel != null)
+            {
+                entityLevelLogic = entityLogicTowerLevel;
+                this.Entity.OnAttachedId(entityLevelLogic.Entity.SerialId);
+            }
+            else
+            {
+                Log.Error("EntityTowerLevel logic is null or not of type EntityTowerLevel.");
+            }
         }
 
         public void ShowControlForm()
@@ -69,35 +94,22 @@ namespace GameLogic
             GameModule.UI.ShowUI<UITowerControllerForm>(entityDataTower.Tower);
         }
 
-        // private void OnUpgradeTower(object sender, GameEventArgs e)
-        // {
-        //     UpgradeTowerEventArgs ne = (UpgradeTowerEventArgs)e;
-        //     if (ne == null)
-        //         return;
-        //
-        //     if (ne.Tower.SerialId != entityDataTower.Tower.SerialId)
-        //         return;
-        //
-        //     ShowTowerLevelEntity(ne.Tower.Level);
-        // }
-
-        private void ShowEntity(int entityId, object userData = null)
+        private void OnUpgradeTower(Tower tower)
         {
-            if (itemLoader == null)
-            {
-                itemLoader = EntityControl.Create();
-            }
+            if (tower == null)
+                return;
+        
+            if (tower.SerialId != entityDataTower.Tower.SerialId)
+                return;
 
-            itemLoader.ShowTowerLevelEntity(entityId, OnShowTowerLevelSuccess, userData);
+            // entityDataTower.Tower = tower;
+        
+            ShowTowerLevelEntity(tower.Level);
         }
 
         private void HideEntity(Entity entity)
         {
-        }
-
-        private void OnShowTowerLevelSuccess(Entity entity)
-        {
-            //
+            Entity.OnHide(true, null);
         }
 
 

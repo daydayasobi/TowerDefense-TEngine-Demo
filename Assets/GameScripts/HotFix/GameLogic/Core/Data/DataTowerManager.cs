@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class DataManager : Singleton<DataManager>
+    public class DataTowerManager : Singleton<DataTowerManager>
     {
         private Dictionary<int, TowerDataBase> dicTowerData;
         private Dictionary<int, TowerLevelDataBase> dicTowerLevelData;
         private Dictionary<int, Tower> dicTower;
         private int serialId = 0;
 
-        public DataManager()
+        public DataTowerManager()
         {
             dicTowerLevelData = new Dictionary<int, TowerLevelDataBase>();
             dicTowerData = new Dictionary<int, TowerDataBase>();
@@ -112,7 +112,7 @@ namespace GameLogic
             Tower tower = dicTower[serialId];
             if (tower.Level >= tower.MaxLevel)
             {
-                Log.Error("Tower (id:'{0}') has reached the highest level", serialId);
+                Log.Error("Tower (id:'{0}') has reached the highest level {1}", serialId, tower.MaxLevel);
                 return;
             }
 
@@ -125,11 +125,11 @@ namespace GameLogic
             // }
             //
             // dataPlayer.AddEnergy(-needEnergy);
-            //
-            // int lastLevel = tower.Level;
-            //
-            // tower.Upgrade();
-            // GameEntry.Event.Fire(this, UpgradeTowerEventArgs.Create(tower, lastLevel));
+            
+            int lastLevel = tower.Level;
+            
+            tower.Upgrade();
+            GameEvent.Send(LevelEvent.OnUpgradeTower,serialId);
         }
 
         public void UpgradeTower(Tower tower)
@@ -155,6 +155,7 @@ namespace GameLogic
             Tower tower = dicTower[serialId];
             GameEvent.Send(LevelEvent.OnSellTower,tower.SerialId);
             
+            //放还能量
             // GameEntry.Event.Fire(this, HideTowerInLevelEventArgs.Create(tower.SerialId));
             // DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             //

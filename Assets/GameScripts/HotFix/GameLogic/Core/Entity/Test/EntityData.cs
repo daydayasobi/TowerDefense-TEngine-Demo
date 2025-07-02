@@ -10,8 +10,10 @@ namespace GameLogic
         protected Vector3 m_Position = Vector3.zero;
 
         protected Quaternion m_Rotation = Quaternion.identity;
-        
-        protected Transform m_parent = null;
+
+        protected Transform m_Parent = null;
+
+        protected int m_SerialId = 0;
 
         public EntityData()
         {
@@ -25,14 +27,8 @@ namespace GameLogic
         /// </summary>
         public Vector3 Position
         {
-            get
-            {
-                return m_Position;
-            }
-            set
-            {
-                m_Position = value;
-            }
+            get { return m_Position; }
+            set { m_Position = value; }
         }
 
         /// <summary>
@@ -40,36 +36,29 @@ namespace GameLogic
         /// </summary>
         public Quaternion Rotation
         {
-            get
-            {
-                return m_Rotation;
-            }
-            set
-            {
-                m_Rotation = value;
-            }
+            get { return m_Rotation; }
+            set { m_Rotation = value; }
         }
-        
+
         /// <summary>
         /// 实体根节点
         /// </summary>
         public Transform Parent
         {
-            get
-            {
-                return m_parent;
-            }
-            set
-            {
-                m_parent = value;
-            }
+            get { return m_Parent; }
+            set { m_Parent = value; }
         }
 
-        public object UserData
+        /// <summary>
+        /// 序列号码
+        /// </summary>
+        public int SerialId
         {
-            get;
-            protected set;
+            get { return m_SerialId; }
+            set { m_SerialId = value; }
         }
+
+        public object UserData { get; protected set; }
 
         public static EntityData Create(object userData = null)
         {
@@ -95,6 +84,27 @@ namespace GameLogic
             entityData.Position = position;
             entityData.Rotation = quaternion;
             entityData.UserData = userData;
+            return entityData;
+        }
+
+        public static EntityData Create(Vector3 position, Quaternion quaternion, Transform parent, object userData = null)
+        {
+            EntityData entityData = PoolReference.Acquire<EntityData>();
+            entityData.Position = position;
+            entityData.Rotation = quaternion;
+            entityData.UserData = userData;
+            entityData.Parent = parent;
+            return entityData;
+        }
+        
+        public static EntityData Create(Vector3 position, Quaternion quaternion, Transform parent,int serialId, object userData = null)
+        {
+            EntityData entityData = PoolReference.Acquire<EntityData>();
+            entityData.Position = position;
+            entityData.Rotation = quaternion;
+            entityData.UserData = userData;
+            entityData.Parent = parent;
+            entityData.m_SerialId = serialId;
             return entityData;
         }
 

@@ -10,17 +10,26 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityControl : IMemory
+    public class EntityControl : Singleton<EntityControl>
     {
         // 实体字典
         public Dictionary<int, Dictionary<int, EntityBase>> EntityDic = new Dictionary<int, Dictionary<int, EntityBase>>();
         private Dictionary<int, Entity> dicSerial2Entity = new Dictionary<int, Entity>();
         int EntityId = 0;
 
-        public static EntityControl Create()
+        private static int serialId = 0;
+
+        // public static EntityControl Create()
+        // {
+        //     EntityControl entityLoader = MemoryPool.Acquire<EntityControl>();
+        //     return entityLoader;
+        // }
+
+        public int GenerateSerialId()
         {
-            EntityControl entityLoader = MemoryPool.Acquire<EntityControl>();
-            return entityLoader;
+            serialId += 1;
+            Log.Debug("GenerateSerialId" + serialId);
+            return serialId;
         }
 
         public void AddEntityTower(int entityTypeId, Vector3 position, Quaternion rotation, Transform parent)
@@ -40,18 +49,12 @@ namespace GameLogic
             towerEntity.EntityTypeId = entityTypeId;
         }
 
-        public void ShowTowerLevelEntity(int levelId, Action<Entity> onShowSuccess, object userData = null)
+        public void ShowTowerLevelEntity(int levelId, int serialId, Action<Entity> onShowSuccess, object userData = null)
         {
             var data = TowerLevelDataManger.Instance.GetItemConfig(levelId);
-            int serialId = EntityManager.Instance.GenerateSerialId();
 
             EntityData entityData = null;
             // TODO: 测试用
-            if (userData.GetType() == typeof(EntityData))
-            {
-                entityData = (EntityData)userData;
-            }
-
             string pathName = "";
             if (levelId == 10101)
             {
@@ -70,28 +73,29 @@ namespace GameLogic
 
             GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
             Entity entity = gameObject.GetComponent<Entity>();
-            EntityTowerLevel entityTowerLevel = gameObject.GetComponent<EntityTowerLevel>();
+            EntityTowerLevel entityLogic = gameObject.GetComponent<EntityTowerLevel>();
             //初始化entity
-            entity.OnInit(levelId, pathName);
-            gameObject.transform.position = entityData.Position;
-            gameObject.transform.rotation = entityData.Rotation;
+            entity.OnInit(levelId, serialId, pathName, entityLogic);
+            //初始化entity logic
+            entityLogic.OnInit(userData);
             dicSerial2Entity.Add(serialId, entity);
+            Log.Debug("ShowTowerLevelEntity serialId:{0} entity count:{1}", serialId, dicSerial2Entity.Count);
             onShowSuccess?.Invoke(entity);
         }
 
-        public void ShowTowerEntity(int entityId, object userData, Action<Entity> onShowSuccess)
+        public void ShowTowerEntity(int entityId, int serialId, object userData, Action<Entity> onShowSuccess)
         {
             var data = TowerDataManger.Instance.GetItemConfig(entityId);
-            int serialId = EntityManager.Instance.GenerateSerialId();
             //获取预制体
             GameObject gameObject = PoolManager.Instance.GetGameObject(data.NameId);
             Entity entity = gameObject.GetComponent<Entity>();
-            var towerbase = gameObject.GetComponent<EntityTowerBase>();
+            var entityLogic = gameObject.GetComponent<EntityTowerBase>();
             //初始化entity
-            entity.OnInit(entityId, data.NameId);
+            entity.OnInit(entityId, serialId, data.NameId, entityLogic);
             //初始化entity logic
-            towerbase.OnInit(userData);
-            dicSerial2Entity.Add(serialId, entity.GetComponent<Entity>());
+            entityLogic.OnInit(userData);
+            dicSerial2Entity.Add(serialId, entity);
+            Log.Debug("ShowTowerEntity serialId:{0} entity count:{1}", serialId, dicSerial2Entity.Count);
             onShowSuccess?.Invoke(entity);
         }
 
@@ -109,11 +113,7 @@ namespace GameLogic
             onShowSuccess?.Invoke(previewTowerGameObject.GetComponent<EntityTowerPreview>());
         }
 
-        private void HideTowerLevel(int seriaId)
-        {
-        }
-
-        public void HideTowerEntity(int serialId)
+        public void HideEntity(int serialId)
         {
             Entity entity = null;
             if (!dicSerial2Entity.TryGetValue(serialId, out entity))
@@ -121,30 +121,38 @@ namespace GameLogic
                 Log.Error("Can find entity('serial id:{0}') ", serialId);
             }
 
+            Log.Debug("HideEntity serialId:{0} entity count:{1}", serialId, dicSerial2Entity.Count);
+
+            Entity tempEntity = dicSerial2Entity[serialId];
+            List<int> childSerialIds = tempEntity.GetChildrenIds();
             dicSerial2Entity.Remove(serialId);
 
-            // Entity[] entities = GameEntry.Entity.GetChildEntities(entity);
-            // if (entities != null)
-            // {
-            //     foreach (var item in entities)
-            //     {
-            //         //若Child Entity由这个Loader对象托管，则由此Loader释放
-            //         if (dicSerial2Entity.ContainsKey(item.Id))
-            //         {
-            //             HideEntity(item);
-            //         }
-            //         else//若Child Entity不由这个Loader对象托管，则从Parent Entity脱离
-            //             GameEntry.Entity.DetachEntity(item);
-            //     }
-            // }
-            //
-            // GameEntry.Entity.HideEntity(entity);
+            if (childSerialIds.Count > 0)
+            {
+                foreach (var item in childSerialIds)
+                {
+                    if (dicSerial2Entity.ContainsKey(item))
+                    {
+                        HideEntity(item);
+                    }
+                }
+            }
+
+            tempEntity.OnHide(true, null);
+            tempEntity.Clear();
+        }
+
+        public void HideEntity(Entity entity)
+        {
+            if (entity == null)
+                return;
+
+            HideEntity(entity.SerialId);
         }
 
 
         public void Clear()
         {
-            throw new NotImplementedException();
         }
     }
 }

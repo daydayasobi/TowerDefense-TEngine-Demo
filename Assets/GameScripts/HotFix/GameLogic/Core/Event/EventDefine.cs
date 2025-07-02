@@ -102,5 +102,9 @@ namespace GameLogic
 
         // 游戏开始事件ID
         public static readonly int OnGameStartWave = RuntimeId.ToRuntimeId("ILoginUI_Event.OnGameStartWave");
+        
+        // 防御塔升级ID
+        public static readonly int OnUpgradeTower = RuntimeId.ToRuntimeId("ILoginUI_Event.OnUpgradeTower");
     }
+
 }

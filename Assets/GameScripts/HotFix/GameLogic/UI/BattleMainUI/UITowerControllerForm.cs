@@ -94,14 +94,16 @@ namespace GameLogic
             if (m_tower == null || click)
                 return;
             
-            Log.Debug("OnClickUpgradeButtonBtn");
+            DataTowerManager.Instance.UpgradeTower(m_tower.SerialId);
+            Close();
         }
         
         private void OnClickSellButtonBtn()
         {
             if (m_tower == null)
                 return;
-         
+            
+            click = true;
         }
 
         private void OnClickSellConfirmButtonBtn()
@@ -109,8 +111,12 @@ namespace GameLogic
             if (m_tower == null)
                 return;
             
-            DataManager.Instance.SellTower(m_tower.SerialId);
+            DataTowerManager.Instance.UpgradeTower(m_tower.SerialId);
             Close();
+            
+            // // TODO: 需要返还能量
+            // DataTowerManager.Instance.SellTower(m_tower.SerialId);
+            // Close();
         }
         #endregion
 

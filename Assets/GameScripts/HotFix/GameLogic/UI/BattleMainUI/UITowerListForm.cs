@@ -82,7 +82,7 @@ namespace GameLogic
                 // item.transform.localScale = Vector3.one;
                 // item.transform.eulerAngles = Vector3.zero;
                 // TowerData towerData = TowerDataManger.Instance.GetItemConfig(towers);
-                TowerDataBase towerDataBase = DataManager.Instance.GetTowerData(towers);
+                TowerDataBase towerDataBase = DataTowerManager.Instance.GetTowerData(towers);
                 item.SetTowerBuildButton(towerDataBase, ShowBuildInfo);
             }
         }

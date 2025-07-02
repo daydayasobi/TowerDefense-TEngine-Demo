@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
@@ -9,18 +8,25 @@ namespace GameLogic
     public class Entity : MonoBehaviour, IMemory
     {
         private int m_Id;
+        private int m_SerialId; //序列号Id
         private string m_EntityAssetName;
         private EntityLogic m_EntityLogic;
-        
+        private List<int> childSerialIds = new List<int>(5);
+
         /// <summary>
         /// 获取实体编号。
         /// </summary>
         public int Id
         {
-            get
-            {
-                return m_Id;
-            }
+            get { return m_Id; }
+        }
+
+        /// <summary>
+        /// 获取实体序列号Id。
+        /// </summary>
+        public int SerialId
+        {
+            get { return m_SerialId; }
         }
 
         /// <summary>
@@ -28,105 +34,58 @@ namespace GameLogic
         /// </summary>
         public string EntityAssetName
         {
-            get
-            {
-                return m_EntityAssetName;
-            }
+            get { return m_EntityAssetName; }
         }
-        
+
         /// <summary>
         /// 获取实体实例。
         /// </summary>
         public object Handle
         {
-            get
-            {
-                return gameObject;
-            }
+            get { return gameObject; }
         }
-        
+
         /// <summary>
         /// 获取实体逻辑。
         /// </summary>
         public EntityLogic Logic
         {
-            get
-            {
-                return m_EntityLogic;
-            }
+            get { return m_EntityLogic; }
         }
-        
+
         /// <summary>
         /// 实体初始化。
         /// </summary>
         /// <param name="entityId">实体编号。</param>
         /// <param name="entityAssetName">实体资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
-        public void OnInit(int entityId, string entityAssetName, object userData = null)
+        public void OnInit(int entityId, int serialId, string entityAssetName, object userData = null)
         {
             m_Id = entityId;
+            m_SerialId = serialId;
             m_EntityAssetName = entityAssetName;
-            
-            EntityTowerBase towerBase = FindObjectOfType<EntityTowerBase>();
-            if (towerBase != null)
+
+            if (userData != null)
             {
-                m_EntityLogic = towerBase;
-            }
-            else
-            {
-                // 尝试查找脚本B
-                EntityTowerLevel towerLevel = FindObjectOfType<EntityTowerLevel>();
-                if (towerLevel != null)
+                if (userData is EntityTowerBase)
                 {
-                    m_EntityLogic = towerLevel;
+                    m_EntityLogic = userData as EntityTowerBase;
+                }
+                else if (userData is EntityTowerLevel)
+                {
+                    m_EntityLogic = userData as EntityTowerLevel;
                 }
                 else
                 {
-                    Debug.LogError("未找到脚本towerBase或脚本towerLevel！");
+                    Debug.LogError("userData 类型不正确，不是 EntityTowerBase 或 EntityTowerLevel！");
                 }
             }
-
-            // // ShowEntityInfo showEntityInfo = (ShowEntityInfo)userData;
-            // Type entityLogicType = (EntityLogic)EntityLogicType;
-            // if (entityLogicType == null)
-            // {
-            //     Log.Error("Entity logic type is invalid.");
-            //     return;
-            // }
-            //
-            // if (m_EntityLogic != null)
-            // {
-            //     if (m_EntityLogic.GetType() == entityLogicType)
-            //     {
-            //         m_EntityLogic.enabled = true;
-            //         return;
-            //     }
-            //
-            //     Destroy(m_EntityLogic);
-            //     m_EntityLogic = null;
-            // }
-            //
-            // m_EntityLogic = gameObject.GetComponent(entityLogicType) as EntityLogic;
-            //
-            // if (m_EntityLogic == null)
-            //     m_EntityLogic = gameObject.AddComponent(entityLogicType) as EntityLogic;
-            //
-            // if (m_EntityLogic == null)
-            // {
-            //     Log.Error("Entity '{0}' can not add entity logic.", entityAssetName);
-            //     return;
-            // }
-            //
-            // try
-            // {
-            //     m_EntityLogic.OnInit(showEntityInfo.UserData);
-            // }
-            // catch (Exception exception)
-            // {
-            //     Log.Error("Entity '[{0}]{1}' OnInit with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
-            // }
+            else
+            {
+                Debug.LogError("userData 为 null！");
+            }
         }
-        
+
         /// <summary>
         /// 实体回收。
         /// </summary>
@@ -144,7 +103,7 @@ namespace GameLogic
 
             m_Id = 0;
         }
-        
+
         /// <summary>
         /// 实体显示。
         /// </summary>
@@ -161,7 +120,7 @@ namespace GameLogic
                 Log.Error("Entity '[{0}]{1}' OnShow with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
             }
         }
-        
+
         /// <summary>
         /// 实体隐藏。
         /// </summary>
@@ -172,14 +131,49 @@ namespace GameLogic
             try
             {
                 m_EntityLogic.OnHide(isShutdown, userData);
+                m_Id = 0;
+                m_EntityAssetName = string.Empty;
+                childSerialIds.Clear();
+                PoolManager.Instance.PushGameObject(this.gameObject);
             }
             catch (Exception exception)
             {
                 Log.Error("Entity '[{0}]{1}' OnHide with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
             }
         }
-        
+
+        public void OnAttachedId(int SerialId)
+        {
+            childSerialIds.Add(SerialId);
+        }
+
+        public void OnDetachedId(int SerialIds)
+        {
+            for (int i = 0; i < childSerialIds.Count; i++)
+            {
+                if (childSerialIds[i] == SerialIds)
+                {
+                    childSerialIds.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+
+        public List<int> GetChildrenIds()
+        {
+            return childSerialIds;
+        }
+
+        public void Clear()
+        {
+            m_Id = 0;
+            m_EntityAssetName = string.Empty;
+            childSerialIds.Clear();
+            PoolManager.Instance.PushGameObject(this.gameObject);
+        }
+
         /*
+
 
         /// <summary>
         /// 实体附加子实体。
@@ -215,6 +209,8 @@ namespace GameLogic
                 Log.Error("Entity '[{0}]{1}' OnDetached with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
             }
         }
+
+        /*
 
         /// <summary>
         /// 实体附加子实体。
@@ -252,7 +248,7 @@ namespace GameLogic
                 Log.Error("Entity '[{0}]{1}' OnDetachFrom with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
             }
         }
-        
+
          */
 
         /// <summary>
@@ -270,11 +266,6 @@ namespace GameLogic
             {
                 Log.Error("Entity '[{0}]{1}' OnUpdate with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
             }
-        }
-
-        public void Clear()
-        {
-            
         }
     }
 }
