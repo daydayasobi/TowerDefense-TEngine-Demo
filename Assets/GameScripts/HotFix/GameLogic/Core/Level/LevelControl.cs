@@ -24,11 +24,11 @@ namespace GameLogic
 
         private bool isBuilding = false; // 是否正在建造塔
         private bool pause = false; // 是否暂停
-        
+
         // 数据
         // private DataLevelManager dataLevel;
-        // private DataPlayerManager dataPlayer;
-        private DataTowerManager dataTower;
+        // private DataPlayerManager dataPlayer;(已经实现
+        // private DataTowerManager dataTower;(已经实现
         // private DataEnemyManager dataEnemy;
 
         // 预览塔相关数据
@@ -37,7 +37,7 @@ namespace GameLogic
 
         // private Level Level;
 
-        private EntityPlayer player;
+        // private EntityPlayer player;
 
         private Dictionary<int, TowerInfo> dicTowerInfo;
 
@@ -52,8 +52,11 @@ namespace GameLogic
 
         public void OnEnter()
         {
-            player = EntityBase.CreatePlayer(new Vector3(leveldata.PlayerPosition.X, leveldata.PlayerPosition.Y, leveldata.PlayerPosition.Z),
-                new Vector3(leveldata.PlayerQuaternion.X, leveldata.PlayerQuaternion.Y, leveldata.PlayerQuaternion.Z), entityRoot.transform);
+            // DataPlayerManager.Instance.OnLoad();
+            int serialId = EntityControl.Instance.GenerateSerialId();
+            Vector3 position = new Vector3(leveldata.PlayerPosition.X, leveldata.PlayerPosition.Y, leveldata.PlayerPosition.Z);
+            Quaternion quaternion = Quaternion.Euler(new Vector3(leveldata.PlayerQuaternion.X, leveldata.PlayerQuaternion.Y, leveldata.PlayerQuaternion.Z));
+            EntityControl.Instance.ShowPlayerEntity(serialId, null, EntityData.Create(position, quaternion, entityRoot.transform, null));
         }
 
         /// <summary>
@@ -158,6 +161,11 @@ namespace GameLogic
                 Log.Error("Create tower fail,Tower data id is '{0}'.", towerData.Id);
                 return;
             }
+            
+            if (DataPlayerManager.Instance.Energy < tower.BuildEnergy)
+                return;
+            
+            DataPlayerManager.Instance.AddEnergy(-tower.BuildEnergy);
 
             // 1. 通过EntityControl创建塔实体
             int serialId = EntityControl.Instance.GenerateSerialId();
@@ -186,7 +194,7 @@ namespace GameLogic
             TowerInfo towerInfo = dicTowerInfo[towerSerialId];
             EntityControl.Instance.HideEntity(towerInfo.EntityTower.Entity); // 隐藏塔实体
             towerInfo.PlacementArea.Clear(towerInfo.PlaceGrid, towerInfo.Tower.Dimensions);
-            dataTower.DestroyTower(towerInfo.Tower);
+            DataTowerManager.Instance.DestroyTower(towerInfo.Tower);
             dicTowerInfo.Remove(towerSerialId);
             PoolReference.Release(towerInfo);
         }

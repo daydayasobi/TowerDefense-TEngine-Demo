@@ -64,8 +64,8 @@ namespace GameLogic
         {
             base.OnDestroy();
 
-            m_textName.text = string.Empty;
-            m_textDescription.text = string.Empty;
+            // m_textName.text = string.Empty;
+            // m_textDescription.text = string.Empty;
         }
 
         private void ShowTowerBuildButtons()
@@ -79,9 +79,6 @@ namespace GameLogic
                 TowerBuildButton item = CreateWidgetByPath<TowerBuildButton>(this.transform, "TowerBuildButton", true);
             
                 item.transform.SetParent(m_goSidebar.transform, false);
-                // item.transform.localScale = Vector3.one;
-                // item.transform.eulerAngles = Vector3.zero;
-                // TowerData towerData = TowerDataManger.Instance.GetItemConfig(towers);
                 TowerDataBase towerDataBase = DataTowerManager.Instance.GetTowerData(towers);
                 item.SetTowerBuildButton(towerDataBase, ShowBuildInfo);
             }

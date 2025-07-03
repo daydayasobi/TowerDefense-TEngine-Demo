@@ -116,15 +116,14 @@ namespace GameLogic
                 return;
             }
 
-            // DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-            // int needEnergy = tower.GetBuildEnergy(tower.Level + 1);
-            // if (dataPlayer.Energy < needEnergy)
-            // {
-            //     Log.Error("Energy lack,need {0},current is {1}", needEnergy, dataPlayer.Energy);
-            //     return;
-            // }
-            //
-            // dataPlayer.AddEnergy(-needEnergy);
+            int needEnergy = tower.GetBuildEnergy(tower.Level + 1);
+            if (DataPlayerManager.Instance.Energy < needEnergy)
+            {
+                Log.Error("Energy lack,need {0},current is {1}", needEnergy, DataPlayerManager.Instance.Energy);
+                return;
+            }
+            
+            DataPlayerManager.Instance.AddEnergy(-needEnergy);
 
             int lastLevel = tower.Level;
 
@@ -155,10 +154,7 @@ namespace GameLogic
             Tower tower = dicTower[serialId];
             GameEvent.Send(LevelEvent.OnSellTower, tower.SerialId);
 
-            //放还能量
-            // GameEntry.Event.Fire(this, HideTowerInLevelEventArgs.Create(tower.SerialId));
             // DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-            //
             // if (dataLevel.LevelState == EnumLevelState.Prepare)
             // {
             //     dataPlayer.AddEnergy(tower.TotalCostEnergy);
@@ -167,6 +163,8 @@ namespace GameLogic
             // {
             //     dataPlayer.AddEnergy(tower.SellEnergy);
             // }
+            
+            DataPlayerManager.Instance.AddEnergy(tower.SellEnergy);
         }
     }
 }

@@ -75,6 +75,10 @@ namespace GameLogic
                 {
                     m_EntityLogic = userData as EntityTowerLevelLogic;
                 }
+                else if (userData is EntityPlayerLogic)
+                {
+                    m_EntityLogic = userData as EntityPlayerLogic;
+                }
                 else
                 {
                     Debug.LogError("userData 类型不正确，不是 EntityTowerBase 或 EntityTowerLevel！");

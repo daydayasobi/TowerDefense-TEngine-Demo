@@ -57,15 +57,21 @@ namespace GameLogic
                 }
             }
             
-            // TODO: 暂时强制开启炮塔升级
-            m_btnUpgradeButton.GetComponent<Button>().interactable = true;
-            
             click = true;
             
             if (m_tower == null)
             {
                 Log.Error("Open UITowerConrollerForm Param inbaild");
                 return;
+            }
+            
+            m_btnUpgradeButton.gameObject.SetActive(!m_tower.IsMaxLevel);
+            if (!m_tower.IsMaxLevel)
+            {
+                int upgradeNeedEngry = m_tower.GetBuildEnergy(m_tower.Level + 1);
+                m_textEnergyTextUp.text = upgradeNeedEngry.ToString();
+                
+                m_btnUpgradeButton.GetComponent<Button>().interactable = (DataPlayerManager.Instance.Energy >= upgradeNeedEngry);
             }
             
             m_textName.text = m_tower.Name;

@@ -9,6 +9,7 @@ namespace GameLogic
     class UILevelMainInfoForm : UIWindow
     {
         #region 脚本工具生成的代码
+
         private Text m_textHP;
         private Text m_textEnergy;
         private GameObject m_goWaveInfo;
@@ -18,6 +19,7 @@ namespace GameLogic
         private Button m_btnDebugAddCurrency;
         private Text m_textCurrencyAmount;
         private Button m_btnButtonPause;
+
         protected override void ScriptGenerator()
         {
             m_textHP = FindChildComponent<Text>("PlayerInfo/m_textHP");
@@ -33,61 +35,59 @@ namespace GameLogic
             m_btnDebugAddCurrency.onClick.AddListener(OnClickDebugAddCurrencyBtn);
             m_btnButtonPause.onClick.AddListener(OnClickButtonPauseBtn);
         }
+
         #endregion
 
         #region 事件
+
         // 开始波次按钮点击事件处理
         private void OnClickStartWaveButtonBtn()
         {
             GameEvent.Send(LevelEvent.OnGameStartWave);
         }
+
         // 调试增加货币按钮点击事件处理
         private void OnClickDebugAddCurrencyBtn()
         {
-            Log.Debug("On Click Debug Add Currency Button");
-            TowerData towerData = TowerDataManger.Instance.GetItemConfig(101);
-            if (towerData != null)
-            {
-                GameEvent.Send(LevelEvent.OnShowPreviewTower, towerData);
-            }
-            else
-            {
-                Log.Error("TowerData with ID 1 not found.");
-            }
+            DataPlayerManager.Instance.DebugAddEnergy();
         }
+
         // 暂停按钮点击事件处理
         private void OnClickButtonPauseBtn()
         {
-
         }
+
         #endregion
+
         protected override void OnCreate()
         {
             base.OnCreate();
-            GameEvent.AddEventListener<int>(LevelEvent.OnPlayerHPChange, OnPlayerHPChange);
+            GameEvent.AddEventListener<int, int>(LevelEvent.OnPlayerHPChange, OnPlayerHPChange);
             GameEvent.AddEventListener(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.AddEventListener<int, int, float>(LevelEvent.OnWaveUpdate, OnWaveUpdate);
-            GameEvent.AddEventListener<int>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
+            GameEvent.AddEventListener<float, float>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
         }
+
         protected override void OnDestroy()
         {
             base.OnDestroy();
         }
+
         // 设置波次信息
         private void SetWaveInfo(int currentWave, int totalWave, float progress)
         {
-           m_textWave.text = string.Format("{0}/{1}", currentWave, totalWave);
+            m_textWave.text = string.Format("{0}/{1}", currentWave, totalWave);
             m_imgSliderForeground.fillAmount = progress;
         }
 
         // 玩家生命值变化事件处理
-        private void OnPlayerHPChange(int CurrentHP)
+        private void OnPlayerHPChange(int LastHP,int CurrentHP)
         {
             m_textHP.text = CurrentHP.ToString();
         }
 
         // 玩家能量变化事件处理
-        private void OnPlayerEnergyChange(int CurrentEnergy)
+        private void OnPlayerEnergyChange(float LastEnergy, float CurrentEnergy)
         {
             m_textEnergy.text = CurrentEnergy.ToString();
         }
@@ -95,13 +95,12 @@ namespace GameLogic
         // 关卡状态变化事件处理
         private void OnLevelStateChange()
         {
-
         }
 
         // 波次信息更新事件处理
         private void OnWaveUpdate(int currentWave, int totalWave, float CurrentWaveProgress)
         {
-            SetWaveInfo(currentWave,totalWave,currentWave);
+            SetWaveInfo(currentWave, totalWave, currentWave);
         }
     }
 }

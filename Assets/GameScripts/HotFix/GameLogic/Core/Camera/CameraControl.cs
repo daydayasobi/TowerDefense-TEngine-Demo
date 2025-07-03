@@ -284,6 +284,8 @@ namespace GameLogic
 
             // Camera position calculated from look position with view vector and zoom dist
             cameraPosition = lookPosition + (GetToCamVector() * zoomDist);
+            
+            Debug.Log("Camera panned to: " + cameraPosition + ", look position: " + lookPosition +" with pan delta: " + panDelta);
         }
 
         /// <summary>

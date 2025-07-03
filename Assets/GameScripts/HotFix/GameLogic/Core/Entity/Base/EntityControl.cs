@@ -13,7 +13,6 @@ namespace GameLogic
     public class EntityControl : Singleton<EntityControl>
     {
         // 实体字典
-        public Dictionary<int, Dictionary<int, EntityBase>> EntityDic = new Dictionary<int, Dictionary<int, EntityBase>>();
         private Dictionary<int, Entity> dicSerial2Entity = new Dictionary<int, Entity>();
         int EntityId = 0;
 
@@ -32,14 +31,27 @@ namespace GameLogic
             return serialId;
         }
 
-        public void ShowTowerLevelEntity(int levelId, int serialId, Action<Entity> onShowSuccess, object userData = null)
+        public void ShowPlayerEntity(int serialID, Action<Entity> onShowSuccess, object userData = null)
         {
-            var data = TowerLevelDataManger.Instance.GetItemConfig(levelId);
+            GameObject gameObject = PoolManager.Instance.GetGameObject(DataPlayerManager.Instance.AssetName);
+            Entity entity = gameObject.GetComponent<Entity>();
+            EntityPlayerLogic entityLogic = gameObject.GetComponent<EntityPlayerLogic>();
+            //初始化entity
+            entity.OnInit(0, serialId, DataPlayerManager.Instance.AssetName, entityLogic);
+            //初始化entity logic
+            entityLogic.OnInit(userData);
+            dicSerial2Entity.Add(serialId, entity);
+            onShowSuccess?.Invoke(entity);
+        }
+
+        public void ShowTowerLevelEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
+        {
+            var data = TowerLevelDataManger.Instance.GetItemConfig(entityId);
             GameObject gameObject = PoolManager.Instance.GetGameObject(data.NameId);
             Entity entity = gameObject.GetComponent<Entity>();
             EntityTowerLevelLogic entityLogic = gameObject.GetComponent<EntityTowerLevelLogic>();
             //初始化entity
-            entity.OnInit(levelId, serialId, data.NameId, entityLogic);
+            entity.OnInit(entityId, serialId, data.NameId, entityLogic);
             //初始化entity logic
             entityLogic.OnInit(userData);
             dicSerial2Entity.Add(serialId, entity);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
+using TEngine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,10 +18,13 @@ namespace GameLogic
         #region 脚本工具生成的代码
         private Button m_btnButton;
         private Text m_textText;
+        private Image m_image;
+        
         protected override void ScriptGenerator()
         {
             m_btnButton = FindChildComponent<Button>("m_btnButton");
             m_textText = FindChildComponent<Text>("m_textText");
+            m_image = FindChildComponent<Image>("EnergyIcon");
             m_btnButton.onClick.AddListener(OnClickButtonBtn);
         }
         #endregion
@@ -41,6 +45,13 @@ namespace GameLogic
             base.OnCreate();
             Icon = FindChildComponent<Image>("m_btnButton");
         }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            GameEvent.RemoveEventListener<float,float>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
+        }
+
         #region 配置参数
         [Header("颜色状态配置")]
         public Color energyDefaultColor;    // 能量充足时图标颜色
@@ -73,8 +84,11 @@ namespace GameLogic
             // 初始化UI显示
             UpdateEnergyDisplay();
             UpdateTowerIcon();
+            
+            //绑定通知
+            GameEvent.AddEventListener<float,float>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
 
-            UpdateEnergyState(PlayerData.Energy);
+            UpdateEnergyState(DataPlayerManager.Instance.Energy);
         }
 
         /// <summary>
@@ -87,9 +101,10 @@ namespace GameLogic
 
             // 计算能量是否足够
             bool canBuild = ownEnergy >= towerLevelData.BuildEnergy;
-
-
-
+            
+            bool haveEnoughEnergy = ownEnergy >= towerLevelData.BuildEnergy;
+            m_btnButton.interactable = haveEnoughEnergy;
+            m_image.color = haveEnoughEnergy ? energyDefaultColor : energyInvalidColor;
         }
 
         /// <summary>
@@ -100,6 +115,7 @@ namespace GameLogic
             // 安全检查：确保回调和数据有效
             if (onClick != null && towerData != null)
             {
+                onClick(towerData);
             }
         }
 
@@ -107,7 +123,7 @@ namespace GameLogic
         /// 玩家能量变更事件响应
         /// </summary>
         /// <param name="ownEnergy">更新后的能量值</param>
-        public void OnPlayerEnergyChange(float ownEnergy)
+        public void OnPlayerEnergyChange(float lastEnergy, float ownEnergy)
         {
             UpdateEnergyState(ownEnergy);
         }
