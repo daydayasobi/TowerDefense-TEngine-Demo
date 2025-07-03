@@ -21,20 +21,20 @@ namespace GameLogic
             return Entity.GetComponent<GameLogic.View.EntityPlayer>();
         }
 
-        public static GameLogic.Module.EntityTower CreateTower(int entityid, TowerData data, Vector3 Position, Quaternion rotation, Transform parent)
-        {
-            Type procedureType = Type.GetType(string.Format("GameLogic.Module.{0}", data.Type));
-            GameLogic.Module.EntityTower entitybase = (GameLogic.Module.EntityTower)MemoryPool.Acquire(procedureType);
-            entitybase.EntityId = entityid;
-            GameObject Entity = PoolManager.Instance.GetGameObject(data.NameId);
-            var entity= Entity.AddComponent<GameLogic.View.EntityTower>();
-            entity.InitialPosition = Position;
-            entity.Id = entityid;
-            entity.towerData = data;
-            entity.OnInit();
-            // entitybase.Initialize(entityid.ToString(), Entity);
-            return entitybase;
-        }
+        // public static GameLogic.Module.EntityTower CreateTower(int entityid, TowerData data, Vector3 Position, Quaternion rotation, Transform parent)
+        // {
+        //     Type procedureType = Type.GetType(string.Format("GameLogic.Module.{0}", data.Type));
+        //     GameLogic.Module.EntityTower entitybase = (GameLogic.Module.EntityTower)MemoryPool.Acquire(procedureType);
+        //     entitybase.EntityId = entityid;
+        //     GameObject Entity = PoolManager.Instance.GetGameObject(data.NameId);
+        //     var entity= Entity.AddComponent<GameLogic.View.EntityTower>();
+        //     entity.InitialPosition = Position;
+        //     entity.Id = entityid;
+        //     entity.towerData = data;
+        //     entity.OnInit();
+        //     // entitybase.Initialize(entityid.ToString(), Entity);
+        //     return entitybase;
+        // }
         
         private int m_Id;
         private string m_EntityAssetName;

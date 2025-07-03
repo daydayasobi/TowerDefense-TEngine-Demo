@@ -57,6 +57,9 @@ namespace GameLogic
                 }
             }
             
+            // TODO: 暂时强制开启炮塔升级
+            m_btnUpgradeButton.GetComponent<Button>().interactable = true;
+            
             click = true;
             
             if (m_tower == null)
@@ -91,7 +94,7 @@ namespace GameLogic
         
         private void OnClickUpgradeButtonBtn()
         {
-            if (m_tower == null || click)
+            if (m_tower == null || !click)
                 return;
             
             DataTowerManager.Instance.UpgradeTower(m_tower.SerialId);
@@ -111,12 +114,9 @@ namespace GameLogic
             if (m_tower == null)
                 return;
             
-            DataTowerManager.Instance.UpgradeTower(m_tower.SerialId);
+            // TODO: 需要返还能量
+            DataTowerManager.Instance.SellTower(m_tower.SerialId);
             Close();
-            
-            // // TODO: 需要返还能量
-            // DataTowerManager.Instance.SellTower(m_tower.SerialId);
-            // Close();
         }
         #endregion
 

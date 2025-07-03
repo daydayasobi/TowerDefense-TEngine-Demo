@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityAssaultCannon : EntityTowerBase
+    public class EntityAssaultCannon : EntityTowerLogic
     {
         
     }

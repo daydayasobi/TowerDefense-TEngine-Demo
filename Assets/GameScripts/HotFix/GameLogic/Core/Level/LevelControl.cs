@@ -93,10 +93,10 @@ namespace GameLogic
                     {
                         if (raycastHit.collider != null)
                         {
-                            EntityTowerBase entityTowerBase = raycastHit.collider.gameObject.GetComponent<EntityTowerBase>();
-                            if (entityTowerBase != null)
+                            EntityTowerLogic entityTowerLogic = raycastHit.collider.gameObject.GetComponent<EntityTowerLogic>();
+                            if (entityTowerLogic != null)
                             {
-                                entityTowerBase.ShowControlForm();
+                                entityTowerLogic.ShowControlForm();
                             }
                         }
                     }
@@ -161,10 +161,10 @@ namespace GameLogic
 
             // 1. 通过EntityControl创建塔实体
             int serialId = EntityControl.Instance.GenerateSerialId();
-            EntityControl.Instance.ShowTowerEntity(towerData.EntityId, serialId, EntityDataTower.Create(tower, position, rotation, entityRoot.transform, serialId), (entity) =>
+            EntityControl.Instance.ShowTowerEntity(towerData.EntityId, serialId, EntityTowerData.Create(tower, position, rotation, entityRoot.transform, serialId), (entity) =>
             {
-                EntityTowerBase entityTowerBase = entity.Logic as EntityTowerBase;
-                dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBase, placementArea, placeGrid));
+                EntityTowerLogic entityTowerLogic = entity.Logic as EntityTowerLogic;
+                dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerLogic, placementArea, placeGrid));
             });
 
             // 2. 隐藏预览塔
@@ -186,7 +186,7 @@ namespace GameLogic
             TowerInfo towerInfo = dicTowerInfo[towerSerialId];
             EntityControl.Instance.HideEntity(towerInfo.EntityTower.Entity); // 隐藏塔实体
             towerInfo.PlacementArea.Clear(towerInfo.PlaceGrid, towerInfo.Tower.Dimensions);
-            // dataTower.DestroyTower(towerInfo.Tower);
+            dataTower.DestroyTower(towerInfo.Tower);
             dicTowerInfo.Remove(towerSerialId);
             PoolReference.Release(towerInfo);
         }
@@ -196,6 +196,11 @@ namespace GameLogic
         /// </summary>
         private void HideAllTower()
         {
+            List<int> towerSerialIds = new List<int>(dicTowerInfo.Keys);
+            for (int i = 0; i < towerSerialIds.Count; i++)
+            {
+                HideTower(towerSerialIds[i]);
+            }
         }
 
         /// <summary>

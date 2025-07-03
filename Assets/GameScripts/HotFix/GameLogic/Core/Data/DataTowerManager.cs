@@ -125,11 +125,11 @@ namespace GameLogic
             // }
             //
             // dataPlayer.AddEnergy(-needEnergy);
-            
+
             int lastLevel = tower.Level;
-            
+
             tower.Upgrade();
-            GameEvent.Send(LevelEvent.OnUpgradeTower,serialId);
+            GameEvent.Send(LevelEvent.OnUpgradeTower, tower);
         }
 
         public void UpgradeTower(Tower tower)
@@ -146,15 +146,15 @@ namespace GameLogic
             }
 
             // DataManager dataLevel = GameEntry.Data.GetData<DataLevel>();
-            
+
             // if (dataLevel.LevelState != EnumLevelState.Prepare && dataLevel.LevelState != EnumLevelState.Normal)
             // {
             //     return;
             // }
-            
+
             Tower tower = dicTower[serialId];
-            GameEvent.Send(LevelEvent.OnSellTower,tower.SerialId);
-            
+            GameEvent.Send(LevelEvent.OnSellTower, tower.SerialId);
+
             //放还能量
             // GameEntry.Event.Fire(this, HideTowerInLevelEventArgs.Create(tower.SerialId));
             // DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();

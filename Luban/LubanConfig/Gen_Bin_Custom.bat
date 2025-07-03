@@ -5,7 +5,7 @@ set LUBAN_DLL=%LUBAN_ROOT%\Tools\Luban\Luban.dll
 set DATA_OUTPATH=%ASSET_ROOT%\Assets\AssetRaw\Configs\bytes\
 set CODE_OUTPATH=%ASSET_ROOT%\Assets\GameScripts\HotFix\GameProto\GameConfig\
 
-xcopy /s /e /i /y "%WORKSPACE%\CustomTemplate\ConfigSystem.cs" "%ASSET_ROOT%\Assets\GameScripts\HotFix\GameProto\ConfigSystem.cs"
+#xcopy /s /e /i /y "%WORKSPACE%\CustomTemplate\ConfigSystem.cs" "%ASSET_ROOT%\Assets\GameScripts\HotFix\GameProto\ConfigSystem.cs"
 
 dotnet %LUBAN_DLL% ^
     -t client ^

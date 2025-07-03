@@ -11,7 +11,7 @@ namespace GameLogic
         {
             public Tower Tower { get; private set; }
 
-            public EntityTowerBase EntityTower { get; private set; }
+            public EntityTowerLogic EntityTower { get; private set; }
 
             public IPlacementArea PlacementArea { get; private set; }
 
@@ -25,7 +25,7 @@ namespace GameLogic
                 this.PlaceGrid = IntVector2.zero;
             }
 
-            public static TowerInfo Create(Tower tower, EntityTowerBase entityTower, IPlacementArea placementArea, IntVector2 placeGrid)
+            public static TowerInfo Create(Tower tower, EntityTowerLogic entityTower, IPlacementArea placementArea, IntVector2 placeGrid)
             {
                 TowerInfo towerInfo = PoolReference.Acquire<TowerInfo>();
                 towerInfo.Tower = tower;
