@@ -52,7 +52,6 @@ namespace GameLogic
             GameEvent.AddEventListener(LevelEvent.OnShowEntityInLevel, OnShowEntityInLevel);
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.AddEventListener(LevelEvent.OnGameStartWave, OnStartWave);
-            GameEvent.AddEventListener(TestEvent.OnTest1, OnTestEvent);
             GameModule.UI.ShowUI<UITowerListForm>();
             levelControl.OnEnter();
         }
@@ -194,11 +193,6 @@ namespace GameLogic
         private void OnStartWave()
         {
             levelControl.StartWave();
-        }
-
-        private void OnTestEvent()
-        {
-            Log.Debug("TestEvent triggered in LevelProcedure");
         }
     }
 }

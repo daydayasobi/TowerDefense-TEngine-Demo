@@ -76,8 +76,8 @@ namespace GameLogic
                 if (userData is EntityTowerPreviewData)
                 {
                     entityTowerPreviewData = userData as EntityTowerPreviewData;
-                    transform.position = entityTowerPreviewData.Position;
-                    transform.rotation = entityTowerPreviewData.Rotation;
+                    // transform.position = entityTowerPreviewData.Position;
+                    // transform.rotation = entityTowerPreviewData.Rotation;
                     transform.parent = entityTowerPreviewData.Parent;
                     // 加载模型
                     // ShowTowerLevelEntity(EntityTowerData.Tower.Level);
