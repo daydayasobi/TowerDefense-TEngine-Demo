@@ -158,6 +158,7 @@ namespace GameLogic
         /// </summary>
         private void Start()
         {
+            mapSize = new Rect(-30, -30, 45, 45);
             RecalculateBoundingRect();
             SetZoom(furthestZoom);
         }
@@ -284,8 +285,6 @@ namespace GameLogic
 
             // Camera position calculated from look position with view vector and zoom dist
             cameraPosition = lookPosition + (GetToCamVector() * zoomDist);
-            
-            Debug.Log("Camera panned to: " + cameraPosition + ", look position: " + lookPosition +" with pan delta: " + panDelta);
         }
 
         /// <summary>

@@ -15,6 +15,14 @@ namespace GameLogic
             get;
             private set;
         }
+        
+        public int EntityId
+        {
+            get
+            {
+                return towerData.EntityId;
+            }
+        }
 
         public int SerialId
         {

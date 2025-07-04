@@ -89,9 +89,9 @@ public class GameModule
     /// <summary>
     /// 获取实体管理模块。
     /// </summary>
-    public static IEntityManagerModule EntityManager => _entityManager ??= Get<IEntityManagerModule>();
+    public static IEntityModule Entity => _entity ??= Get<IEntityModule>();
     
-    private static IEntityManagerModule _entityManager = null;
+    private static IEntityModule _entity = null;
     
     #endregion
     
@@ -123,7 +123,7 @@ public class GameModule
         _scene = null;
         _timer = null;
         _localization = null;
-        _entityManager = null;
+        _entity = null;
         
         Application.Quit();
 #if UNITY_EDITOR

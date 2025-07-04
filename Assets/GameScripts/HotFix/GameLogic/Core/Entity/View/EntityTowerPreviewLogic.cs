@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityTowerPreview : EntityLogicWithData
+    public class EntityTowerPreviewLogic : EntityLogic
     {
         // 预览塔的碰撞检测半径
         [SerializeField]
@@ -40,7 +40,7 @@ namespace GameLogic
         private IntVector2 m_GridPosition;
 
         // 预览塔的数据
-        private EntityDataTowerPreview entityDataTowerPreview;
+        private EntityTowerPreviewData entityTowerPreviewData;
 
         // 目标位置
         private Vector3 targetPos;
@@ -59,35 +59,53 @@ namespace GameLogic
 
         // 预览塔的所有网格渲染器
         private MeshRenderer[] renderers;
-        
+
         // 是否可以放置的属性
         public bool CanPlace
         {
-            get
-            {
-                return canPlace;
-            }
+            get { return canPlace; }
         }
-        
-        private void Start()
-        {
-            renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
-                        
-            // TODO: 测试用 手动剔除一个，剔除的是半径
-            // 移除最后一个元素
-            // Array.Resize(ref renderers, renderers.Length - 1);
-        }
-        
+
         // 显示方法
-        public void OnShow(EntityDataTowerPreview userData)
+        public override void OnInit(object userData)
         {
-            // 将传入的数据转换为预览塔数据
-            entityDataTowerPreview = userData;
-            if (entityDataTowerPreview == null)
+            base.OnInit(userData);
+
+            if (userData != null)
             {
-                Log.Error("EntityDataTowerPreview param is invaild");
-                return;
+                if (userData is EntityTowerPreviewData)
+                {
+                    entityTowerPreviewData = userData as EntityTowerPreviewData;
+                    transform.position = entityTowerPreviewData.Position;
+                    transform.rotation = entityTowerPreviewData.Rotation;
+                    transform.parent = entityTowerPreviewData.Parent;
+                    // 加载模型
+                    // ShowTowerLevelEntity(EntityTowerData.Tower.Level);
+                }
+                else
+                {
+                    Log.Error("Invalid userData type in OnInit. Expected EntityTowerPreviewData.");
+                }
             }
+            else
+            {
+                Log.Error("userData 为 null！");
+            }
+
+            renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
+        }
+
+        protected override void OnShow(object userData)
+        {
+            base.OnShow(userData);
+
+            // 将传入的数据转换为预览塔数据
+            // entityTowerPreviewData = userData as EntityTowerPreviewData;
+            // if (entityTowerPreviewData == null)
+            // {
+            //     Log.Error("EntityTowerPreviewData param is invaild");
+            //     return;
+            // }
 
             // 初始化状态
             canPlace = false;
@@ -95,12 +113,23 @@ namespace GameLogic
             moveVel = Vector3.zero;
             SetVisiable(true);
         }
-        
-        // 更新方法
-        protected  void Update()
+
+        // 隐藏方法
+        protected void OnHide(bool isShutdown, object userData)
         {
+            // 清理状态
+            currentArea = null;
+            m_GridPosition = IntVector2.zero;
+            entityTowerPreviewData = null;
+        }
+
+        // 更新方法
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(elapseSeconds, realElapseSeconds);
+
             // 如果没有预览塔数据，则直接返回
-            if (entityDataTowerPreview == null)
+            if (entityTowerPreviewData == null)
                 return;
             // 移动预览塔
             MoveGhost(false);
@@ -120,16 +149,7 @@ namespace GameLogic
                 moveVel = Vector3.zero;
             }
         }
-        
-        // 隐藏方法
-        protected void OnHide(bool isShutdown, object userData)
-        {
-            // 清理状态
-            currentArea = null;
-            m_GridPosition = IntVector2.zero;
-            entityDataTowerPreview = null;
-        }
-        
+
         // 设置预览塔的可见性
         private void SetVisiable(bool value)
         {
@@ -153,7 +173,7 @@ namespace GameLogic
             // 更新可见性状态
             visible = value;
         }
-        
+
         // 移动预览塔
         private void MoveGhost(bool hideWhenInvalid = true)
         {
@@ -171,7 +191,7 @@ namespace GameLogic
                 MoveGhostOntoWorld(ray, hideWhenInvalid);
             }
         }
-        
+
         // 当射线与放置区域发生碰撞时，移动预览塔
         private void MoveGhostWithRaycastHit(RaycastHit raycast)
         {
@@ -186,10 +206,10 @@ namespace GameLogic
             }
 
             // 将世界坐标转换为网格坐标
-            m_GridPosition = currentArea.WorldToGrid(raycast.point, entityDataTowerPreview.Dimensions);
+            m_GridPosition = currentArea.WorldToGrid(raycast.point, entityTowerPreviewData.Tower.Dimensions);
 
             // 检查塔是否可以放置在该位置
-            TowerFitStatus fits = currentArea.Fits(m_GridPosition, entityDataTowerPreview.Dimensions);
+            TowerFitStatus fits = currentArea.Fits(m_GridPosition, entityTowerPreviewData.Tower.Dimensions);
 
             // 设置预览塔可见
             SetVisiable(true);
@@ -198,9 +218,9 @@ namespace GameLogic
             canPlace = fits == TowerFitStatus.Fits;
 
             // 移动预览塔到目标位置，并设置材质
-            Move(currentArea.GridToWorld(m_GridPosition, entityDataTowerPreview.Dimensions),
-                                currentArea.transform.rotation,
-                                canPlace);
+            Move(currentArea.GridToWorld(m_GridPosition, entityTowerPreviewData.Tower.Dimensions),
+                currentArea.transform.rotation,
+                canPlace);
         }
 
         // 当射线没有与放置区域发生碰撞时，移动预览塔
@@ -212,7 +232,6 @@ namespace GameLogic
             // 如果不需要在无效位置隐藏预览塔，则进行碰撞检测
             if (!hideWhenInvalid)
             {
-
                 RaycastHit hit;
 
                 // 使用球形射线检测预览塔可以放置的位置
@@ -269,20 +288,20 @@ namespace GameLogic
             Quaternion rotation = currentArea.transform.rotation;
 
             // 检查塔是否可以放置在当前位置
-            TowerFitStatus fits = currentArea.Fits(m_GridPosition, entityDataTowerPreview.Dimensions);
+            TowerFitStatus fits = currentArea.Fits(m_GridPosition, entityTowerPreviewData.Tower.Dimensions);
 
             // 如果可以放置，则进行建造操作
             if (fits == TowerFitStatus.Fits)
             {
-                
                 // 获取建造位置
-                position = currentArea.GridToWorld(m_GridPosition, entityDataTowerPreview.Dimensions);
+                position = currentArea.GridToWorld(m_GridPosition, entityTowerPreviewData.Tower.Dimensions);
 
                 // 占用网格
-                currentArea.Occupy(m_GridPosition, entityDataTowerPreview.Dimensions);
+                currentArea.Occupy(m_GridPosition, entityTowerPreviewData.Tower.Dimensions);
 
                 // 触发建造塔事件
-                GameEvent.Send(LevelEvent.OnBuildTower,entityDataTowerPreview.TowerData, currentArea, m_GridPosition, position, rotation);
+                GameEvent.Send(TestEvent.OnTest1);
+                GameEvent.Send(LevelEvent.OnBuildTower, entityTowerPreviewData.Tower, currentArea, m_GridPosition, position, rotation);
                 return true;
             }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
 namespace GameLogic
@@ -12,7 +13,7 @@ namespace GameLogic
 
         // private DataPlayer dataPlayer;
 
-        protected internal override void OnInit(object userData)
+        public void OnInit(object userData)
         {
             base.OnInit(userData);
             if (userData.GetType() == typeof(EntityData))
@@ -24,7 +25,7 @@ namespace GameLogic
             }
         }
 
-        protected internal override void OnShow(object userData)
+        protected override void OnShow(object userData)
         {
             base.OnShow(userData);
 
@@ -32,14 +33,14 @@ namespace GameLogic
             // dataPlayer = GameEntry.Data.GetData<DataPlayer>();
         }
 
-        protected internal override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
 
 
         }
 
-        protected internal override void OnHide(bool isShutdown, object userData)
+        protected override void OnHide(bool isShutdown, object userData)
         {
             base.OnHide(isShutdown, userData);
 

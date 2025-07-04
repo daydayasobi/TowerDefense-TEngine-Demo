@@ -9,6 +9,7 @@ namespace GameLogic
     public class LevelProcedure : ProcedureBase
     {
         LevelControl levelControl;
+
         protected override void OnEnter(IFsm<IProcedureModule> procedureOwner)
         {
             base.OnEnter(procedureOwner);
@@ -26,16 +27,17 @@ namespace GameLogic
                 Log.Error("Can not find CameraInput instance in scene");
                 return;
             }
-            
+
             GameObject entityRoot = GameObject.Find("EntityRoot");
             if (entityRoot == null)
             {
                 Log.Error("Can not find EntityRoot in scene");
                 return;
             }
+
             levelControl = LevelControl.Create(LevelDataManger.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
             GameModule.UI.ShowUI<UILevelMainInfoForm>();
-            
+
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法
             GameEvent.AddEventListener(LevelEvent.OnChangeScene, OnChangeScene);
             GameEvent.AddEventListener(LevelEvent.OnLoadLevel, OnLoadLevel);
@@ -43,13 +45,14 @@ namespace GameLogic
             GameEvent.AddEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.AddEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.AddEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
-            GameEvent.AddEventListener<TowerDataBase, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
+            GameEvent.AddEventListener<Tower, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
             GameEvent.AddEventListener<int>(LevelEvent.OnSellTower, OnSellTower);
             GameEvent.AddEventListener<int>(LevelEvent.OnSpawnEnemy, OnSpawnEnemy);
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEnemyEntity, OnHideEnemyEntity);
             GameEvent.AddEventListener(LevelEvent.OnShowEntityInLevel, OnShowEntityInLevel);
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.AddEventListener(LevelEvent.OnGameStartWave, OnStartWave);
+            GameEvent.AddEventListener(TestEvent.OnTest1, OnTestEvent);
             GameModule.UI.ShowUI<UITowerListForm>();
             levelControl.OnEnter();
         }
@@ -57,7 +60,7 @@ namespace GameLogic
         protected override void OnUpdate(IFsm<IProcedureModule> procedureOwner, float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
-            
+
             if (levelControl != null)
                 levelControl.Update(elapseSeconds, realElapseSeconds);
         }
@@ -72,7 +75,7 @@ namespace GameLogic
             GameEvent.RemoveEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.RemoveEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.RemoveEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
-            GameEvent.RemoveEventListener<TowerDataBase, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
+            GameEvent.RemoveEventListener<Tower, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnSellTower, OnSellTower);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnSpawnEnemy, OnSpawnEnemy);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnHideEnemyEntity, OnHideEnemyEntity);
@@ -83,7 +86,7 @@ namespace GameLogic
             MemoryPool.Release(levelControl);
             levelControl = null;
         }
-        
+
         /// <summary>
         /// 处理场景切换事件
         /// </summary>
@@ -105,7 +108,6 @@ namespace GameLogic
         /// </summary>
         private void OnLevelStateChange()
         {
-
         }
 
         /// <summary>
@@ -138,10 +140,10 @@ namespace GameLogic
         /// <summary>
         /// 处理建造塔事件
         /// </summary>
-        private void OnBuildTower(TowerDataBase towerData, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
+        private void OnBuildTower(Tower tower, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
         {
             // 处理建造塔的逻辑
-            levelControl.CreateTower(towerData,placementArea,placeGrid,position,rotation);
+            levelControl.CreateTower(tower, placementArea, placeGrid, position, rotation);
         }
 
         /// <summary>
@@ -192,6 +194,11 @@ namespace GameLogic
         private void OnStartWave()
         {
             levelControl.StartWave();
+        }
+
+        private void OnTestEvent()
+        {
+            Log.Debug("TestEvent triggered in LevelProcedure");
         }
     }
 }

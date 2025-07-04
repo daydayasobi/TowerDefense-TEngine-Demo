@@ -15,8 +15,6 @@ namespace GameLogic
 
         #endregion
 
-        public readonly string AssetName = "EntityPlayer";
-
         public int HP { get; private set; }
 
         private float energy;

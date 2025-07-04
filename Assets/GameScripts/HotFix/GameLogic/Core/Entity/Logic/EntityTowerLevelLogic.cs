@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TEngine;
 using UnityEngine;
 
 namespace GameLogic
@@ -14,7 +15,7 @@ namespace GameLogic
         public ParticleSystem effect;
 
 
-        protected internal override void OnInit(object userData)
+        public override void OnInit(object userData)
         {
             base.OnInit(userData);
             if (userData.GetType() == typeof(EntityData))

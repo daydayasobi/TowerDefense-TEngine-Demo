@@ -17,62 +17,67 @@ namespace GameLogic
 
         public Animation CachedAnimation { get; private set; }
 
-        protected internal override void OnInit(object userData)
+        public override void OnInit(object userData)
         {
             base.OnInit(userData);
             CachedAnimation = GetComponent<Animation>();
         }
 
-        protected internal override void OnRecycle()
+        protected override void OnRecycle()
         {
             base.OnRecycle();
         }
 
-        protected internal override void OnShow(object userData)
+        protected override void OnShow(object userData)
         {
             base.OnShow(userData);
 
-            m_EntityData = userData as EntityData;
-            if (m_EntityData == null)
+            if (userData.GetType() == typeof(EntityData))
             {
-                Log.Error("Entity data is invalid.");
-                return;
+                //初始化位置
+                m_EntityData = (EntityData)userData;
+                transform.position = m_EntityData.Position;
+                transform.rotation = m_EntityData.Rotation;
+                transform.parent = m_EntityData.Parent;
+                CachedTransform.localScale = Vector3.one;
+                Name = Utility.Text.Format("[Entity {0}]", Id.ToString());
+                // 加载模型
+                // ShowTowerLevelEntity(EntityTowerData.Tower.Level);
             }
-
-            Name = Utility.Text.Format("[Entity {0}]", Id.ToString());
-            CachedTransform.localPosition = m_EntityData.Position;
-            CachedTransform.localRotation = m_EntityData.Rotation;
-            CachedTransform.localScale = Vector3.one;
+            else
+            {
+                Log.Info("Invalid userData type in OnShow. Expected EntityDataTower.");
+            }
         }
 
-        protected internal override void OnHide(bool isShutdown, object userData)
+        protected override void OnHide(bool isShutdown, object userData)
         {
             base.OnHide(isShutdown, userData);
 
             PoolReference.Release(m_EntityData);
         }
 
-        protected internal override void OnAttached(EntityLogic childEntity, Transform parentTransform, object userData)
+        protected override void OnAttached(EntityLogic childEntity, Transform parentTransform, object userData)
         {
             base.OnAttached(childEntity, parentTransform, userData);
         }
 
-        protected internal override void OnDetached(EntityLogic childEntity, object userData)
+        protected override void OnDetached(EntityLogic childEntity, object userData)
         {
             base.OnDetached(childEntity, userData);
         }
 
-        protected internal override void OnAttachTo(EntityLogic parentEntity, Transform parentTransform, object userData)
+        protected override void OnAttachTo(EntityLogic parentEntity, Transform parentTransform, object userData)
         {
             base.OnAttachTo(parentEntity, parentTransform, userData);
         }
 
-        protected internal override void OnDetachFrom(EntityLogic parentEntity, object userData)
+        protected override void OnDetachFrom(EntityLogic parentEntity, object userData)
         {
             base.OnDetachFrom(parentEntity, userData);
         }
 
-        protected internal override void OnUpdate(float elapseSeconds, float realElapseSeconds)
+        protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
         }

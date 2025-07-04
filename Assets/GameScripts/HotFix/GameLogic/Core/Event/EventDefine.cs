@@ -50,6 +50,12 @@ namespace GameLogic
         public static readonly int LevelSelect = RuntimeId.ToRuntimeId("ILoginUI_Event.LevelSelect");
     }
     
+    public partial class TestEvent
+    {
+        // 测试事件ID
+        public static readonly int OnTest1 = RuntimeId.ToRuntimeId("ITestEvent_Event.OnTest1");
+    }
+    
     public partial class LevelEvent
     {
         // 定义了一系列静态只读的运行时事件ID，这些ID用于标识不同的事件类型。

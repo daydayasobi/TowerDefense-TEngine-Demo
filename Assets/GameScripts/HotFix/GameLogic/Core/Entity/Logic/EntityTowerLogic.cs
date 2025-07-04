@@ -31,25 +31,17 @@ namespace GameLogic
             {
                 Log.Info("Invalid userData type in OnInit. Expected EntityDataTower.");
             }
-            
+
             GameEvent.AddEventListener<Tower>(LevelEvent.OnUpgradeTower, OnUpgradeTower);
         }
 
-        public void OnShow()
+        protected override void OnHide(bool isShutdown, object userData)
         {
-        }
-
-        protected internal override void OnHide(bool isShutdown, object userData)
-        {
-            base.OnHide(isShutdown,userData);
+            base.OnHide(isShutdown, userData);
             EntityTowerData = null;
             entityLevel = null;
             EntityLevelLogicLogic = null;
             GameEvent.RemoveEventListener<Tower>(LevelEvent.OnUpgradeTower, OnUpgradeTower);
-        }
-
-        private void Update()
-        {
         }
 
         private void ShowTowerLevelEntity(int level)
@@ -59,20 +51,20 @@ namespace GameLogic
                 HideEntity(entityLevel);
             }
 
-            int entityTypeId = EntityTowerData.Tower.GetLevelId(level);
-
-            int serialId = EntityControl.Instance.GenerateSerialId();
-            EntityControl.Instance.ShowTowerLevelEntity(entityTypeId, serialId, OnShowTowerLevelSuccess, EntityData.Create(transform.position, transform.rotation, transform));
+            EntityModuleEx.Instance.ShowTowerLevelEntity(
+                EntityTowerData.Tower.GetLevelEntityId(level), 
+                OnShowTowerLevelSuccess,
+                EntityData.Create(transform.position, transform.rotation, transform));
         }
 
         private void OnShowTowerLevelSuccess(Entity entity)
         {
-            if(entity == null)
+            if (entity == null)
             {
                 Log.Error("Failed to show tower level entity.");
                 return;
             }
-            
+
             entityLevel = entity;
             EntityTowerLevelLogic entityLogicTowerLevelLogic = entity.Logic as EntityTowerLevelLogic;
             if (entityLogicTowerLevelLogic != null)
@@ -101,7 +93,7 @@ namespace GameLogic
         {
             if (tower == null)
                 return;
-        
+
             if (tower.SerialId != EntityTowerData.Tower.SerialId)
                 return;
 
@@ -111,7 +103,7 @@ namespace GameLogic
 
         private void HideEntity(Entity entity)
         {
-            EntityControl.Instance.HideEntity(entity);
+            // GameModule.Entity.HideEntity(entity);
         }
 
 
