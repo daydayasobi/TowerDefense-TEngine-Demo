@@ -17,6 +17,7 @@ namespace GameLogic
         {
             EntityTowerPreviewData entityData = PoolReference.Acquire<EntityTowerPreviewData>();
             entityData.Tower = Tower;
+            
             return entityData;
         }
 
@@ -28,6 +29,7 @@ namespace GameLogic
             entityData.m_SerialId = serialId;
             return entityData;
         }
+        
 
         public override void Clear()
         {

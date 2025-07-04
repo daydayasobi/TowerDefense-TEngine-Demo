@@ -39,9 +39,6 @@ namespace GameLogic
         // 当前网格位置
         private IntVector2 m_GridPosition;
 
-        // 预览塔的数据
-        private EntityTowerPreviewData entityTowerPreviewData;
-
         // 目标位置
         private Vector3 targetPos;
 
@@ -66,10 +63,17 @@ namespace GameLogic
             get { return canPlace; }
         }
 
+        // 预览塔的数据
+        private EntityTowerPreviewData entityTowerPreviewData;
+        private Entity entityRadius;
+        private EntityLogic entityRadiusLogic;
+
         // 显示方法
         public override void OnInit(object userData)
         {
             base.OnInit(userData);
+            
+            renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
 
             if (userData != null)
             {
@@ -80,7 +84,7 @@ namespace GameLogic
                     // transform.rotation = entityTowerPreviewData.Rotation;
                     transform.parent = entityTowerPreviewData.Parent;
                     // 加载模型
-                    // ShowTowerLevelEntity(EntityTowerData.Tower.Level);
+                    ShowRadiusEntity();
                 }
                 else
                 {
@@ -91,8 +95,6 @@ namespace GameLogic
             {
                 Log.Error("userData 为 null！");
             }
-
-            renderers = transform.GetComponentsInChildren<MeshRenderer>(true);
         }
 
         protected override void OnShow(object userData)
@@ -307,6 +309,43 @@ namespace GameLogic
 
             // 如果不能放置，则返回false
             return false;
+        }
+
+        private void HideEntity(Entity entity)
+        {
+            EntityModuleEx.Instance.HideEntity(entity);
+        }
+
+
+        // 生成炮塔半径
+        private void ShowRadiusEntity()
+        {
+            int serialId = GameModule.Entity.GenerateSerialId();
+            EntityModuleEx.Instance.ShowRadiusEntity(
+                3029,
+                serialId,
+                OnShowRadiusEntitySuccess,
+                EntityRadiusData.Create(transform, serialId, entityTowerPreviewData.Tower.Range));
+        }
+
+        private void OnShowRadiusEntitySuccess(Entity entity)
+        {
+            if (entityRadius != null)
+            {
+                HideEntity(entityRadius);
+            }
+
+            entityRadius = entity;
+            EntityRadiusLogic entityLogic = entity.Logic as EntityRadiusLogic;
+            if (entityLogic != null)
+            {
+                entityRadiusLogic = entityLogic;
+                this.Entity.OnAttachedId(entityRadiusLogic.Entity.SerialId);
+            }
+            else
+            {
+                Log.Error("EntityTowerLevel logic is null or not of type EntityTowerLevel.");
+            }
         }
     }
 }

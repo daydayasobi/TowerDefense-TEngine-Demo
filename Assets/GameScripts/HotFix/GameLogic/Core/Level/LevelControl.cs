@@ -118,7 +118,8 @@ namespace GameLogic
 
             Tower tower = DataTowerManager.Instance.CreateTower(towerData.Id);
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityModuleEx.Instance.ShowTowerPreview(towerData.PreviewEntityId, serialId, (entity) =>
+            float radius = tower.GetRange(1);
+            EntityModuleEx.Instance.ShowTowerPreviewEntity(towerData.PreviewEntityId, serialId, (entity) =>
             {
                 _previewLogicTowerEntityLogic = entity.Logic as EntityTowerPreviewLogic;
                 isBuilding = true;
@@ -142,9 +143,9 @@ namespace GameLogic
         {
             if (DataPlayerManager.Instance.Energy < tower.BuildEnergy)
                 return;
-            
+
             DataPlayerManager.Instance.AddEnergy(-tower.BuildEnergy);
-            
+
             // 1. 通过EntityControl创建塔实体
             int serialId = GameModule.Entity.GenerateSerialId();
             EntityModuleEx.Instance.ShowTowerEntity(tower.EntityId, serialId, (entity) =>
@@ -152,10 +153,10 @@ namespace GameLogic
                 EntityTowerLogic entityTowerLogic = entity.Logic as EntityTowerLogic;
                 dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerLogic, placementArea, placeGrid));
             }, EntityTowerData.Create(tower, position, rotation, entityRoot.transform, serialId));
-            
+
             // 2. 隐藏预览塔
             HidePreviewTower();
-            
+
             // 3. 记录调试日志
             Log.Debug($"创建塔 [{tower.EntityId}] 在位置 {position}");
         }

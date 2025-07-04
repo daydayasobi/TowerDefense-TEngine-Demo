@@ -41,7 +41,7 @@ namespace GameLogic
             onShowSuccess?.Invoke(entity);
         }
 
-        public void ShowTowerEntity(int entityId,int serialId, Action<Entity> onShowSuccess, object userData = null)
+        public void ShowTowerEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
         {
             // int serialId = GameModule.Entity.GenerateSerialId();
             var data = TowerDataManger.Instance.GetItemConfig(entityId);
@@ -57,11 +57,11 @@ namespace GameLogic
             onShowSuccess?.Invoke(entity);
         }
 
-        public void ShowTowerPreview(int entityId,int serialId ,Action<Entity> onShowSuccess, object userData = null)
+        public void ShowTowerPreviewEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
         {
             // int serialId = GameModule.Entity.GenerateSerialId();
             string pathName = AssetsDataManger.Instance.GetItemConfig(entityId).ResourcesName;
-            var gameObject = PoolManager.Instance.GetGameObject(pathName);
+            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
             Entity entity = gameObject.GetComponent<Entity>();
             EntityTowerPreviewLogic entityLogic = gameObject.GetComponent<EntityTowerPreviewLogic>();
             //初始化entity
@@ -72,34 +72,19 @@ namespace GameLogic
             onShowSuccess?.Invoke(entity);
         }
 
-        // public void HideEntity(int serialId)
-        // {
-        //     Entity entity = null;
-        //     if (!DicSerial2Entity.TryGetValue(serialId, out entity))
-        //     {
-        //         Log.Error("Can find entity('serial id:{0}') ", serialId);
-        //     }
-        //
-        //     Log.Debug("HideEntity serialId:{0} entity count:{1}", serialId, DicSerial2Entity.Count);
-        //
-        //     Entity tempEntity = DicSerial2Entity[serialId];
-        //     List<int> childSerialIds = tempEntity.GetChildrenIds();
-        //     RemoveFromDic(serialId);
-        //
-        //     if (childSerialIds.Count > 0)
-        //     {
-        //         foreach (var item in childSerialIds)
-        //         {
-        //             if (DicSerial2Entity.ContainsKey(item))
-        //             {
-        //                 HideEntity(item);
-        //             }
-        //         }
-        //     }
-        //
-        //     tempEntity.OnHide(true, null);
-        //     tempEntity.Clear();
-        // }
+        public void ShowRadiusEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
+        {
+            string pathName = AssetsDataManger.Instance.GetItemConfig(entityId).ResourcesName;
+            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
+            Entity entity = gameObject.GetComponent<Entity>();
+            EntityRadiusLogic entityLogic = gameObject.GetComponent<EntityRadiusLogic>();
+            //初始化entity
+            entity.OnInit(entityId, serialId, pathName, entityLogic);
+            //初始化entity logic
+            entityLogic.OnInit(userData);
+            GameModule.Entity.AddToDic(serialId, entity);
+            onShowSuccess?.Invoke(entity);
+        }
 
         public void HideEntity(Entity entity)
         {

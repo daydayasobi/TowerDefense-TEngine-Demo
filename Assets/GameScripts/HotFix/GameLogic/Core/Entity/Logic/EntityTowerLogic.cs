@@ -10,7 +10,7 @@ namespace GameLogic
     {
         protected EntityTowerData EntityTowerData;
         protected Entity entityLevel;
-        protected EntityTowerLevelLogic EntityLevelLogicLogic;
+        protected EntityTowerLevelLogic EntityLevelLogic;
 
         protected bool pause = false;
 
@@ -40,7 +40,7 @@ namespace GameLogic
             base.OnHide(isShutdown, userData);
             EntityTowerData = null;
             entityLevel = null;
-            EntityLevelLogicLogic = null;
+            EntityLevelLogic = null;
             GameEvent.RemoveEventListener<Tower>(LevelEvent.OnUpgradeTower, OnUpgradeTower);
         }
 
@@ -69,8 +69,8 @@ namespace GameLogic
             EntityTowerLevelLogic entityLogicTowerLevelLogic = entity.Logic as EntityTowerLevelLogic;
             if (entityLogicTowerLevelLogic != null)
             {
-                EntityLevelLogicLogic = entityLogicTowerLevelLogic;
-                this.Entity.OnAttachedId(EntityLevelLogicLogic.Entity.SerialId);
+                EntityLevelLogic = entityLogicTowerLevelLogic;
+                this.Entity.OnAttachedId(EntityLevelLogic.Entity.SerialId);
             }
             else
             {
@@ -103,7 +103,7 @@ namespace GameLogic
 
         private void HideEntity(Entity entity)
         {
-            // GameModule.Entity.HideEntity(entity);
+            EntityModuleEx.Instance.HideEntity(entity);
         }
 
 
