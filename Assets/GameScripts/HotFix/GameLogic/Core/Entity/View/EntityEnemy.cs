@@ -29,7 +29,7 @@ namespace GameLogic.View
 
         public Vector3 InitialPosition;
         // 目标玩家实体
-        public EntityPlayer TargetPlayer { get; private set; }
+        public EntityPlayerLogic TargetPlayer { get; private set; }
 
         private void Start()
         {
@@ -128,7 +128,7 @@ namespace GameLogic.View
         /// </summary>
         private void OnTriggerEnter(Collider other)
         {
-            var player = other.GetComponent<EntityPlayer>();
+            var player = other.GetComponent<EntityPlayerLogic>();
 
             if (player == null)
             {

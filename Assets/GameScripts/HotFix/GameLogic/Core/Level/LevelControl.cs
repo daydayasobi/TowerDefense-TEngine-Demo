@@ -33,7 +33,7 @@ namespace GameLogic
 
         // 预览塔相关数据
         // private TowerDataBase previewTowerData; // 当前预览的塔数据
-        private EntityTowerPreviewLogic _previewLogicTowerEntityLogic; // 预览塔的逻辑组件
+        private EntityTowerPreviewLogic entityPreviewLogic; // 预览塔的逻辑组件
 
         // private Level Level;
 
@@ -75,9 +75,9 @@ namespace GameLogic
             if (isBuilding)
             {
                 // 鼠标左键点击且可以放置塔
-                if (Input.GetMouseButtonDown(0) && _previewLogicTowerEntityLogic != null && _previewLogicTowerEntityLogic.CanPlace)
+                if (Input.GetMouseButtonDown(0) && entityPreviewLogic != null && entityPreviewLogic.CanPlace)
                 {
-                    _previewLogicTowerEntityLogic.TryBuildTower(); // 尝试建造塔
+                    entityPreviewLogic.TryBuildTower(); // 尝试建造塔
                 }
 
                 // 鼠标右键点击，取消预览
@@ -121,7 +121,7 @@ namespace GameLogic
             float radius = tower.GetRange(1);
             EntityModuleEx.Instance.ShowTowerPreviewEntity(towerData.PreviewEntityId, serialId, (entity) =>
             {
-                _previewLogicTowerEntityLogic = entity.Logic as EntityTowerPreviewLogic;
+                entityPreviewLogic = entity.Logic as EntityTowerPreviewLogic;
                 isBuilding = true;
             }, EntityTowerPreviewData.Create(tower, entityRoot.transform, serialId));
         }
@@ -131,8 +131,9 @@ namespace GameLogic
         /// </summary>
         public void HidePreviewTower()
         {
-            PoolManager.Instance.PushGameObject(_previewLogicTowerEntityLogic.gameObject);
-            _previewLogicTowerEntityLogic = null;
+            EntityModuleEx.Instance.HideEntity(entityPreviewLogic.Entity);
+            // entityPreviewLogic.Entity.OnHide(true, false);
+            entityPreviewLogic = null;
             isBuilding = false;
         }
 
@@ -171,7 +172,7 @@ namespace GameLogic
                 return;
 
             TowerInfo towerInfo = dicTowerInfo[towerSerialId];
-            // GameModule.Entity.HideEntity(towerInfo.EntityTower.Entity); // 隐藏塔实体
+            EntityModuleEx.Instance.HideEntity(towerInfo.EntityTower.Entity); // 隐藏塔实体
             towerInfo.PlacementArea.Clear(towerInfo.PlaceGrid, towerInfo.Tower.Dimensions);
             DataTowerManager.Instance.DestroyTower(towerInfo.Tower);
             dicTowerInfo.Remove(towerSerialId);
@@ -311,7 +312,7 @@ namespace GameLogic
 
             // previewTowerData = null;
 
-            _previewLogicTowerEntityLogic = null;
+            entityPreviewLogic = null;
             isBuilding = false;
         }
     }

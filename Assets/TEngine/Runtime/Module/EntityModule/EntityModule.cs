@@ -9,7 +9,7 @@ namespace TEngine
     {
         private Dictionary<int, Entity> _dicSerial2Entity;
 
-        protected Dictionary<int, Entity> DicSerial2Entity { get; private set; }
+        // protected Dictionary<int, Entity> DicSerial2Entity { get; private set; }
         protected int serialId;
         private IEntityModule _entityModuleImplementation;
 
@@ -58,14 +58,14 @@ namespace TEngine
         public void HideEntity(int serialId)
         {
             Entity entity = null;
-            if (!DicSerial2Entity.TryGetValue(serialId, out entity))
+            if (!_dicSerial2Entity.TryGetValue(serialId, out entity))
             {
                 Log.Error("Can find entity('serial id:{0}') ", serialId);
             }
 
-            Log.Debug("HideEntity serialId:{0} entity count:{1}", serialId, DicSerial2Entity.Count);
+            Log.Debug("HideEntity serialId:{0} entity count:{1}", serialId, _dicSerial2Entity.Count);
 
-            Entity tempEntity = DicSerial2Entity[serialId];
+            Entity tempEntity = _dicSerial2Entity[serialId];
             List<int> childSerialIds = tempEntity.GetChildrenIds();
             RemoveFromDic(serialId);
 
@@ -73,7 +73,7 @@ namespace TEngine
             {
                 foreach (var item in childSerialIds)
                 {
-                    if (DicSerial2Entity.ContainsKey(item))
+                    if (_dicSerial2Entity.ContainsKey(item))
                     {
                         HideEntity(item);
                     }

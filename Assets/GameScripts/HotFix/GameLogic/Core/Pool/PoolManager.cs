@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using GameLogic;
 using TEngine;
 using UnityEngine;
 
-namespace GameLogic
+namespace TEngine
 {
     public class PoolManager : MonoBehaviour
     {
@@ -29,6 +30,20 @@ namespace GameLogic
 
                 return _instance;
             }
+        }
+
+        private void Awake()
+        {
+            // GameEvent.AddEventListener(PoolEvent.OnGetGameObject);
+            GameEvent.AddEventListener<GameObject>(PoolEvent.OnPushGameObject,PushGameObject);
+            // GameEvent.AddEventListener(PoolEvent.OnGetObject);
+            GameEvent.AddEventListener<object>(PoolEvent.OnPushObject,PushObject);
+        }
+
+        private void OnDestroy()
+        {
+            GameEvent.RemoveEventListener<GameObject>(PoolEvent.OnPushGameObject,PushGameObject);
+            GameEvent.RemoveEventListener<object>(PoolEvent.OnPushObject,PushObject);
         }
 
         [SerializeField] private GameObject poolRootObj;

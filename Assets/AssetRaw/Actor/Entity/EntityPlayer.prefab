@@ -105064,7 +105064,7 @@ GameObject:
   - component: {fileID: 3839075486201245064}
   - component: {fileID: 1669105099377873957}
   - component: {fileID: 6731279153824958294}
-  - component: {fileID: 8413153731454436795}
+  - component: {fileID: 1347854117228515018}
   m_Layer: 0
   m_Name: EntityPlayer
   m_TagString: Untagged
@@ -105124,7 +105124,7 @@ MonoBehaviour:
   idleEffect: {fileID: 7001049720510516528}
   chargeEffect: {fileID: 3573594496902468259}
   demagedEffect: {fileID: 2243455078475697978}
---- !u!114 &8413153731454436795
+--- !u!114 &1347854117228515018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105133,7 +105133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5143934176021516398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a00ae8dc321c2a445a7d681f71914f3e, type: 3}
+  m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5288128317273241782

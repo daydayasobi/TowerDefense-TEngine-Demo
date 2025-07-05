@@ -134,6 +134,7 @@ namespace TEngine
         {
             // TODO: 待实现方法
             // gameObject.SetLayerRecursively(m_OriginalLayer);
+            Log.Debug("EntityLogic OnHide called");
             Visible = false;
             m_Available = false;
         }

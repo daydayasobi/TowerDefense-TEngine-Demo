@@ -117,12 +117,16 @@ namespace GameLogic
         }
 
         // 隐藏方法
-        protected void OnHide(bool isShutdown, object userData)
+        protected override void OnHide(bool isShutdown, object userData)
         {
+            base.OnHide(isShutdown, userData);
             // 清理状态
+            Log.Debug("EntityTowerPreviewLogic OnHide called");
             currentArea = null;
             m_GridPosition = IntVector2.zero;
             entityTowerPreviewData = null;
+            entityRadius = null;
+            entityRadiusLogic = null;
         }
 
         // 更新方法
@@ -302,7 +306,6 @@ namespace GameLogic
                 currentArea.Occupy(m_GridPosition, entityTowerPreviewData.Tower.Dimensions);
 
                 // 触发建造塔事件
-                GameEvent.Send(TestEvent.OnTest1);
                 GameEvent.Send(LevelEvent.OnBuildTower, entityTowerPreviewData.Tower, currentArea, m_GridPosition, position, rotation);
                 return true;
             }
@@ -314,6 +317,8 @@ namespace GameLogic
         private void HideEntity(Entity entity)
         {
             EntityModuleEx.Instance.HideEntity(entity);
+            this.Entity.OnDetachedId(entityRadiusLogic.Entity.SerialId);
+            entityRadius = null;
         }
 
 
@@ -332,14 +337,14 @@ namespace GameLogic
         {
             if (entityRadius != null)
             {
+                Log.Debug("Showing radius entity HideEntity");
                 HideEntity(entityRadius);
             }
 
             entityRadius = entity;
-            EntityRadiusLogic entityLogic = entity.Logic as EntityRadiusLogic;
-            if (entityLogic != null)
+            entityRadiusLogic = entity.Logic as EntityRadiusLogic;
+            if (entityRadiusLogic != null)
             {
-                entityRadiusLogic = entityLogic;
                 this.Entity.OnAttachedId(entityRadiusLogic.Entity.SerialId);
             }
             else

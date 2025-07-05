@@ -152,6 +152,7 @@ namespace GameLogic
             // }
 
             Tower tower = dicTower[serialId];
+            DataPlayerManager.Instance.AddEnergy(tower.SellEnergy);
             GameEvent.Send(LevelEvent.OnSellTower, tower.SerialId);
 
             // DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();
@@ -164,7 +165,6 @@ namespace GameLogic
             //     dataPlayer.AddEnergy(tower.SellEnergy);
             // }
             
-            DataPlayerManager.Instance.AddEnergy(tower.SellEnergy);
         }
     }
 }

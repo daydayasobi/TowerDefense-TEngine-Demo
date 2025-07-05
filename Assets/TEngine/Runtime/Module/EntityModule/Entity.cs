@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TEngine
 {
-    public class Entity : MonoBehaviour, IMemory
+    public abstract class Entity : MonoBehaviour, IMemory
     {
         private int m_Id;
         private int m_SerialId; //序列号Id
@@ -59,48 +59,12 @@ namespace TEngine
         /// <param name="entityId">实体编号。</param>
         /// <param name="entityAssetName">实体资源名称。</param>
         /// <param name="userData">用户自定义数据。</param>
-        public void OnInit(int entityId, int serialId, string entityAssetName, EntityLogic entityLogic)
+        public virtual void OnInit(int entityId, int serialId, string entityAssetName, EntityLogic entityLogic)
         {
             m_Id = entityId;
             m_SerialId = serialId;
             m_EntityAssetName = entityAssetName;
             m_EntityLogic = entityLogic;
-            // if (userData != null)
-            // {
-            //     m_EntityLogic = userData as EntityLogic;
-            // }
-            // else
-            // {
-            //     Debug.LogError("userData 为 null！");
-            // }
-
-            // if (userData != null)
-            // {
-            //     if (userData is EntityTowerLogic)
-            //     {
-            //         m_EntityLogic = userData as EntityTowerLogic;
-            //     }
-            //     else if (userData is EntityTowerLevelLogic)
-            //     {
-            //         m_EntityLogic = userData as EntityTowerLevelLogic;
-            //     }
-            //     else if (userData is EntityPlayerLogic)
-            //     {
-            //         m_EntityLogic = userData as EntityPlayerLogic;
-            //     }
-            //     else if (userData is EntityTowerPreviewLogic)
-            //     {
-            //         m_EntityLogic = userData as EntityTowerPreviewLogic;
-            //     }
-            //     else
-            //     {
-            //         Debug.LogError("userData 类型不正确，不是 EntityTowerBase 或 EntityTowerLevel！");
-            //     }
-            // }
-            // else
-            // {
-            //     Debug.LogError("userData 为 null！");
-            // }
         }
 
         /// <summary>
@@ -144,7 +108,7 @@ namespace TEngine
         /// </summary>
         /// <param name="isShutdown">是否是关闭实体管理器时触发。</param>
         /// <param name="userData">用户自定义数据。</param>
-        public void OnHide(bool isShutdown, object userData)
+        public virtual void OnHide(bool isShutdown, object userData)
         {
             try
             {
@@ -152,7 +116,6 @@ namespace TEngine
                 m_Id = 0;
                 m_EntityAssetName = string.Empty;
                 childSerialIds.Clear();
-                // PoolManager.Instance.PushGameObject(this.gameObject);
             }
             catch (Exception exception)
             {
@@ -182,7 +145,7 @@ namespace TEngine
             return childSerialIds;
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             m_Id = 0;
             m_EntityAssetName = string.Empty;
