@@ -150,7 +150,7 @@ namespace GameLogic
         private void OnSellTower(int EntityId)
         {
             // 处理出售塔的逻辑
-            // levelControl.HideTower(EntityId);
+            levelControl.HideTower(EntityId);
         }
 
         /// <summary>

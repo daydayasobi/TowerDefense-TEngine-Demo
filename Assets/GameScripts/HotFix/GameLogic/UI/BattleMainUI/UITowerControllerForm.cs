@@ -101,8 +101,7 @@ namespace GameLogic
         {
             if (m_tower == null)
                 return;
-            
-            Log.Debug("OnClickSellButtonBtn");
+         
         }
 
         private void OnClickSellConfirmButtonBtn()
@@ -110,6 +109,7 @@ namespace GameLogic
             if (m_tower == null)
                 return;
             
+            DataManager.Instance.SellTower(m_tower.SerialId);
             Close();
         }
         #endregion

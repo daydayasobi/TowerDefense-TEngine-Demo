@@ -161,8 +161,8 @@ namespace GameLogic
             // 1. 通过EntityControl创建塔实体
             entityloader.ShowTowerEntity(towerData.EntityId, EntityDataTower.Create(tower, position, rotation, entityRoot.transform), (entity) =>
             {
-                // EntityTowerBase entityTowerBase = entity.Logic as EntityTowerBase;
-                dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entity, placementArea, placeGrid));
+                EntityTowerBase entityTowerBase = entity.Logic as EntityTowerBase;
+                dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBase, placementArea, placeGrid));
             });
 
             // 2. 隐藏预览塔
@@ -178,6 +178,16 @@ namespace GameLogic
         /// <param name="towerSerialId">塔的序列ID。</param>
         public void HideTower(int towerSerialId)
         {
+            if (!dicTowerInfo.ContainsKey(towerSerialId))
+                return;
+            
+            // TowerInfo towerInfo = dicTowerInfo[towerSerialId];
+            // entityloader.HideTowerLevel(towerInfo.Tower.Level);
+            // entityloader.HideTowerEntity(towerSerialId);
+            // towerInfo.PlacementArea.Clear(towerInfo.PlaceGrid, towerInfo.Tower.Dimensions);
+            // dataTower.DestroyTower(towerInfo.Tower);
+            // dicTowerInfo.Remove(towerSerialId);
+            // PoolReference.Release(towerInfo);
         }
 
         /// <summary>

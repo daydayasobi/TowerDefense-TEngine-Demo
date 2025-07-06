@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class Entity : MonoBehaviour
+    public class Entity : MonoBehaviour, IMemory
     {
         private int m_Id;
         private string m_EntityAssetName;
@@ -61,53 +61,70 @@ namespace GameLogic
         /// </summary>
         /// <param name="entityId">实体编号。</param>
         /// <param name="entityAssetName">实体资源名称。</param>
-        /// <param name="entityGroup">实体所属的实体组。</param>
-        /// <param name="isNewInstance">是否是新实例。</param>
         /// <param name="userData">用户自定义数据。</param>
-        public void OnInit(int entityId, string entityAssetName, bool isNewInstance, object userData)
+        public void OnInit(int entityId, string entityAssetName, object userData = null)
         {
             m_Id = entityId;
             m_EntityAssetName = entityAssetName;
-
-            ShowEntityInfo showEntityInfo = (ShowEntityInfo)userData;
-            Type entityLogicType = showEntityInfo.EntityLogicType;
-            if (entityLogicType == null)
+            
+            EntityTowerBase towerBase = FindObjectOfType<EntityTowerBase>();
+            if (towerBase != null)
             {
-                Log.Error("Entity logic type is invalid.");
-                return;
+                m_EntityLogic = towerBase;
             }
-
-            if (m_EntityLogic != null)
+            else
             {
-                if (m_EntityLogic.GetType() == entityLogicType)
+                // 尝试查找脚本B
+                EntityTowerLevel towerLevel = FindObjectOfType<EntityTowerLevel>();
+                if (towerLevel != null)
                 {
-                    m_EntityLogic.enabled = true;
-                    return;
+                    m_EntityLogic = towerLevel;
                 }
-
-                Destroy(m_EntityLogic);
-                m_EntityLogic = null;
+                else
+                {
+                    Debug.LogError("未找到脚本towerBase或脚本towerLevel！");
+                }
             }
 
-            m_EntityLogic = gameObject.GetComponent(entityLogicType) as EntityLogic;
-
-            if (m_EntityLogic == null)
-                m_EntityLogic = gameObject.AddComponent(entityLogicType) as EntityLogic;
-
-            if (m_EntityLogic == null)
-            {
-                Log.Error("Entity '{0}' can not add entity logic.", entityAssetName);
-                return;
-            }
-
-            try
-            {
-                m_EntityLogic.OnInit(showEntityInfo.UserData);
-            }
-            catch (Exception exception)
-            {
-                Log.Error("Entity '[{0}]{1}' OnInit with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
-            }
+            // // ShowEntityInfo showEntityInfo = (ShowEntityInfo)userData;
+            // Type entityLogicType = (EntityLogic)EntityLogicType;
+            // if (entityLogicType == null)
+            // {
+            //     Log.Error("Entity logic type is invalid.");
+            //     return;
+            // }
+            //
+            // if (m_EntityLogic != null)
+            // {
+            //     if (m_EntityLogic.GetType() == entityLogicType)
+            //     {
+            //         m_EntityLogic.enabled = true;
+            //         return;
+            //     }
+            //
+            //     Destroy(m_EntityLogic);
+            //     m_EntityLogic = null;
+            // }
+            //
+            // m_EntityLogic = gameObject.GetComponent(entityLogicType) as EntityLogic;
+            //
+            // if (m_EntityLogic == null)
+            //     m_EntityLogic = gameObject.AddComponent(entityLogicType) as EntityLogic;
+            //
+            // if (m_EntityLogic == null)
+            // {
+            //     Log.Error("Entity '{0}' can not add entity logic.", entityAssetName);
+            //     return;
+            // }
+            //
+            // try
+            // {
+            //     m_EntityLogic.OnInit(showEntityInfo.UserData);
+            // }
+            // catch (Exception exception)
+            // {
+            //     Log.Error("Entity '[{0}]{1}' OnInit with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
+            // }
         }
         
         /// <summary>
@@ -253,6 +270,11 @@ namespace GameLogic
             {
                 Log.Error("Entity '[{0}]{1}' OnUpdate with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
             }
+        }
+
+        public void Clear()
+        {
+            
         }
     }
 }

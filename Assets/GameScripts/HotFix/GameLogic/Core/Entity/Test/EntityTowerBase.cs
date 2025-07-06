@@ -95,7 +95,7 @@ namespace GameLogic
         {
         }
 
-        private void OnShowTowerLevelSuccess(EntityLogic entity)
+        private void OnShowTowerLevelSuccess(Entity entity)
         {
             //
         }

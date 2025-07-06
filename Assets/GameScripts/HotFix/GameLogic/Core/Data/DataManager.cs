@@ -145,16 +145,17 @@ namespace GameLogic
                 return;
             }
 
-            // DataLevel dataLevel = GameEntry.Data.GetData<DataLevel>();
-            //
+            // DataManager dataLevel = GameEntry.Data.GetData<DataLevel>();
+            
             // if (dataLevel.LevelState != EnumLevelState.Prepare && dataLevel.LevelState != EnumLevelState.Normal)
             // {
             //     return;
             // }
-            //
-            // Tower tower = dicTower[serialId];
+            
+            Tower tower = dicTower[serialId];
+            GameEvent.Send(LevelEvent.OnSellTower,tower.SerialId);
+            
             // GameEntry.Event.Fire(this, HideTowerInLevelEventArgs.Create(tower.SerialId));
-            //
             // DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();
             //
             // if (dataLevel.LevelState == EnumLevelState.Prepare)
