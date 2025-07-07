@@ -31,6 +31,9 @@ namespace GameLogic
             get;
             private set;
         }
+        
+        public bool IsActivation
+        { get;  set; }
 
         public Attacker Attacker
         {
@@ -136,7 +139,7 @@ namespace GameLogic
 
             if (EntityDataEnemy == null)
             {
-                Log.Error("Entity enemy '{0}' entity data invaild.", Id);
+                Log.Error("Entity enemy '{0}' entity data invaild.");
                 return;
             }
 
@@ -197,6 +200,11 @@ namespace GameLogic
             // stateList.Add(EnemyMoveState.Create());
             // stateList.Add(EnemyAttackHomeBaseState.Create());
             // stateList.Add(EnemyAttackTowerState.Create());
+            
+            fsm = GameModule.Fsm.CreateFsm("EntityEnemy", this, new FsmState<EntityEnemyLogic>[] {
+                new EnemyAttackHomeBaseState(),
+                new EnemyMoveState(),
+                new EnemyStandbyState()});
         }
 
         protected virtual void StartFsm()

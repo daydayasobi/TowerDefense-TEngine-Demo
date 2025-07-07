@@ -39,22 +39,22 @@ namespace GameLogic
                 // 如果计时器超过1秒，则发起攻击
                 if (attackTimer > 1)
                 {
-                    owner.TargetPlayer.Damage(owner.enemyData.Damage); // 对目标玩家造成伤害
+                    owner.TargetPlayer.Damage(owner.EntityDataEnemy.EnemyData.Damage); // 对目标玩家造成伤害
                     attacked = true; // 标记已发起攻击
                     owner.AfterAttack();
-                    owner.IsActivation = false;
+                    // owner.IsActivation = false;
                     ChangeState<EnemyStandbyState>(procedureOwner);
                 }
             }
         }
 
-        protected override void OnLeave(IFsm<EntityEnemy> procedureOwner, bool isShutdown)
+        protected override void OnLeave(IFsm<EntityEnemyLogic> procedureOwner, bool isShutdown)
         {
             base.OnLeave(procedureOwner, isShutdown);
         }
 
 
-        protected override void OnDestroy(IFsm<EntityEnemy> procedureOwner)
+        protected override void OnDestroy(IFsm<EntityEnemyLogic> procedureOwner)
         {
             base.OnDestroy(procedureOwner);
         }

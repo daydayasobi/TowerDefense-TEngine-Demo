@@ -11,6 +11,7 @@ namespace GameLogic
         private EntityEnemyLogic owner;
         // 目标路径节点的索引，用于记录当前移动到路径中的哪个节点
         private int targetPathNodeIndex = 0;
+        protected EntityTargetableLogic m_TargetTower;
         public EnemyMoveState()
         {
 
@@ -57,7 +58,7 @@ namespace GameLogic
             }
 
             // 更新导航速度，考虑减速效果
-            owner.Agent.speed = owner.EntityEnemyLogic.Speed * owner.CurrentSlowRate;
+            owner.Agent.speed = owner.EntityDataEnemy.EnemyData.Speed * owner.CurrentSlowRate;
         }
 
         protected override void OnLeave(IFsm<EntityEnemyLogic> procedureOwner, bool isShutdown)

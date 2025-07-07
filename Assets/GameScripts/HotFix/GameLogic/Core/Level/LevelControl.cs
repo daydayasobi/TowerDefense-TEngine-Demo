@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
-using GameLogic.View;
 using TEngine;
 using Unity.Properties;
 using UnityEngine;
