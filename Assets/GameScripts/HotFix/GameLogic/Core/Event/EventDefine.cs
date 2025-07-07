@@ -25,29 +25,44 @@ namespace GameLogic
         public static readonly int OnShowEntitySuccess = RuntimeId.ToRuntimeId("EventDefine.OnShowEntitySuccess");
         public static readonly int OnShowEntityFail = RuntimeId.ToRuntimeId("EventDefine.OnShowEntityFail");
     }
+
+    public static class MenuEvent
+    {
+        // 进入选择关卡流程
+        public static readonly int ChangeLevelSelect = RuntimeId.ToRuntimeId("IMenu_Event.ChangeLevelSelect");
+
+        // 打开设置
+        public static readonly int OpenOptions = RuntimeId.ToRuntimeId("IMenu_Event.OpenOptions");
+
+        // 退出游戏
+        public static readonly int QuitGame = RuntimeId.ToRuntimeId("IMenu_Event.QuitGame");
+
+        //打开菜单
+        public static readonly int OpenMenu = RuntimeId.ToRuntimeId("IMenu_Event.OpenMenu");
+    }
     
     public partial class MainMenuEvent
     {
         // 进入选择关卡流程
-        public static readonly int ChangeLevelSelect = RuntimeId.ToRuntimeId("ILoginUI_Event.ChangeLevelSelect");
+        public static readonly int ChangeLevelSelect = RuntimeId.ToRuntimeId("IMainMenu_Event.ChangeLevelSelect");
 
         // 打开设置
-        public static readonly int OpenOptions = RuntimeId.ToRuntimeId("ILoginUI_Event.OpenOptions");
+        public static readonly int OpenOptions = RuntimeId.ToRuntimeId("IMainMenu_Event.OpenOptions");
 
         // 退出游戏
-        public static readonly int QuitGame = RuntimeId.ToRuntimeId("ILoginUI_Event.QuitGame");
+        public static readonly int QuitGame = RuntimeId.ToRuntimeId("IMainMenu_Event.QuitGame");
 
         //打开菜单
-        public static readonly int OpenMenu = RuntimeId.ToRuntimeId("ILoginUI_Event.OpenMenu");
+        public static readonly int OpenMenu = RuntimeId.ToRuntimeId("IMainMenu_Event.OpenMenu");
     }
     
     public partial class ChangeSceneEvent
     {
         // 返回菜单流程
-        public static readonly int MenuSelect = RuntimeId.ToRuntimeId("ILoginUI_Event.MenuSelect");
+        public static readonly int MenuSelect = RuntimeId.ToRuntimeId("IChangeScene_Event.MenuSelect");
 
         // 进入关卡流程
-        public static readonly int LevelSelect = RuntimeId.ToRuntimeId("ILoginUI_Event.LevelSelect");
+        public static readonly int LevelSelect = RuntimeId.ToRuntimeId("IChangeScene_Event.LevelSelect");
     }
     
     public partial class PoolEvent
@@ -71,55 +86,58 @@ namespace GameLogic
         // 这些事件ID通过RuntimeId.ToRuntimeId方法生成，确保每个事件ID的唯一性。
 
         // 场景切换事件ID
-        public static readonly int OnChangeScene = RuntimeId.ToRuntimeId("ILoginUI_Event.OnChangeScene");
+        public static readonly int OnChangeScene = RuntimeId.ToRuntimeId("ILevel_Event.OnChangeScene");
 
         // 加载关卡事件ID
-        public static readonly int OnLoadLevel = RuntimeId.ToRuntimeId("ILoginUI_Event.OnLoadLevel");
+        public static readonly int OnLoadLevel = RuntimeId.ToRuntimeId("ILevel_Event.OnLoadLevel");
+        
+        // 加载关卡事件ID
+        public static readonly int OnLoadLevelFinish = RuntimeId.ToRuntimeId("ILevel_Event.OnLoadLevelFinish");
 
         // 关卡状态变化事件ID
-        public static readonly int OnLevelStateChange = RuntimeId.ToRuntimeId("ILoginUI_Event.OnLevelStateChange");
+        public static readonly int OnLevelStateChange = RuntimeId.ToRuntimeId("ILevel_Event.OnLevelStateChange");
 
         // 游戏结束事件ID
-        public static readonly int OnGameOver = RuntimeId.ToRuntimeId("ILoginUI_Event.OnGameOver");
+        public static readonly int OnGameOver = RuntimeId.ToRuntimeId("ILevel_Event.OnGameOver");
 
         // 重新加载关卡事件ID
-        public static readonly int OnReloadLevel = RuntimeId.ToRuntimeId("ILoginUI_Event.OnReloadLevel");
+        public static readonly int OnReloadLevel = RuntimeId.ToRuntimeId("ILevel_Event.OnReloadLevel");
 
         // 显示预览塔事件ID
-        public static readonly int OnShowPreviewTower = RuntimeId.ToRuntimeId("ILoginUI_Event.OnShowPreviewTower");
+        public static readonly int OnShowPreviewTower = RuntimeId.ToRuntimeId("ILevel_Event.OnShowPreviewTower");
 
         // 建造塔事件ID
-        public static readonly int OnBuildTower = RuntimeId.ToRuntimeId("ILoginUI_Event.OnBuildTower");
+        public static readonly int OnBuildTower = RuntimeId.ToRuntimeId("ILevel_Event.OnBuildTower");
 
         // 出售塔事件ID
-        public static readonly int OnSellTower = RuntimeId.ToRuntimeId("ILoginUI_Event.OnSellTower");
+        public static readonly int OnSellTower = RuntimeId.ToRuntimeId("ILevel_Event.OnSellTower");
 
         // 生成敌人事件ID
-        public static readonly int OnSpawnEnemy = RuntimeId.ToRuntimeId("ILoginUI_Event.OnSpawnEnemy");
+        public static readonly int OnSpawnEnemy = RuntimeId.ToRuntimeId("ILevel_Event.OnSpawnEnemy");
 
         // 隐藏敌人实体事件ID
-        public static readonly int OnHideEnemyEntity = RuntimeId.ToRuntimeId("ILoginUI_Event.OnHideEnemyEntity");
+        public static readonly int OnHideEnemyEntity = RuntimeId.ToRuntimeId("ILevel_Event.OnHideEnemyEntity");
 
         // 在关卡中显示实体事件ID
-        public static readonly int OnShowEntityInLevel = RuntimeId.ToRuntimeId("ILoginUI_Event.OnShowEntityInLevel");
+        public static readonly int OnShowEntityInLevel = RuntimeId.ToRuntimeId("ILevel_Event.OnShowEntityInLevel");
 
         // 在关卡中隐藏实体事件ID
-        public static readonly int OnHideEntityInLevel = RuntimeId.ToRuntimeId("ILoginUI_Event.OnHideEntityInLevel");
+        public static readonly int OnHideEntityInLevel = RuntimeId.ToRuntimeId("ILevel_Event.OnHideEntityInLevel");
 
         // 更改生命数值事件ID
-        public static readonly int OnPlayerHPChange = RuntimeId.ToRuntimeId("ILoginUI_Event.OnPlayerHPChange");
+        public static readonly int OnPlayerHPChange = RuntimeId.ToRuntimeId("ILevel_Event.OnPlayerHPChange");
 
         // 更改能量数值事件ID
-        public static readonly int OnPlayerEnergyChange = RuntimeId.ToRuntimeId("ILoginUI_Event.OnPlayerEnergyChange");
+        public static readonly int OnPlayerEnergyChange = RuntimeId.ToRuntimeId("ILevel_Event.OnPlayerEnergyChange");
 
         // 关卡状态变化事件
-        public static readonly int OnWaveUpdate = RuntimeId.ToRuntimeId("ILoginUI_Event.OnWaveUpdate");
+        public static readonly int OnWaveUpdate = RuntimeId.ToRuntimeId("ILevel_Event.OnWaveUpdate");
 
         // 游戏开始事件ID
-        public static readonly int OnGameStartWave = RuntimeId.ToRuntimeId("ILoginUI_Event.OnGameStartWave");
+        public static readonly int OnGameStartWave = RuntimeId.ToRuntimeId("ILevel_Event.OnGameStartWave");
         
         // 防御塔升级ID
-        public static readonly int OnUpgradeTower = RuntimeId.ToRuntimeId("ILoginUI_Event.OnUpgradeTower");
+        public static readonly int OnUpgradeTower = RuntimeId.ToRuntimeId("ILevel_Event.OnUpgradeTower");
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class WaveDataBase : MonoBehaviour
+    public class WaveDataBase
     {
         private WaveData dRWave;
         private WaveElementDataBase[] waveElementDatas;

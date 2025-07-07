@@ -44,7 +44,7 @@ namespace GameLogic
         {
             base.OnCreate();
 
-            currentLevelData = LevelDataManger.Instance.CurrentLevel;
+            currentLevelData = LevelDataLoader.Instance.CurrentLevel;
 
             ShowTowerBuildButtons();
             showBuildInfo = false;

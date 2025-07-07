@@ -26,16 +26,16 @@ namespace GameLogic
         private bool pause = false; // 是否暂停
 
         // 数据
-        // private DataLevelManager dataLevel;
+        // private DataLevelManager dataLevel;(正在实现
         // private DataPlayerManager dataPlayer;(已经实现
         // private DataTowerManager dataTower;(已经实现
-        // private DataEnemyManager dataEnemy;
+        // private DataEnemyManager dataEnemy;(正在实现
 
         // 预览塔相关数据
         // private TowerDataBase previewTowerData; // 当前预览的塔数据
         private EntityTowerPreviewLogic entityPreviewLogic; // 预览塔的逻辑组件
 
-        // private Level Level;
+        private Level Level;
 
         // private EntityPlayer player;
 
@@ -53,11 +53,9 @@ namespace GameLogic
         public void OnEnter()
         {
             // DataPlayerManager.Instance.OnLoad();
-            // int serialId = GameModule.Entity.GenerateSerialId();
             Vector3 position = new Vector3(leveldata.PlayerPosition.X, leveldata.PlayerPosition.Y, leveldata.PlayerPosition.Z);
             Quaternion quaternion = Quaternion.Euler(new Vector3(leveldata.PlayerQuaternion.X, leveldata.PlayerQuaternion.Y, leveldata.PlayerQuaternion.Z));
             EntityModuleEx.Instance.ShowPlayerEntity(3039, null, EntityData.Create(position, quaternion, entityRoot.transform));
-            // GameModule.Entity.ShowPlayerEntity(3039, serialId, null, EntityData.Create(position, quaternion, entityRoot.transform));
         }
 
         /// <summary>

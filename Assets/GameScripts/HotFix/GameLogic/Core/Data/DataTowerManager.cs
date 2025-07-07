@@ -19,9 +19,9 @@ namespace GameLogic
             dicTowerData = new Dictionary<int, TowerDataBase>();
             dicTower = new Dictionary<int, Tower>();
 
-            List<ProjectileData> dataProjectile = ProjectileDataManger.Instance.GetAllItemConfig();
+            List<ProjectileData> dataProjectile = ProjectileDataLoader.Instance.GetAllItemConfig();
 
-            List<TowerLevelData> drTowerLevels = TowerLevelDataManger.Instance.GetAllItemConfig();
+            List<TowerLevelData> drTowerLevels = TowerLevelDataLoader.Instance.GetAllItemConfig();
             foreach (var drTowerLevel in drTowerLevels)
             {
                 if (dicTowerLevelData.ContainsKey(drTowerLevel.Id))
@@ -29,12 +29,12 @@ namespace GameLogic
                     throw new System.Exception(string.Format("Data tower level id '{0}' duplicate.", drTowerLevel.Id));
                 }
 
-                ProjectileDataBase projectileData = new ProjectileDataBase(ProjectileDataManger.Instance.GetItemConfig(drTowerLevel.ProjectileData));
+                ProjectileDataBase projectileData = new ProjectileDataBase(ProjectileDataLoader.Instance.GetItemConfig(drTowerLevel.ProjectileData));
                 TowerLevelDataBase towerLevelData = new TowerLevelDataBase(drTowerLevel, projectileData);
                 dicTowerLevelData.Add(drTowerLevel.Id, towerLevelData);
             }
 
-            List<TowerData> drTowers = TowerDataManger.Instance.GetAllItemConfig();
+            List<TowerData> drTowers = TowerDataLoader.Instance.GetAllItemConfig();
             foreach (var drTower in drTowers)
             {
                 TowerLevelDataBase[] towerLevelDatas = new TowerLevelDataBase[drTower.Levels.Count];

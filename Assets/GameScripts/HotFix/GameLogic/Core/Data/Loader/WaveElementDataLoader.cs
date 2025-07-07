@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLogic
 {
-    internal class WaveElementDataManger : Singleton<WaveElementDataManger>
+    internal class WaveElementDataLoader : Singleton<WaveElementDataLoader>
     {
         public WaveElementData CurrentLevel
         {

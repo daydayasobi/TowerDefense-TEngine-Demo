@@ -19,7 +19,6 @@ namespace GameLogic
             GameEvent.AddEventListener(MainMenuEvent.OpenMenu, OpenMenu);
             GameModule.Scene.LoadScene("Menu");
             GameModule.UI.ShowUIAsync<UIMainMenuForm>();
-            Log.Debug("菜单流程");
         }
 
         protected override void OnLeave(IFsm<IProcedureModule> procedureOwner, bool isShutdown)

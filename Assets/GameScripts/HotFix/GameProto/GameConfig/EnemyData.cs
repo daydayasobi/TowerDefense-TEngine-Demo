@@ -23,12 +23,12 @@ public sealed partial class EnemyData : Luban.BeanBase
         MaxHp = _buf.ReadFloat();
         Damage = _buf.ReadInt();
         TowerDamage = _buf.ReadFloat();
-        ProjectileEntityid = _buf.ReadString();
+        ProjectileEntityid = _buf.ReadInt();
         ProjectileData = _buf.ReadInt();
         FireRate = _buf.ReadFloat();
         Range = _buf.ReadFloat();
         IsMultiAttack = _buf.ReadBool();
-        Sped = _buf.ReadFloat();
+        Speed = _buf.ReadFloat();
         AddEnergy = _buf.ReadFloat();
         Type = _buf.ReadString();
     }
@@ -69,7 +69,7 @@ public sealed partial class EnemyData : Luban.BeanBase
     /// <summary>
     /// 炮弹实体编号
     /// </summary>
-    public readonly string ProjectileEntityid;
+    public readonly int ProjectileEntityid;
     /// <summary>
     /// 炮弹数据
     /// </summary>
@@ -89,7 +89,7 @@ public sealed partial class EnemyData : Luban.BeanBase
     /// <summary>
     /// 移动速度
     /// </summary>
-    public readonly float Sped;
+    public readonly float Speed;
     /// <summary>
     /// 玩家死亡时获得的能量
     /// </summary>
@@ -121,7 +121,7 @@ public sealed partial class EnemyData : Luban.BeanBase
         + "FireRate:" + FireRate + ","
         + "Range:" + Range + ","
         + "IsMultiAttack:" + IsMultiAttack + ","
-        + "Sped:" + Sped + ","
+        + "Speed:" + Speed + ","
         + "AddEnergy:" + AddEnergy + ","
         + "Type:" + Type + ","
         + "}";

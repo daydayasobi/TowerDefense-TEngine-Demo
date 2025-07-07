@@ -18,6 +18,7 @@ public sealed partial class SceneData : Luban.BeanBase
     {
         Id = _buf.ReadInt();
         Description = _buf.ReadString();
+        SceneEntityId = _buf.ReadInt();
         SceneName = _buf.ReadString();
     }
 
@@ -35,6 +36,10 @@ public sealed partial class SceneData : Luban.BeanBase
     /// </summary>
     public readonly string Description;
     /// <summary>
+    /// 场景实体的编号
+    /// </summary>
+    public readonly int SceneEntityId;
+    /// <summary>
     /// 场景名称
     /// </summary>
     public readonly string SceneName;
@@ -51,6 +56,7 @@ public sealed partial class SceneData : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "description:" + Description + ","
+        + "SceneEntityId:" + SceneEntityId + ","
         + "SceneName:" + SceneName + ","
         + "}";
     }

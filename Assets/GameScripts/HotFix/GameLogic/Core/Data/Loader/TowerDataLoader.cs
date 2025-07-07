@@ -4,26 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TEngine;
 
 namespace GameLogic
 {
-    public class ProjectileDataManger: Singleton<ProjectileDataManger>
-    {        
+    internal class TowerDataLoader : Singleton<TowerDataLoader>
+    {
         /// <summary>
-             /// 炮弹Table。
-             /// </summary>
-        private TbProjectileData TbItem => ConfigSystem.Instance.Tables.TbProjectileData;
+        /// Table。
+        /// </summary>
+        private TbTowerData TbItem => ConfigSystem.Instance.Tables.TbTowerData;
 
         /// <summary>
-        /// 获取场景配置表。
+        /// 配置表。
         /// </summary>
         /// <param name="itemId">场景Id。</param>
-        public ProjectileData GetItemConfig(int itemId)
+        public TowerData GetItemConfig(int itemId)
         {
             TbItem.DataMap.TryGetValue(itemId, out var config);
             return config;
         }
-        public List<ProjectileData> GetAllItemConfig()
+        public List<TowerData> GetAllItemConfig()
         {
             return TbItem.DataList;
         }

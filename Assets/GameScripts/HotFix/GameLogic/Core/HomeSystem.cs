@@ -24,11 +24,11 @@ namespace GameLogic
         {
             await GameModule.Scene.UnloadAsync("mainMenu");
             GameModule.UI.HideUI<MainMenuUI>();
-            LevelSystem.Instance.LoadLevelSystem("Level1").Forget();
         }
 
         public void OpenOptions()
         {
+            
         }
 
         public void QuitGame()

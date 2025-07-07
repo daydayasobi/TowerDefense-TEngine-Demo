@@ -9,7 +9,7 @@ using static UnityEditor.Progress;
 
 namespace GameLogic
 {
-    internal class WaveDataManger : Singleton<WaveDataManger>
+    internal class WaveDataLoader : Singleton<WaveDataLoader>
     {
         public WaveData CurrentLevel
         {

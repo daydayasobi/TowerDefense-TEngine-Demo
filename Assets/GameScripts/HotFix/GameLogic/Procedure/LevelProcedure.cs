@@ -35,7 +35,7 @@ namespace GameLogic
                 return;
             }
 
-            levelControl = LevelControl.Create(LevelDataManger.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
+            levelControl = LevelControl.Create(LevelDataLoader.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
             GameModule.UI.ShowUI<UILevelMainInfoForm>();
 
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法

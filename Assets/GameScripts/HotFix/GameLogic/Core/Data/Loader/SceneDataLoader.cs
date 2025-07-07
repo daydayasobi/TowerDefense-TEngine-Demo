@@ -8,7 +8,7 @@ using static UnityEditor.Progress;
 
 namespace GameLogic
 {
-    internal class SceneDataManger : Singleton<SceneDataManger>
+    internal class SceneDataLoader : Singleton<SceneDataLoader>
     {
         /// <summary>
         /// 场景Table。

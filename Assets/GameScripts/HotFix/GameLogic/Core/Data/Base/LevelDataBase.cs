@@ -61,8 +61,8 @@ namespace GameLogic
         {
             get
             {
-                vector3 temp = dRLevel.PlayerPosition;
-                return new Vector3(temp.X, temp.Y, temp.Z);
+                Vector3 temp = new Vector3(dRLevel.PlayerPosition.X, dRLevel.PlayerPosition.Y, dRLevel.PlayerPosition.Z);
+                return temp;
             }
         }
 
@@ -70,8 +70,8 @@ namespace GameLogic
         {
             get
             {
-                vector3 temp = dRLevel.PlayerQuaternion;
-                return Quaternion.Euler(new Vector3(temp.X, temp.Y, temp.Z));
+                Vector3 temp = new Vector3(dRLevel.PlayerQuaternion.X, dRLevel.PlayerQuaternion.Y, dRLevel.PlayerQuaternion.Z);
+                return Quaternion.Euler(temp);
             }
         }
 

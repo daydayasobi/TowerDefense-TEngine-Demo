@@ -9,7 +9,7 @@ using static UnityEditor.Progress;
 
 namespace GameLogic
 {
-    internal class LevelDataManger : Singleton<LevelDataManger>
+    internal class LevelDataLoader : Singleton<LevelDataLoader>
     {
         public LevelData CurrentLevel
         {

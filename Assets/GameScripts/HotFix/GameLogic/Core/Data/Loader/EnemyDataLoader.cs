@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GameLogic
 {
-    public class AssetsDataManger : Singleton<AssetsDataManger>
+    public class EnemyDataLoader : Singleton<EnemyDataLoader>
     {
-        public AssetsPathData CurrentLevel
+        public EnemyData CurrentLevel
         {
             get;
             private set;
@@ -17,19 +17,19 @@ namespace GameLogic
         /// <summary>
         /// Table。
         /// </summary>
-        private TbAssetsPathData TbItem => ConfigSystem.Instance.Tables.TbAssetsPathData;
+        private TbEnemyData TbItem => ConfigSystem.Instance.Tables.TbEnemyData;
 
         /// <summary>
-        /// 获取实体。
+        /// 获取怪物表。
         /// </summary>
-        /// <param name="itemId">实体Id。</param>
-        public AssetsPathData GetItemConfig(int itemId)
+        /// <param name="itemId">怪物Id。</param>
+        public EnemyData GetItemConfig(int itemId)
         {
             TbItem.DataMap.TryGetValue(itemId, out var config);
             CurrentLevel = config;
             return config;
         }
-        public List<AssetsPathData> GetAllItemConfig()
+        public List<EnemyData> GetAllItemConfig()
         {
             return TbItem.DataList;
         }

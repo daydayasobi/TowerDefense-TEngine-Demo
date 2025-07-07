@@ -13,7 +13,7 @@ namespace GameLogic
         public void ShowPlayerEntity(int entityId, Action<Entity> onShowSuccess, object userData = null)
         {
             int serialId = GameModule.Entity.GenerateSerialId();
-            string pathName = AssetsDataManger.Instance.GetItemConfig(entityId).ResourcesName;
+            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
             GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
             Entity entity = gameObject.GetComponent<Entity>();
             EntityPlayerLogic entityLogic = gameObject.GetComponent<EntityPlayerLogic>();
@@ -28,8 +28,8 @@ namespace GameLogic
         public void ShowTowerLevelEntity(int entityId, Action<Entity> onShowSuccess, object userData = null)
         {
             int serialId = GameModule.Entity.GenerateSerialId();
-            var data = TowerLevelDataManger.Instance.GetItemConfig(entityId);
-            string pathName = AssetsDataManger.Instance.GetItemConfig(entityId).ResourcesName;
+            var data = TowerLevelDataLoader.Instance.GetItemConfig(entityId);
+            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
             GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
             Entity entity = gameObject.GetComponent<Entity>();
             EntityTowerLevelLogic entityLogic = gameObject.GetComponent<EntityTowerLevelLogic>();
@@ -44,7 +44,7 @@ namespace GameLogic
         public void ShowTowerEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
         {
             // int serialId = GameModule.Entity.GenerateSerialId();
-            var data = TowerDataManger.Instance.GetItemConfig(entityId);
+            var data = TowerDataLoader.Instance.GetItemConfig(entityId);
             //获取预制体
             GameObject gameObject = PoolManager.Instance.GetGameObject(data.NameId);
             Entity entity = gameObject.GetComponent<Entity>();
@@ -60,7 +60,7 @@ namespace GameLogic
         public void ShowTowerPreviewEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
         {
             // int serialId = GameModule.Entity.GenerateSerialId();
-            string pathName = AssetsDataManger.Instance.GetItemConfig(entityId).ResourcesName;
+            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
             GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
             Entity entity = gameObject.GetComponent<Entity>();
             EntityTowerPreviewLogic entityLogic = gameObject.GetComponent<EntityTowerPreviewLogic>();
@@ -74,7 +74,7 @@ namespace GameLogic
 
         public void ShowRadiusEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
         {
-            string pathName = AssetsDataManger.Instance.GetItemConfig(entityId).ResourcesName;
+            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
             GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
             Entity entity = gameObject.GetComponent<Entity>();
             EntityRadiusLogic entityLogic = gameObject.GetComponent<EntityRadiusLogic>();

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameConfig;
 using TEngine;
 using UnityEngine;
 
 namespace GameLogic
 {
-    public class DataLevelManager  : Singleton<DataLevelManager>
+    public class DataLevelManger  : Singleton<DataLevelManger>
     {
-        // private IDataTable<DRLevel> dtLevel;
         private Dictionary<int, LevelDataBase> dicLevelData;
         
         private int[] starScore;
@@ -54,10 +54,54 @@ namespace GameLogic
             CurrentLevelIndex = NONE_LEVEL_INDEX;
         }
 
-        protected void OnLoad()
+        public void OnLoad()
         {
             // 加载配置表
+            MaxLevel = 0;
+
+            // dtLevel = GameEntry.DataTable.GetDataTable<DRLevel>();
+            // if (dtLevel == null)
+            //     throw new System.Exception("Can not get data table Level");
+            //
+            dicLevelData = new Dictionary<int, LevelDataBase>();
+            //
+            // DataWave dataWave = GameEntry.Data.GetData<DataWave>();
+            // if (dataWave == null)
+            //     throw new System.Exception("Can not get data 'DataWave'");
             
+            DataSceneManager.Instance.OnLoad();
+            DataWaveManager.Instance.OnLoad();
+            
+            List<LevelData> dRLevels = LevelDataLoader.Instance.GetAllItemConfig();
+            foreach (var dRLevel in dRLevels)
+            {
+                SceneDataBase sceneData = DataSceneManager.Instance.GetSceneData(dRLevel.SceneId);
+
+                List<int> waveIds = new List<int>(dRLevel.WaveIds);
+                WaveDataBase[] waveDatas = new WaveDataBase[waveIds.Count];
+                for (int i = 0; i < waveIds.Count; i++)
+                {
+                    WaveDataBase waveData = DataWaveManager.Instance.GetWaveData(waveIds[i]);
+                    if (waveData == null)
+                        throw new System.Exception("Can not find Wave Data id :" + waveIds[i]);
+
+                    waveDatas[i] = waveData;
+                }
+
+                LevelDataBase levelData = new LevelDataBase(dRLevel, waveDatas, sceneData);
+                dicLevelData.Add(dRLevel.Id, levelData);
+
+                if (dRLevel.Id > MaxLevel)
+                    MaxLevel = dRLevel.Id;
+            }
+            
+            // TODO:关卡星级配置，写死的测试配置
+            starScore = new int[3];
+            starScore[0] = 10;
+            starScore[1] = 50;
+            starScore[2] = 100;
+            
+            GameEvent.AddEventListener<int>(LevelEvent.OnLoadLevelFinish, OnLoadLevelFinish);
         }
         
         public LevelDataBase GetLevelData(int id)
@@ -286,25 +330,23 @@ namespace GameLogic
             // }
         }
 
-        // private void OnLoadLevelFinfish(object sender, GameEventArgs e)
-        // {
-        //     LoadLevelFinishEventArgs ne = (LoadLevelFinishEventArgs)e;
-        //     if (ne == null)
-        //     {
-        //         return;
-        //     }
-        //
-        //     if (LevelState != EnumLevelState.Loading)
-        //     {
-        //         return;
-        //     }
-        //
-        //     LevelDataBase levelData = GetLevelData(CurrentLevelIndex);
-        //     if (levelData != null && levelData.SceneData.Id == ne.LevelId)
-        //     {
-        //         ChangeLevelState(EnumLevelState.Prepare);
-        //     }
-        // }
+        private void OnLoadLevelFinish(int levelId)
+        {
+            if (LevelState != EnumLevelState.Loading)
+            {
+                return;
+            }
+        
+            LevelDataBase levelData = GetLevelData(CurrentLevelIndex);
+            if (levelData != null && levelData.SceneData.Id == levelId)
+            {
+                ChangeLevelState(EnumLevelState.Prepare);
+            }
+            else
+            {
+                Log.Error("Load level finish but level data is null or scene id not match,levelId:{0},currentLevelIndex:{1}", levelId, CurrentLevelIndex);
+            }
+        }
 
         protected void OnUnload()
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameLogic
 {
-    internal class TowerLevelDataManger : Singleton<TowerLevelDataManger>
+    internal class TowerLevelDataLoader : Singleton<TowerLevelDataLoader>
     {
         /// <summary>
         /// Table。
