@@ -120,7 +120,6 @@ namespace GameLogic
             if (m_tower == null)
                 return;
             
-            // TODO: 需要返还能量
             DataTowerManager.Instance.SellTower(m_tower.SerialId);
             Close();
         }

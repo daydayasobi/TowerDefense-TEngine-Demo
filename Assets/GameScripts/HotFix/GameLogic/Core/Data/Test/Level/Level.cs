@@ -144,8 +144,7 @@ namespace GameLogic
 
                 if (updateWaveInfoTimer >= UPDATE_WAVE_INFO_RATE)
                 {
-                    // TODO: event
-                    // GameEntry.Event.Fire(this, WaveInfoUpdateEventArgs.Create(CurrentWaveIndex, WaveCount, wave.Progress));
+                    GameEvent.Send(LevelEvent.OnWaveUpdate,CurrentWaveIndex, WaveCount, wave.Progress);
                     updateWaveInfoTimer -= UPDATE_WAVE_INFO_RATE;
                 }
 
@@ -156,9 +155,8 @@ namespace GameLogic
                     spawnEnemyTimer -= wave.NextWaveTime;
                     if (waves.Count > 0)
                         CurrentWaveIndex++;
-
-                    // TODO: event
-                    // GameEntry.Event.Fire(this, WaveInfoUpdateEventArgs.Create(CurrentWaveIndex, WaveCount, wave.Progress));
+                    
+                    GameEvent.Send(LevelEvent.OnWaveUpdate,CurrentWaveIndex, WaveCount, wave.Progress);
                     PoolReference.Release(wave);
                     wave = null;
                 }
@@ -166,7 +164,6 @@ namespace GameLogic
             else
             {
                 Finish = true;
-
             }
         }
 

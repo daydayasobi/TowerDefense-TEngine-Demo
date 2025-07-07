@@ -56,7 +56,15 @@ namespace GameLogic
                 return dRLevel.InitEnergy;
             }
         }
-
+        
+        public int InitHp
+        {
+            get
+            {
+                return dRLevel.InitHp;
+            }
+        }
+        
         public Vector3 PlayerPosition
         {
             get

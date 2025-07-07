@@ -8,13 +8,6 @@ namespace GameLogic
 {
     public class DataPlayerManager : Singleton<DataPlayerManager>
     {
-        #region 测试数据 需要实现存档功能后去除
-
-        private int TestHP = 100;
-        private int TestEnergy = 100;
-
-        #endregion
-
         public int HP { get; private set; }
 
         private float energy;
@@ -23,12 +16,11 @@ namespace GameLogic
         {
             get
             {
-                // DataLevel dataLevel = GameEntry.Data.GetData<DataLevel>();
-                // if (!dataLevel.IsInLevel)
-                // {
-                //     Log.Error("Is invaild to get player energy outsiede level scene");
-                //     return 0;
-                // }
+                if (!DataLevelManager.Instance.IsInLevel)
+                {
+                    Log.Error("Is invaild to get player energy outsiede level scene");
+                    return 0;
+                }
 
                 return energy;
             }
@@ -51,9 +43,8 @@ namespace GameLogic
 
         protected void OnLoad()
         {
-            // HP = GameEntry.Config.GetInt(Constant.Config.PlayerHP);
-            energy = 6;
-            HP = TestEnergy;
+            energy = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex).InitEnergy;;
+            HP = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex).InitHp;
             IsEnableDebugEnergy = true;
             DebugAddEnergyCount = 1000;
         }
@@ -99,9 +90,7 @@ namespace GameLogic
         public void Reset()
         {
             int lastHP = HP;
-            // HP = GameEntry.Config.GetInt(Constant.Config.PlayerHP);
-            HP = TestHP;
-            //HP = 100;
+            HP = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex).InitHp;
             GameEvent.Send(LevelEvent.OnPlayerHPChange, lastHP, HP);
 
             float lastEnergy = Energy;
@@ -117,7 +106,7 @@ namespace GameLogic
             //     Energy = levelData.InitEnergy;
             // }
             
-            Energy = TestEnergy;
+            Energy = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex).InitEnergy;
 
             GameEvent.Send(LevelEvent.OnPlayerEnergyChange, lastEnergy, Energy);
 

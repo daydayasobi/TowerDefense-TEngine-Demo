@@ -85,6 +85,22 @@ namespace GameLogic
             GameModule.Entity.AddToDic(serialId, entity);
             onShowSuccess?.Invoke(entity);
         }
+        
+        // public void ShowEnemyEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
+        // {
+        //     // int serialId = GameModule.Entity.GenerateSerialId();
+        //     var data = EnemyDataLoader.Instance.GetItemConfig(entityId);
+        //     //获取预制体
+        //     GameObject gameObject = PoolManager.Instance.GetGameObject(data.NameId);
+        //     Entity entity = gameObject.GetComponent<Entity>();
+        //     EntityEnemyLogic entityLogic = gameObject.GetComponent<EntityEnemyLogic>();
+        //     //初始化entity
+        //     entity.OnInit(entityId, serialId, data.NameId, entityLogic);
+        //     //初始化entity logic
+        //     entityLogic.OnInit(userData);
+        //     GameModule.Entity.AddToDic(serialId, entity);
+        //     onShowSuccess?.Invoke(entity);
+        // }
 
         public void HideEntity(Entity entity)
         {

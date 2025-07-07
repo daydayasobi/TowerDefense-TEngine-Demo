@@ -14,7 +14,7 @@ namespace GameLogic
     partial class LevelControl : IMemory
     {
         // 当前关卡数据
-        private LevelData leveldata;
+        private Level Level;
 
         // 关卡管理器，用于管理关卡路径等
         private LevelManager levelManager;
@@ -35,8 +35,6 @@ namespace GameLogic
         // private TowerDataBase previewTowerData; // 当前预览的塔数据
         private EntityTowerPreviewLogic entityPreviewLogic; // 预览塔的逻辑组件
 
-        private Level Level;
-
         // private EntityPlayer player;
 
         private Dictionary<int, TowerInfo> dicTowerInfo;
@@ -53,9 +51,9 @@ namespace GameLogic
         public void OnEnter()
         {
             // DataPlayerManager.Instance.OnLoad();
-            Vector3 position = new Vector3(leveldata.PlayerPosition.X, leveldata.PlayerPosition.Y, leveldata.PlayerPosition.Z);
-            Quaternion quaternion = Quaternion.Euler(new Vector3(leveldata.PlayerQuaternion.X, leveldata.PlayerQuaternion.Y, leveldata.PlayerQuaternion.Z));
-            EntityModuleEx.Instance.ShowPlayerEntity(3039, null, EntityData.Create(position, quaternion, entityRoot.transform));
+            // Vector3 position = new Vector3(leveldata.PlayerPosition.X, leveldata.PlayerPosition.Y, leveldata.PlayerPosition.Z);
+            // Quaternion quaternion = Quaternion.Euler(new Vector3(leveldata.PlayerQuaternion.X, leveldata.PlayerQuaternion.Y, leveldata.PlayerQuaternion.Z));
+            EntityModuleEx.Instance.ShowPlayerEntity(3039, null, EntityData.Create(Level.PlayerPosition, Level.PlayerQuaternion, entityRoot.transform));
         }
 
         /// <summary>
@@ -63,11 +61,21 @@ namespace GameLogic
         /// </summary>
         public void Update(float elapseSeconds, float realElapseSeconds)
         {
-            // if (Level == null) return;
-            //
-            // // 如果关卡未完成，则处理关卡逻辑
-            // if (!Level.Finish)
-            //     Level.ProcessLevel(elapseSeconds, realElapseSeconds);
+            if (Level == null)
+            {
+                Log.Error("Level is null, please check if LevelControl is initialized properly.");
+                return;
+            }
+
+            if (DataLevelManager.Instance.LevelState != EnumLevelState.Prepare && DataLevelManager.Instance.LevelState != EnumLevelState.Normal)
+            {
+                Log.Error("Level is not in a valid state for processing. Current state: " + DataLevelManager.Instance.LevelState);
+                return;
+            }
+            
+            // 如果关卡未完成，则处理关卡逻辑
+            if (!Level.Finish)
+                Level.ProcessLevel(elapseSeconds, realElapseSeconds);
 
             // 如果正在建造塔
             if (isBuilding)
@@ -234,7 +242,7 @@ namespace GameLogic
         /// </summary>
         public void StartWave()
         {
-            // Level.StartWave();
+            Level.StartWave();
         }
 
         /// <summary>
@@ -290,10 +298,10 @@ namespace GameLogic
         }
 
         // 创建关卡控制器
-        public static LevelControl Create(LevelData level, LevelManager levelPathManager, CameraInput cameraInput, GameObject entityRoot)
+        public static LevelControl Create(Level level, LevelManager levelPathManager, CameraInput cameraInput, GameObject entityRoot)
         {
             var levelControl = MemoryPool.Acquire<LevelControl>();
-            levelControl.leveldata = level;
+            levelControl.Level = level;
             levelControl.levelManager = levelPathManager;
             levelControl.cameraInput = cameraInput;
             levelControl.entityRoot = entityRoot;

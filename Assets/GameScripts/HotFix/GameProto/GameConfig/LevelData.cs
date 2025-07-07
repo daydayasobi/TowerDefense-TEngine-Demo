@@ -21,6 +21,7 @@ public sealed partial class LevelData : Luban.BeanBase
         Name = _buf.ReadString();
         DescriptionId = _buf.ReadInt();
         SceneId = _buf.ReadInt();
+        InitHp = _buf.ReadInt();
         InitEnergy = _buf.ReadInt();
         PlayerPosition = global::GameConfig.vector3.Deserializevector3(_buf);
         PlayerQuaternion = global::GameConfig.vector3.Deserializevector3(_buf);
@@ -53,6 +54,10 @@ public sealed partial class LevelData : Luban.BeanBase
     /// 场景Id
     /// </summary>
     public readonly int SceneId;
+    /// <summary>
+    /// 初始生命值
+    /// </summary>
+    public readonly int InitHp;
     /// <summary>
     /// 初始能量
     /// </summary>
@@ -89,6 +94,7 @@ public sealed partial class LevelData : Luban.BeanBase
         + "name:" + Name + ","
         + "DescriptionId:" + DescriptionId + ","
         + "SceneId:" + SceneId + ","
+        + "InitHp:" + InitHp + ","
         + "InitEnergy:" + InitEnergy + ","
         + "PlayerPosition:" + PlayerPosition + ","
         + "PlayerQuaternion:" + PlayerQuaternion + ","

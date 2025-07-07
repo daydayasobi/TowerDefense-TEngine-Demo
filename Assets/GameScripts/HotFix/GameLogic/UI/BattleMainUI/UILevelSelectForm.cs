@@ -37,7 +37,7 @@ namespace GameLogic
         {
             int index = 0;
             
-            foreach (var itemdata in DataLevelManger.Instance.GetAllLevelData())
+            foreach (var itemdata in DataLevelManager.Instance.GetAllLevelData())
             {
                 LevelSelectionButton item = CreateWidgetByPath<LevelSelectionButton>(this.transform, "LevelSelectionButton", true);
 

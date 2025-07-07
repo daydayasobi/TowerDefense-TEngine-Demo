@@ -112,8 +112,7 @@ namespace GameLogic
                     PoolReference.Release(waveElement);
                     waveElement = null;
                     CurrentEnemyIndex++;
-                    // TODO: Event
-                    // GameEntry.Event.Fire(this, SpawnEnemyEventArgs.Create(enemyId));
+                    GameEvent.Send(LevelEvent.OnSpawnEnemy,enemyId);
                 }
             }
             else if (!Finish && timer >= NextWaveTime)

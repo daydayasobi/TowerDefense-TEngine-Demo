@@ -30,7 +30,7 @@ namespace GameLogic
         private Dictionary<int, GameObject> dicTowerId2Button;
         private Dictionary<int, int> dicSerialId2TowerId;
 
-        private LevelData currentLevelData;
+        private LevelDataBase currentLevelData;
 
         private bool showBuildInfo = false;
 
@@ -44,7 +44,8 @@ namespace GameLogic
         {
             base.OnCreate();
 
-            currentLevelData = LevelDataLoader.Instance.CurrentLevel;
+            // currentLevelData = LevelDataLoader.Instance.CurrentLevel;
+            currentLevelData = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex);
 
             ShowTowerBuildButtons();
             showBuildInfo = false;

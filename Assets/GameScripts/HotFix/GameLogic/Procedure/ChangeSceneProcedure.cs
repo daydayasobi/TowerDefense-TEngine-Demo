@@ -39,7 +39,7 @@ namespace GameLogic
         private void LoadData()
         {
             //加载关卡相关
-            DataLevelManger.Instance.OnLoad();
+            DataLevelManager.Instance.OnLoad();
             
             // TODO: 需要判空
         }
@@ -57,7 +57,9 @@ namespace GameLogic
 
         private async UniTaskVoid TestLevel1()
         {
-            LevelDataLoader.Instance.LoadLevel(1);
+            // LevelDataLoader.Instance.LoadLevel(1);
+            DataLevelManager.Instance.OnLoad();
+            DataLevelManager.Instance.LoadLevel(1);
             await GameModule.Scene.LoadSceneAsync("Level1");
             ChangeState<LevelProcedure>(procedureOwner);
         }

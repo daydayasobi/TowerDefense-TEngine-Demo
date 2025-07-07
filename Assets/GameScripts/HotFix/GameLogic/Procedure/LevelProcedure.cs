@@ -35,7 +35,7 @@ namespace GameLogic
                 return;
             }
 
-            levelControl = LevelControl.Create(LevelDataLoader.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
+            levelControl = LevelControl.Create(DataLevelManager.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
             GameModule.UI.ShowUI<UILevelMainInfoForm>();
 
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法
@@ -100,6 +100,9 @@ namespace GameLogic
         private void OnLoadLevel()
         {
             // 处理加载关卡的逻辑
+            // TODO: 写死测试数据
+            // GameEvent.Send(LevelEvent.OnLoadLevelFinish, 1);
+            DataLevelManager.Instance.OnLoadLevelFinish(1);
         }
 
         /// <summary>
@@ -115,7 +118,7 @@ namespace GameLogic
         private void OnGameOver()
         {
             // 处理游戏结束的逻辑
-            // levelControl.Gameover();
+            levelControl.Gameover();
         }
 
         /// <summary>
@@ -124,7 +127,7 @@ namespace GameLogic
         private void OnReloadLevel()
         {
             // 处理重新加载关卡的逻辑
-            // levelControl.Restart();
+            levelControl.Restart();
         }
 
         /// <summary>
@@ -160,7 +163,7 @@ namespace GameLogic
         private void OnSpawnEnemy(int EntityId)
         {
             // 处理生成敌人的逻辑
-            // levelControl.SpawnEnemy(EntityId);
+            levelControl.SpawnEnemy(EntityId);
         }
 
         /// <summary>
@@ -169,7 +172,7 @@ namespace GameLogic
         private void OnHideEnemyEntity(int EntityId)
         {
             // 处理隐藏敌人实体的逻辑
-            // levelControl.HideEnemyEntity(EntityId);
+            levelControl.HideEnemyEntity(EntityId);
         }
 
         /// <summary>
@@ -178,7 +181,7 @@ namespace GameLogic
         private void OnShowEntityInLevel()
         {
             // 处理显示实体在关卡中的逻辑
-            // levelControl.ShowEntity();
+            levelControl.ShowEntity();
         }
 
         /// <summary>
@@ -187,7 +190,7 @@ namespace GameLogic
         private void OnHideEntityInLevel(int EntityId)
         {
             // 处理隐藏实体在关卡中的逻辑
-            // levelControl.HideEntity(EntityId);
+            levelControl.HideEntity(EntityId);
         }
 
         private void OnStartWave()

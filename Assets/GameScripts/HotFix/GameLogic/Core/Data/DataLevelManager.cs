@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class DataLevelManger  : Singleton<DataLevelManger>
+    public class DataLevelManager  : Singleton<DataLevelManager>
     {
         private Dictionary<int, LevelDataBase> dicLevelData;
         
@@ -101,7 +101,7 @@ namespace GameLogic
             starScore[1] = 50;
             starScore[2] = 100;
             
-            GameEvent.AddEventListener<int>(LevelEvent.OnLoadLevelFinish, OnLoadLevelFinish);
+            // GameEvent.AddEventListener<int>(LevelEvent.OnLoadLevelFinish, OnLoadLevelFinish);
         }
         
         public LevelDataBase GetLevelData(int id)
@@ -174,25 +174,29 @@ namespace GameLogic
         {
             bool isReload = true;
 
-            if (CurrentLevelIndex != levelData.Id)
-            {
-                CurrentLevelIndex = levelData.Id;
-                isReload = false;
-            }
+            // TODO:这里需要判断是否是重新加载关卡 注意注释
+            // if (CurrentLevelIndex != levelData.Id)
+            // {
+            //     CurrentLevelIndex = levelData.Id;
+            //     isReload = false;
+            // }
 
             // if (CurrentLevel != null)
             //     ReferencePool.Release(CurrentLevel);
             //
             // CurrentLevel = Level.Create(levelData);
+            
+            CurrentLevelIndex = levelData.Id;
+            CurrentLevel = Level.Create(levelData);
 
             DataPlayerManager.Instance.Reset();
 
             ChangeLevelState(isReload ? EnumLevelState.Prepare : EnumLevelState.Loading);
 
-            // if (isReload)
-            //     GameEntry.Event.Fire(this, ReloadLevelEventArgs.Create(levelData));
-            // else
-            //     GameEntry.Event.Fire(this, LoadLevelEventArgs.Create(levelData));
+            if (isReload)
+                GameEvent.Send(LevelEvent.OnReloadLevel, levelData);
+            else
+                GameEvent.Send(LevelEvent.OnLoadLevel, levelData);
         }
         
         public void StartWave()
@@ -330,7 +334,7 @@ namespace GameLogic
             // }
         }
 
-        private void OnLoadLevelFinish(int levelId)
+        public void OnLoadLevelFinish(int levelId)
         {
             if (LevelState != EnumLevelState.Loading)
             {
@@ -350,9 +354,6 @@ namespace GameLogic
 
         protected void OnUnload()
         {
-            // GameEntry.DataTable.DestroyDataTable<DRLevel>();
-
-            // dtLevel = null;
             dicLevelData = null;
 
             if (CurrentLevel != null)
