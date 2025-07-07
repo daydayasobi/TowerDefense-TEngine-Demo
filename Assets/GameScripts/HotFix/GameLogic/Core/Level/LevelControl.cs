@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
@@ -71,7 +72,7 @@ namespace GameLogic
                 Log.Error("Level is not in a valid state for processing. Current state: " + DataLevelManager.Instance.LevelState);
                 return;
             }
-            
+
             // 如果关卡未完成，则处理关卡逻辑
             if (!Level.Finish)
                 Level.ProcessLevel(elapseSeconds, realElapseSeconds);
@@ -200,9 +201,23 @@ namespace GameLogic
         /// 生成敌人，通常在波次开始时调用。
         /// </summary>
         /// <param name="enemyId">敌人的ID。</param>
+        // public void SpawnEnemy(int enemyId, Action<Entity> showSuccess, EntityData entityData)
+        // {
+        //     // entityloader.AddEntityEnemy(enemyId,levelManager);
+        //     EntityModuleEx.Instance.ShowEnemyEntity(enemyId, (entity) =>
+        //     {
+        //         if (showSuccess != null)
+        //             showSuccess(entity);
+        //     }, entityData);
+        // }
         public void SpawnEnemy(int enemyId)
         {
             // entityloader.AddEntityEnemy(enemyId,levelManager);
+            EntityModuleEx.Instance.ShowEnemyEntity(enemyId, (entity) =>
+            {
+                // if (showSuccess != null)
+                //     showSuccess(entity);
+            });
         }
 
         /// <summary>
