@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 54943286195798258}
   - component: {fileID: 65314383504805724}
   - component: {fileID: -144804306009071330}
+  - component: {fileID: 2383068211224650284}
   m_Layer: 11
   m_Name: Hoverboss
   m_TagString: Untagged
@@ -155,6 +156,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2383068211224650284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300474929184216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0648fe6717164d9f01a46b6ddcdbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: {fileID: 0}
+  projectilePoints: []
+  epicenter: {fileID: 0}
 --- !u!1 &1497969988445794
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +765,8 @@ GameObject:
   - component: {fileID: 6715954537606921106}
   - component: {fileID: 247370764945379283}
   - component: {fileID: 2122707362468672598}
+  - component: {fileID: 2971527052515640814}
+  - component: {fileID: 1463756759077874095}
   m_Layer: 11
   m_Name: Targetter
   m_TagString: Untagged
@@ -819,6 +837,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2971527052515640814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950072036521051375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4702994d55feb64caec04f6ccb5a4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchRate: 0
+  idleRotationSpeed: 39
+  idleCorrectionTime: 2
+  idleWaitTime: 2
+--- !u!114 &1463756759077874095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950072036521051375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems: []
 --- !u!1 &7406466081536892355
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6984733934244090337}
+  - component: {fileID: 7984476859861403539}
   m_Layer: 11
   m_Name: Attack
   m_TagString: Untagged
@@ -850,3 +898,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4527377347391372}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7984476859861403539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406466081536892355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061d91c955737cd4a9fd3399d356aa3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

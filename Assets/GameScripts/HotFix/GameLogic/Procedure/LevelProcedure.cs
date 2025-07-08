@@ -34,6 +34,9 @@ namespace GameLogic
                 Log.Error("Can not find EntityRoot in scene");
                 return;
             }
+            
+            //加载数据
+            DataEnemyManager.Instance.OnLoad();
 
             levelControl = LevelControl.Create(DataLevelManager.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
             GameModule.UI.ShowUI<UILevelMainInfoForm>();
@@ -41,7 +44,7 @@ namespace GameLogic
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法
             GameEvent.AddEventListener(LevelEvent.OnChangeScene, OnChangeScene);
             GameEvent.AddEventListener(LevelEvent.OnLoadLevel, OnLoadLevel);
-            GameEvent.AddEventListener(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.AddEventListener<EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.AddEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.AddEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.AddEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
@@ -70,7 +73,7 @@ namespace GameLogic
             GameModule.UI.CloseUI<UILevelMainInfoForm>();
             GameEvent.RemoveEventListener(LevelEvent.OnChangeScene, OnChangeScene);
             GameEvent.RemoveEventListener(LevelEvent.OnLoadLevel, OnLoadLevel);
-            GameEvent.RemoveEventListener(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.RemoveEventListener<EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.RemoveEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.RemoveEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.RemoveEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
@@ -108,7 +111,7 @@ namespace GameLogic
         /// <summary>
         /// 处理关卡状态变化事件
         /// </summary>
-        private void OnLevelStateChange()
+        private void OnLevelStateChange(EnumLevelState curState)
         {
         }
 
@@ -160,10 +163,9 @@ namespace GameLogic
         /// <summary>
         /// 处理生成敌人事件
         /// </summary>
-        private void OnSpawnEnemy(int EntityId)
+        private void OnSpawnEnemy(int enemyId)
         {
-            // 处理生成敌人的逻辑
-            levelControl.SpawnEnemy(EntityId);
+            levelControl.SpawnEnemy(enemyId);
         }
 
         /// <summary>

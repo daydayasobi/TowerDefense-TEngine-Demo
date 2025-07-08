@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EnemyAttackHomeBaseState : FsmState<EntityEnemyLogic>
+    public class EnemyAttackHomeBaseState : FsmState<EntityEnemyLogic>, IMemory
     {
         private EntityEnemyLogic owner;
         private bool attacked = false;
@@ -59,6 +59,11 @@ namespace GameLogic
             base.OnDestroy(procedureOwner);
         }
 
+        public static EnemyAttackHomeBaseState Create()
+        {
+            EnemyAttackHomeBaseState state = PoolReference.Acquire<EnemyAttackHomeBaseState>();
+            return state;
+        }
 
         public void Clear()
         {

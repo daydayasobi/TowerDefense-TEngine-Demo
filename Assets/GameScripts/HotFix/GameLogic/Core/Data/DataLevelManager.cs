@@ -140,8 +140,7 @@ namespace GameLogic
 
             EnumLevelState lastLevelState = LevelState;
             LevelState = targetLevelState;
-            // TODO:Change level state
-            // GameEntry.Event.Fire(this, LevelStateChangeEventArgs.Create(levelData, lastLevelState, LevelState));
+            GameEvent.Send(LevelEvent.OnLevelStateChange, LevelState);
             Log.Debug("Current level is '{0}',level state is '{1}.'", levelData.Name, LevelState.ToString());
         }
         

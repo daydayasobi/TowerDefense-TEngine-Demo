@@ -7,17 +7,9 @@ namespace GameLogic
 {
     public class EntityDataEnemy : EntityData
     {
-        public EnemyDataBase EnemyData
-        {
-            get;
-            private set;
-        }
+        public EnemyDataBase EnemyData { get; private set; }
 
-        public LevelPath LevelPath
-        {
-            get;
-            private set;
-        }
+        public LevelPath LevelPath { get; private set; }
 
         public EntityDataEnemy() : base()
         {
@@ -39,6 +31,19 @@ namespace GameLogic
             entityData.LevelPath = levelPath;
             entityData.Position = position;
             entityData.Rotation = rotation;
+            return entityData;
+        }
+
+        public static EntityDataEnemy Create(int serialId, EnemyDataBase enemyData, LevelPath levelPath, Vector3 position, Quaternion rotation, Transform transform,
+            object userData = null)
+        {
+            EntityDataEnemy entityData = PoolReference.Acquire<EntityDataEnemy>();
+            entityData.m_SerialId = serialId;
+            entityData.EnemyData = enemyData;
+            entityData.LevelPath = levelPath;
+            entityData.Position = position;
+            entityData.Rotation = rotation;
+            entityData.Parent = transform;
             return entityData;
         }
 

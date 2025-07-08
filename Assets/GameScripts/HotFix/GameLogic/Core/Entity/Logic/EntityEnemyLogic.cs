@@ -10,9 +10,12 @@ namespace GameLogic
     {
         public Transform turret;
         public Transform[] projectilePoints;
+
         public Transform epicenter;
+
         // public Launcher launcher;
-        
+        private EntityDataEnemy entityData;
+
         protected IFsm<EntityEnemyLogic> fsm;
 
 
@@ -25,28 +28,16 @@ namespace GameLogic
         private bool loadSlowDownEffect = false;
 
         protected List<FsmState<EntityEnemyLogic>> stateList;
-        
-        public Targetter Targetter
-        {
-            get;
-            private set;
-        }
-        
-        public bool IsActivation
-        { get;  set; }
 
-        public Attacker Attacker
-        {
-            get;
-            private set;
-        }
-        
+        public Targetter Targetter { get; private set; }
+
+        public bool IsActivation { get; set; }
+
+        public Attacker Attacker { get; private set; }
+
         public override EnumAlignment Alignment
         {
-            get
-            {
-                return EnumAlignment.Enemy;
-            }
+            get { return EnumAlignment.Enemy; }
         }
 
         protected override float MaxHP
@@ -59,24 +50,12 @@ namespace GameLogic
                     return 0;
             }
         }
-        
-        public EntityDataEnemy EntityDataEnemy
-        {
-            get;
-            private set;
-        }
 
-        public float CurrentSlowRate
-        {
-            get;
-            private set;
-        }
+        public EntityDataEnemy EntityDataEnemy { get; private set; }
 
-        public NavMeshAgent Agent
-        {
-            get;
-            private set;
-        }
+        public float CurrentSlowRate { get; private set; }
+
+        public NavMeshAgent Agent { get; private set; }
 
         public bool isPathBlocked
         {
@@ -88,23 +67,11 @@ namespace GameLogic
             get { return Agent.remainingDistance <= Agent.stoppingDistance; }
         }
 
-        public LevelPath LevelPath
-        {
-            get;
-            private set;
-        }
+        public LevelPath LevelPath { get; private set; }
 
-        public EntityPlayerLogic TargetPlayer
-        {
-            get;
-            private set;
-        }
+        public EntityPlayerLogic TargetPlayer { get; private set; }
 
-        public bool IsPause
-        {
-            get;
-            private set;
-        }
+        public bool IsPause { get; private set; }
 
         public override void OnInit(object userData)
         {
@@ -115,12 +82,21 @@ namespace GameLogic
             dicSlowDownRates = new Dictionary<int, float>();
             stateList = new List<FsmState<EntityEnemyLogic>>();
             CurrentSlowRate = 1;
+            if (userData != null)
+            {
+                entityData = (EntityDataEnemy)userData;
+                transform.parent = entityData.Parent;
+                transform.position = entityData.Position;
+                transform.rotation = entityData.Rotation;
+            }
 
             Targetter = transform.Find("Targetter").GetComponent<Targetter>();
             Attacker = transform.Find("Attack").GetComponent<Attacker>();
 
-            // Targetter.OnInit(userData);
-            // Attacker.OnInit(userData);
+            Targetter.OnInit(userData);
+            Attacker.OnInit(userData);
+
+            OnShow(userData);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -147,30 +123,29 @@ namespace GameLogic
             Agent.enabled = true;
             LevelPath = EntityDataEnemy.LevelPath;
             hp = EntityDataEnemy.EnemyData.MaxHP;
-            // dataPlayer = GameEntry.Data.GetData<DataPlayer>();
 
-            // Attacker.SetOwnerEntity(Entity);
-            // Targetter.SetAlignment(Alignment);
-            // Targetter.SetTurret(turret);
-            // Targetter.SetSearchRange(EntityDataEnemy.EnemyData.Range);
-            // Targetter.ResetTargetter();
+            Attacker.SetOwnerEntity(Entity);
+            Targetter.SetAlignment(Alignment);
+            Targetter.SetTurret(turret);
+            Targetter.SetSearchRange(EntityDataEnemy.EnemyData.Range);
+            Targetter.ResetTargetter();
 
-            // AttackerData attackerData = AttackerData.Create(EntityDataEnemy.EnemyData.Range,
-            //     EntityDataEnemy.EnemyData.FireRate,
-            //     EntityDataEnemy.EnemyData.IsMultiAttack,
-            //     EntityDataEnemy.EnemyData.ProjectileType,
-            //     EntityDataEnemy.EnemyData.ProjectileEntityId
-            //     );
-            //
-            // Attacker.SetData(attackerData, EntityDataEnemy.EnemyData.ProjectileData);
-            // Attacker.SetTargetter(Targetter);
-            // Attacker.SetProjectilePoints(projectilePoints);
-            // Attacker.SetEpicenter(epicenter);
+            AttackerDataBase attackerData = AttackerDataBase.Create(EntityDataEnemy.EnemyData.Range,
+                EntityDataEnemy.EnemyData.FireRate,
+                EntityDataEnemy.EnemyData.IsMultiAttack,
+                // EntityDataEnemy.EnemyData.ProjectileType,
+                EntityDataEnemy.EnemyData.ProjectileEntityId
+                );
+            
+            Attacker.SetData(attackerData, EntityDataEnemy.EnemyData.ProjectileData);
+            Attacker.SetTargetter(Targetter);
+            Attacker.SetProjectilePoints(projectilePoints);
+            Attacker.SetEpicenter(epicenter);
             // Attacker.SetLaunch(launcher);
-            // Attacker.ResetAttack();
-            //
-            // Targetter.OnShow(userData);
-            // Attacker.OnShow(userData);
+            Attacker.ResetAttack();
+            
+            Targetter.OnShow(userData);
+            Attacker.OnShow(userData);
 
             CreateFsm();
         }
@@ -179,9 +154,9 @@ namespace GameLogic
         {
             base.OnHide(isShutdown, userData);
 
-            // Targetter.OnHide(isShutdown, userData);
-            // Attacker.OnHide(isShutdown, userData);
-            // Attacker.EmptyOwnerEntity();
+            Targetter.OnHide(isShutdown, userData);
+            Attacker.OnHide(isShutdown, userData);
+            Attacker.EmptyOwnerEntity();
 
             LevelPath = null;
             EntityDataEnemy = null;
@@ -189,7 +164,6 @@ namespace GameLogic
             Agent.enabled = false;
             TargetPlayer = null;
             hide = true;
-            // dataPlayer = null;
             DestroyFsm();
             RemoveSlowEffect();
             dicSlowDownRates.Clear();
@@ -197,14 +171,9 @@ namespace GameLogic
 
         protected virtual void AddFsmState()
         {
-            // stateList.Add(EnemyMoveState.Create());
-            // stateList.Add(EnemyAttackHomeBaseState.Create());
-            // stateList.Add(EnemyAttackTowerState.Create());
-            
-            fsm = GameModule.Fsm.CreateFsm("EntityEnemy", this, new FsmState<EntityEnemyLogic>[] {
-                new EnemyAttackHomeBaseState(),
-                new EnemyMoveState(),
-                new EnemyStandbyState()});
+            stateList.Add(EnemyMoveState.Create());
+            stateList.Add(EnemyAttackHomeBaseState.Create());
+            stateList.Add(EnemyAttackTowerState.Create());
         }
 
         protected virtual void StartFsm()
@@ -215,7 +184,8 @@ namespace GameLogic
         private void CreateFsm()
         {
             AddFsmState();
-            fsm = GameModule.Fsm.CreateFsm<EntityEnemyLogic>(gameObject.name, this, stateList);
+            Log.Debug("Create Fsm for enemy {0} with states count: {1}", gameObject.name + entityData.SerialId, stateList.Count);
+            fsm = GameModule.Fsm.CreateFsm<EntityEnemyLogic>(gameObject.name + entityData.SerialId, this, stateList);
             StartFsm();
         }
 
@@ -261,6 +231,7 @@ namespace GameLogic
             {
                 return;
             }
+
             TargetPlayer = player;
         }
 

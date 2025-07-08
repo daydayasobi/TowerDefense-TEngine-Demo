@@ -38,11 +38,13 @@ namespace GameLogic
         // private EntityPlayer player;
 
         private Dictionary<int, TowerInfo> dicTowerInfo;
+        private Dictionary<int, EntityEnemyLogic> dicEntityEnemy;
 
         // 构造函数，初始化字典
         public LevelControl()
         {
-            dicTowerInfo = new Dictionary<int, TowerInfo>();
+            dicTowerInfo = new Dictionary<int, TowerInfo>(20);
+            dicEntityEnemy = new Dictionary<int, EntityEnemyLogic>(20);
         }
 
         // 实体的根节点，用于存放塔和敌人的实体
@@ -201,23 +203,27 @@ namespace GameLogic
         /// 生成敌人，通常在波次开始时调用。
         /// </summary>
         /// <param name="enemyId">敌人的ID。</param>
-        // public void SpawnEnemy(int enemyId, Action<Entity> showSuccess, EntityData entityData)
-        // {
-        //     // entityloader.AddEntityEnemy(enemyId,levelManager);
-        //     EntityModuleEx.Instance.ShowEnemyEntity(enemyId, (entity) =>
-        //     {
-        //         if (showSuccess != null)
-        //             showSuccess(entity);
-        //     }, entityData);
-        // }
         public void SpawnEnemy(int enemyId)
         {
-            // entityloader.AddEntityEnemy(enemyId,levelManager);
-            EntityModuleEx.Instance.ShowEnemyEntity(enemyId, (entity) =>
+            // 处理生成敌人的逻辑
+            EnemyDataBase enemyData = DataEnemyManager.Instance.GetEnemyData(enemyId);
+            
+            if (enemyData == null)
             {
-                // if (showSuccess != null)
-                //     showSuccess(entity);
-            });
+                Log.Error("Can not get enemy data by id '{0}'.", enemyId);
+                return;
+            }
+            
+            int serialId = GameModule.Entity.GenerateSerialId();
+            EntityModuleEx.Instance.ShowEnemyEntity(enemyData.EntityId,serialId,(entity) =>
+            {
+                dicEntityEnemy.Add(entity.SerialId, (EntityEnemyLogic)entity.Logic);
+            },EntityDataEnemy.Create(serialId,
+                enemyData,
+                levelManager.GetLevelPath(),
+                levelManager.GetStartPathNode().position - new Vector3(0, 0.2f, 0),
+                Quaternion.identity,
+                entityRoot.transform));
         }
 
         /// <summary>

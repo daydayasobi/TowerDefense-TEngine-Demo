@@ -44,6 +44,7 @@ namespace GameLogic
         private void OnClickStartWaveButtonBtn()
         {
             GameEvent.Send(LevelEvent.OnGameStartWave);
+            DataLevelManager.Instance.StartWave();
         }
 
         // 调试增加货币按钮点击事件处理
@@ -63,7 +64,7 @@ namespace GameLogic
         {
             base.OnCreate();
             GameEvent.AddEventListener<int, int>(LevelEvent.OnPlayerHPChange, OnPlayerHPChange);
-            GameEvent.AddEventListener(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.AddEventListener<EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.AddEventListener<int, int, float>(LevelEvent.OnWaveUpdate, OnWaveUpdate);
             GameEvent.AddEventListener<float, float>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
         }
@@ -71,6 +72,10 @@ namespace GameLogic
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            GameEvent.RemoveEventListener<int, int>(LevelEvent.OnPlayerHPChange, OnPlayerHPChange);
+            GameEvent.RemoveEventListener<EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.RemoveEventListener<int, int, float>(LevelEvent.OnWaveUpdate, OnWaveUpdate);
+            GameEvent.RemoveEventListener<float, float>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
         }
 
         // 设置波次信息
@@ -93,14 +98,27 @@ namespace GameLogic
         }
 
         // 关卡状态变化事件处理
-        private void OnLevelStateChange()
+        private void OnLevelStateChange(EnumLevelState currentState)
         {
+            if (currentState == EnumLevelState.Normal)
+            {
+                m_btnStartWaveButton.gameObject.SetActive(false);
+                m_goWaveInfo.SetActive(true);
+
+                Level level = DataLevelManager.Instance.CurrentLevel;
+                SetWaveInfo(level.CurrentWaveIndex, level.WaveCount, 0);
+            }
+            else if (currentState == EnumLevelState.Prepare)
+            {
+                m_btnStartWaveButton.gameObject.SetActive(true);
+                m_goWaveInfo.SetActive(false);
+            }
         }
 
         // 波次信息更新事件处理
         private void OnWaveUpdate(int currentWave, int totalWave, float CurrentWaveProgress)
         {
-            SetWaveInfo(currentWave, totalWave, currentWave);
+            SetWaveInfo(currentWave, totalWave, CurrentWaveProgress);
         }
     }
 }

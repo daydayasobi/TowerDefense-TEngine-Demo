@@ -112,7 +112,7 @@ namespace GameLogic
                     PoolReference.Release(waveElement);
                     waveElement = null;
                     CurrentEnemyIndex++;
-                    GameEvent.Send(LevelEvent.OnSpawnEnemy,enemyId);
+                    GameEvent.Send(LevelEvent.OnSpawnEnemy, enemyId);
                 }
             }
             else if (!Finish && timer >= NextWaveTime)

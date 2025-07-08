@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public abstract class EntityTargetableLogic : EntityLogic
+    public abstract class EntityTargetableLogic : EntityLogicWithData
     {
         protected Transform hpBarRoot;
 

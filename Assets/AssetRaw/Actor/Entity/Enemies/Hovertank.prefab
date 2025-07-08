@@ -95,6 +95,8 @@ GameObject:
   - component: {fileID: 195793231520020778}
   - component: {fileID: 54954296514567692}
   - component: {fileID: 65159708320296242}
+  - component: {fileID: -2075726579364708407}
+  - component: {fileID: 2695242582139416890}
   m_Layer: 11
   m_Name: Hovertank
   m_TagString: Untagged
@@ -191,6 +193,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5191112, y: 0.7688527, z: 2.1745498}
   m_Center: {x: -0.012941241, y: 0.61869645, z: 0.019012332}
+--- !u!114 &-2075726579364708407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271389358909432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2695242582139416890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271389358909432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0648fe6717164d9f01a46b6ddcdbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: {fileID: 0}
+  projectilePoints: []
+  epicenter: {fileID: 0}
 --- !u!1 &1304416442214840
 GameObject:
   m_ObjectHideFlags: 0

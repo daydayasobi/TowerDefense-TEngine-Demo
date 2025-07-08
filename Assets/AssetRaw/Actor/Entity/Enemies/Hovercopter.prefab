@@ -244,6 +244,8 @@ GameObject:
   - component: {fileID: 195405972089236582}
   - component: {fileID: 54135300629997764}
   - component: {fileID: 136006059290064374}
+  - component: {fileID: 6162423456322425044}
+  - component: {fileID: 3576180131649832108}
   m_Layer: 14
   m_Name: Hovercopter
   m_TagString: Untagged
@@ -342,6 +344,33 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &6162423456322425044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567776943554846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3576180131649832108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567776943554846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d0648fe6717164d9f01a46b6ddcdbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: {fileID: 0}
+  projectilePoints: []
+  epicenter: {fileID: 0}
 --- !u!1 &1827873515105730
 GameObject:
   m_ObjectHideFlags: 0

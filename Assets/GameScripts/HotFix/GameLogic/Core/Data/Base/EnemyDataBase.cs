@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EnemyDataBase : MonoBehaviour
+    public class EnemyDataBase
     {
         private EnemyData dREnemy;
         private ProjectileDataBase projectileData;
