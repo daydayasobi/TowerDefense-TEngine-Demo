@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4737672716932362}
   - component: {fileID: 9019360752363517470}
   - component: {fileID: 8657659927692464252}
+  - component: {fileID: -548298124958524870}
   m_Layer: 10
   m_Name: AssaultCannon_Level3
   m_TagString: Untagged
@@ -47,9 +48,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24eaa924a46ff5d4192f2daa026ea155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 0}
-  projectilePoints: []
-  epicenter: {fileID: 0}
+  turret: {fileID: 4221898185616454}
+  projectilePoints:
+  - {fileID: 4575828760328406}
+  - {fileID: 4195283445768172}
+  epicenter: {fileID: 4737672716932362}
+  launcher: {fileID: -548298124958524870}
   effect: {fileID: 0}
 --- !u!114 &8657659927692464252
 MonoBehaviour:
@@ -63,6 +67,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-548298124958524870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048612225750864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee822b861717e04ca29308b9cf41638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireParticleSystem: {fileID: 0}
 --- !u!1 &1236043131410496
 GameObject:
   m_ObjectHideFlags: 0

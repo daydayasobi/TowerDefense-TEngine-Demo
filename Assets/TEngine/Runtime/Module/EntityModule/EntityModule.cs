@@ -52,6 +52,7 @@ namespace TEngine
             if (entity == null)
                 return;
 
+            Log.Debug("EntityModuleEx Hide Entity {0}", entity.SerialId);
             HideEntity(entity.SerialId);
         }
 
@@ -63,11 +64,12 @@ namespace TEngine
                 Log.Error("Can find entity('serial id:{0}') ", serialId);
             }
 
-            Log.Debug("HideEntity serialId:{0} entity count:{1}", serialId, _dicSerial2Entity.Count);
 
             Entity tempEntity = _dicSerial2Entity[serialId];
             List<int> childSerialIds = tempEntity.GetChildrenIds();
             RemoveFromDic(serialId);
+
+            Log.Debug("HideEntity serialId:{0} entity count:{1} childSerialIds:{2}", serialId, _dicSerial2Entity.Count, childSerialIds.Count);
 
             if (childSerialIds.Count > 0)
             {

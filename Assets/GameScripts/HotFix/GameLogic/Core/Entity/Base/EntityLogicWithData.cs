@@ -54,7 +54,8 @@ namespace GameLogic
         {
             base.OnHide(isShutdown, userData);
 
-            PoolReference.Release(m_EntityData);
+            // TODO：使用内存池会报错
+            // PoolReference.Release(m_EntityData);
         }
 
         protected override void OnAttached(EntityLogic childEntity, Transform parentTransform, object userData)

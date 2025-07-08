@@ -110,6 +110,7 @@ namespace TEngine
         {
             try
             {
+                Log.Debug("OnHide {0}", m_EntityAssetName);
                 m_EntityLogic.OnHide(isShutdown, userData);
                 m_Id = 0;
                 m_EntityAssetName = string.Empty;

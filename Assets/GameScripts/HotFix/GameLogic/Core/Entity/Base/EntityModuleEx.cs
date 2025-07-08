@@ -113,7 +113,7 @@ namespace GameLogic
                 return;
 
             // HideEntity(entity.SerialId);
-            GameModule.Entity.HideEntity(entity.SerialId);
+            GameModule.Entity.HideEntity(entity);
         }
 
         public void Clear()
