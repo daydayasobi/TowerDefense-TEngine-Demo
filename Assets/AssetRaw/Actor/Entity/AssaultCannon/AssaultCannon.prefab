@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 54885580420894926}
   - component: {fileID: 65801875245033440}
   - component: {fileID: 208111389854632630}
-  - component: {fileID: 1803347968860667255}
   - component: {fileID: 8389103983918628650}
+  - component: {fileID: 2892005014983547208}
+  - component: {fileID: 4797152136035727177}
+  - component: {fileID: 5721263978593269710}
   m_Layer: 10
   m_Name: AssaultCannon
   m_TagString: Untagged
@@ -103,18 +105,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &1803347968860667255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1304972810206532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f1298d0ca3fb044aec51041cf1a9ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8389103983918628650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +115,45 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2892005014983547208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304972810206532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems: []
+--- !u!114 &4797152136035727177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304972810206532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dc16181edbff54ab4bd61467541404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadEffectEntity: 1055
+  deadEffectOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &5721263978593269710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304972810206532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08a4f71b36c4d904fb204e97cccd341d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1291596318174295874
@@ -168,6 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2565807323005463278}
   - component: {fileID: 4464552333608736683}
+  - component: {fileID: 8448816279151403121}
   m_Layer: 10
   m_Name: Targetter
   m_TagString: Untagged
@@ -211,6 +241,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8448816279151403121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2451035197468944492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4702994d55feb64caec04f6ccb5a4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchRate: 0
+  idleRotationSpeed: 39
+  idleCorrectionTime: 2
+  idleWaitTime: 2
 --- !u!1 &3574007491742182724
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1273171863805030786}
+  - component: {fileID: 1811289556241661777}
   m_Layer: 10
   m_Name: Attack
   m_TagString: Untagged
@@ -242,3 +289,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4054417465033028}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1811289556241661777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3574007491742182724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061d91c955737cd4a9fd3399d356aa3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -13,7 +13,7 @@ namespace GameLogic
 
         public Transform epicenter;
 
-        // public Launcher launcher;
+        public Launcher launcher;
         private EntityDataEnemy entityData;
 
         protected IFsm<EntityEnemyLogic> fsm;
@@ -141,7 +141,7 @@ namespace GameLogic
             Attacker.SetTargetter(Targetter);
             Attacker.SetProjectilePoints(projectilePoints);
             Attacker.SetEpicenter(epicenter);
-            // Attacker.SetLaunch(launcher);
+            Attacker.SetLaunch(launcher);
             Attacker.ResetAttack();
             
             Targetter.OnShow(userData);

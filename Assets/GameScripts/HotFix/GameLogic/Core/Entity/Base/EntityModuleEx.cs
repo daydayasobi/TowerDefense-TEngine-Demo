@@ -22,6 +22,7 @@ namespace GameLogic
             //初始化entity logic
             entityLogic.OnInit(userData);
             GameModule.Entity.AddToDic(serialId, entity);
+            entity.OnShow(userData);
             onShowSuccess?.Invoke(entity);
         }
 
@@ -38,6 +39,7 @@ namespace GameLogic
             //初始化entity logic
             entityLogic.OnInit(userData);
             GameModule.Entity.AddToDic(serialId, entity);
+            entity.OnShow(userData);
             onShowSuccess?.Invoke(entity);
         }
 
@@ -48,12 +50,13 @@ namespace GameLogic
             //获取预制体
             GameObject gameObject = PoolManager.Instance.GetGameObject(data.NameId);
             Entity entity = gameObject.GetComponent<Entity>();
-            var entityLogic = gameObject.GetComponent<EntityTowerLogic>();
+            var entityLogic = gameObject.GetComponent<EntityTowerAttackerLogic>();
             //初始化entity
             entity.OnInit(entityId, serialId, data.NameId, entityLogic);
             //初始化entity logic
             entityLogic.OnInit(userData);
             GameModule.Entity.AddToDic(serialId, entity);
+            entity.OnShow(userData);
             onShowSuccess?.Invoke(entity);
         }
 
@@ -69,6 +72,7 @@ namespace GameLogic
             //初始化entity logic
             entityLogic.OnInit(userData);
             GameModule.Entity.AddToDic(serialId, entity);
+            entity.OnShow(userData);
             onShowSuccess?.Invoke(entity);
         }
 
@@ -83,6 +87,7 @@ namespace GameLogic
             //初始化entity logic
             entityLogic.OnInit(userData);
             GameModule.Entity.AddToDic(serialId, entity);
+            entity.OnShow(userData);
             onShowSuccess?.Invoke(entity);
         }
 
@@ -98,6 +103,7 @@ namespace GameLogic
             // //初始化entity logic
             entityLogic.OnInit(userData);
             GameModule.Entity.AddToDic(serialId, entity);
+            entity.OnShow(userData);
             onShowSuccess?.Invoke(entity);
         }
 

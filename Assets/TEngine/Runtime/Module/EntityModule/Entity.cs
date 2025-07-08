@@ -91,10 +91,8 @@ namespace TEngine
         /// <param name="userData">用户自定义数据。</param>
         public void OnShow(object userData)
         {
-            // ShowEntityInfo showEntityInfo = (ShowEntityInfo)userData;
             try
             {
-                // m_EntityLogic.OnShow(showEntityInfo.UserData);
                 m_EntityLogic.OnShow(userData);
             }
             catch (Exception exception)

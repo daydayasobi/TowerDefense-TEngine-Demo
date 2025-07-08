@@ -11,7 +11,7 @@ namespace GameLogic
         {
             public Tower Tower { get; private set; }
 
-            public EntityTowerLogic EntityTower { get; private set; }
+            public EntityTowerBaseLogic EntityTowerBase { get; private set; }
 
             public IPlacementArea PlacementArea { get; private set; }
 
@@ -20,16 +20,16 @@ namespace GameLogic
             public TowerInfo()
             {
                 this.Tower = null;
-                this.EntityTower = null;
+                this.EntityTowerBase = null;
                 this.PlacementArea = null;
                 this.PlaceGrid = IntVector2.zero;
             }
 
-            public static TowerInfo Create(Tower tower, EntityTowerLogic entityTower, IPlacementArea placementArea, IntVector2 placeGrid)
+            public static TowerInfo Create(Tower tower, EntityTowerBaseLogic entityTowerBase, IPlacementArea placementArea, IntVector2 placeGrid)
             {
                 TowerInfo towerInfo = PoolReference.Acquire<TowerInfo>();
                 towerInfo.Tower = tower;
-                towerInfo.EntityTower = entityTower;
+                towerInfo.EntityTowerBase = entityTowerBase;
                 towerInfo.PlacementArea = placementArea;
                 towerInfo.PlaceGrid = placeGrid;
                 return towerInfo;
@@ -48,7 +48,7 @@ namespace GameLogic
             public void Clear()
             {
                 this.Tower = null;
-                this.EntityTower = null;
+                this.EntityTowerBase = null;
                 this.PlacementArea = null;
                 this.PlaceGrid = IntVector2.zero;
             }

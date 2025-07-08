@@ -6,41 +6,76 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityTowerLogic : EntityLogic
+    public abstract class EntityTowerBaseLogic : EntityTargetableLogic, IPause
     {
-        protected EntityTowerData EntityTowerData;
+        protected EntityTowerData entityTowerData;
         protected Entity entityLevel;
-        protected EntityTowerLevelLogic EntityLevelLogic;
+        protected EntityTowerLevelLogic entityLevelLogic;
 
         protected bool pause = false;
+        
+        public override EnumAlignment Alignment
+        {
+            get
+            {
+                return EnumAlignment.Tower;
+            }
+        }
+        
+        protected override float MaxHP
+        {
+            get
+            {
+                if (entityTowerData == null)
+                    return 0;
+                else
+                    return entityTowerData.Tower.MaxHP;
+            }
+        }
 
-        public void OnInit(object userData)
+        public override void OnInit(object userData)
         {
             base.OnInit(userData);
             if (userData.GetType() == typeof(EntityTowerData))
             {
                 //初始化位置
-                EntityTowerData = (EntityTowerData)userData;
-                transform.position = EntityTowerData.Position;
-                transform.rotation = EntityTowerData.Rotation;
-                transform.parent = EntityTowerData.Parent;
+                entityTowerData = (EntityTowerData)userData;
+                transform.position = entityTowerData.Position;
+                transform.rotation = entityTowerData.Rotation;
+                transform.parent = entityTowerData.Parent;
                 // 加载模型
-                ShowTowerLevelEntity(EntityTowerData.Tower.Level);
+                // ShowTowerLevelEntity(entityTowerData.Tower.Level);
             }
             else
             {
                 Log.Info("Invalid userData type in OnInit. Expected EntityDataTower.");
             }
 
+        }
+        
+        protected override void OnShow(object userData)
+        {
+            base.OnShow(userData);
+            
+            if (entityTowerData == null)
+            {
+                Log.Error("Entity tower '{0}' tower data invaild.", Id);
+                return;
+            }
+
+            hp = entityTowerData.Tower.MaxHP;
+
+            ShowTowerLevelEntity(entityTowerData.Tower.Level);
+            
             GameEvent.AddEventListener<Tower>(LevelEvent.OnUpgradeTower, OnUpgradeTower);
         }
 
         protected override void OnHide(bool isShutdown, object userData)
         {
             base.OnHide(isShutdown, userData);
-            EntityTowerData = null;
+            entityTowerData = null;
             entityLevel = null;
-            EntityLevelLogic = null;
+            entityLevelLogic = null;
             GameEvent.RemoveEventListener<Tower>(LevelEvent.OnUpgradeTower, OnUpgradeTower);
         }
 
@@ -52,12 +87,12 @@ namespace GameLogic
             }
 
             EntityModuleEx.Instance.ShowTowerLevelEntity(
-                EntityTowerData.Tower.GetLevelEntityId(level), 
+                entityTowerData.Tower.GetLevelEntityId(level), 
                 OnShowTowerLevelSuccess,
                 EntityData.Create(transform.position, transform.rotation, transform));
         }
 
-        private void OnShowTowerLevelSuccess(Entity entity)
+        protected virtual void OnShowTowerLevelSuccess(Entity entity)
         {
             if (entity == null)
             {
@@ -69,24 +104,26 @@ namespace GameLogic
             EntityTowerLevelLogic entityLogicTowerLevelLogic = entity.Logic as EntityTowerLevelLogic;
             if (entityLogicTowerLevelLogic != null)
             {
-                EntityLevelLogic = entityLogicTowerLevelLogic;
-                this.Entity.OnAttachedId(EntityLevelLogic.Entity.SerialId);
+                entityLevelLogic = entityLogicTowerLevelLogic;
+                this.Entity.OnAttachedId(entityLevelLogic.Entity.SerialId);
             }
             else
             {
                 Log.Error("EntityTowerLevel logic is null or not of type EntityTowerLevel.");
             }
+            
+            Log.Debug("EntityTowerBaseLogic OnShowTowerLevelSuccess: {0} {1}", entity.Id, entity.SerialId);
         }
 
         public void ShowControlForm()
         {
-            if (EntityTowerData == null)
+            if (entityTowerData == null)
             {
                 Log.Error("Entity tower data is null.");
                 return;
             }
 
-            GameModule.UI.ShowUI<UITowerControllerForm>(EntityTowerData.Tower);
+            GameModule.UI.ShowUI<UITowerControllerForm>(entityTowerData.Tower);
         }
 
         private void OnUpgradeTower(Tower tower)
@@ -94,7 +131,7 @@ namespace GameLogic
             if (tower == null)
                 return;
 
-            if (tower.SerialId != EntityTowerData.Tower.SerialId)
+            if (tower.SerialId != entityTowerData.Tower.SerialId)
                 return;
 
             // entityDataTower.Tower = tower;

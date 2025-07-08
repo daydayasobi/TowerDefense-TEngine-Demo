@@ -18,7 +18,7 @@ namespace GameLogic
 
         private Entity ownerEntity;
         private Targetter towerTargetter;
-        // private ILauncher m_Launcher;
+        private ILauncher m_Launcher;
         private float m_FireTimer;
         private EntityTargetableLogic m_TrackingTarget;
 
@@ -105,21 +105,21 @@ namespace GameLogic
             if (attackerData.IsMultiAttack)
             {
                 List<EntityTargetableLogic> enemies = towerTargetter.GetAllTargets();
-                // m_Launcher.Launch(
-                //     enemies,
-                //     attackerData,
-                //     projectileData,
-                //     epicenter.position,
-                //     projectilePoints);
+                m_Launcher.Launch(
+                    enemies,
+                    attackerData,
+                    projectileData,
+                    epicenter.position,
+                    projectilePoints);
             }
             else
             {
-                // m_Launcher.Launch(
-                //     m_TrackingTarget,
-                //     attackerData,
-                //     projectileData,
-                //     epicenter.position,
-                //     projectilePoints);
+                m_Launcher.Launch(
+                    m_TrackingTarget,
+                    attackerData,
+                    projectileData,
+                    epicenter.position,
+                    projectilePoints);
             }
             if (randomSound != null)
             {
@@ -189,14 +189,14 @@ namespace GameLogic
             this.towerTargetter = null;
         }
 
-        // public void SetLaunch(ILauncher launcher)
-        // {
-        //     this.m_Launcher = launcher;
-        // }
+        public void SetLaunch(ILauncher launcher)
+        {
+            this.m_Launcher = launcher;
+        }
 
         public void EmptyLaunch()
         {
-            // this.m_Launcher = null;
+            this.m_Launcher = null;
         }
 
         public void SetOwnerEntity(Entity entity)

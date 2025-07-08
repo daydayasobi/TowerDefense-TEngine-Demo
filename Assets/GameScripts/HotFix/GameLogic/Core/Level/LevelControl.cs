@@ -105,10 +105,10 @@ namespace GameLogic
                     {
                         if (raycastHit.collider != null)
                         {
-                            EntityTowerLogic entityTowerLogic = raycastHit.collider.gameObject.GetComponent<EntityTowerLogic>();
-                            if (entityTowerLogic != null)
+                            EntityTowerBaseLogic entityTowerBaseLogic = raycastHit.collider.gameObject.GetComponent<EntityTowerBaseLogic>();
+                            if (entityTowerBaseLogic != null)
                             {
-                                entityTowerLogic.ShowControlForm();
+                                entityTowerBaseLogic.ShowControlForm();
                             }
                         }
                     }
@@ -159,8 +159,8 @@ namespace GameLogic
             int serialId = GameModule.Entity.GenerateSerialId();
             EntityModuleEx.Instance.ShowTowerEntity(tower.EntityId, serialId, (entity) =>
             {
-                EntityTowerLogic entityTowerLogic = entity.Logic as EntityTowerLogic;
-                dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerLogic, placementArea, placeGrid));
+                EntityTowerBaseLogic entityTowerBaseLogic = entity.Logic as EntityTowerBaseLogic;
+                dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBaseLogic, placementArea, placeGrid));
             }, EntityTowerData.Create(tower, position, rotation, entityRoot.transform, serialId));
 
             // 2. 隐藏预览塔
@@ -180,7 +180,7 @@ namespace GameLogic
                 return;
 
             TowerInfo towerInfo = dicTowerInfo[towerSerialId];
-            EntityModuleEx.Instance.HideEntity(towerInfo.EntityTower.Entity); // 隐藏塔实体
+            EntityModuleEx.Instance.HideEntity(towerInfo.EntityTowerBase.Entity); // 隐藏塔实体
             towerInfo.PlacementArea.Clear(towerInfo.PlaceGrid, towerInfo.Tower.Dimensions);
             DataTowerManager.Instance.DestroyTower(towerInfo.Tower);
             dicTowerInfo.Remove(towerSerialId);

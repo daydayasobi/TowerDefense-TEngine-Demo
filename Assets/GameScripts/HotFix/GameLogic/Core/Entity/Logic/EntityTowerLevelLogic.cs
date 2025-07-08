@@ -11,7 +11,7 @@ namespace GameLogic
         public Transform turret;
         public Transform[] projectilePoints;
         public Transform epicenter;
-        // public Launcher launcher;
+        public Launcher launcher;
         public ParticleSystem effect;
 
 

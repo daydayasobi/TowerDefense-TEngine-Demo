@@ -12,7 +12,7 @@ namespace GameLogic
 
         private Vector3 m_CurrentPosition, m_PreviousPosition;
 
-        // private RandomSound randomSound;
+        private RandomSound randomSound;
         
         public virtual EnumAlignment Alignment
         {
@@ -47,38 +47,38 @@ namespace GameLogic
             }
         }
 
-        // public Vector3 DeadEffectOffset
-        // {
-        //     get
-        //     {
-        //         if (deadEffect == null)
-        //             return Vector3.zero;
-        //
-        //         return deadEffect.deadEffectOffset;
-        //     }
-        // }
-        //
-        // public Vector3 ApplyEffectOffset
-        // {
-        //     get
-        //     {
-        //         if (effectPointData == null)
-        //             return Vector3.zero;
-        //
-        //         return effectPointData.applyEffectOffset;
-        //     }
-        // }
-        //
-        // public float ApplyEffectScale
-        // {
-        //     get
-        //     {
-        //         if (effectPointData == null)
-        //             return 1;
-        //
-        //         return effectPointData.applyEffectScale;
-        //     }
-        // }
+        public Vector3 DeadEffectOffset
+        {
+            get
+            {
+                if (deadEffect == null)
+                    return Vector3.zero;
+        
+                return deadEffect.deadEffectOffset;
+            }
+        }
+        
+        public Vector3 ApplyEffectOffset
+        {
+            get
+            {
+                if (effectPointData == null)
+                    return Vector3.zero;
+        
+                return effectPointData.applyEffectOffset;
+            }
+        }
+        
+        public float ApplyEffectScale
+        {
+            get
+            {
+                if (effectPointData == null)
+                    return 1;
+        
+                return effectPointData.applyEffectScale;
+            }
+        }
         
         public Vector3 Velocity
         {
@@ -92,15 +92,15 @@ namespace GameLogic
         public event Action<EntityTargetableLogic> OnDead;
         public event Action<EntityTargetableLogic> OnHidden;
 
-        // private EffectPointData effectPointData;
-        // private DeadEffect deadEffect;
+        private EffectPointData effectPointData;
+        private DeadEffect deadEffect;
 
         public override void OnInit(object userData)
         {
             base.OnInit(userData);
-            // randomSound = GetComponent<RandomSound>();
-            // effectPointData = GetComponent<EffectPointData>();
-            // deadEffect = GetComponent<DeadEffect>();
+            randomSound = GetComponent<RandomSound>();
+            effectPointData = GetComponent<EffectPointData>();
+            deadEffect = GetComponent<DeadEffect>();
             hpBarRoot = transform.Find("HealthBar");
         }
 
