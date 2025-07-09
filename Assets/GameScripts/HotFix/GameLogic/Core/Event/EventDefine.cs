@@ -5,21 +5,6 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public static class MenuEvent
-    {
-        // 进入选择关卡流程
-        public static readonly int ChangeLevelSelect = RuntimeId.ToRuntimeId("IMenu_Event.ChangeLevelSelect");
-
-        // 打开设置
-        public static readonly int OpenOptions = RuntimeId.ToRuntimeId("IMenu_Event.OpenOptions");
-
-        // 退出游戏
-        public static readonly int QuitGame = RuntimeId.ToRuntimeId("IMenu_Event.QuitGame");
-
-        //打开菜单
-        public static readonly int OpenMenu = RuntimeId.ToRuntimeId("IMenu_Event.OpenMenu");
-    }
-    
     public partial class MainMenuEvent
     {
         // 进入选择关卡流程

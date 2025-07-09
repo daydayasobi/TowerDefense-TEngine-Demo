@@ -9,10 +9,12 @@ namespace GameLogic
     public class LevelProcedure : ProcedureBase
     {
         LevelControl levelControl;
+        IFsm<IProcedureModule> procedureOwner;
 
         protected override void OnEnter(IFsm<IProcedureModule> procedureOwner)
         {
             base.OnEnter(procedureOwner);
+            this.procedureOwner = procedureOwner;
             Log.Debug("游戏流程");
             LevelManager levelPathManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
             if (levelPathManager == null)
@@ -92,9 +94,11 @@ namespace GameLogic
         /// <summary>
         /// 处理场景切换事件
         /// </summary>
-        private void OnChangeScene()
+        private async void OnChangeScene()
         {
             // 处理场景切换的逻辑
+            await GameModule.Scene.LoadSceneAsync("Menu");
+            ChangeState<ChangeSceneProcedure>(procedureOwner);
         }
 
         /// <summary>

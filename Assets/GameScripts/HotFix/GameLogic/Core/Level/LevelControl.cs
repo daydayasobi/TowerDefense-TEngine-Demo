@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using GameConfig;
 using TEngine;
 using Unity.Properties;
@@ -70,7 +71,7 @@ namespace GameLogic
         {
             if (DataLevelManager.Instance.CurrentLevel == null)
             {
-                Log.Error("Level is null, please check if LevelControl is initialized properly.");
+                Log.Info("Level is null, please check if LevelControl is initialized properly.");
                 return;
             }
 
@@ -348,6 +349,9 @@ namespace GameLogic
         {
             HidePreviewTower();
             Pause();
+
+            int testStarCount = 2;
+            GameModule.UI.ShowUI<UIGameOverForm>(testStarCount);
         }
 
         /// <summary>

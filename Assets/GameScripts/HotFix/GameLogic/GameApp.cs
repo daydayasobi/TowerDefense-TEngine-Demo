@@ -40,7 +40,6 @@ public partial class GameApp
     {
         UIModule.Instance.Active();
         await GameModule.Scene.LoadSceneAsync("mainMenu");
-        HomeSystem.Instance.LoadHomeSystem().Forget();
     }
 
 

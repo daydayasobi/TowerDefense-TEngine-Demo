@@ -123,7 +123,7 @@ namespace GameLogic
 
         private void GameOver()
         {
-            // GameEntry.Data.GetData<DataLevel>().GameFail();
+            DataLevelManager.Instance.GameFail();
         }
 
         protected void OnUnload()

@@ -38,13 +38,13 @@ namespace GameLogic
         }
         private void OpenOptions()
         {
-            // GameModule.UI.ShowUI<UIOptionsForm>();
-            // GameModule.UI.CloseUI<UIMainMenuForm>();
+            GameModule.UI.ShowUI<UIOptionsForm>();
+            GameModule.UI.CloseUI<UIMainMenuForm>();
         }
         private void OpenMenu()
         {
-            // GameModule.UI.CloseUI<UIOptionsForm>();
-            // GameModule.UI.ShowUI<UIMainMenuForm>();
+            GameModule.UI.CloseUI<UIOptionsForm>();
+            GameModule.UI.ShowUI<UIMainMenuForm>();
         }
         private void QuitGame()
         {

@@ -36,7 +36,8 @@ namespace GameLogic
         }
         private void OnClickMainMenuBtn()
         {
-            
+            DataLevelManager.Instance.ExitLevel();
+            Close();
         }
         
         private void OnClickRestartBtn()

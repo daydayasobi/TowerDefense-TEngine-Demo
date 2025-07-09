@@ -37,18 +37,17 @@ namespace GameLogic
         private async UniTaskVoid OnClickLevelSelectBtn()
         {
             await UniTask.Yield();
-            // HomeSystem.Instance.LoadLevelAsync();
-            GameEvent.Send(MenuEvent.ChangeLevelSelect);
+            GameEvent.Send(MainMenuEvent.ChangeLevelSelect);
         }
         private async UniTaskVoid OnClickOptionsBtn()
         {
             await UniTask.Yield();
-            HomeSystem.Instance.OpenOptions();
+            GameEvent.Send(MainMenuEvent.OpenOptions);
         }
         private async UniTaskVoid OnClickQuitBtn()
         {
             await UniTask.Yield();
-            HomeSystem.Instance.QuitGame();
+            GameEvent.Send(MainMenuEvent.QuitGame);
         }
         #endregion
 

@@ -30,6 +30,8 @@ namespace GameLogic
             get { return CurrentLevelIndex != NONE_LEVEL_INDEX; }
         }
 
+        public bool IsLoaded { get; private set; }
+
         protected override void OnInit()
         {
             LevelState = EnumLevelState.None;
@@ -38,6 +40,10 @@ namespace GameLogic
 
         public void OnLoad()
         {
+            
+            if(IsLoaded)
+                return;
+            
             // 加载配置表
             MaxLevel = 0;
 
@@ -76,6 +82,7 @@ namespace GameLogic
             starScore[2] = 100;
 
             GameEvent.AddEventListener<int>(LevelEvent.OnLoadLevelFinish, OnLoadLevelFinish);
+            IsLoaded = true;
         }
 
         public LevelDataBase GetLevelData(int id)
@@ -235,6 +242,7 @@ namespace GameLogic
 
                 ChangeLevelState(EnumLevelState.None);
                 CurrentLevelIndex = NONE_LEVEL_INDEX;
+                GameEvent.Send(LevelEvent.OnChangeScene);
                 // GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
             }
         }
@@ -295,7 +303,6 @@ namespace GameLogic
             }
 
             ChangeLevelState(EnumLevelState.Gameover);
-            // GameEntry.Event.Fire(this, GameoverEventArgs.Create(EnumGameOverType.Fail, 0));
             GameEvent.Send(LevelEvent.OnGameOver);
         }
 
