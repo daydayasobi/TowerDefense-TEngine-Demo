@@ -171,10 +171,10 @@ namespace GameLogic
         /// <summary>
         /// 处理隐藏敌人实体事件
         /// </summary>
-        private void OnHideEnemyEntity(int EntityId)
+        private void OnHideEnemyEntity(int SerialId)
         {
             // 处理隐藏敌人实体的逻辑
-            levelControl.HideEnemyEntity(EntityId);
+            levelControl.HideEnemyEntity(SerialId);
         }
 
         /// <summary>
@@ -189,10 +189,10 @@ namespace GameLogic
         /// <summary>
         /// 处理隐藏实体在关卡中事件
         /// </summary>
-        private void OnHideEntityInLevel(int EntityId)
+        private void OnHideEntityInLevel(int serialId)
         {
             // 处理隐藏实体在关卡中的逻辑
-            levelControl.HideEntity(EntityId);
+            levelControl.HideEntity(serialId);
         }
 
         private void OnStartWave()

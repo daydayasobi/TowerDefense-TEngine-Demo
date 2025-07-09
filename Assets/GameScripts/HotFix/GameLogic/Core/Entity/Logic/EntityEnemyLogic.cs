@@ -95,8 +95,6 @@ namespace GameLogic
 
             Targetter.OnInit(userData);
             Attacker.OnInit(userData);
-
-            OnShow(userData);
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -206,8 +204,7 @@ namespace GameLogic
             if (!hide)
             {
                 hide = true;
-                // TODO: Event to hide enemy
-                // GameEntry.Event.Fire(this, HideEnemyEventArgs.Create(Id));
+                GameEvent.Send(LevelEvent.OnHideEnemyEntity,entityData.SerialId);
             }
         }
 
@@ -219,8 +216,7 @@ namespace GameLogic
             if (!hide)
             {
                 hide = true;
-                // TODO: Event to hide enemy
-                // GameEntry.Event.Fire(this, HideEnemyEventArgs.Create(Id));
+                GameEvent.Send(LevelEvent.OnHideEnemyEntity,entityData.SerialId);
             }
         }
 

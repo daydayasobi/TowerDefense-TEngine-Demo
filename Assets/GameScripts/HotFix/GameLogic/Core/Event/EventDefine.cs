@@ -75,6 +75,9 @@ namespace GameLogic
 
         // 关卡状态变化事件ID
         public static readonly int OnLevelStateChange = RuntimeId.ToRuntimeId("ILevel_Event.OnLevelStateChange");
+        
+        // 游戏结束事件ID
+        public static readonly int OnGameSuccess = RuntimeId.ToRuntimeId("ILevel_Event.OnGameSuccess");
 
         // 游戏结束事件ID
         public static readonly int OnGameOver = RuntimeId.ToRuntimeId("ILevel_Event.OnGameOver");

@@ -9,7 +9,7 @@ namespace GameLogic
     {
         private EntityEnemyLogic owner;
         private bool attacked = false;
-        private float attackTimer;
+        private float attackTimer = 0;
 
         protected override void OnInit(IFsm<EntityEnemyLogic> procedureOwner)
         {
@@ -31,19 +31,20 @@ namespace GameLogic
         {
             base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
+            if (owner.IsPause)
+                return;
 
-            if (owner.TargetPlayer != null && !attacked)
+            if (owner.TargetPlayer != null)
             {
-                attackTimer += elapseSeconds; // 更新攻击计时器
-
-                // 如果计时器超过1秒，则发起攻击
-                if (attackTimer > 1)
+                if (owner.TargetPlayer != null && !attacked)
                 {
-                    owner.TargetPlayer.Damage(owner.EntityDataEnemy.EnemyData.Damage); // 对目标玩家造成伤害
-                    attacked = true; // 标记已发起攻击
-                    owner.AfterAttack();
-                    // owner.IsActivation = false;
-                    ChangeState<EnemyStandbyState>(procedureOwner);
+                    attackTimer += elapseSeconds;
+                    if (attackTimer > 1)
+                    {
+                        owner.TargetPlayer.Damage(owner.EntityDataEnemy.EnemyData.Damage);
+                        attacked = true;
+                        owner.AfterAttack();
+                    }
                 }
             }
         }

@@ -143,14 +143,13 @@ namespace GameLogic
 
             if (!loadedHPBar)
             {
-                // TODO: Show HP bar if not loaded yet
                 // GameEvent.Send(LevelEvent.OnShowEntityInLevel);
                 // GameEntry.Event.Fire(this, ShowEntityInLevelEventArgs.Create(
                 //     (int)EnumEntity.HPBar,
                 //     typeof(EntityHPBar),
                 //     OnLoadHpBarSuccess,
                 //     EntityDataFollower.Create(hpBarRoot)));
-                //
+                
                 // loadedHPBar = true;
             }
 
@@ -174,14 +173,14 @@ namespace GameLogic
             if (OnDead != null)
                 OnDead(this);
 
-            // if (deadEffect != null)
-            // {
-            //     GameEntry.Event.Fire(this, ShowEntityInLevelEventArgs.Create(
-            //         (int)deadEffect.deadEffectEntity,
-            //         typeof(EntityParticleAutoHide),
-            //         null,
-            //         EntityDataFollower.Create(randomSound ? randomSound.GetRandomSound() : EnumSound.None, transform.position + DeadEffectOffset, transform.rotation)));
-            // }
+            if (deadEffect != null)
+            {
+                // GameEntry.Event.Fire(this, ShowEntityInLevelEventArgs.Create(
+                //     (int)deadEffect.deadEffectEntity,
+                //     typeof(EntityParticleAutoHide),
+                //     null,
+                //     EntityDataFollower.Create(randomSound ? randomSound.GetRandomSound() : EnumSound.None, transform.position + DeadEffectOffset, transform.rotation)));
+            }
         }
 
         private void OnLoadHpBarSuccess(Entity entity)

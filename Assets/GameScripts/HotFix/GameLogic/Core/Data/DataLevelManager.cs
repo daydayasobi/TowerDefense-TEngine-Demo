@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using GameConfig;
 using TEngine;
 using UnityEngine;
@@ -300,7 +301,7 @@ namespace GameLogic
 
             SetLevelRecord(CurrentLevelIndex, starCount);
             ChangeLevelState(EnumLevelState.Gameover);
-            // GameEntry.Event.Fire(this, GameoverEventArgs.Create(EnumGameOverType.Success, starCount));
+            GameEvent.Send(LevelEvent.OnGameSuccess, starCount);
         }
 
         public void GameFail()
@@ -322,6 +323,7 @@ namespace GameLogic
 
             ChangeLevelState(EnumLevelState.Gameover);
             // GameEntry.Event.Fire(this, GameoverEventArgs.Create(EnumGameOverType.Fail, 0));
+            GameEvent.Send(LevelEvent.OnGameOver);
         }
         
         private void SetLevelRecord(int levelIndex, int starCount)

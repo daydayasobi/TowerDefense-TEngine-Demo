@@ -31,8 +31,7 @@ namespace GameLogic
             if (owner.IsPause)
                 return;
 
-            // TODO: 更新攻击器状态
-            // owner.Attacker.OnUpdate(elapseSeconds, realElapseSeconds);
+            owner.Attacker.OnUpdate(elapseSeconds, realElapseSeconds);
 
             if (!owner.isPathBlocked)
             {

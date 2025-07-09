@@ -38,13 +38,17 @@ namespace GameLogic
         // private EntityPlayer player;
 
         private Dictionary<int, TowerInfo> dicTowerInfo;
-        private Dictionary<int, EntityEnemyLogic> dicEntityEnemy;
+        private Dictionary<int, Entity> dicEntityTower;
+        private Dictionary<int, EntityEnemyLogic> dicEntityEnemyLogic;
+        private Dictionary<int, Entity> dicEntityEnemy;
 
         // 构造函数，初始化字典
         public LevelControl()
         {
             dicTowerInfo = new Dictionary<int, TowerInfo>(20);
-            dicEntityEnemy = new Dictionary<int, EntityEnemyLogic>(20);
+            dicEntityTower = new Dictionary<int, Entity>(20);
+            dicEntityEnemyLogic = new Dictionary<int, EntityEnemyLogic>(20);
+            dicEntityEnemy = new Dictionary<int, Entity>(20);
         }
 
         // 实体的根节点，用于存放塔和敌人的实体
@@ -161,6 +165,7 @@ namespace GameLogic
             {
                 EntityTowerBaseLogic entityTowerBaseLogic = entity.Logic as EntityTowerBaseLogic;
                 dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBaseLogic, placementArea, placeGrid));
+                dicEntityTower.Add(tower.SerialId, entity);
             }, EntityTowerData.Create(tower, position, rotation, entityRoot.transform, serialId));
 
             // 2. 隐藏预览塔
@@ -184,6 +189,7 @@ namespace GameLogic
             towerInfo.PlacementArea.Clear(towerInfo.PlaceGrid, towerInfo.Tower.Dimensions);
             DataTowerManager.Instance.DestroyTower(towerInfo.Tower);
             dicTowerInfo.Remove(towerSerialId);
+            dicEntityTower.Remove(towerSerialId); // 从塔实体字典中移除
             PoolReference.Release(towerInfo);
         }
 
@@ -217,7 +223,8 @@ namespace GameLogic
             int serialId = GameModule.Entity.GenerateSerialId();
             EntityModuleEx.Instance.ShowEnemyEntity(enemyData.EntityId,serialId,(entity) =>
             {
-                dicEntityEnemy.Add(entity.SerialId, (EntityEnemyLogic)entity.Logic);
+                dicEntityEnemyLogic.Add(entity.SerialId, (EntityEnemyLogic)entity.Logic);
+                dicEntityEnemy.Add(entity.SerialId, entity);
             },EntityDataEnemy.Create(serialId,
                 enemyData,
                 levelManager.GetLevelPath(),
@@ -232,7 +239,19 @@ namespace GameLogic
         /// <param name="serialId">敌人实体的序列ID。</param>
         public void HideEnemyEntity(int serialId)
         {
-            // entityloader.HideEnemyEntity(serialId);
+            if (dicEntityEnemy.ContainsKey(serialId))
+            {
+                EntityModuleEx.Instance.HideEntity(dicEntityEnemy[serialId]);
+                dicEntityEnemy.Remove(serialId);
+                dicEntityEnemyLogic.Remove(serialId);
+            }
+            else
+            {
+                Log.Warning("Entity with serial ID '{0}' not found in tower dictionary.", serialId);
+            }
+           
+            if (Level.Finish && dicEntityEnemy.Count <= 0)
+                DataLevelManager.Instance.GameSuccess();
         }
 
         /// <summary>
@@ -240,6 +259,11 @@ namespace GameLogic
         /// </summary>
         private void HideAllEnemyEntity()
         {
+            List<int> enemyEntitySerialIds = new List<int>(dicEntityEnemy.Keys);
+            for (int i = 0; i < enemyEntitySerialIds.Count; i++)
+            {
+                HideTower(enemyEntitySerialIds[i]);
+            }
         }
 
         /// <summary>
@@ -252,9 +276,10 @@ namespace GameLogic
         /// <summary>
         /// 隐藏指定ID的实体。
         /// </summary>
-        /// <param name="entityId">实体的ID。</param>
-        public void HideEntity(int entityId)
+        /// <param name="serialId">实体的序列号ID。</param>
+        public void HideEntity(int serialId)
         {
+            
         }
 
         /// <summary>
@@ -292,6 +317,7 @@ namespace GameLogic
                 pause = false;
             }
 
+            HidePreviewTower();
             HideAllTower(); // 隐藏所有塔
             HideAllEnemyEntity(); // 隐藏所有敌人
         }
@@ -301,6 +327,8 @@ namespace GameLogic
         /// </summary>
         public void Gameover()
         {
+            HidePreviewTower();
+            Pause();
         }
 
         /// <summary>

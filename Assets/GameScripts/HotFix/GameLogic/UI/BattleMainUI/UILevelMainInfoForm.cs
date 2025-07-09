@@ -56,6 +56,7 @@ namespace GameLogic
         // 暂停按钮点击事件处理
         private void OnClickButtonPauseBtn()
         {
+            GameModule.UI.ShowUI<UIPausePanelForm>();
         }
 
         #endregion
