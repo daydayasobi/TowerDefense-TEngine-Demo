@@ -9,7 +9,6 @@ namespace TEngine
     {
         private Dictionary<int, Entity> _dicSerial2Entity;
 
-        // protected Dictionary<int, Entity> DicSerial2Entity { get; private set; }
         protected int serialId;
         private IEntityModule _entityModuleImplementation;
 
@@ -39,7 +38,6 @@ namespace TEngine
                 }
             }
         }
-
 
         public int GenerateSerialId()
         {
@@ -88,6 +86,11 @@ namespace TEngine
 
         public void HideAllEntity()
         {
+            List<int> towerSerialIds = new List<int>(_dicSerial2Entity.Keys);
+            for (int i = 0; i < towerSerialIds.Count; i++)
+            {
+                HideEntity(towerSerialIds[i]);
+            }
         }
 
         public void AddToDic(int serialId, Entity entity)
@@ -110,6 +113,11 @@ namespace TEngine
             {
                 _dicSerial2Entity.Remove(serialId);
             }
+        }
+
+        public IEnumerable<Entity> GetAllEntities()
+        {
+            return _dicSerial2Entity.Values;
         }
 
         public void Clear()

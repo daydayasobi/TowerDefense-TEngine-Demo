@@ -13,11 +13,14 @@ namespace GameLogic
         private GameObject m_gorScroll;
         private Transform m_tfLayout;
         private Button m_btnBack;
+        private MouseScroll mouseScroll;
+        
         protected override void ScriptGenerator()
         {
             m_gorScroll = FindChild("Levels/m_gorScroll").gameObject;
             m_tfLayout = FindChild("Levels/m_gorScroll/m_tfLayout");
             m_btnBack = FindChildComponent<Button>("m_btnBack");
+            mouseScroll = FindChild("Levels/m_gorScroll").GetComponent<MouseScroll>();
             m_btnBack.onClick.AddListener(OnClickBackBtn);
         }
         #endregion
@@ -31,8 +34,8 @@ namespace GameLogic
         protected override void OnCreate()
         {
             ShowLevelSelectionButtonItems();
+            // mouseScroll.Init();
         }
-        // public MouseScroll mouseScroll;
         private void ShowLevelSelectionButtonItems()
         {
             int index = 0;

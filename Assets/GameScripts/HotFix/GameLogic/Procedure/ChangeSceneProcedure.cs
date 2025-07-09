@@ -57,9 +57,9 @@ namespace GameLogic
 
         private async UniTaskVoid TestLevel1()
         {
-            // LevelDataLoader.Instance.LoadLevel(1);
-            DataLevelManager.Instance.OnLoad();
+            // DataLevelManager.Instance.OnLoad();
             DataLevelManager.Instance.LoadLevel(1);
+            GameEvent.Send(LevelEvent.OnLoadLevelFinish, 1);
             await GameModule.Scene.LoadSceneAsync("Level1");
             ChangeState<LevelProcedure>(procedureOwner);
         }

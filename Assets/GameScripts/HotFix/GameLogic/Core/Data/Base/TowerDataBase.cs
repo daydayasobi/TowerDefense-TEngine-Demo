@@ -36,12 +36,12 @@ namespace GameLogic
                 return dRTower.Icon;
             }
         }
-
+        
         public int EntityId
         {
             get
             {
-                return dRTower.Id;
+                return dRTower.Entityid;
             }
         }
 

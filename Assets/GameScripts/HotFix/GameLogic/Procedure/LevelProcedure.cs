@@ -34,7 +34,7 @@ namespace GameLogic
                 Log.Error("Can not find EntityRoot in scene");
                 return;
             }
-            
+
             //加载数据
             DataEnemyManager.Instance.OnLoad();
 
@@ -44,7 +44,7 @@ namespace GameLogic
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法
             GameEvent.AddEventListener(LevelEvent.OnChangeScene, OnChangeScene);
             GameEvent.AddEventListener(LevelEvent.OnLoadLevel, OnLoadLevel);
-            GameEvent.AddEventListener<EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.AddEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.AddEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.AddEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.AddEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
@@ -73,7 +73,7 @@ namespace GameLogic
             GameModule.UI.CloseUI<UILevelMainInfoForm>();
             GameEvent.RemoveEventListener(LevelEvent.OnChangeScene, OnChangeScene);
             GameEvent.RemoveEventListener(LevelEvent.OnLoadLevel, OnLoadLevel);
-            GameEvent.RemoveEventListener<EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.RemoveEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.RemoveEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.RemoveEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.RemoveEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
@@ -111,8 +111,16 @@ namespace GameLogic
         /// <summary>
         /// 处理关卡状态变化事件
         /// </summary>
-        private void OnLevelStateChange(EnumLevelState curState)
+        private void OnLevelStateChange(EnumLevelState lastState, EnumLevelState curState)
         {
+            if (curState == EnumLevelState.Pause)
+            {
+                levelControl.Pause();
+            }
+            else if (lastState == EnumLevelState.Pause)
+            {
+                levelControl.Resume();
+            }
         }
 
         /// <summary>

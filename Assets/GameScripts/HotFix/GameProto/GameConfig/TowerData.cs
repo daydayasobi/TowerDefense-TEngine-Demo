@@ -20,6 +20,7 @@ public sealed partial class TowerData : Luban.BeanBase
         Description = _buf.ReadString();
         NameId = _buf.ReadString();
         Icon = _buf.ReadString();
+        Entityid = _buf.ReadInt();
         PreviewEntityid = _buf.ReadInt();
         ProjectileEntityid = _buf.ReadInt();
         IsMultiAttack = _buf.ReadBool();
@@ -50,6 +51,10 @@ public sealed partial class TowerData : Luban.BeanBase
     /// 图标
     /// </summary>
     public readonly string Icon;
+    /// <summary>
+    /// 实体编号
+    /// </summary>
+    public readonly int Entityid;
     /// <summary>
     /// 预览实体编号
     /// </summary>
@@ -93,6 +98,7 @@ public sealed partial class TowerData : Luban.BeanBase
         + "description:" + Description + ","
         + "NameId:" + NameId + ","
         + "Icon:" + Icon + ","
+        + "Entityid:" + Entityid + ","
         + "PreviewEntityid:" + PreviewEntityid + ","
         + "ProjectileEntityid:" + ProjectileEntityid + ","
         + "IsMultiAttack:" + IsMultiAttack + ","

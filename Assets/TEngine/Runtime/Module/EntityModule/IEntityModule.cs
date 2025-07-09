@@ -16,6 +16,8 @@ namespace TEngine
         public void AddToDic(int serialId, Entity entity);
         public void RemoveFromDic(int serialId);
 
+        public IEnumerable<Entity> GetAllEntities();
+
         public void Clear();
     }
 }

@@ -43,7 +43,6 @@ namespace GameLogic
         // 开始波次按钮点击事件处理
         private void OnClickStartWaveButtonBtn()
         {
-            GameEvent.Send(LevelEvent.OnGameStartWave);
             DataLevelManager.Instance.StartWave();
         }
 
@@ -65,7 +64,7 @@ namespace GameLogic
         {
             base.OnCreate();
             GameEvent.AddEventListener<int, int>(LevelEvent.OnPlayerHPChange, OnPlayerHPChange);
-            GameEvent.AddEventListener<EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.AddEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.AddEventListener<int, int, float>(LevelEvent.OnWaveUpdate, OnWaveUpdate);
             GameEvent.AddEventListener<float, float>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
         }
@@ -74,7 +73,7 @@ namespace GameLogic
         {
             base.OnDestroy();
             GameEvent.RemoveEventListener<int, int>(LevelEvent.OnPlayerHPChange, OnPlayerHPChange);
-            GameEvent.RemoveEventListener<EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
+            GameEvent.RemoveEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.RemoveEventListener<int, int, float>(LevelEvent.OnWaveUpdate, OnWaveUpdate);
             GameEvent.RemoveEventListener<float, float>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
         }
@@ -87,7 +86,7 @@ namespace GameLogic
         }
 
         // 玩家生命值变化事件处理
-        private void OnPlayerHPChange(int LastHP,int CurrentHP)
+        private void OnPlayerHPChange(int LastHP, int CurrentHP)
         {
             m_textHP.text = CurrentHP.ToString();
         }
@@ -99,17 +98,16 @@ namespace GameLogic
         }
 
         // 关卡状态变化事件处理
-        private void OnLevelStateChange(EnumLevelState currentState)
+        private void OnLevelStateChange(EnumLevelState lastState, EnumLevelState curState)
         {
-            if (currentState == EnumLevelState.Normal)
+            if (curState == EnumLevelState.Normal)
             {
                 m_btnStartWaveButton.gameObject.SetActive(false);
                 m_goWaveInfo.SetActive(true);
 
-                Level level = DataLevelManager.Instance.CurrentLevel;
-                SetWaveInfo(level.CurrentWaveIndex, level.WaveCount, 0);
+                SetWaveInfo(DataLevelManager.Instance.CurrentLevel.CurrentWaveIndex, DataLevelManager.Instance.CurrentLevel.WaveCount, 0);
             }
-            else if (currentState == EnumLevelState.Prepare)
+            else if (curState == EnumLevelState.Prepare)
             {
                 m_btnStartWaveButton.gameObject.SetActive(true);
                 m_goWaveInfo.SetActive(false);

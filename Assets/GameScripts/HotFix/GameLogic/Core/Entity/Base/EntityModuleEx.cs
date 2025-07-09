@@ -29,7 +29,6 @@ namespace GameLogic
         public void ShowTowerLevelEntity(int entityId, Action<Entity> onShowSuccess, object userData = null)
         {
             int serialId = GameModule.Entity.GenerateSerialId();
-            var data = TowerLevelDataLoader.Instance.GetItemConfig(entityId);
             string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
             GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
             Entity entity = gameObject.GetComponent<Entity>();
@@ -46,13 +45,13 @@ namespace GameLogic
         public void ShowTowerEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
         {
             // int serialId = GameModule.Entity.GenerateSerialId();
-            var data = TowerDataLoader.Instance.GetItemConfig(entityId);
+            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
             //获取预制体
-            GameObject gameObject = PoolManager.Instance.GetGameObject(data.NameId);
+            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
             Entity entity = gameObject.GetComponent<Entity>();
             var entityLogic = gameObject.GetComponent<EntityTowerAttackerLogic>();
             //初始化entity
-            entity.OnInit(entityId, serialId, data.NameId, entityLogic);
+            entity.OnInit(entityId, serialId, pathName, entityLogic);
             //初始化entity logic
             entityLogic.OnInit(userData);
             GameModule.Entity.AddToDic(serialId, entity);
@@ -107,13 +106,46 @@ namespace GameLogic
             onShowSuccess?.Invoke(entity);
         }
 
+        public void ShowEntity<TLogic>(
+            int entityId,
+            Action<Entity> onShowSuccess,
+            object userData = null,
+            bool autoGenerateSerialId = true,
+            int manualSerialId = -1
+        )
+            where TLogic : EntityLogic
+        {
+            int serialId = autoGenerateSerialId ? GameModule.Entity.GenerateSerialId() : manualSerialId;
+            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
+
+            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
+            Entity entity = gameObject.GetComponent<Entity>();
+            TLogic entityLogic = gameObject.GetComponent<TLogic>();
+
+            entity.OnInit(entityId, serialId, pathName, entityLogic);
+            entityLogic.OnInit(userData);
+            GameModule.Entity.AddToDic(serialId, entity);
+            entity.OnShow(userData);
+            onShowSuccess?.Invoke(entity);
+        }
+
+
         public void HideEntity(Entity entity)
         {
             if (entity == null)
                 return;
 
-            // HideEntity(entity.SerialId);
             GameModule.Entity.HideEntity(entity);
+        }
+
+        public void HideAllEntities()
+        {
+            
+        }
+
+        public IEnumerable<Entity> GetAllEntities()
+        {
+            return GameModule.Entity.GetAllEntities();
         }
 
         public void Clear()

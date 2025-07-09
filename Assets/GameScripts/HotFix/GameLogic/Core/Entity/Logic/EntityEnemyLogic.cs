@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace GameLogic
 {
-    public class EntityEnemyLogic : EntityTargetableLogic
+    public class EntityEnemyLogic : EntityTargetableLogic, IPause
     {
         public Transform turret;
         public Transform[] projectilePoints;
@@ -17,8 +17,7 @@ namespace GameLogic
         private EntityDataEnemy entityData;
 
         protected IFsm<EntityEnemyLogic> fsm;
-
-
+        
         private Dictionary<int, float> dicSlowDownRates;
 
         //表示是否死亡或已攻击玩家即将回收，以防重复执行回收逻辑

@@ -14,7 +14,7 @@ namespace GameLogic
     partial class LevelControl : IMemory
     {
         // 当前关卡数据
-        private Level Level;
+        // private Level level;
 
         // 关卡管理器，用于管理关卡路径等
         private LevelManager levelManager;
@@ -56,10 +56,11 @@ namespace GameLogic
 
         public void OnEnter()
         {
-            // DataPlayerManager.Instance.OnLoad();
-            // Vector3 position = new Vector3(leveldata.PlayerPosition.X, leveldata.PlayerPosition.Y, leveldata.PlayerPosition.Z);
-            // Quaternion quaternion = Quaternion.Euler(new Vector3(leveldata.PlayerQuaternion.X, leveldata.PlayerQuaternion.Y, leveldata.PlayerQuaternion.Z));
-            EntityModuleEx.Instance.ShowPlayerEntity(3039, null, EntityData.Create(Level.PlayerPosition, Level.PlayerQuaternion, entityRoot.transform));
+            EntityModuleEx.Instance.ShowPlayerEntity(3039, null, EntityData.Create(
+                DataLevelManager.Instance.CurrentLevel.PlayerPosition, 
+                DataLevelManager.Instance.CurrentLevel.PlayerQuaternion, 
+                entityRoot.transform));
+            // EntityModuleEx.Instance.ShowEntity<EntityPlayerLogic>(3039,null,EntityData.Create(Level.PlayerPosition, Level.PlayerQuaternion, entityRoot.transform));
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace GameLogic
         /// </summary>
         public void Update(float elapseSeconds, float realElapseSeconds)
         {
-            if (Level == null)
+            if (DataLevelManager.Instance.CurrentLevel == null)
             {
                 Log.Error("Level is null, please check if LevelControl is initialized properly.");
                 return;
@@ -75,13 +76,13 @@ namespace GameLogic
 
             if (DataLevelManager.Instance.LevelState != EnumLevelState.Prepare && DataLevelManager.Instance.LevelState != EnumLevelState.Normal)
             {
-                Log.Error("Level is not in a valid state for processing. Current state: " + DataLevelManager.Instance.LevelState);
+                Log.Info("Level is not in a valid state for processing. Current state: " + DataLevelManager.Instance.LevelState);
                 return;
             }
 
             // 如果关卡未完成，则处理关卡逻辑
-            if (!Level.Finish)
-                Level.ProcessLevel(elapseSeconds, realElapseSeconds);
+            if (!DataLevelManager.Instance.CurrentLevel.Finish)
+                DataLevelManager.Instance.CurrentLevel.ProcessLevel(elapseSeconds, realElapseSeconds);
 
             // 如果正在建造塔
             if (isBuilding)
@@ -143,10 +144,12 @@ namespace GameLogic
         /// </summary>
         public void HidePreviewTower()
         {
-            EntityModuleEx.Instance.HideEntity(entityPreviewLogic.Entity);
-            // entityPreviewLogic.Entity.OnHide(true, false);
-            entityPreviewLogic = null;
-            isBuilding = false;
+            if (entityPreviewLogic != null)
+            {
+                EntityModuleEx.Instance.HideEntity(entityPreviewLogic.Entity);
+                entityPreviewLogic = null;
+                isBuilding = false;
+            }
         }
 
         /// <summary>
@@ -250,7 +253,7 @@ namespace GameLogic
                 Log.Warning("Entity with serial ID '{0}' not found in tower dictionary.", serialId);
             }
            
-            if (Level.Finish && dicEntityEnemy.Count <= 0)
+            if (DataLevelManager.Instance.CurrentLevel.Finish && dicEntityEnemy.Count <= 0)
                 DataLevelManager.Instance.GameSuccess();
         }
 
@@ -262,7 +265,7 @@ namespace GameLogic
             List<int> enemyEntitySerialIds = new List<int>(dicEntityEnemy.Keys);
             for (int i = 0; i < enemyEntitySerialIds.Count; i++)
             {
-                HideTower(enemyEntitySerialIds[i]);
+                HideEnemyEntity(enemyEntitySerialIds[i]);
             }
         }
 
@@ -287,7 +290,7 @@ namespace GameLogic
         /// </summary>
         public void StartWave()
         {
-            Level.StartWave();
+            DataLevelManager.Instance.CurrentLevel.StartWave();
         }
 
         /// <summary>
@@ -296,6 +299,13 @@ namespace GameLogic
         public void Pause()
         {
             pause = true;
+            
+            foreach (var entity in EntityModuleEx.Instance.GetAllEntities())
+            {
+                IPause iPause = entity.Logic as IPause;
+                if (iPause != null)
+                    iPause.Pause();
+            }
         }
 
         /// <summary>
@@ -304,6 +314,15 @@ namespace GameLogic
         public void Resume()
         {
             pause = false;
+            
+            foreach (var entity in EntityModuleEx.Instance.GetAllEntities())
+            {
+                IPause iPause = entity.Logic as IPause;
+                if (iPause != null)
+                    iPause.Resume();
+            }
+            
+            cameraInput.Resume();
         }
 
         /// <summary>
@@ -343,13 +362,15 @@ namespace GameLogic
             }
 
             HideAllTower(); // 隐藏所有塔
+            HideAllEnemyEntity();
+            EntityModuleEx.Instance.HideAllEntities();
         }
 
         // 创建关卡控制器
         public static LevelControl Create(Level level, LevelManager levelPathManager, CameraInput cameraInput, GameObject entityRoot)
         {
             var levelControl = MemoryPool.Acquire<LevelControl>();
-            levelControl.Level = level;
+            // levelControl.level = level;
             levelControl.levelManager = levelPathManager;
             levelControl.cameraInput = cameraInput;
             levelControl.entityRoot = entityRoot;
@@ -361,13 +382,20 @@ namespace GameLogic
         /// </summary>
         public void Clear()
         {
-            levelManager = null;
-            cameraInput = null;
-
-            // previewTowerData = null;
-
             entityPreviewLogic = null;
             isBuilding = false;
+            
+            // level = null;
+            levelManager = null;
+            cameraInput = null;
+            
+            entityPreviewLogic = null;
+            isBuilding = false;
+
+            dicTowerInfo.Clear();
+            dicEntityTower.Clear();
+            dicEntityEnemy.Clear();
+            dicEntityEnemyLogic.Clear();
         }
     }
 }

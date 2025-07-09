@@ -7,48 +7,29 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class DataLevelManager  : Singleton<DataLevelManager>
+    public class DataLevelManager : Singleton<DataLevelManager>
     {
         private Dictionary<int, LevelDataBase> dicLevelData;
-        
+
         private int[] starScore;
 
         private readonly static int NONE_LEVEL_INDEX = -1;
-        
+
         private EnumLevelState stateBeforePause;
 
-        public EnumLevelState LevelState
-        {
-            get;
-            private set;
-        }
-        
-        public Level CurrentLevel
-        {
-            get;
-            private set;
-        }
-        
-        public int CurrentLevelIndex
-        {
-            get;
-            private set;
-        }
+        public EnumLevelState LevelState { get; private set; }
 
-        public int MaxLevel
-        {
-            get;
-            private set;
-        }
+        public Level CurrentLevel { get; private set; }
+
+        public int CurrentLevelIndex { get; private set; }
+
+        public int MaxLevel { get; private set; }
 
         public bool IsInLevel
         {
-            get
-            {
-                return CurrentLevelIndex != NONE_LEVEL_INDEX;
-            }
+            get { return CurrentLevelIndex != NONE_LEVEL_INDEX; }
         }
-        
+
         protected override void OnInit()
         {
             LevelState = EnumLevelState.None;
@@ -60,19 +41,11 @@ namespace GameLogic
             // 加载配置表
             MaxLevel = 0;
 
-            // dtLevel = GameEntry.DataTable.GetDataTable<DRLevel>();
-            // if (dtLevel == null)
-            //     throw new System.Exception("Can not get data table Level");
-            //
             dicLevelData = new Dictionary<int, LevelDataBase>();
-            //
-            // DataWave dataWave = GameEntry.Data.GetData<DataWave>();
-            // if (dataWave == null)
-            //     throw new System.Exception("Can not get data 'DataWave'");
-            
+
             DataSceneManager.Instance.OnLoad();
             DataWaveManager.Instance.OnLoad();
-            
+
             List<LevelData> dRLevels = LevelDataLoader.Instance.GetAllItemConfig();
             foreach (var dRLevel in dRLevels)
             {
@@ -95,16 +68,16 @@ namespace GameLogic
                 if (dRLevel.Id > MaxLevel)
                     MaxLevel = dRLevel.Id;
             }
-            
+
             // TODO:关卡星级配置，写死的测试配置
             starScore = new int[3];
             starScore[0] = 10;
             starScore[1] = 50;
             starScore[2] = 100;
-            
-            // GameEvent.AddEventListener<int>(LevelEvent.OnLoadLevelFinish, OnLoadLevelFinish);
+
+            GameEvent.AddEventListener<int>(LevelEvent.OnLoadLevelFinish, OnLoadLevelFinish);
         }
-        
+
         public LevelDataBase GetLevelData(int id)
         {
             if (dicLevelData.ContainsKey(id))
@@ -126,7 +99,7 @@ namespace GameLogic
 
             return results;
         }
-        
+
         private void ChangeLevelState(EnumLevelState targetLevelState)
         {
             if (LevelState == targetLevelState)
@@ -141,10 +114,10 @@ namespace GameLogic
 
             EnumLevelState lastLevelState = LevelState;
             LevelState = targetLevelState;
-            GameEvent.Send(LevelEvent.OnLevelStateChange, LevelState);
+            GameEvent.Send(LevelEvent.OnLevelStateChange, lastLevelState, LevelState);
             Log.Debug("Current level is '{0}',level state is '{1}.'", levelData.Name, LevelState.ToString());
         }
-        
+
         public void LoadLevel(int level)
         {
             if (LevelState == EnumLevelState.Loading)
@@ -169,25 +142,25 @@ namespace GameLogic
 
             InternalLoadLevel(levelData);
         }
-        
+
         private void InternalLoadLevel(LevelDataBase levelData)
         {
             bool isReload = true;
 
             // TODO:这里需要判断是否是重新加载关卡 注意注释
-            // if (CurrentLevelIndex != levelData.Id)
-            // {
-            //     CurrentLevelIndex = levelData.Id;
-            //     isReload = false;
-            // }
+            if (CurrentLevelIndex != levelData.Id)
+            {
+                Log.Warning("Load level '{0}' but current level is '{1}',will reload level.", levelData.Id, CurrentLevelIndex);
+                CurrentLevelIndex = levelData.Id;
+                isReload = false;
+            }
 
             // if (CurrentLevel != null)
-            //     ReferencePool.Release(CurrentLevel);
-            //
-            // CurrentLevel = Level.Create(levelData);
-            
-            CurrentLevelIndex = levelData.Id;
+            //     PoolReference.Release(CurrentLevel);
+
             CurrentLevel = Level.Create(levelData);
+
+            CurrentLevelIndex = levelData.Id;
 
             DataPlayerManager.Instance.Reset();
 
@@ -198,7 +171,7 @@ namespace GameLogic
             else
                 GameEvent.Send(LevelEvent.OnLoadLevel, levelData);
         }
-        
+
         public void StartWave()
         {
             if (CurrentLevelIndex == NONE_LEVEL_INDEX)
@@ -212,8 +185,9 @@ namespace GameLogic
                 Log.Error("Only can start wave when level is in Prepare State,now is {0}", LevelState.ToString());
                 return;
             }
+
             ChangeLevelState(EnumLevelState.Normal);
-            // GameEntry.Event.Fire(this, StartWaveEventArgs.Create());
+            GameEvent.Send(LevelEvent.OnGameStartWave);
         }
 
         public void LevelPause()
@@ -233,7 +207,7 @@ namespace GameLogic
             stateBeforePause = LevelState;
             ChangeLevelState(EnumLevelState.Pause);
         }
-        
+
         public void LevelResume()
         {
             if (CurrentLevelIndex == NONE_LEVEL_INDEX)
@@ -263,7 +237,6 @@ namespace GameLogic
                 CurrentLevelIndex = NONE_LEVEL_INDEX;
                 // GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
             }
-
         }
 
         public void GameSuccess()
@@ -283,7 +256,7 @@ namespace GameLogic
                 return;
             }
 
-            
+
             int hp = DataPlayerManager.Instance.HP;
             int starCount = 0;
             for (int i = 0; i < starScore.Length; i++)
@@ -325,7 +298,7 @@ namespace GameLogic
             // GameEntry.Event.Fire(this, GameoverEventArgs.Create(EnumGameOverType.Fail, 0));
             GameEvent.Send(LevelEvent.OnGameOver);
         }
-        
+
         private void SetLevelRecord(int levelIndex, int starCount)
         {
             // int currentStarCount = GameEntry.Setting.GetInt(string.Format(Constant.Setting.LevelStarRecord, levelIndex), 0);
@@ -341,7 +314,7 @@ namespace GameLogic
             {
                 return;
             }
-        
+
             LevelDataBase levelData = GetLevelData(CurrentLevelIndex);
             if (levelData != null && levelData.SceneData.Id == levelId)
             {

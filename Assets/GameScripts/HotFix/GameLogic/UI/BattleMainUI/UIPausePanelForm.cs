@@ -27,18 +27,22 @@ namespace GameLogic
             m_btnRestart.onClick.AddListener(OnClickRestartBtn);
         }
         #endregion
-
+        
         #region 事件
         private void OnClickCloseBtn()
         {
+            DataLevelManager.Instance.LevelResume();
             Close();
         }
         private void OnClickMainMenuBtn()
         {
             
         }
+        
         private void OnClickRestartBtn()
         {
+            int currentLevelIndex = DataLevelManager.Instance.CurrentLevelIndex;
+            DataLevelManager.Instance.LoadLevel(currentLevelIndex);
             GameEvent.Send(LevelEvent.OnReloadLevel);
             Close();
         }
@@ -53,6 +57,7 @@ namespace GameLogic
             m_textLevelTitleText.text = levelData.Name;
             m_textLevelDescriptionText.text = levelData.Description;
 
+            DataLevelManager.Instance.LevelPause();
         }
     }
 }
