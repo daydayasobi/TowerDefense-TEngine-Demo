@@ -88,7 +88,7 @@ namespace GameLogic
             //绑定通知
             GameEvent.AddEventListener<float,float>(LevelEvent.OnPlayerEnergyChange, OnPlayerEnergyChange);
 
-            UpdateEnergyState(DataPlayerManager.Instance.Energy);
+            UpdateEnergyState(PlayerDataControl.Instance.Energy);
         }
 
         /// <summary>

@@ -64,7 +64,7 @@ namespace GameLogic
             // GameEntry.Sound.PlaySound(EnumSound.base_attack, Entity);
 
             // dataPlayer.Damage(value);
-            DataPlayerManager.Instance.Damage(value);
+            PlayerDataControl.Instance.Damage(value);
         }
     }
 }

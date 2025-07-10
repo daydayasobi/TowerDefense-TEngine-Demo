@@ -43,13 +43,13 @@ namespace GameLogic
         // 开始波次按钮点击事件处理
         private void OnClickStartWaveButtonBtn()
         {
-            DataLevelManager.Instance.StartWave();
+            LevelDataControl.Instance.StartWave();
         }
 
         // 调试增加货币按钮点击事件处理
         private void OnClickDebugAddCurrencyBtn()
         {
-            DataPlayerManager.Instance.DebugAddEnergy();
+            PlayerDataControl.Instance.DebugAddEnergy();
         }
 
         // 暂停按钮点击事件处理
@@ -105,7 +105,7 @@ namespace GameLogic
                 m_btnStartWaveButton.gameObject.SetActive(false);
                 m_goWaveInfo.SetActive(true);
 
-                SetWaveInfo(DataLevelManager.Instance.CurrentLevel.CurrentWaveIndex, DataLevelManager.Instance.CurrentLevel.WaveCount, 0);
+                SetWaveInfo(LevelDataControl.Instance.CurrentLevel.CurrentWaveIndex, LevelDataControl.Instance.CurrentLevel.WaveCount, 0);
             }
             else if (curState == EnumLevelState.Prepare)
             {

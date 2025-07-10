@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class DataPlayerManager : Singleton<DataPlayerManager>
+    public class PlayerDataControl : Singleton<PlayerDataControl>
     {
         public int HP { get; private set; }
 
@@ -16,7 +16,7 @@ namespace GameLogic
         {
             get
             {
-                if (!DataLevelManager.Instance.IsInLevel)
+                if (!LevelDataControl.Instance.IsInLevel)
                 {
                     Log.Error("Is invaild to get player energy outsiede level scene");
                     return 0;
@@ -43,8 +43,8 @@ namespace GameLogic
 
         protected void OnLoad()
         {
-            energy = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex).InitEnergy;;
-            HP = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex).InitHp;
+            energy = LevelDataControl.Instance.GetLevelData(LevelDataControl.Instance.CurrentLevelIndex).InitEnergy;;
+            HP = LevelDataControl.Instance.GetLevelData(LevelDataControl.Instance.CurrentLevelIndex).InitHp;
             IsEnableDebugEnergy = true;
             DebugAddEnergyCount = 1000;
         }
@@ -90,7 +90,9 @@ namespace GameLogic
         public void Reset()
         {
             int lastHP = HP;
-            HP = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex).InitHp;
+            HP = LevelDataControl.Instance.GetLevelData(LevelDataControl.Instance.CurrentLevelIndex).InitHp;
+            // TODO: test
+            HP = 5;
             GameEvent.Send(LevelEvent.OnPlayerHPChange, lastHP, HP);
 
             float lastEnergy = Energy;
@@ -106,7 +108,7 @@ namespace GameLogic
             //     Energy = levelData.InitEnergy;
             // }
             
-            Energy = DataLevelManager.Instance.GetLevelData(DataLevelManager.Instance.CurrentLevelIndex).InitEnergy;
+            Energy = LevelDataControl.Instance.GetLevelData(LevelDataControl.Instance.CurrentLevelIndex).InitEnergy;
 
             GameEvent.Send(LevelEvent.OnPlayerEnergyChange, lastEnergy, Energy);
 
@@ -123,7 +125,7 @@ namespace GameLogic
 
         private void GameOver()
         {
-            DataLevelManager.Instance.GameFail();
+            LevelDataControl.Instance.GameFail();
         }
 
         protected void OnUnload()

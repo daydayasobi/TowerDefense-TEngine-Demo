@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Cysharp.Threading.Tasks;
 using GameConfig;
 using TEngine;
@@ -57,10 +58,12 @@ namespace GameLogic
 
         public void OnEnter()
         {
-            EntityModuleEx.Instance.ShowPlayerEntity(3039, null, EntityData.Create(
-                DataLevelManager.Instance.CurrentLevel.PlayerPosition, 
-                DataLevelManager.Instance.CurrentLevel.PlayerQuaternion, 
-                entityRoot.transform));
+            int serialId = GameModule.Entity.GenerateSerialId();
+            EntityDataControl.Instance.ShowPlayerEntity(3039, serialId, null, EntityData.Create(
+                LevelDataControl.Instance.CurrentLevel.PlayerPosition,
+                LevelDataControl.Instance.CurrentLevel.PlayerQuaternion,
+                entityRoot.transform,
+                serialId));
             // EntityModuleEx.Instance.ShowEntity<EntityPlayerLogic>(3039,null,EntityData.Create(Level.PlayerPosition, Level.PlayerQuaternion, entityRoot.transform));
         }
 
@@ -69,21 +72,21 @@ namespace GameLogic
         /// </summary>
         public void Update(float elapseSeconds, float realElapseSeconds)
         {
-            if (DataLevelManager.Instance.CurrentLevel == null)
+            if (LevelDataControl.Instance.CurrentLevel == null)
             {
                 Log.Info("Level is null, please check if LevelControl is initialized properly.");
                 return;
             }
 
-            if (DataLevelManager.Instance.LevelState != EnumLevelState.Prepare && DataLevelManager.Instance.LevelState != EnumLevelState.Normal)
+            if (LevelDataControl.Instance.LevelState != EnumLevelState.Prepare && LevelDataControl.Instance.LevelState != EnumLevelState.Normal)
             {
-                Log.Info("Level is not in a valid state for processing. Current state: " + DataLevelManager.Instance.LevelState);
+                Log.Info("Level is not in a valid state for processing. Current state: " + LevelDataControl.Instance.LevelState);
                 return;
             }
 
             // 如果关卡未完成，则处理关卡逻辑
-            if (!DataLevelManager.Instance.CurrentLevel.Finish)
-                DataLevelManager.Instance.CurrentLevel.ProcessLevel(elapseSeconds, realElapseSeconds);
+            if (!LevelDataControl.Instance.CurrentLevel.Finish)
+                LevelDataControl.Instance.CurrentLevel.ProcessLevel(elapseSeconds, realElapseSeconds);
 
             // 如果正在建造塔
             if (isBuilding)
@@ -133,7 +136,7 @@ namespace GameLogic
             Tower tower = DataTowerManager.Instance.CreateTower(towerData.Id);
             int serialId = GameModule.Entity.GenerateSerialId();
             float radius = tower.GetRange(1);
-            EntityModuleEx.Instance.ShowTowerPreviewEntity(towerData.PreviewEntityId, serialId, (entity) =>
+            EntityDataControl.Instance.ShowTowerPreviewEntity(towerData.PreviewEntityId, serialId, (entity) =>
             {
                 entityPreviewLogic = entity.Logic as EntityTowerPreviewLogic;
                 isBuilding = true;
@@ -147,7 +150,7 @@ namespace GameLogic
         {
             if (entityPreviewLogic != null)
             {
-                EntityModuleEx.Instance.HideEntity(entityPreviewLogic.Entity);
+                EntityDataControl.Instance.HideEntity(entityPreviewLogic.Entity);
                 entityPreviewLogic = null;
                 isBuilding = false;
             }
@@ -158,14 +161,14 @@ namespace GameLogic
         /// </summary>
         public void CreateTower(Tower tower, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
         {
-            if (DataPlayerManager.Instance.Energy < tower.BuildEnergy)
+            if (PlayerDataControl.Instance.Energy < tower.BuildEnergy)
                 return;
 
-            DataPlayerManager.Instance.AddEnergy(-tower.BuildEnergy);
+            PlayerDataControl.Instance.AddEnergy(-tower.BuildEnergy);
 
             // 1. 通过EntityControl创建塔实体
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityModuleEx.Instance.ShowTowerEntity(tower.EntityId, serialId, (entity) =>
+            EntityDataControl.Instance.ShowTowerEntity(tower.EntityId, serialId, (entity) =>
             {
                 EntityTowerBaseLogic entityTowerBaseLogic = entity.Logic as EntityTowerBaseLogic;
                 dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBaseLogic, placementArea, placeGrid));
@@ -189,7 +192,7 @@ namespace GameLogic
                 return;
 
             TowerInfo towerInfo = dicTowerInfo[towerSerialId];
-            EntityModuleEx.Instance.HideEntity(towerInfo.EntityTowerBase.Entity); // 隐藏塔实体
+            EntityDataControl.Instance.HideEntity(towerInfo.EntityTowerBase.Entity); // 隐藏塔实体
             towerInfo.PlacementArea.Clear(towerInfo.PlaceGrid, towerInfo.Tower.Dimensions);
             DataTowerManager.Instance.DestroyTower(towerInfo.Tower);
             dicTowerInfo.Remove(towerSerialId);
@@ -217,19 +220,19 @@ namespace GameLogic
         {
             // 处理生成敌人的逻辑
             EnemyDataBase enemyData = DataEnemyManager.Instance.GetEnemyData(enemyId);
-            
+
             if (enemyData == null)
             {
                 Log.Error("Can not get enemy data by id '{0}'.", enemyId);
                 return;
             }
-            
+
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityModuleEx.Instance.ShowEnemyEntity(enemyData.EntityId,serialId,(entity) =>
+            EntityDataControl.Instance.ShowEnemyEntity(enemyData.EntityId, serialId, (entity) =>
             {
                 dicEntityEnemyLogic.Add(entity.SerialId, (EntityEnemyLogic)entity.Logic);
                 dicEntityEnemy.Add(entity.SerialId, entity);
-            },EntityDataEnemy.Create(serialId,
+            }, EntityDataEnemy.Create(serialId,
                 enemyData,
                 levelManager.GetLevelPath(),
                 levelManager.GetStartPathNode().position - new Vector3(0, 0.2f, 0),
@@ -245,7 +248,7 @@ namespace GameLogic
         {
             if (dicEntityEnemy.ContainsKey(serialId))
             {
-                EntityModuleEx.Instance.HideEntity(dicEntityEnemy[serialId]);
+                EntityDataControl.Instance.HideEntity(dicEntityEnemy[serialId]);
                 dicEntityEnemy.Remove(serialId);
                 dicEntityEnemyLogic.Remove(serialId);
             }
@@ -253,9 +256,9 @@ namespace GameLogic
             {
                 Log.Warning("Entity with serial ID '{0}' not found in tower dictionary.", serialId);
             }
-           
-            if (DataLevelManager.Instance.CurrentLevel.Finish && dicEntityEnemy.Count <= 0)
-                DataLevelManager.Instance.GameSuccess();
+
+            if (LevelDataControl.Instance.CurrentLevel != null && LevelDataControl.Instance.CurrentLevel.Finish && dicEntityEnemy.Count <= 0)
+                LevelDataControl.Instance.GameSuccess();
         }
 
         /// <summary>
@@ -273,17 +276,33 @@ namespace GameLogic
         /// <summary>
         /// 显示实体，可能用于显示某个特定的游戏实体。
         /// </summary>
-        public void ShowEntity()
+        public void ShowEntity(ShowEntityEventData data)
         {
+            // 测试用
+            // EntityDataControl.Instance.ShowEntityTest<>(entityData.EntityId, entityData.SerialId, (entity) =>
+            // {
+            //     // 这里可以处理显示成功后的逻辑
+            //     Log.Debug("Entity shown successfully: {0} with Serial ID: {1}", entity.Id, entity.SerialId);
+            // }, entityData.UserData);
+
+            EntityDataControl.Instance.ShowEntityTest2(data);
         }
+
 
         /// <summary>
         /// 隐藏指定ID的实体。
         /// </summary>
         /// <param name="serialId">实体的序列号ID。</param>
-        public void HideEntity(int serialId)
+        public void HideEntity(Entity entity)
         {
-            
+            if (entity == null)
+            {
+                Log.Warning("Entity is null, cannot hide.");
+                return;
+            }
+
+            EntityDataControl.Instance.HideEntity(entity);
+            Log.Debug("Entity with Serial ID '{0}' has been hidden.", entity.SerialId);
         }
 
         /// <summary>
@@ -291,7 +310,7 @@ namespace GameLogic
         /// </summary>
         public void StartWave()
         {
-            DataLevelManager.Instance.CurrentLevel.StartWave();
+            LevelDataControl.Instance.CurrentLevel.StartWave();
         }
 
         /// <summary>
@@ -300,8 +319,8 @@ namespace GameLogic
         public void Pause()
         {
             pause = true;
-            
-            foreach (var entity in EntityModuleEx.Instance.GetAllEntities())
+
+            foreach (var entity in EntityDataControl.Instance.GetAllEntities())
             {
                 IPause iPause = entity.Logic as IPause;
                 if (iPause != null)
@@ -315,14 +334,14 @@ namespace GameLogic
         public void Resume()
         {
             pause = false;
-            
-            foreach (var entity in EntityModuleEx.Instance.GetAllEntities())
+
+            foreach (var entity in EntityDataControl.Instance.GetAllEntities())
             {
                 IPause iPause = entity.Logic as IPause;
                 if (iPause != null)
                     iPause.Resume();
             }
-            
+
             cameraInput.Resume();
         }
 
@@ -355,6 +374,21 @@ namespace GameLogic
         }
 
         /// <summary>
+        /// 返回游戏主页
+        /// </summary>
+        public void BackMainMenu()
+        {
+            if (pause)
+            {
+                Resume();
+                pause = false;
+            }
+
+            HideAllTower(); // 隐藏所有塔
+            HideAllEnemyEntity(); // 隐藏所有敌人
+        }
+
+        /// <summary>
         /// 快速操作，可能在游戏结束时调用，隐藏所有塔并恢复游戏。
         /// </summary>
         public void Quick()
@@ -367,7 +401,7 @@ namespace GameLogic
 
             HideAllTower(); // 隐藏所有塔
             HideAllEnemyEntity();
-            EntityModuleEx.Instance.HideAllEntities();
+            EntityDataControl.Instance.HideAllEntities();
         }
 
         // 创建关卡控制器
@@ -388,11 +422,11 @@ namespace GameLogic
         {
             entityPreviewLogic = null;
             isBuilding = false;
-            
+
             // level = null;
             levelManager = null;
             cameraInput = null;
-            
+
             entityPreviewLogic = null;
             isBuilding = false;
 

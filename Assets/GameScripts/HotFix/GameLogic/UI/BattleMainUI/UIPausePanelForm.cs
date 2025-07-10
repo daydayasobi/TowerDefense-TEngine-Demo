@@ -31,19 +31,19 @@ namespace GameLogic
         #region 事件
         private void OnClickCloseBtn()
         {
-            DataLevelManager.Instance.LevelResume();
+            LevelDataControl.Instance.LevelResume();
             Close();
         }
         private void OnClickMainMenuBtn()
         {
-            DataLevelManager.Instance.ExitLevel();
+            LevelDataControl.Instance.ExitLevel();
             Close();
         }
         
         private void OnClickRestartBtn()
         {
-            int currentLevelIndex = DataLevelManager.Instance.CurrentLevelIndex;
-            DataLevelManager.Instance.LoadLevel(currentLevelIndex);
+            int currentLevelIndex = LevelDataControl.Instance.CurrentLevelIndex;
+            LevelDataControl.Instance.LoadLevel(currentLevelIndex);
             GameEvent.Send(LevelEvent.OnReloadLevel);
             Close();
         }
@@ -53,12 +53,12 @@ namespace GameLogic
         {
             base.OnCreate();
 
-            Level levelData = DataLevelManager.Instance.CurrentLevel;
+            Level levelData = LevelDataControl.Instance.CurrentLevel;
 
             m_textLevelTitleText.text = levelData.Name;
             m_textLevelDescriptionText.text = levelData.Description;
 
-            DataLevelManager.Instance.LevelPause();
+            LevelDataControl.Instance.LevelPause();
         }
     }
 }

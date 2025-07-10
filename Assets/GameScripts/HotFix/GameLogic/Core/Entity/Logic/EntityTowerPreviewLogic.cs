@@ -315,7 +315,7 @@ namespace GameLogic
 
         private void HideEntity(Entity entity)
         {
-            EntityModuleEx.Instance.HideEntity(entity);
+            EntityDataControl.Instance.HideEntity(entity);
             this.Entity.OnDetachedId(entityRadiusLogic.Entity.SerialId);
             entityRadius = null;
         }
@@ -325,7 +325,7 @@ namespace GameLogic
         private void ShowRadiusEntity()
         {
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityModuleEx.Instance.ShowRadiusEntity(
+            EntityDataControl.Instance.ShowRadiusEntity(
                 3029,
                 serialId,
                 OnShowRadiusEntitySuccess,

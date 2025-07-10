@@ -13,38 +13,26 @@ namespace GameLogic
         private Vector3 m_CurrentPosition, m_PreviousPosition;
 
         private RandomSound randomSound;
-        
+
         public virtual EnumAlignment Alignment
         {
-            get
-            {
-                return EnumAlignment.None;
-            }
+            get { return EnumAlignment.None; }
         }
-        
+
         protected float hp;
 
         public float HP
         {
-            get
-            {
-                return hp;
-            }
+            get { return hp; }
 
-            protected set
-            {
-                hp = value;
-            }
+            protected set { hp = value; }
         }
 
         protected abstract float MaxHP { get; }
-        
+
         public bool IsDead
         {
-            get
-            {
-                return HP <= 0;
-            }
+            get { return HP <= 0; }
         }
 
         public Vector3 DeadEffectOffset
@@ -53,38 +41,34 @@ namespace GameLogic
             {
                 if (deadEffect == null)
                     return Vector3.zero;
-        
+
                 return deadEffect.deadEffectOffset;
             }
         }
-        
+
         public Vector3 ApplyEffectOffset
         {
             get
             {
                 if (effectPointData == null)
                     return Vector3.zero;
-        
+
                 return effectPointData.applyEffectOffset;
             }
         }
-        
+
         public float ApplyEffectScale
         {
             get
             {
                 if (effectPointData == null)
                     return 1;
-        
+
                 return effectPointData.applyEffectScale;
             }
         }
-        
-        public Vector3 Velocity
-        {
-            get;
-            private set;
-        }
+
+        public Vector3 Velocity { get; private set; }
 
         private bool loadedHPBar = false;
         private EntityHPBarLogic entityHPBar;
@@ -107,13 +91,11 @@ namespace GameLogic
         protected override void OnShow(object userData)
         {
             base.OnShow(userData);
-
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
-
         }
 
         protected override void OnHide(bool isShutdown, object userData)
@@ -128,7 +110,7 @@ namespace GameLogic
 
             HideHpBar();
         }
-        
+
         protected virtual void FixedUpdate()
         {
             m_CurrentPosition = transform.position;
@@ -143,14 +125,21 @@ namespace GameLogic
 
             if (!loadedHPBar)
             {
-                // GameEvent.Send(LevelEvent.OnShowEntityInLevel);
-                // GameEntry.Event.Fire(this, ShowEntityInLevelEventArgs.Create(
-                //     (int)EnumEntity.HPBar,
-                //     typeof(EntityHPBar),
-                //     OnLoadHpBarSuccess,
-                //     EntityDataFollower.Create(hpBarRoot)));
-                
-                // loadedHPBar = true;
+                int serialId = GameModule.Entity.GenerateSerialId();
+                var eventData = new ShowEntityEventData
+                {
+                    EntityId = (int)EnumEntity.HPBar,
+                    SerialId = serialId,
+                    LogicType = typeof(EntityHPBarLogic),
+                    UserData = EntityDataFollower.Create(hpBarRoot),
+                    OnShowSuccess = (entity) =>
+                    {
+                        OnLoadHpBarSuccess(entity);
+                    },
+                };
+                GameEvent.Send(LevelEvent.OnShowEntityInLevel, eventData);
+
+                loadedHPBar = true;
             }
 
             hp -= value;
@@ -175,6 +164,15 @@ namespace GameLogic
 
             if (deadEffect != null)
             {
+                // TODO:Show Effect Entity
+                // int serialId = GameModule.Entity.GenerateSerialId();
+                // var eventData = new ShowEntityEventData
+                // {
+                //     EntityId = attackerData.ProjectileEntityId,
+                //     SerialId = serialId,
+                //     LogicType = typeof(EntityProjectileHitscanLogic),
+                //     UserData = EntityProjectileData.Create(target, projectileData, origin, firingPoint, firingPoint.position, firingPoint.rotation, serialId)
+                // };
                 // GameEntry.Event.Fire(this, ShowEntityInLevelEventArgs.Create(
                 //     (int)deadEffect.deadEffectEntity,
                 //     typeof(EntityParticleAutoHide),
@@ -200,9 +198,7 @@ namespace GameLogic
         {
             if (entityHPBar)
             {
-                // TODO:Hide the HP bar
-                // GameEvent.Send(LevelEvent.OnHideEntityInLevel);
-                // GameEntry.Event.Fire(this, HideEntityInLevelEventArgs.Create(entityHPBar.Id));
+                GameEvent.Send(LevelEvent.OnHideEntityInLevel, entityHPBar);
                 loadedHPBar = false;
                 entityHPBar = null;
             }

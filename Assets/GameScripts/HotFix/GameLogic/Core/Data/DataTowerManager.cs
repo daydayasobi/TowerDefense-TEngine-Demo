@@ -117,13 +117,13 @@ namespace GameLogic
             }
 
             int needEnergy = tower.GetBuildEnergy(tower.Level + 1);
-            if (DataPlayerManager.Instance.Energy < needEnergy)
+            if (PlayerDataControl.Instance.Energy < needEnergy)
             {
-                Log.Error("Energy lack,need {0},current is {1}", needEnergy, DataPlayerManager.Instance.Energy);
+                Log.Error("Energy lack,need {0},current is {1}", needEnergy, PlayerDataControl.Instance.Energy);
                 return;
             }
             
-            DataPlayerManager.Instance.AddEnergy(-needEnergy);
+            PlayerDataControl.Instance.AddEnergy(-needEnergy);
 
             int lastLevel = tower.Level;
 
@@ -152,7 +152,7 @@ namespace GameLogic
             // }
 
             Tower tower = dicTower[serialId];
-            DataPlayerManager.Instance.AddEnergy(tower.SellEnergy);
+            PlayerDataControl.Instance.AddEnergy(tower.SellEnergy);
             GameEvent.Send(LevelEvent.OnSellTower, tower.SerialId);
 
             // DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();

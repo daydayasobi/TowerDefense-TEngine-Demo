@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
@@ -40,7 +41,7 @@ namespace GameLogic
             //加载数据
             DataEnemyManager.Instance.OnLoad();
 
-            levelControl = LevelControl.Create(DataLevelManager.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
+            levelControl = LevelControl.Create(LevelDataControl.Instance.CurrentLevel, levelPathManager, cameraInput, entityRoot);
             GameModule.UI.ShowUI<UILevelMainInfoForm>();
 
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法
@@ -54,8 +55,8 @@ namespace GameLogic
             GameEvent.AddEventListener<int>(LevelEvent.OnSellTower, OnSellTower);
             GameEvent.AddEventListener<int>(LevelEvent.OnSpawnEnemy, OnSpawnEnemy);
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEnemyEntity, OnHideEnemyEntity);
-            GameEvent.AddEventListener(LevelEvent.OnShowEntityInLevel, OnShowEntityInLevel);
-            GameEvent.AddEventListener<int>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
+            GameEvent.AddEventListener<ShowEntityEventData>(LevelEvent.OnShowEntityInLevel, OnShowEntityInLevel);
+            GameEvent.AddEventListener<Entity>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.AddEventListener(LevelEvent.OnGameStartWave, OnStartWave);
             GameModule.UI.ShowUI<UITowerListForm>();
             levelControl.OnEnter();
@@ -83,8 +84,8 @@ namespace GameLogic
             GameEvent.RemoveEventListener<int>(LevelEvent.OnSellTower, OnSellTower);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnSpawnEnemy, OnSpawnEnemy);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnHideEnemyEntity, OnHideEnemyEntity);
-            GameEvent.RemoveEventListener(LevelEvent.OnShowEntityInLevel, OnShowEntityInLevel);
-            GameEvent.RemoveEventListener<int>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
+            GameEvent.RemoveEventListener<ShowEntityEventData>(LevelEvent.OnShowEntityInLevel, OnShowEntityInLevel);
+            GameEvent.RemoveEventListener<Entity>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.RemoveEventListener(LevelEvent.OnGameStartWave, OnStartWave);
             levelControl.Quick();
             MemoryPool.Release(levelControl);
@@ -97,6 +98,7 @@ namespace GameLogic
         private async void OnChangeScene()
         {
             // 处理场景切换的逻辑
+            levelControl.BackMainMenu();
             await GameModule.Scene.LoadSceneAsync("Menu");
             ChangeState<ChangeSceneProcedure>(procedureOwner);
         }
@@ -109,7 +111,7 @@ namespace GameLogic
             // 处理加载关卡的逻辑
             // TODO: 写死测试数据
             // GameEvent.Send(LevelEvent.OnLoadLevelFinish, 1);
-            DataLevelManager.Instance.OnLoadLevelFinish(1);
+            LevelDataControl.Instance.OnLoadLevelFinish(1);
         }
 
         /// <summary>
@@ -192,19 +194,19 @@ namespace GameLogic
         /// <summary>
         /// 处理显示实体在关卡中事件
         /// </summary>
-        private void OnShowEntityInLevel()
+        public void OnShowEntityInLevel(ShowEntityEventData data)
         {
             // 处理显示实体在关卡中的逻辑
-            levelControl.ShowEntity();
+            levelControl.ShowEntity(data);
         }
 
         /// <summary>
         /// 处理隐藏实体在关卡中事件
         /// </summary>
-        private void OnHideEntityInLevel(int serialId)
+        private void OnHideEntityInLevel(Entity entity)
         {
             // 处理隐藏实体在关卡中的逻辑
-            levelControl.HideEntity(serialId);
+            levelControl.HideEntity(entity);
         }
 
         private void OnStartWave()

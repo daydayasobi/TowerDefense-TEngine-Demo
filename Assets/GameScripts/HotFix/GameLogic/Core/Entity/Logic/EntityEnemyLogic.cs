@@ -211,7 +211,7 @@ namespace GameLogic
         {
             base.Dead();
 
-            DataPlayerManager.Instance.AddEnergy(EntityDataEnemy.EnemyData.AddEnergy);
+            PlayerDataControl.Instance.AddEnergy(EntityDataEnemy.EnemyData.AddEnergy);
             if (!hide)
             {
                 hide = true;
@@ -274,6 +274,13 @@ namespace GameLogic
             if (slowDownEffect == null && !loadSlowDownEffect)
             {
                 // TODO: load slow effect
+                // var eventData = new ShowEntityEventData
+                // {
+                //     EntityId = attackerData.ProjectileEntityId,
+                //     SerialId = serialId,
+                //     LogicType = typeof(EntityProjectileHitscanLogic),
+                //     UserData = EntityProjectileData.Create(target, projectileData, origin, firingPoint, firingPoint.position, firingPoint.rotation, serialId)
+                // };
                 // GameEntry.Event.Fire(this, ShowEntityInLevelEventArgs.Create((int)EnumEntity.SlowFx,
                 //     typeof(EntityAnimation),
                 //     OnLoadSlowEffectSuccess,

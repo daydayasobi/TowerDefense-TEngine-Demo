@@ -28,19 +28,40 @@ namespace GameLogic
             m_btnMainmenu.onClick.AddListener(OnClickMainmenuBtn);
             m_btnRestart.onClick.AddListener(OnClickRestartBtn);
         }
+
         #endregion
 
         #region 事件
         private void OnClickNextLevelBtn()
         {
+            // 测试用
+            OnClickMainmenuBtn();
+            Close();
         }
         private void OnClickMainmenuBtn()
         {
+            LevelDataControl.Instance.ExitLevel();
+            Close();
         }
         private void OnClickRestartBtn()
         {
+            LevelDataControl.Instance.LoadLevel(LevelDataControl.Instance.CurrentLevelIndex);
+            Close();
         }
         #endregion
+        
+        protected override void OnCreate()
+        {
+            base.OnCreate();
 
+            int starCount = 0;
+            foreach (object obj in base._userDatas)
+            {
+                if (obj is int)
+                {
+                    starCount = (int)obj;
+                }
+            }
+        }
     }
 }

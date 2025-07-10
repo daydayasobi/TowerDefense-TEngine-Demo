@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class DataLevelManager : Singleton<DataLevelManager>
+    public class LevelDataControl : Singleton<LevelDataControl>
     {
         private Dictionary<int, LevelDataBase> dicLevelData;
 
@@ -169,7 +169,7 @@ namespace GameLogic
 
             CurrentLevelIndex = levelData.Id;
 
-            DataPlayerManager.Instance.Reset();
+            PlayerDataControl.Instance.Reset();
 
             ChangeLevelState(isReload ? EnumLevelState.Prepare : EnumLevelState.Loading);
 
@@ -265,7 +265,7 @@ namespace GameLogic
             }
 
 
-            int hp = DataPlayerManager.Instance.HP;
+            int hp = PlayerDataControl.Instance.HP;
             int starCount = 0;
             for (int i = 0; i < starScore.Length; i++)
             {

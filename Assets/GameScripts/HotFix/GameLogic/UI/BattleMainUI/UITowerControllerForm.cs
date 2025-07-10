@@ -71,7 +71,7 @@ namespace GameLogic
                 int upgradeNeedEngry = m_tower.GetBuildEnergy(m_tower.Level + 1);
                 m_textEnergyTextUp.text = upgradeNeedEngry.ToString();
                 
-                m_btnUpgradeButton.GetComponent<Button>().interactable = (DataPlayerManager.Instance.Energy >= upgradeNeedEngry);
+                m_btnUpgradeButton.GetComponent<Button>().interactable = (PlayerDataControl.Instance.Energy >= upgradeNeedEngry);
             }
             
             m_textName.text = m_tower.Name;
