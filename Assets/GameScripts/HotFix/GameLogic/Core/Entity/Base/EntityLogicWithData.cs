@@ -21,6 +21,10 @@ namespace GameLogic
         {
             base.OnInit(userData);
             CachedAnimation = GetComponent<Animation>();
+            if (userData.GetType() == typeof(EntityData))
+            {
+                m_EntityData = (EntityData)userData;
+            }
         }
 
         protected override void OnRecycle()
@@ -32,22 +36,13 @@ namespace GameLogic
         {
             base.OnShow(userData);
 
-            if (userData.GetType() == typeof(EntityData))
-            {
-                //初始化位置
-                m_EntityData = (EntityData)userData;
-                transform.position = m_EntityData.Position;
-                transform.rotation = m_EntityData.Rotation;
-                transform.parent = m_EntityData.Parent;
-                CachedTransform.localScale = Vector3.one;
-                Name = Utility.Text.Format("[Entity {0}]", Id.ToString());
-                // 加载模型
-                // ShowTowerLevelEntity(EntityTowerData.Tower.Level);
-            }
-            else
-            {
-                Log.Info("Invalid userData type in OnShow. Expected EntityDataTower.");
-            }
+            //初始化位置
+            m_EntityData = (EntityData)userData;
+            transform.position = m_EntityData.Position;
+            transform.rotation = m_EntityData.Rotation;
+            transform.parent = m_EntityData.Parent;
+            CachedTransform.localScale = Vector3.one;
+            // Name = Utility.Text.Format("[Entity {0}]", Id.ToString());
         }
 
         protected override void OnHide(bool isShutdown, object userData)

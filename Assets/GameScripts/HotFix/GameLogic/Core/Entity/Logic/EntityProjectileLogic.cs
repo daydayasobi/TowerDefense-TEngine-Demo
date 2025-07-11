@@ -52,13 +52,11 @@ namespace GameLogic
             {
                 Vector3 pos = entityProjectileData.EntityTargetableLogic.transform.position + entityProjectileData.EntityTargetableLogic.ApplyEffectOffset;
                 int serialId = GameModule.Entity.GenerateSerialId();
-                var eventData = new ShowEntityEventData
-                {
-                    EntityId = collisionParticlesEntityId,
-                    SerialId = serialId,
-                    LogicType = typeof(EntityParticleAutoHideLogic),
-                    UserData = EntityData.Create(pos, transform.rotation, serialId)
-                };
+                ShowEntityEventData eventData = PoolReference.Acquire<ShowEntityEventData>();
+                eventData.EntityId = collisionParticlesEntityId;
+                eventData.SerialId = serialId;
+                eventData.LogicType = typeof(EntityParticleAutoHideLogic);
+                eventData.UserData = EntityData.Create(pos, transform.rotation, serialId);
                 GameEvent.Send(LevelEvent.OnShowEntityInLevel, eventData);
             }
         }

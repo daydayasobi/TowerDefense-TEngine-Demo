@@ -91,8 +91,6 @@ namespace GameLogic
         {
             int lastHP = HP;
             HP = LevelDataControl.Instance.GetLevelData(LevelDataControl.Instance.CurrentLevelIndex).InitHp;
-            // TODO: test
-            HP = 5;
             GameEvent.Send(LevelEvent.OnPlayerHPChange, lastHP, HP);
 
             float lastEnergy = Energy;

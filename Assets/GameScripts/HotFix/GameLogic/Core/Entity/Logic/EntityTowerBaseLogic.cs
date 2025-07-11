@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameConfig;
 using TEngine;
 using UnityEngine;
 
@@ -81,9 +82,10 @@ namespace GameLogic
             }
 
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowTowerLevelEntity(
+            EntityDataControl.Instance.ShowEntity(
                 entityTowerData.Tower.GetLevelEntityId(level),
                 serialId,
+                typeof(EntityTowerLevelLogic),
                 OnShowTowerLevelSuccess,
                 EntityData.Create(transform.position, transform.rotation, transform, serialId));
         }
@@ -102,6 +104,17 @@ namespace GameLogic
             {
                 entityLevelLogic = entityLogicTowerLevelLogic;
                 this.Entity.OnAttachedId(entityLevelLogic.Entity.SerialId);
+                
+                int serialId = GameModule.Entity.GenerateSerialId();
+                ShowEntityEventData eventData = PoolReference.Acquire<ShowEntityEventData>();
+                eventData.EntityId = (int)EnumEntity.BuildPfx;
+                eventData.SerialId = serialId;
+                eventData.LogicType = typeof(EntityParticleAutoHideLogic);
+                eventData.UserData = EntityData.Create(transform.position, transform.rotation, serialId);
+                GameEvent.Send(LevelEvent.OnShowEntityInLevel, eventData);
+
+                // GameEntry.Sound.PlaySound(EnumSound.TDTowerUpgrade);
+                // GameModule.Audio.Play();
             }
             else
             {

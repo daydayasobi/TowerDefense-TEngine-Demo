@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameConfig;
 using TEngine;
 using UnityEngine;
 
@@ -125,21 +126,18 @@ namespace GameLogic
 
             if (!loadedHPBar)
             {
+                loadedHPBar = true;
                 int serialId = GameModule.Entity.GenerateSerialId();
-                var eventData = new ShowEntityEventData
+                ShowEntityEventData eventData = PoolReference.Acquire<ShowEntityEventData>();
+                eventData.EntityId = (int)EnumEntity.HPBar;
+                eventData.SerialId = serialId;
+                eventData.LogicType = typeof(EntityHPBarLogic);
+                eventData.UserData = EntityDataFollower.Create(hpBarRoot);
+                eventData.OnShowSuccess = (entity) =>
                 {
-                    EntityId = (int)EnumEntity.HPBar,
-                    SerialId = serialId,
-                    LogicType = typeof(EntityHPBarLogic),
-                    UserData = EntityDataFollower.Create(hpBarRoot),
-                    OnShowSuccess = (entity) =>
-                    {
-                        OnLoadHpBarSuccess(entity);
-                    },
+                    OnLoadHpBarSuccess(entity);
                 };
                 GameEvent.Send(LevelEvent.OnShowEntityInLevel, eventData);
-
-                loadedHPBar = true;
             }
 
             hp -= value;
@@ -198,7 +196,7 @@ namespace GameLogic
         {
             if (entityHPBar)
             {
-                GameEvent.Send(LevelEvent.OnHideEntityInLevel, entityHPBar);
+                GameEvent.Send(LevelEvent.OnHideEntityInLevel, entityHPBar.Entity);
                 loadedHPBar = false;
                 entityHPBar = null;
             }

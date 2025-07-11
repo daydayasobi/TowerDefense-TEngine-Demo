@@ -325,9 +325,10 @@ namespace GameLogic
         private void ShowRadiusEntity()
         {
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowRadiusEntity(
+            EntityDataControl.Instance.ShowEntity(
                 3029,
                 serialId,
+                typeof(EntityRadiusLogic),
                 OnShowRadiusEntitySuccess,
                 EntityRadiusData.Create(transform, serialId, entityTowerPreviewData.Tower.Range));
         }

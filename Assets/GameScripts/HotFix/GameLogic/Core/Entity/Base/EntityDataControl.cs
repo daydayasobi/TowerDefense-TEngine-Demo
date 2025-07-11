@@ -11,116 +11,15 @@ namespace GameLogic
 {
     public class EntityDataControl : Singleton<EntityDataControl>
     {
-        public void ShowPlayerEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
+        public void ShowEntity(int entityId, int serialId,Type LogicType, Action<Entity> onShowSuccess, object userData = null)
         {
-            // int serialId = GameModule.Entity.GenerateSerialId();
-            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
-            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
-            Entity entity = gameObject.GetComponent<Entity>();
-            EntityPlayerLogic entityLogic = gameObject.GetComponent<EntityPlayerLogic>();
-            //初始化entity
-            entity.OnInit(entityId, serialId, pathName, entityLogic);
-            //初始化entity logic
-            entityLogic.OnInit(userData);
-            GameModule.Entity.AddToDic(serialId, entity);
-            entity.OnShow(userData);
-            onShowSuccess?.Invoke(entity);
-        }
-
-        public void ShowTowerLevelEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
-        {
-            // int serialId = GameModule.Entity.GenerateSerialId();
-            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
-            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
-            Entity entity = gameObject.GetComponent<Entity>();
-            EntityTowerLevelLogic entityLogic = gameObject.GetComponent<EntityTowerLevelLogic>();
-            //初始化entity
-            entity.OnInit(entityId, serialId, pathName, entityLogic);
-            //初始化entity logic
-            entityLogic.OnInit(userData);
-            GameModule.Entity.AddToDic(serialId, entity);
-            entity.OnShow(userData);
-            onShowSuccess?.Invoke(entity);
-        }
-
-        public void ShowTowerEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
-        {
-            // int serialId = GameModule.Entity.GenerateSerialId();
-            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
-            //获取预制体
-            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
-            Entity entity = gameObject.GetComponent<Entity>();
-            var entityLogic = gameObject.GetComponent<EntityTowerAttackerLogic>();
-            //初始化entity
-            entity.OnInit(entityId, serialId, pathName, entityLogic);
-            //初始化entity logic
-            entityLogic.OnInit(userData);
-            GameModule.Entity.AddToDic(serialId, entity);
-            entity.OnShow(userData);
-            onShowSuccess?.Invoke(entity);
-        }
-
-        public void ShowTowerPreviewEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
-        {
-            // int serialId = GameModule.Entity.GenerateSerialId();
-            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
-            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
-            Entity entity = gameObject.GetComponent<Entity>();
-            EntityTowerPreviewLogic entityLogic = gameObject.GetComponent<EntityTowerPreviewLogic>();
-            //初始化entity
-            entity.OnInit(entityId, serialId, pathName, entityLogic);
-            //初始化entity logic
-            entityLogic.OnInit(userData);
-            GameModule.Entity.AddToDic(serialId, entity);
-            entity.OnShow(userData);
-            onShowSuccess?.Invoke(entity);
-        }
-
-        public void ShowRadiusEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
-        {
-            string pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
-            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
-            Entity entity = gameObject.GetComponent<Entity>();
-            EntityRadiusLogic entityLogic = gameObject.GetComponent<EntityRadiusLogic>();
-            //初始化entity
-            entity.OnInit(entityId, serialId, pathName, entityLogic);
-            //初始化entity logic
-            entityLogic.OnInit(userData);
-            GameModule.Entity.AddToDic(serialId, entity);
-            entity.OnShow(userData);
-            onShowSuccess?.Invoke(entity);
-        }
-
-        public void ShowEnemyEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
-        {
-            var pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
-            // //获取预制体
-            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
-            Entity entity = gameObject.GetComponent<Entity>();
-            EntityEnemyLogic entityLogic = gameObject.GetComponent<EntityEnemyLogic>();
-            // //初始化entity
-            entity.OnInit(entityId, serialId, pathName, entityLogic);
-            // //初始化entity logic
-            entityLogic.OnInit(userData);
-            GameModule.Entity.AddToDic(serialId, entity);
-            entity.OnShow(userData);
-            onShowSuccess?.Invoke(entity);
-        }
-
-        public void ShowMachineGunEntity(int entityId, int serialId, Action<Entity> onShowSuccess, object userData = null)
-        {
-            var pathName = AssetsDataLoader.Instance.GetItemConfig(entityId).ResourcesName;
-            // //获取预制体
-            GameObject gameObject = PoolManager.Instance.GetGameObject(pathName);
-            Entity entity = gameObject.GetComponent<Entity>();
-            EntityProjectileHitscanLogic entityLogic = gameObject.GetComponent<EntityProjectileHitscanLogic>();
-            // //初始化entity
-            entity.OnInit(entityId, serialId, pathName, entityLogic);
-            // //初始化entity logic
-            entityLogic.OnInit(userData);
-            GameModule.Entity.AddToDic(serialId, entity);
-            entity.OnShow(userData);
-            onShowSuccess?.Invoke(entity);
+            ShowEntityEventData tempData = PoolReference.Acquire<ShowEntityEventData>();
+            tempData.EntityId = entityId;
+            tempData.SerialId = serialId;
+            tempData.LogicType = LogicType;
+            tempData.OnShowSuccess = onShowSuccess;
+            tempData.UserData = userData;
+            ShowEntity(tempData);
         }
 
         public void ShowEntity<TLogic>(
@@ -144,7 +43,6 @@ namespace GameLogic
             GameModule.Entity.AddToDic(serialId, entity);
             entity.OnShow(userData);
 
-
             onShowSuccess?.Invoke(entity);
         }
 
@@ -155,7 +53,7 @@ namespace GameLogic
         /// <param name="manualSerialId"></param>
         /// <param name="onShowSuccess"></param>
         /// <param name="userData"></param>
-        public void ShowEntityTest<TLogic>(int entityId,
+        public void ShowEntity<TLogic>(int entityId,
             int serialId,
             Action<Entity> onShowSuccess,
             object userData = null) where TLogic : EntityLogic
@@ -189,19 +87,36 @@ namespace GameLogic
             onShowSuccess?.Invoke(entity);
         }
 
-        public void ShowEntityTest2(ShowEntityEventData entityData)
+        public void ShowEntity(ShowEntityEventData entityData)
         {
             var logicType = entityData.LogicType;
             
-            Log.Debug("ShowEntityTest2 entityId:{0} ",entityData.EntityId);
+            Log.Debug("ShowEntity entityId:{0} ",entityData.EntityId);
             Action<Entity> callback = entity =>
             {
                 entityData.OnShowSuccess?.Invoke(entity);
+                entityData.Clear();
             };
-
-            if (logicType == typeof(EntityProjectileHitscanLogic))
+            
+            if (logicType == typeof(EntityPlayerLogic))
             {
-                EntityDataControl.Instance.ShowEntityTest<EntityProjectileHitscanLogic>(
+                EntityDataControl.Instance.ShowEntity<EntityPlayerLogic>(
+                    entityData.EntityId,
+                    entityData.SerialId,
+                    callback,
+                    entityData.UserData);
+            }
+            else if(logicType == typeof(EntityTowerBaseLogic))
+            {
+                EntityDataControl.Instance.ShowEntity<EntityTowerBaseLogic>(
+                    entityData.EntityId,
+                    entityData.SerialId,
+                    callback,
+                    entityData.UserData);
+            }
+            else if (logicType == typeof(EntityTowerLevelLogic))
+            {
+                EntityDataControl.Instance.ShowEntity<EntityTowerLevelLogic>(
                     entityData.EntityId,
                     entityData.SerialId,
                     callback,
@@ -209,7 +124,7 @@ namespace GameLogic
             }
             else if (logicType == typeof(EntityTowerAttackerLogic))
             {
-                EntityDataControl.Instance.ShowEntityTest<EntityTowerAttackerLogic>(
+                EntityDataControl.Instance.ShowEntity<EntityTowerAttackerLogic>(
                     entityData.EntityId,
                     entityData.SerialId,
                     callback,
@@ -217,15 +132,7 @@ namespace GameLogic
             }
             else if (logicType == typeof(EntityTowerPreviewLogic))
             {
-                EntityDataControl.Instance.ShowEntityTest<EntityTowerPreviewLogic>(
-                    entityData.EntityId,
-                    entityData.SerialId,
-                    callback,
-                    entityData.UserData);
-            }
-            else if (logicType == typeof(EntityEnemyLogic))
-            {
-                EntityDataControl.Instance.ShowEntityTest<EntityEnemyLogic>(
+                EntityDataControl.Instance.ShowEntity<EntityTowerPreviewLogic>(
                     entityData.EntityId,
                     entityData.SerialId,
                     callback,
@@ -233,7 +140,55 @@ namespace GameLogic
             }
             else if (logicType == typeof(EntityRadiusLogic))
             {
-                EntityDataControl.Instance.ShowEntityTest<EntityRadiusLogic>(
+                EntityDataControl.Instance.ShowEntity<EntityRadiusLogic>(
+                    entityData.EntityId,
+                    entityData.SerialId,
+                    callback,
+                    entityData.UserData);
+            }
+            else if (logicType == typeof(EntityEnemyLogic))
+            {
+                EntityDataControl.Instance.ShowEntity<EntityEnemyLogic>(
+                    entityData.EntityId,
+                    entityData.SerialId,
+                    callback,
+                    entityData.UserData);
+            }
+            else if (logicType == typeof(EntityProjectileHitscanLogic))
+            {
+                EntityDataControl.Instance.ShowEntity<EntityProjectileHitscanLogic>(
+                    entityData.EntityId,
+                    entityData.SerialId,
+                    callback,
+                    entityData.UserData);
+            }
+            else if (logicType == typeof(EntityTowerAttackerLogic))
+            {
+                EntityDataControl.Instance.ShowEntity<EntityTowerAttackerLogic>(
+                    entityData.EntityId,
+                    entityData.SerialId,
+                    callback,
+                    entityData.UserData);
+            }
+            else if (logicType == typeof(EntityTowerPreviewLogic))
+            {
+                EntityDataControl.Instance.ShowEntity<EntityTowerPreviewLogic>(
+                    entityData.EntityId,
+                    entityData.SerialId,
+                    callback,
+                    entityData.UserData);
+            }
+            else if (logicType == typeof(EntityEnemyLogic))
+            {
+                EntityDataControl.Instance.ShowEntity<EntityEnemyLogic>(
+                    entityData.EntityId,
+                    entityData.SerialId,
+                    callback,
+                    entityData.UserData);
+            }
+            else if (logicType == typeof(EntityRadiusLogic))
+            {
+                EntityDataControl.Instance.ShowEntity<EntityRadiusLogic>(
                     entityData.EntityId,
                     entityData.SerialId,
                     callback,
@@ -241,7 +196,7 @@ namespace GameLogic
             }
             else if(logicType == typeof(EntityParticleAutoHideLogic))
             {
-                EntityDataControl.Instance.ShowEntityTest<EntityParticleAutoHideLogic>(
+                EntityDataControl.Instance.ShowEntity<EntityParticleAutoHideLogic>(
                     entityData.EntityId,
                     entityData.SerialId,
                     callback,
@@ -249,7 +204,7 @@ namespace GameLogic
             }
             else if(logicType == typeof(EntityHPBarLogic))
             {
-                EntityDataControl.Instance.ShowEntityTest<EntityHPBarLogic>(
+                EntityDataControl.Instance.ShowEntity<EntityHPBarLogic>(
                     entityData.EntityId,
                     entityData.SerialId,
                     callback,
@@ -310,12 +265,21 @@ namespace GameLogic
         }
     }
 
-    public class ShowEntityEventData
+    public class ShowEntityEventData : IMemory
     {
         public int EntityId;
         public int SerialId;
         public Type LogicType;
         public Object UserData;
         public Action<Entity> OnShowSuccess = null;
+
+        public void Clear()
+        {
+            EntityId = 0;
+            SerialId = 0;
+            LogicType = null;
+            UserData = null;
+            OnShowSuccess = null;
+        }
     }
 }

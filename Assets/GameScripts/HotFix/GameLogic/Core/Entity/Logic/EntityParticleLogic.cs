@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameLogic
 {
-    public class EntityParticleLogic : EntityLogic, IPause
+    public class EntityParticleLogic : EntityLogicWithData, IPause
     {
         protected ParticleSystem ps;
 

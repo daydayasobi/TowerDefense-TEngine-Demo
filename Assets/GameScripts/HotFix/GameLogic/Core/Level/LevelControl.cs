@@ -27,17 +27,9 @@ namespace GameLogic
         private bool isBuilding = false; // 是否正在建造塔
         private bool pause = false; // 是否暂停
 
-        // 数据
-        // private DataLevelManager dataLevel;(正在实现
-        // private DataPlayerManager dataPlayer;(已经实现
-        // private DataTowerManager dataTower;(已经实现
-        // private DataEnemyManager dataEnemy;(正在实现
-
         // 预览塔相关数据
         // private TowerDataBase previewTowerData; // 当前预览的塔数据
         private EntityTowerPreviewLogic entityPreviewLogic; // 预览塔的逻辑组件
-
-        // private EntityPlayer player;
 
         private Dictionary<int, TowerInfo> dicTowerInfo;
         private Dictionary<int, Entity> dicEntityTower;
@@ -59,12 +51,11 @@ namespace GameLogic
         public void OnEnter()
         {
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowPlayerEntity(3039, serialId, null, EntityData.Create(
+            EntityDataControl.Instance.ShowEntity((int)EnumEntity.EntityPlayer, serialId, typeof(EntityPlayerLogic), null, EntityData.Create(
                 LevelDataControl.Instance.CurrentLevel.PlayerPosition,
                 LevelDataControl.Instance.CurrentLevel.PlayerQuaternion,
                 entityRoot.transform,
                 serialId));
-            // EntityModuleEx.Instance.ShowEntity<EntityPlayerLogic>(3039,null,EntityData.Create(Level.PlayerPosition, Level.PlayerQuaternion, entityRoot.transform));
         }
 
         /// <summary>
@@ -136,7 +127,7 @@ namespace GameLogic
             Tower tower = DataTowerManager.Instance.CreateTower(towerData.Id);
             int serialId = GameModule.Entity.GenerateSerialId();
             float radius = tower.GetRange(1);
-            EntityDataControl.Instance.ShowTowerPreviewEntity(towerData.PreviewEntityId, serialId, (entity) =>
+            EntityDataControl.Instance.ShowEntity(towerData.PreviewEntityId, serialId,typeof(EntityTowerPreviewLogic), (entity) =>
             {
                 entityPreviewLogic = entity.Logic as EntityTowerPreviewLogic;
                 isBuilding = true;
@@ -168,7 +159,7 @@ namespace GameLogic
 
             // 1. 通过EntityControl创建塔实体
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowTowerEntity(tower.EntityId, serialId, (entity) =>
+            EntityDataControl.Instance.ShowEntity(tower.EntityId, serialId,typeof(EntityTowerBaseLogic), (entity) =>
             {
                 EntityTowerBaseLogic entityTowerBaseLogic = entity.Logic as EntityTowerBaseLogic;
                 dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBaseLogic, placementArea, placeGrid));
@@ -228,7 +219,7 @@ namespace GameLogic
             }
 
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowEnemyEntity(enemyData.EntityId, serialId, (entity) =>
+            EntityDataControl.Instance.ShowEntity(enemyData.EntityId, serialId, typeof(EntityEnemyLogic), (entity) =>
             {
                 dicEntityEnemyLogic.Add(entity.SerialId, (EntityEnemyLogic)entity.Logic);
                 dicEntityEnemy.Add(entity.SerialId, entity);
@@ -278,14 +269,7 @@ namespace GameLogic
         /// </summary>
         public void ShowEntity(ShowEntityEventData data)
         {
-            // 测试用
-            // EntityDataControl.Instance.ShowEntityTest<>(entityData.EntityId, entityData.SerialId, (entity) =>
-            // {
-            //     // 这里可以处理显示成功后的逻辑
-            //     Log.Debug("Entity shown successfully: {0} with Serial ID: {1}", entity.Id, entity.SerialId);
-            // }, entityData.UserData);
-
-            EntityDataControl.Instance.ShowEntityTest2(data);
+            EntityDataControl.Instance.ShowEntity(data);
         }
 
 

@@ -30,12 +30,24 @@ namespace TEngine
 
         public void Update(float elapseSeconds, float realElapseSeconds)
         {
-            foreach (var entity in _dicSerial2Entity.Values)
+            try
             {
-                if (entity != null && entity.Logic != null)
+                // TODO: EntityModule Update时候可能会报错，需要了解一下
+                // 创建副本
+                var entities = new List<Entity>(_dicSerial2Entity.Values);
+                
+                foreach (var entity in entities)
                 {
-                    entity.Logic.OnUpdate(elapseSeconds, realElapseSeconds);
+                    if (entity != null && entity.Logic != null)
+                    {
+                        entity.Logic.OnUpdate(elapseSeconds, realElapseSeconds);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
 

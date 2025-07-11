@@ -9,6 +9,7 @@ namespace GameLogic
     {
         private float hideTime = 0;
         private float timer = 0;
+        private bool isHide = true;
 
 
         public override void OnInit(object userData)
@@ -20,6 +21,7 @@ namespace GameLogic
         {
             base.OnShow(userData);
             hideTime = ps.main.duration;
+            isHide = false;
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -31,9 +33,10 @@ namespace GameLogic
 
             timer += elapseSeconds;
 
-            if (timer > hideTime)
+            if (timer > hideTime && !isHide)
             {
-                GameEvent.Send(LevelEvent.OnHideEntityInLevel,Entity.SerialId);
+                isHide = true;
+                GameEvent.Send(LevelEvent.OnHideEntityInLevel,Entity);
             }
         }
 
