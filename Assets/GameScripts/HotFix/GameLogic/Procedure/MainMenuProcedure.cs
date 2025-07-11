@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameConfig;
 using TEngine;
 using UnityEngine;
+using AudioType = TEngine.AudioType;
 
 namespace GameLogic
 {
@@ -19,6 +21,7 @@ namespace GameLogic
             GameEvent.AddEventListener(MainMenuEvent.OpenMenu, OpenMenu);
             GameModule.Scene.LoadScene("Menu");
             GameModule.UI.ShowUIAsync<UIMainMenuForm>();
+            GameModule.Audio.Play(AudioType.Music, AssetsDataLoader.Instance.GetItemConfig((int)EnumSound.MenuBGM).ResourcesName);
         }
 
         protected override void OnLeave(IFsm<IProcedureModule> procedureOwner, bool isShutdown)

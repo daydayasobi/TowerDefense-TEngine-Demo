@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using GameConfig;
 using TEngine;
 using UnityEngine;
+using AudioType = TEngine.AudioType;
 
 namespace GameLogic
 {
@@ -59,6 +60,7 @@ namespace GameLogic
             GameEvent.AddEventListener<Entity>(LevelEvent.OnHideEntityInLevel, OnHideEntityInLevel);
             GameEvent.AddEventListener(LevelEvent.OnGameStartWave, OnStartWave);
             GameModule.UI.ShowUI<UITowerListForm>();
+            GameModule.Audio.Play(AudioType.Music, AssetsDataLoader.Instance.GetItemConfig((int)EnumSound.GameBGM).ResourcesName);
             levelControl.OnEnter();
         }
 

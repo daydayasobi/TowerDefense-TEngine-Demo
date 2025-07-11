@@ -139,6 +139,14 @@ namespace GameConfig
         /// </summary>
         EnemyProjectile = 1053,
         /// <summary>
+        /// 敌人攻击特效
+        /// </summary>
+        EnemyShootEffect = 1054,
+        /// <summary>
+        /// 炮塔爆炸
+        /// </summary>
+        TowerDeathExplosion = 1055,
+        /// <summary>
         /// 关卡选择按钮
         /// </summary>
         LevelSelectionButton = 2001,

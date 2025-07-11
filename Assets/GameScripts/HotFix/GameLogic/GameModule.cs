@@ -93,6 +93,9 @@ public class GameModule
     
     private static IEntityModule _entity = null;
     
+    public static ISaveModule Save => _save ??= Get<ISaveModule>();
+    private static ISaveModule _save;
+    
     #endregion
     
     /// <summary>
@@ -117,6 +120,7 @@ public class GameModule
         _debugger = null;
         _fsm = null;
         _procedure = null;
+        _save = null;
         _resource = null;
         _audio = null;
         _ui = null;

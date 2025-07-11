@@ -25,6 +25,7 @@ public partial class GameApp
         Log.Warning("======= 看到此条日志代表你成功运行了热更新代码 =======");
         Log.Warning("======= Entrance GameApp =======");
         Utility.Unity.AddDestroyListener(Release);
+        GetSave();
         ProcedureBase[] procedureBase = new ProcedureBase[] { new OnEnterGameAppProcedure(), new ChangeSceneProcedure(), new MainMenuProcedure(), new LevelProcedure() };
         GameModule.Procedure.RestartProcedure(procedureBase);
         // OpenMainMenuScene().Forget();
@@ -40,6 +41,14 @@ public partial class GameApp
     {
         UIModule.Instance.Active();
         await GameModule.Scene.LoadSceneAsync("mainMenu");
+    }
+
+    private static void GetSave()
+    {
+        //加载音效
+        GameModule.Audio.SoundVolume = GameModule.Save.GetFloat(AudioKey.SoundVolume, 100);
+        GameModule.Audio.MusicVolume = GameModule.Save.GetFloat(AudioKey.MusicVolume, 100);
+        GameModule.Audio.UISoundVolume = GameModule.Save.GetFloat(AudioKey.UISoundVolume, 100);
     }
 
 

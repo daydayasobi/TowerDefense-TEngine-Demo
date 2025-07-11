@@ -17,7 +17,6 @@ public sealed partial class AssetsPathData : Luban.BeanBase
     public AssetsPathData(ByteBuf _buf) 
     {
         Id = _buf.ReadInt();
-        Description = _buf.ReadString();
         ResourcesName = _buf.ReadString();
     }
 
@@ -30,10 +29,6 @@ public sealed partial class AssetsPathData : Luban.BeanBase
     /// id
     /// </summary>
     public readonly int Id;
-    /// <summary>
-    /// 描述
-    /// </summary>
-    public readonly string Description;
     /// <summary>
     /// 资源名称
     /// </summary>
@@ -50,7 +45,6 @@ public sealed partial class AssetsPathData : Luban.BeanBase
     {
         return "{ "
         + "id:" + Id + ","
-        + "description:" + Description + ","
         + "ResourcesName:" + ResourcesName + ","
         + "}";
     }

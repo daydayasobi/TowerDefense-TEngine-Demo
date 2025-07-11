@@ -7,16 +7,17 @@ using UnityEngine.UI;
 namespace GameLogic
 {
     [Window(UILayer.UI)]
-    
     public class UIOptionsForm : UIWindow
     {
-         #region 脚本工具生成的代码
+        #region 脚本工具生成的代码
+
         private Button m_btnBack;
         private Slider m_sliderMasterVolumeSlider;
         private Slider m_sliderSFXVolumeSlider;
         private Slider m_sliderMusicVolumeSlider;
         private Button m_btnChineseSimplified;
         private Button m_btnEnglish;
+
         protected override void ScriptGenerator()
         {
             m_btnBack = FindChildComponent<Button>("Root/m_btnBack");
@@ -32,27 +33,38 @@ namespace GameLogic
             m_btnChineseSimplified.onClick.AddListener(OnClickChineseSimplifiedBtn);
             m_btnEnglish.onClick.AddListener(OnClickEnglishBtn);
         }
+
         #endregion
+
         #region 事件
+
         private void OnClickBackBtn()
         {
             GameEvent.Send(MainMenuEvent.OpenMenu);
         }
+
         private void OnSliderMasterVolumeSliderChange(float value)
         {
             GameModule.Audio.MusicVolume = value;
+            GameModule.Save.SetFloat(AudioKey.MusicVolume, value);
         }
+
         private void OnSliderSFXVolumeSliderChange(float value)
         {
             GameModule.Audio.SoundVolume = value;
+            GameModule.Save.SetFloat(AudioKey.SoundVolume, value);
         }
+
         private void OnSliderMusicVolumeSliderChange(float value)
         {
             GameModule.Audio.UISoundVolume = value;
+            GameModule.Save.SetFloat(AudioKey.UISoundVolume, value);
         }
+
         private void OnClickConfirmButtonBtn()
         {
         }
+
         private void OnClickCancelButtonBtn()
         {
         }
@@ -61,10 +73,21 @@ namespace GameLogic
         {
             // GameModule.Localization.SetLanguage(Language.ChineseSimplified);
         }
+
         private void OnClickEnglishBtn()
         {
             // GameModule.Localization.SetLanguage(Language.English);
         }
+
         #endregion
+
+        protected override void OnCreate()
+        {
+            base.OnCreate();
+            // 初始化音量滑块
+            m_sliderMasterVolumeSlider.value = GameModule.Audio.MusicVolume;
+            m_sliderSFXVolumeSlider.value = GameModule.Audio.SoundVolume;
+            m_sliderMusicVolumeSlider.value = GameModule.Audio.UISoundVolume;
+        }
     }
 }

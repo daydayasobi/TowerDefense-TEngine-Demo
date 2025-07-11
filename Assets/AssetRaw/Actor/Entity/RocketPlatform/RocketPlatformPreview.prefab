@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 136107846089498568}
   - component: {fileID: 54298539718872334}
   - component: {fileID: 7526483131731436677}
+  - component: {fileID: 3998230815542687221}
   m_Layer: 9
   m_Name: RocketPlatformPreview
   m_TagString: Untagged
@@ -192,6 +193,18 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 6fe9580bd67b34580977e0aa4eab9755, type: 2}
   invalidPositionMaterial: {fileID: 2100000, guid: a33edf12f3c0044e8ba582a16ddaae3f,
     type: 2}
+--- !u!114 &3998230815542687221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357704856333272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1582035826446864
 GameObject:
   m_ObjectHideFlags: 0
