@@ -25,6 +25,7 @@ public sealed partial class EnemyData : Luban.BeanBase
         TowerDamage = _buf.ReadFloat();
         ProjectileEntityid = _buf.ReadInt();
         ProjectileData = _buf.ReadInt();
+        ProjectileType = (EnumProjectile)_buf.ReadInt();
         FireRate = _buf.ReadFloat();
         Range = _buf.ReadFloat();
         IsMultiAttack = _buf.ReadBool();
@@ -75,6 +76,10 @@ public sealed partial class EnemyData : Luban.BeanBase
     /// </summary>
     public readonly int ProjectileData;
     /// <summary>
+    /// 炮弹脚本类型
+    /// </summary>
+    public readonly EnumProjectile ProjectileType;
+    /// <summary>
     /// 开火频率
     /// </summary>
     public readonly float FireRate;
@@ -118,6 +123,7 @@ public sealed partial class EnemyData : Luban.BeanBase
         + "TowerDamage:" + TowerDamage + ","
         + "ProjectileEntityid:" + ProjectileEntityid + ","
         + "ProjectileData:" + ProjectileData + ","
+        + "ProjectileType:" + ProjectileType + ","
         + "FireRate:" + FireRate + ","
         + "Range:" + Range + ","
         + "IsMultiAttack:" + IsMultiAttack + ","

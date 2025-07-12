@@ -23,6 +23,7 @@ public sealed partial class TowerData : Luban.BeanBase
         Entityid = _buf.ReadInt();
         PreviewEntityid = _buf.ReadInt();
         ProjectileEntityid = _buf.ReadInt();
+        ProjectileType = (EnumProjectile)_buf.ReadInt();
         IsMultiAttack = _buf.ReadBool();
         MaxHp = _buf.ReadFloat();
         {int n0 = System.Math.Min(_buf.ReadSize(), _buf.Size);Dimensions = new System.Collections.Generic.List<int>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { int _e0;  _e0 = _buf.ReadInt(); Dimensions.Add(_e0);}}
@@ -64,6 +65,10 @@ public sealed partial class TowerData : Luban.BeanBase
     /// </summary>
     public readonly int ProjectileEntityid;
     /// <summary>
+    /// 炮弹脚本类型
+    /// </summary>
+    public readonly EnumProjectile ProjectileType;
+    /// <summary>
     /// 是否攻击多个敌人
     /// </summary>
     public readonly bool IsMultiAttack;
@@ -101,6 +106,7 @@ public sealed partial class TowerData : Luban.BeanBase
         + "Entityid:" + Entityid + ","
         + "PreviewEntityid:" + PreviewEntityid + ","
         + "ProjectileEntityid:" + ProjectileEntityid + ","
+        + "ProjectileType:" + ProjectileType + ","
         + "IsMultiAttack:" + IsMultiAttack + ","
         + "MaxHp:" + MaxHp + ","
         + "Dimensions:" + Luban.StringUtil.CollectionToString(Dimensions) + ","

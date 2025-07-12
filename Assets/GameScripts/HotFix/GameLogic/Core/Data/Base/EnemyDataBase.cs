@@ -68,13 +68,13 @@ namespace GameLogic
             }
         }
 
-        // public string ProjectileType
-        // {
-        //     get
-        //     {
-        //         return dREnemy.ProjectileEntityid;
-        //     }
-        // }
+        public EnumProjectile ProjectileType
+        {
+            get
+            {
+                return dREnemy.ProjectileType;
+            }
+        }
 
         public ProjectileDataBase ProjectileData
         {

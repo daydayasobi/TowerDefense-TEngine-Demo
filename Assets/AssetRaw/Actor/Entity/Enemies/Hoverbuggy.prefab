@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 136866353072794800}
   - component: {fileID: -3635187751052961918}
   - component: {fileID: 1060535313580255440}
+  - component: {fileID: 5326483274806392708}
   m_Layer: 11
   m_Name: Hoverbuggy
   m_TagString: Untagged
@@ -283,8 +284,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turret: {fileID: 0}
-  projectilePoints: []
-  epicenter: {fileID: 0}
+  projectilePoints:
+  - {fileID: 4013251577074370}
+  epicenter: {fileID: 4066970842593808}
+  launcher: {fileID: 5326483274806392708}
+--- !u!114 &5326483274806392708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511114609136056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee822b861717e04ca29308b9cf41638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireParticleSystem: {fileID: 0}
 --- !u!1 &1542550302764498
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,7 +530,6 @@ GameObject:
   - component: {fileID: 3818540502101782669}
   - component: {fileID: 4932419788821004646}
   - component: {fileID: 5789320161841784152}
-  - component: {fileID: 8459015937592581088}
   m_Layer: 11
   m_Name: Targetter
   m_TagString: Untagged
@@ -601,19 +616,6 @@ MonoBehaviour:
   idleRotationSpeed: 39
   idleCorrectionTime: 2
   idleWaitTime: 2
---- !u!114 &8459015937592581088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1716511909853235442}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weightedItems: []
 --- !u!1 &3117867131515921595
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6714399235701915752}
   - component: {fileID: 7631089955654954845}
+  - component: {fileID: 3298755031496935784}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -658,3 +661,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061d91c955737cd4a9fd3399d356aa3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3298755031496935784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3117867131515921595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems:
+  - sound: 25001
+    weight: 0
+  - sound: 25002
+    weight: 0
+  - sound: 25003
+    weight: 0
+  - sound: 25004
+    weight: 0
+  - sound: 25005
+    weight: 0
+  - sound: 25006
+    weight: 0
+  - sound: 25007
+    weight: 0
+  - sound: 25008
+    weight: 0
+  - sound: 25009
+    weight: 0
+  - sound: 25010
+    weight: 0
+  - sound: 25011
+    weight: 0
+  - sound: 25012
+    weight: 0
+  - sound: 25013
+    weight: 0
+  - sound: 25014
+    weight: 0

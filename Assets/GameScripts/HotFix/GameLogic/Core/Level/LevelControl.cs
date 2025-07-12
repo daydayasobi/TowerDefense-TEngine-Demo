@@ -51,7 +51,9 @@ namespace GameLogic
         public void OnEnter()
         {
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowEntity((int)EnumEntity.EntityPlayer, serialId, typeof(EntityPlayerLogic), null, EntityData.Create(
+            EntityDataControl.ShowEntity<EntityPlayerLogic>(
+                (int)EnumEntity.EntityPlayer, 
+                serialId, null, EntityData.Create(
                 LevelDataControl.Instance.CurrentLevel.PlayerPosition,
                 LevelDataControl.Instance.CurrentLevel.PlayerQuaternion,
                 entityRoot.transform,
@@ -127,7 +129,7 @@ namespace GameLogic
             Tower tower = DataTowerManager.Instance.CreateTower(towerData.Id);
             int serialId = GameModule.Entity.GenerateSerialId();
             float radius = tower.GetRange(1);
-            EntityDataControl.Instance.ShowEntity(towerData.PreviewEntityId, serialId,typeof(EntityTowerPreviewLogic), (entity) =>
+            EntityDataControl.ShowEntity<EntityTowerPreviewLogic>(towerData.PreviewEntityId, serialId, (entity) =>
             {
                 entityPreviewLogic = entity.Logic as EntityTowerPreviewLogic;
                 isBuilding = true;
@@ -159,7 +161,7 @@ namespace GameLogic
 
             // 1. 通过EntityControl创建塔实体
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowEntity(tower.EntityId, serialId,typeof(EntityTowerBaseLogic), (entity) =>
+            EntityDataControl.ShowEntity<EntityTowerBaseLogic>(tower.EntityId, serialId, (entity) =>
             {
                 EntityTowerBaseLogic entityTowerBaseLogic = entity.Logic as EntityTowerBaseLogic;
                 dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBaseLogic, placementArea, placeGrid));
@@ -219,7 +221,7 @@ namespace GameLogic
             }
 
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowEntity(enemyData.EntityId, serialId, typeof(EntityEnemyLogic), (entity) =>
+            EntityDataControl.ShowEntity<EntityEnemyLogic>(enemyData.EntityId, serialId, (entity) =>
             {
                 dicEntityEnemyLogic.Add(entity.SerialId, (EntityEnemyLogic)entity.Logic);
                 dicEntityEnemy.Add(entity.SerialId, entity);

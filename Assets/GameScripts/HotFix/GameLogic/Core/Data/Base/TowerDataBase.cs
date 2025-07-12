@@ -61,13 +61,13 @@ namespace GameLogic
             }
         }
 
-        // public string ProjectileType
-        // {
-        //     get
-        //     {
-        //         return dRTower.ProjectileType;
-        //     }
-        // }
+        public EnumProjectile ProjectileType
+        {
+            get
+            {
+                return dRTower.ProjectileType;
+            }
+        }
 
         public bool IsMultiAttack
         {

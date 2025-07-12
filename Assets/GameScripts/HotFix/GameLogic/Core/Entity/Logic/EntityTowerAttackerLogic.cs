@@ -41,7 +41,7 @@ namespace GameLogic
             AttackerDataBase attackerData = AttackerDataBase.Create(entityTowerData.Tower.Range,
                 entityTowerData.Tower.FireRate,
                 entityTowerData.Tower.IsMultiAttack,
-                // entityTowerData.Tower.ProjectileType,
+                entityTowerData.Tower.ProjectileType,
                 entityTowerData.Tower.ProjectileEntityId
                 );
             attacker.SetData(attackerData, entityTowerData.Tower.ProjectileData);
@@ -73,7 +73,7 @@ namespace GameLogic
             AttackerDataBase attackerData = AttackerDataBase.Create(entityTowerData.Tower.Range,
                 entityTowerData.Tower.FireRate,
                 entityTowerData.Tower.IsMultiAttack,
-                // entityTowerData.Tower.ProjectileType,
+                entityTowerData.Tower.ProjectileType,
                 entityTowerData.Tower.ProjectileEntityId
             );
 

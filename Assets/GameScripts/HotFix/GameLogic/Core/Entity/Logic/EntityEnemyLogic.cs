@@ -130,7 +130,7 @@ namespace GameLogic
             AttackerDataBase attackerData = AttackerDataBase.Create(EntityDataEnemy.EnemyData.Range,
                 EntityDataEnemy.EnemyData.FireRate,
                 EntityDataEnemy.EnemyData.IsMultiAttack,
-                // EntityDataEnemy.EnemyData.ProjectileType,
+                EntityDataEnemy.EnemyData.ProjectileType,
                 EntityDataEnemy.EnemyData.ProjectileEntityId
                 );
             

@@ -82,10 +82,9 @@ namespace GameLogic
             }
 
             int serialId = GameModule.Entity.GenerateSerialId();
-            EntityDataControl.Instance.ShowEntity(
+            EntityDataControl.ShowEntity<EntityTowerLevelLogic>(
                 entityTowerData.Tower.GetLevelEntityId(level),
                 serialId,
-                typeof(EntityTowerLevelLogic),
                 OnShowTowerLevelSuccess,
                 EntityData.Create(transform.position, transform.rotation, transform, serialId));
         }

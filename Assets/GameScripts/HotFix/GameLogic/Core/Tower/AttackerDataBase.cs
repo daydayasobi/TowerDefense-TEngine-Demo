@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameConfig;
 using TEngine;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace GameLogic
             private set;
         }
 
-        public string ProjectileType
+        public EnumProjectile ProjectileType
         {
             get;
             private set;
@@ -42,12 +43,11 @@ namespace GameLogic
             this.Range = 0;
             this.FireRate = 0;
             this.IsMultiAttack = false;
-            this.ProjectileType = null;
+            this.ProjectileType = EnumProjectile.None;
             this.ProjectileEntityId = -1;
         }
-
-
-        public static AttackerDataBase Create(float range, float fireRate, bool isMultiAttack, string projectileType, int projectileEntityId)
+        
+        public static AttackerDataBase Create(float range, float fireRate, bool isMultiAttack, EnumProjectile projectileType, int projectileEntityId)
         {
             AttackerDataBase attackerData = PoolReference.Acquire<AttackerDataBase>();
             attackerData.Range = range;
@@ -57,24 +57,13 @@ namespace GameLogic
             attackerData.ProjectileEntityId = projectileEntityId;
             return attackerData;
         }
-        
-        //test
-        public static AttackerDataBase Create(float range, float fireRate, bool isMultiAttack,  int projectileEntityId)
-        {
-            AttackerDataBase attackerData = PoolReference.Acquire<AttackerDataBase>();
-            attackerData.Range = range;
-            attackerData.FireRate = fireRate;
-            attackerData.IsMultiAttack = isMultiAttack;
-            attackerData.ProjectileEntityId = projectileEntityId;
-            return attackerData;
-        }
 
         public void Clear()
         {
             this.Range = 0;
             this.FireRate = 0;
             this.IsMultiAttack = false;
-            this.ProjectileType = null;
+            this.ProjectileType = EnumProjectile.None;
             this.ProjectileEntityId = -1;
         }
     }

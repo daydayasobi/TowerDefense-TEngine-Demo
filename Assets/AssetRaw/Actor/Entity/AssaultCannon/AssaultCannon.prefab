@@ -129,7 +129,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weightedItems: []
+  weightedItems:
+  - sound: 23001
+    weight: 1
+  - sound: 23002
+    weight: 1
+  - sound: 23003
+    weight: 1
+  - sound: 23004
+    weight: 1
+  - sound: 23005
+    weight: 1
 --- !u!114 &4797152136035727177
 MonoBehaviour:
   m_ObjectHideFlags: 0

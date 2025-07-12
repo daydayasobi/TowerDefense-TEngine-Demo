@@ -133,10 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24eaa924a46ff5d4192f2daa026ea155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 0}
-  projectilePoints: []
-  epicenter: {fileID: 0}
-  launcher: {fileID: 0}
+  turret: {fileID: 4641205055848048}
+  projectilePoints:
+  - {fileID: 4357798972921266}
+  epicenter: {fileID: 4182109551995616}
+  launcher: {fileID: 6144739958402084082}
   effect: {fileID: 0}
 --- !u!114 &7694967991015521836
 MonoBehaviour:

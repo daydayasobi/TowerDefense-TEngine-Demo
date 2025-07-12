@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GameConfig;
 using TEngine;
 using UnityEngine;
+using AudioType = TEngine.AudioType;
 
 namespace GameLogic
 {
@@ -121,10 +122,11 @@ namespace GameLogic
                     epicenter.position,
                     projectilePoints);
             }
+
             if (randomSound != null)
             {
-                // TODO: Play Sound
                 // GameEntry.Sound.PlaySound(randomSound.GetRandomSound(), ownerEntity);
+                GameModule.Audio.Play(AudioType.Sound, AssetsDataLoader.Instance.GetItemConfig((int)randomSound.GetRandomSound()).ResourcesName);
             }
         }
 

@@ -231,13 +231,13 @@ namespace GameLogic
             }
         }
 
-        // public string ProjectileType
-        // {
-        //     get
-        //     {
-        //         return towerData.ProjectileType;
-        //     }
-        // }
+        public EnumProjectile ProjectileType
+        {
+            get
+            {
+                return towerData.ProjectileType;
+            }
+        }
 
         public bool IsMultiAttack
         {
