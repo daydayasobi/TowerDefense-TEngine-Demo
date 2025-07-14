@@ -98,7 +98,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000002, guid: be7aa0ed75cb94133b36c8126cc10667,
+  m_LightingDataAsset: {fileID: 112000000, guid: ee490f0b08d7da34a810230d16ca7261,
     type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 8af8eaaf8b341be4d9e2fe21b01e4091,
     type: 2}
@@ -386,7 +386,7 @@ Light:
   m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 1e-44, z: 3.238e-42, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -897,7 +897,7 @@ GameObject:
   - component: {fileID: 1130363853}
   - component: {fileID: 1130363855}
   - component: {fileID: 1130363856}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: LowerGroundGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -952,7 +952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1950277df7e163b4c82dd652c41155ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 8676843343471619049, guid: c707bc95ab948454ca1e378dce5e9358,
+    type: 3}
   dimensions:
     x: 10
     y: 6
@@ -1303,7 +1304,7 @@ GameObject:
   - component: {fileID: 1669517736}
   - component: {fileID: 1669517738}
   - component: {fileID: 1669517739}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: HigherGroundGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1358,7 +1359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1950277df7e163b4c82dd652c41155ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementTilePrefab: {fileID: 0}
+  placementTilePrefab: {fileID: 8676843343471619049, guid: c707bc95ab948454ca1e378dce5e9358,
+    type: 3}
   dimensions:
     x: 10
     y: 6
@@ -1400,6 +1402,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1464648104}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &1973453833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973453834}
+  m_Layer: 0
+  m_Name: EntityRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1973453834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973453833}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2050907206 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 8fb585f7e9d4c49219e693a26a303efd,
@@ -1609,3 +1642,4 @@ SceneRoots:
   - {fileID: 855070696}
   - {fileID: 589016851}
   - {fileID: 960151835}
+  - {fileID: 1973453834}

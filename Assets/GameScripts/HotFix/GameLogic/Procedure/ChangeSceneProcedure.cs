@@ -47,12 +47,22 @@ namespace GameLogic
         private void LevelSelect(LevelDataBase level)
         {
             Log.Debug("选择场景: " + level.Id);
-            TestLevel1().Forget();
+            // TestLevel1().Forget();
             // LevelDataManger.Instance.LoadLevel(level.Id);
             // GameModule.Scene.LoadScene(SceneDataManger.Instance.GetItemConfig(level.SceneId).SceneName,
             //     progressCallBack: (Progress) => { 
             //         if (Progress == 1) ChangeState<LevelProcedure>(procedureOwner);
             //     });
+
+            LoadLevelScene(level);
+        }
+
+        private async UniTaskVoid LoadLevelScene(LevelDataBase level)
+        {
+            LevelDataControl.Instance.LoadLevel(level.Id);
+            GameEvent.Send(LevelEvent.OnLoadLevelFinish, level.Id);
+            await GameModule.Scene.LoadSceneAsync(AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
+            ChangeState<LevelProcedure>(procedureOwner);
         }
 
         private async UniTaskVoid TestLevel1()
