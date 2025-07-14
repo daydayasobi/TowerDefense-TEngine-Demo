@@ -48,6 +48,8 @@ GameObject:
   - component: {fileID: 65314383504805724}
   - component: {fileID: -144804306009071330}
   - component: {fileID: 2383068211224650284}
+  - component: {fileID: 3442474067976097574}
+  - component: {fileID: 2447260606354588803}
   m_Layer: 11
   m_Name: Hoverboss
   m_TagString: Untagged
@@ -168,9 +170,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d0648fe6717164d9f01a46b6ddcdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 0}
-  projectilePoints: []
-  epicenter: {fileID: 0}
+  turret: {fileID: 4089879176614170}
+  projectilePoints:
+  - {fileID: 4561158699386170}
+  - {fileID: 4191585394662924}
+  epicenter: {fileID: 4561158699386170}
+  launcher: {fileID: 2447260606354588803}
+--- !u!114 &3442474067976097574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300474929184216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dc16181edbff54ab4bd61467541404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadEffectEntity: 1050
+  deadEffectOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &2447260606354588803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300474929184216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee822b861717e04ca29308b9cf41638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireParticleSystem: {fileID: 0}
 --- !u!1 &1497969988445794
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6984733934244090337}
   - component: {fileID: 7984476859861403539}
+  - component: {fileID: 8256994479557417042}
   m_Layer: 11
   m_Name: Attack
   m_TagString: Untagged
@@ -910,3 +943,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061d91c955737cd4a9fd3399d356aa3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8256994479557417042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406466081536892355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems:
+  - sound: 25001
+    weight: 0
+  - sound: 25002
+    weight: 0
+  - sound: 25003
+    weight: 0
+  - sound: 25004
+    weight: 0
+  - sound: 25005
+    weight: 0
+  - sound: 25006
+    weight: 0
+  - sound: 25007
+    weight: 0
+  - sound: 25008
+    weight: 0
+  - sound: 25009
+    weight: 0
+  - sound: 25010
+    weight: 0
+  - sound: 25011
+    weight: 0
+  - sound: 25012
+    weight: 0
+  - sound: 25013
+    weight: 0
+  - sound: 25014
+    weight: 0

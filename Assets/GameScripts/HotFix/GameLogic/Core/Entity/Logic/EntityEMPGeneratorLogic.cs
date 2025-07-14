@@ -59,7 +59,6 @@ namespace GameLogic
                 // GameEntry.Sound.StopSound((int)soundSerialId);
                 soundSerialId = null;
             }
-
         }
 
         protected override void OnShowTowerLevelSuccess(Entity entity)

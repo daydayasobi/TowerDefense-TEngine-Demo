@@ -79,6 +79,10 @@ GameObject:
   - component: {fileID: 136123838071042730}
   - component: {fileID: 7889721437184095870}
   - component: {fileID: -3054250146394620801}
+  - component: {fileID: 3633321977303922802}
+  - component: {fileID: 5529524814196048622}
+  - component: {fileID: 3037061982409209727}
+  - component: {fileID: 454189059219887637}
   m_Layer: 11
   m_Name: SuperHoverboss
   m_TagString: Untagged
@@ -201,9 +205,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d0648fe6717164d9f01a46b6ddcdbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 0}
-  projectilePoints: []
-  epicenter: {fileID: 0}
+  turret: {fileID: 4509685366740576}
+  projectilePoints:
+  - {fileID: 4004142885804742}
+  - {fileID: 4254310097177378}
+  epicenter: {fileID: 4527377347391372}
+  launcher: {fileID: 3037061982409209727}
+--- !u!114 &3633321977303922802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300474929184216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dc16181edbff54ab4bd61467541404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadEffectEntity: 1050
+  deadEffectOffset: {x: 0, y: 1.5, z: 0}
+--- !u!114 &5529524814196048622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300474929184216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e9ebcadd8f2c946a354e0001a47328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyEffectOffset: {x: 0, y: 0.2, z: 0}
+  applyEffectScale: 1.5
+--- !u!114 &3037061982409209727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300474929184216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee822b861717e04ca29308b9cf41638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireParticleSystem: {fileID: 0}
+--- !u!114 &454189059219887637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300474929184216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems:
+  - sound: 22001
+    weight: 1
+  - sound: 22002
+    weight: 1
+  - sound: 22003
+    weight: 1
+  - sound: 22004
+    weight: 1
+  - sound: 22005
+    weight: 1
 --- !u!1 &1341545582985454
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +860,7 @@ GameObject:
   - component: {fileID: 2079124830984291970}
   - component: {fileID: 8919908445780840405}
   - component: {fileID: 4968040150735909488}
+  - component: {fileID: 5835635205137762854}
   m_Layer: 11
   m_Name: Targetter
   m_TagString: Untagged
@@ -859,6 +931,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5835635205137762854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3199387779924626076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4702994d55feb64caec04f6ccb5a4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchRate: 0
+  idleRotationSpeed: 39
+  idleCorrectionTime: 2
+  idleWaitTime: 2
 --- !u!1 &3590342568926660433
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +956,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5168373907386000258}
+  - component: {fileID: 4930162642316829779}
+  - component: {fileID: 4138685596171463443}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -890,3 +980,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4527377347391372}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4930162642316829779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590342568926660433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061d91c955737cd4a9fd3399d356aa3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4138685596171463443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590342568926660433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems:
+  - sound: 25001
+    weight: 0
+  - sound: 25002
+    weight: 0
+  - sound: 25003
+    weight: 0
+  - sound: 25004
+    weight: 0
+  - sound: 25005
+    weight: 0
+  - sound: 25006
+    weight: 0
+  - sound: 25007
+    weight: 0
+  - sound: 25008
+    weight: 0
+  - sound: 25009
+    weight: 0
+  - sound: 25010
+    weight: 0
+  - sound: 25011
+    weight: 0
+  - sound: 25012
+    weight: 0
+  - sound: 25013
+    weight: 0
+  - sound: 25014
+    weight: 0

@@ -626,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6714399235701915752}
   - component: {fileID: 7631089955654954845}
-  - component: {fileID: 3298755031496935784}
+  - component: {fileID: 5925428425093939700}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061d91c955737cd4a9fd3399d356aa3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3298755031496935784
+--- !u!114 &5925428425093939700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

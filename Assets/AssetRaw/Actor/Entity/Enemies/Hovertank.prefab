@@ -97,6 +97,10 @@ GameObject:
   - component: {fileID: 65159708320296242}
   - component: {fileID: -2075726579364708407}
   - component: {fileID: 2695242582139416890}
+  - component: {fileID: 7846444564523446363}
+  - component: {fileID: 217829572762218729}
+  - component: {fileID: 6690519482617242631}
+  - component: {fileID: 3133868289842262362}
   m_Layer: 11
   m_Name: Hovertank
   m_TagString: Untagged
@@ -218,8 +222,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turret: {fileID: 0}
-  projectilePoints: []
-  epicenter: {fileID: 0}
+  projectilePoints:
+  - {fileID: 4039770894478588}
+  epicenter: {fileID: 4379824046344048}
+  launcher: {fileID: 6690519482617242631}
+--- !u!114 &7846444564523446363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271389358909432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems:
+  - sound: 22001
+    weight: 1
+  - sound: 22002
+    weight: 1
+  - sound: 22003
+    weight: 1
+  - sound: 22004
+    weight: 1
+  - sound: 22005
+    weight: 1
+--- !u!114 &217829572762218729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271389358909432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dc16181edbff54ab4bd61467541404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadEffectEntity: 1050
+  deadEffectOffset: {x: 0, y: 1.5, z: 0}
+--- !u!114 &6690519482617242631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271389358909432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee822b861717e04ca29308b9cf41638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireParticleSystem: {fileID: 0}
+--- !u!114 &3133868289842262362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271389358909432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55e9ebcadd8f2c946a354e0001a47328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applyEffectOffset: {x: 0, y: 0.5, z: 0}
+  applyEffectScale: 1
 --- !u!1 &1304416442214840
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +803,7 @@ GameObject:
   - component: {fileID: 6716268218778252969}
   - component: {fileID: 5602398536310468713}
   - component: {fileID: 6078835951565762595}
+  - component: {fileID: 3073822756385285035}
   m_Layer: 11
   m_Name: Targetter
   m_TagString: Untagged
@@ -803,6 +874,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3073822756385285035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181051100439833809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4702994d55feb64caec04f6ccb5a4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  searchRate: 0
+  idleRotationSpeed: 39
+  idleCorrectionTime: 2
+  idleWaitTime: 2
 --- !u!1 &6214678657679992191
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +899,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2329570930688393644}
+  - component: {fileID: 1265656384170678460}
+  - component: {fileID: 7449254293802640515}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -834,3 +923,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4379824046344048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265656384170678460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214678657679992191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061d91c955737cd4a9fd3399d356aa3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7449254293802640515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214678657679992191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems:
+  - sound: 25001
+    weight: 0
+  - sound: 25002
+    weight: 0
+  - sound: 25003
+    weight: 0
+  - sound: 25004
+    weight: 0
+  - sound: 25005
+    weight: 0
+  - sound: 25006
+    weight: 0
+  - sound: 25007
+    weight: 0
+  - sound: 25008
+    weight: 0
+  - sound: 25009
+    weight: 0
+  - sound: 25010
+    weight: 0
+  - sound: 25011
+    weight: 0
+  - sound: 25012
+    weight: 0
+  - sound: 25013
+    weight: 0
+  - sound: 25014
+    weight: 0
