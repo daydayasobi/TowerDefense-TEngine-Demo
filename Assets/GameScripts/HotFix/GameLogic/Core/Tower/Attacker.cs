@@ -125,7 +125,6 @@ namespace GameLogic
 
             if (randomSound != null)
             {
-                // GameEntry.Sound.PlaySound(randomSound.GetRandomSound(), ownerEntity);
                 GameModule.Audio.Play(AudioType.Sound, AssetsDataLoader.Instance.GetItemConfig((int)randomSound.GetRandomSound()).ResourcesName);
             }
         }

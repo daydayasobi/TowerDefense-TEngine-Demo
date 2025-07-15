@@ -75,11 +75,11 @@ namespace GameLogic
                     MaxLevel = dRLevel.Id;
             }
 
-            // TODO:关卡星级配置，写死的测试配置
+
             starScore = new int[3];
-            starScore[0] = 10;
-            starScore[1] = 50;
-            starScore[2] = 100;
+            starScore[0] = DefaultConfigDataLoader.Instance.GetConfig("Star1").Value;
+            starScore[1] = DefaultConfigDataLoader.Instance.GetConfig("Star2").Value;
+            starScore[2] = DefaultConfigDataLoader.Instance.GetConfig("Star3").Value;
 
             GameEvent.AddEventListener<int>(LevelEvent.OnLoadLevelFinish, OnLoadLevelFinish);
             IsLoaded = true;

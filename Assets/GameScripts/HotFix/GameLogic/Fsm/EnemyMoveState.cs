@@ -46,6 +46,8 @@ namespace GameLogic
             if (owner.IsPause)
                 return;
             
+            owner.Targetter.OnUpdate(elapseSeconds, realElapseSeconds);
+            
             // 如果发现目标玩家，切换到攻击基地状态
             if (owner.TargetPlayer != null)
             {

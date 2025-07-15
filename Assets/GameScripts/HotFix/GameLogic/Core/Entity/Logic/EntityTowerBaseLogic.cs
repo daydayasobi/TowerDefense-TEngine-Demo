@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using GameConfig;
 using TEngine;
 using UnityEngine;
+using AudioType = TEngine.AudioType;
 
 namespace GameLogic
 {
@@ -111,9 +112,8 @@ namespace GameLogic
                 eventData.LogicType = typeof(EntityParticleAutoHideLogic);
                 eventData.UserData = EntityData.Create(transform.position, transform.rotation, serialId);
                 GameEvent.Send(LevelEvent.OnShowEntityInLevel, eventData);
-
-                // GameEntry.Sound.PlaySound(EnumSound.TDTowerUpgrade);
-                // GameModule.Audio.Play();
+                
+                GameModule.Audio.Play(AudioType.Sound,AssetsDataLoader.Instance.GetItemConfig((int)EnumSound.TDTowerUpgrade).ResourcesName);
             }
             else
             {

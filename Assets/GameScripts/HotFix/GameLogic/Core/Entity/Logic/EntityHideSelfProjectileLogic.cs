@@ -24,6 +24,7 @@ namespace GameLogic
         protected override void OnShow(object userData)
         {
             base.OnShow(userData);
+            hide = false;
         }
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
@@ -42,8 +43,6 @@ namespace GameLogic
                     GameEvent.Send(LevelEvent.OnHideEntityInLevel, Entity);
                     hide = true;
                 }
-
-                //GameEntry.Data.GetData<DataLevel>().CurrentLevel.EntityLoader.HideEntity(Entity.Id);
             }
         }
 

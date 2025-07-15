@@ -372,6 +372,7 @@ namespace GameLogic
 
             HideAllTower(); // 隐藏所有塔
             HideAllEnemyEntity(); // 隐藏所有敌人
+            EntityDataControl.Instance.HideAllEntities();
         }
 
         /// <summary>
@@ -379,15 +380,12 @@ namespace GameLogic
         /// </summary>
         public void Quick()
         {
+            Log.Debug("Quick operation triggered.");
             if (pause)
             {
                 Resume();
                 pause = false;
             }
-
-            HideAllTower(); // 隐藏所有塔
-            HideAllEnemyEntity();
-            EntityDataControl.Instance.HideAllEntities();
         }
 
         // 创建关卡控制器
@@ -413,7 +411,6 @@ namespace GameLogic
             levelManager = null;
             cameraInput = null;
 
-            entityPreviewLogic = null;
             isBuilding = false;
 
             dicTowerInfo.Clear();

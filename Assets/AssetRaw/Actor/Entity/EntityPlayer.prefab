@@ -105111,7 +105111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleEffect: {fileID: 7001049720510516528}
   chargeEffect: {fileID: 3573594496902468259}
-  demagedEffect: {fileID: 2243455078475697978}
+  damagedEffect: {fileID: 2243455078475697978}
 --- !u!114 &1347854117228515018
 MonoBehaviour:
   m_ObjectHideFlags: 0

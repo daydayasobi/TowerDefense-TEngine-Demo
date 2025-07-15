@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: c44013f415e1f174b9cf85823f529cd9,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -296,6 +297,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6697614230421034925, guid: e38c712e7904fdf42bd0458b769718dd,
+        type: 3}
+      propertyPath: allLanguage.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7696541955266276700, guid: e38c712e7904fdf42bd0458b769718dd,
         type: 3}
       propertyPath: m_RootOrder
@@ -356,7 +362,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameEntry
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2041639501177625017, guid: e38c712e7904fdf42bd0458b769718dd, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6171383378752611683, guid: e38c712e7904fdf42bd0458b769718dd, type: 3}
     m_AddedGameObjects: []

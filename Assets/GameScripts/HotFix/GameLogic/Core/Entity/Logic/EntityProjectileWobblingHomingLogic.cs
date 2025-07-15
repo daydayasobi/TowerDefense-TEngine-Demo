@@ -334,6 +334,7 @@ namespace GameLogic
 
             if (!hide)
             {
+                Log.Debug("EntityHideSelfProjectileLogic OnTargetLost hide entity {0}", Entity.SerialId);
                 GameEvent.Send(LevelEvent.OnHideEntityInLevel,Entity);
                 hide = true;
             }

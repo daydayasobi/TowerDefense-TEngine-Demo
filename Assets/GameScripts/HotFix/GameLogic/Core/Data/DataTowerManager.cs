@@ -30,6 +30,9 @@ namespace GameLogic
                 }
 
                 ProjectileDataBase projectileData = new ProjectileDataBase(ProjectileDataLoader.Instance.GetItemConfig(drTowerLevel.ProjectileData));
+                if (drTowerLevel.ProjectileData == -1)
+                    projectileData = null;
+
                 TowerLevelDataBase towerLevelData = new TowerLevelDataBase(drTowerLevel, projectileData);
                 dicTowerLevelData.Add(drTowerLevel.Id, towerLevelData);
             }
@@ -122,7 +125,7 @@ namespace GameLogic
                 Log.Error("Energy lack,need {0},current is {1}", needEnergy, PlayerDataControl.Instance.Energy);
                 return;
             }
-            
+
             PlayerDataControl.Instance.AddEnergy(-needEnergy);
 
             int lastLevel = tower.Level;
@@ -144,8 +147,6 @@ namespace GameLogic
                 return;
             }
 
-            // DataManager dataLevel = GameEntry.Data.GetData<DataLevel>();
-
             // if (dataLevel.LevelState != EnumLevelState.Prepare && dataLevel.LevelState != EnumLevelState.Normal)
             // {
             //     return;
@@ -153,18 +154,16 @@ namespace GameLogic
 
             Tower tower = dicTower[serialId];
             PlayerDataControl.Instance.AddEnergy(tower.SellEnergy);
-            GameEvent.Send(LevelEvent.OnSellTower, tower.SerialId);
+            if (LevelDataControl.Instance.LevelState == EnumLevelState.Prepare)
+            {
+                PlayerDataControl.Instance.AddEnergy(tower.TotalCostEnergy);
+            }
+            else if (LevelDataControl.Instance.LevelState == EnumLevelState.Normal)
+            {
+                PlayerDataControl.Instance.AddEnergy(tower.SellEnergy);
+            }
 
-            // DataPlayer dataPlayer = GameEntry.Data.GetData<DataPlayer>();
-            // if (dataLevel.LevelState == EnumLevelState.Prepare)
-            // {
-            //     dataPlayer.AddEnergy(tower.TotalCostEnergy);
-            // }
-            // else if (dataLevel.LevelState == EnumLevelState.Normal)
-            // {
-            //     dataPlayer.AddEnergy(tower.SellEnergy);
-            // }
-            
+            GameEvent.Send(LevelEvent.OnSellTower, tower.SerialId);
         }
     }
 }

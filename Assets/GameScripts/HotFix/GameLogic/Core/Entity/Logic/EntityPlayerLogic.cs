@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameConfig;
 using TEngine;
 using UnityEngine;
+using AudioType = TEngine.AudioType;
 
 namespace GameLogic
 {
@@ -9,7 +11,7 @@ namespace GameLogic
     {
         public GameObject idleEffect;
         public ParticleSystem chargeEffect;
-        public ParticleSystem demagedEffect;
+        public ParticleSystem damagedEffect;
 
         public void OnInit(object userData)
         {
@@ -31,7 +33,6 @@ namespace GameLogic
         protected override void OnHide(bool isShutdown, object userData)
         {
             base.OnHide(isShutdown, userData);
-
             idleEffect.SetActive(false);
         }
 
@@ -40,17 +41,15 @@ namespace GameLogic
             if (chargeEffect != null)
                 chargeEffect.Play();
 
-            // GameEntry.Sound.PlaySound(EnumSound.zone_enter, Entity);
+            GameModule.Audio.Play(AudioType.Sound,AssetsDataLoader.Instance.GetItemConfig((int)EnumSound.zone_enter).ResourcesName);
         }
 
         public void Damage(int value)
         {
-            if (demagedEffect != null)
-                demagedEffect.Play();
-
-            // GameEntry.Sound.PlaySound(EnumSound.base_attack, Entity);
-
-            // dataPlayer.Damage(value);
+            if (damagedEffect != null)
+                damagedEffect.Play();
+            
+            GameModule.Audio.Play(AudioType.Sound,AssetsDataLoader.Instance.GetItemConfig((int)EnumSound.base_attack).ResourcesName);
             PlayerDataControl.Instance.Damage(value);
         }
     }

@@ -41,6 +41,7 @@ namespace GameLogic
             { typeof(EntityEMPGeneratorLogic), (id, serial, cb, data) => ShowEntity<EntityEMPGeneratorLogic>(id, serial, cb, data) },
             { typeof(EntityProjectileWobblingHomingLogic), (id, serial, cb, data) => ShowEntity<EntityProjectileWobblingHomingLogic>(id, serial, cb, data) },
             { typeof(EntityPlasmaLanceLogic), (id, serial, cb, data) => ShowEntity<EntityPlasmaLanceLogic>(id, serial, cb, data) },
+            { typeof(EntityAnimationLogic), (id, serial, cb, data) => ShowEntity<EntityAnimationLogic>(id, serial, cb, data) },
         };
         
         public static Type GetProjectileLogicType(EnumProjectile projectileType)

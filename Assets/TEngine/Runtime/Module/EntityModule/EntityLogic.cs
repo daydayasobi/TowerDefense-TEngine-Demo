@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TEngine;
@@ -132,9 +133,13 @@ namespace TEngine
         /// <param name="userData">用户自定义数据。</param>
         protected internal virtual void OnHide(bool isShutdown, object userData)
         {
-            // TODO: 待实现方法
+            if (this == null || gameObject == null)
+            {
+                Log.Warning("EntityLogic.OnHide: Object already destroyed.");
+                return;
+            }
+            // TODO: 待实现方法 递归实现游戏层次
             // gameObject.SetLayerRecursively(m_OriginalLayer);
-            Log.Debug("EntityLogic OnHide called");
             Visible = false;
             m_Available = false;
         }

@@ -33,6 +33,24 @@ public partial class Tables
             m_TbAssetsPathData.ResolveRef(this);
         }
     }
+    private TbDefaultConfigData m_TbDefaultConfigData;
+    public TbDefaultConfigData TbDefaultConfigData 
+    {
+        get
+        {
+            if (m_TbDefaultConfigData == null)
+            {
+                m_TbDefaultConfigData = new TbDefaultConfigData(defaultLoader("tbdefaultconfigdata"));
+                m_TbDefaultConfigData.ResolveRef(this);
+            }
+            return m_TbDefaultConfigData;
+        }
+        set
+        {
+            m_TbDefaultConfigData = value;
+            m_TbDefaultConfigData.ResolveRef(this);
+        }
+    }
     private TbEnemyData m_TbEnemyData;
     public TbEnemyData TbEnemyData 
     {
@@ -67,6 +85,24 @@ public partial class Tables
         {
             m_TbLevelData = value;
             m_TbLevelData.ResolveRef(this);
+        }
+    }
+    private TbLocalizationData m_TbLocalizationData;
+    public TbLocalizationData TbLocalizationData 
+    {
+        get
+        {
+            if (m_TbLocalizationData == null)
+            {
+                m_TbLocalizationData = new TbLocalizationData(defaultLoader("tblocalizationdata"));
+                m_TbLocalizationData.ResolveRef(this);
+            }
+            return m_TbLocalizationData;
+        }
+        set
+        {
+            m_TbLocalizationData = value;
+            m_TbLocalizationData.ResolveRef(this);
         }
     }
     private TbProjectileData m_TbProjectileData;

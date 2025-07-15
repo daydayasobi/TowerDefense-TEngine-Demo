@@ -47,9 +47,7 @@ namespace GameLogic
         protected override void OnShow(object userData)
         {
             base.OnShow(userData);
-
-
-
+            
             Vector3 startPosition = entityProjectileData.FiringPoint.position;
             Vector3 targetPoint;
             if (fireMode == BallisticFireMode.UseLaunchSpeed)
@@ -235,6 +233,7 @@ namespace GameLogic
 
             if (!hide)
             {
+                Log.Debug("EntityHideSelfProjectileLogic OnTriggerEnter hide entity {0}", Entity.SerialId);
                 GameEvent.Send(LevelEvent.OnHideEntityInLevel,Entity);
                 hide = true;
             }

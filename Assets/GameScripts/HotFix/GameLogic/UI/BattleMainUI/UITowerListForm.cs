@@ -92,13 +92,10 @@ namespace GameLogic
             TowerLevelDataBase towerLevelData = towerData.GetTowerLevelData(0);
             if (towerLevelData == null)
                 return;
+            
             ProjectileDataBase projectileData = towerLevelData.ProjectileData;
             m_textName.text = towerData.Name;
-            // TODO: Dps bug
-            // float Dps = (projectileData.Damage + projectileData.SplashDamage) * towerLevelData.FireRate;
-            // m_textDps.text = Dps.ToString();
-
-            m_textDps.text = "test";
+            m_textDps.text =  towerLevelData.DPS.ToString();
             
             m_textDescription.text = towerLevelData.UpgradeDes;
             

@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4310347184248040}
+  - component: {fileID: 4420258543907256255}
+  - component: {fileID: 2291893544564573114}
   m_Layer: 13
   m_Name: EnemyProjectile
   m_TagString: Untagged
@@ -32,6 +34,34 @@ Transform:
   - {fileID: 2427324538112546138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4420258543907256255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797349743178286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbb22692a2ea1649a7d98b6e4ac05e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chanceToSpawnCollisionPrefab: 0.33
+  collisionParticlesEntityId: 1044
+  projectileParticles: {fileID: 2522056688642103602}
+  delayTime: 0.1
+--- !u!114 &2291893544564573114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797349743178286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2431830916795735794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96,6 +126,12 @@ PrefabInstance:
 --- !u!4 &2427324538112546138 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4520758250671016, guid: 472ed7c77852d9246b992f343f81a8f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2431830916795735794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2522056688642103602 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198084062290970560, guid: 472ed7c77852d9246b992f343f81a8f2,
     type: 3}
   m_PrefabInstance: {fileID: 2431830916795735794}
   m_PrefabAsset: {fileID: 0}

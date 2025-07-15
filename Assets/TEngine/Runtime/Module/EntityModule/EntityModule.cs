@@ -32,8 +32,6 @@ namespace TEngine
         {
             try
             {
-                // TODO: EntityModule Update时候可能会报错，需要了解一下
-                // 创建副本
                 var entities = new List<Entity>(_dicSerial2Entity.Values);
                 
                 foreach (var entity in entities)
@@ -73,7 +71,6 @@ namespace TEngine
             {
                 Log.Error("Can find entity('serial id:{0}') ", serialId);
             }
-
 
             Entity tempEntity = _dicSerial2Entity[serialId];
             List<int> childSerialIds = tempEntity.GetChildrenIds();

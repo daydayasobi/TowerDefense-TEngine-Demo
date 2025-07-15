@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using GameConfig;
 using TEngine;
 using UnityEngine;
 using UnityEngine.AI;
@@ -273,25 +275,21 @@ namespace GameLogic
         {
             if (slowDownEffect == null && !loadSlowDownEffect)
             {
-                // TODO: load slow effect
-                // var eventData = new ShowEntityEventData
-                // {
-                //     EntityId = attackerData.ProjectileEntityId,
-                //     SerialId = serialId,
-                //     LogicType = typeof(EntityProjectileHitscanLogic),
-                //     UserData = EntityProjectileData.Create(target, projectileData, origin, firingPoint, firingPoint.position, firingPoint.rotation, serialId)
-                // };
-                // GameEntry.Event.Fire(this, ShowEntityInLevelEventArgs.Create((int)EnumEntity.SlowFx,
-                //     typeof(EntityAnimation),
-                //     OnLoadSlowEffectSuccess,
-                //     EntityDataFollower.Create(transform,
-                //     ApplyEffectOffset,
-                //     Vector3.one * ApplyEffectScale,
-                //     EnumSound.None,
-                //     transform.position,
-                //     transform.rotation)
-                //     )
-                //     );
+                int serialId = GameModule.Entity.GenerateSerialId();
+                ShowEntityEventData eventData = PoolReference.Acquire<ShowEntityEventData>();
+                eventData.EntityId = (int)EnumEntity.SlowFx;
+                eventData.SerialId = serialId;
+                eventData.LogicType = typeof(EntityAnimationLogic);
+                eventData.OnShowSuccess = OnLoadSlowEffectSuccess;
+                eventData.UserData = EntityDataFollower.Create(transform,
+                        ApplyEffectOffset,
+                        Vector3.one * ApplyEffectScale,
+                        EnumSound.None,
+                        transform.position,
+                        transform.rotation,
+                        serialId);
+                
+                GameEvent.Send(LevelEvent.OnShowEntityInLevel, eventData);
 
                 loadSlowDownEffect = true;
             }
@@ -311,8 +309,7 @@ namespace GameLogic
         {
             if (slowDownEffect != null)
             {
-                // TODO Event to hide slow effect
-                // GameEntry.Event.Fire(this, HideEntityInLevelEventArgs.Create(slowDownEffect.Id));
+                GameEvent.Send(LevelEvent.OnHideEntityInLevel,slowDownEffect);
                 slowDownEffect = null;
                 loadSlowDownEffect = false;
             }

@@ -47,7 +47,7 @@ namespace GameLogic
 
             // 在初始化或注册事件的地方，将每个事件ID绑定到对应的事件处理方法
             GameEvent.AddEventListener(LevelEvent.OnChangeScene, OnChangeScene);
-            GameEvent.AddEventListener(LevelEvent.OnLoadLevel, OnLoadLevel);
+            GameEvent.AddEventListener<LevelDataBase>(LevelEvent.OnLoadLevel, OnLoadLevel);
             GameEvent.AddEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.AddEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.AddEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
@@ -77,7 +77,7 @@ namespace GameLogic
             base.OnLeave(procedureOwner, isShutdown);
             GameModule.UI.CloseUI<UILevelMainInfoForm>();
             GameEvent.RemoveEventListener(LevelEvent.OnChangeScene, OnChangeScene);
-            GameEvent.RemoveEventListener(LevelEvent.OnLoadLevel, OnLoadLevel);
+            GameEvent.RemoveEventListener<LevelDataBase>(LevelEvent.OnLoadLevel, OnLoadLevel);
             GameEvent.RemoveEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
             GameEvent.RemoveEventListener(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.RemoveEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
@@ -108,12 +108,10 @@ namespace GameLogic
         /// <summary>
         /// 处理加载关卡事件
         /// </summary>
-        private void OnLoadLevel()
+        private void OnLoadLevel(LevelDataBase levelData)
         {
             // 处理加载关卡的逻辑
-            // TODO: 写死测试数据
-            // GameEvent.Send(LevelEvent.OnLoadLevelFinish, 1);
-            LevelDataControl.Instance.OnLoadLevelFinish(1);
+            LevelDataControl.Instance.OnLoadLevelFinish(levelData.Id);
         }
 
         /// <summary>

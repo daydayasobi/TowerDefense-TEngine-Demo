@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TEngine;
 using UnityEngine;
+using AudioType = TEngine.AudioType;
 
 namespace GameLogic
 {
@@ -32,6 +33,7 @@ namespace GameLogic
 
             // TODO: play Sound
             // GameEntry.Sound.PlaySound(entityDataFollower.ShowSound, Entity);
+            // GameModule.Audio.Play(AudioType.Sound,)
 
             transform.localScale = entityDataFollower.Scale;
 

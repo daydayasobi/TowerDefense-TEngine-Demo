@@ -132,11 +132,8 @@ namespace GameLogic
                 eventData.EntityId = (int)EnumEntity.HPBar;
                 eventData.SerialId = serialId;
                 eventData.LogicType = typeof(EntityHPBarLogic);
-                eventData.UserData = EntityDataFollower.Create(hpBarRoot);
-                eventData.OnShowSuccess = (entity) =>
-                {
-                    OnLoadHpBarSuccess(entity);
-                };
+                eventData.UserData = EntityDataFollower.Create(hpBarRoot, serialId);
+                eventData.OnShowSuccess = (entity) => { OnLoadHpBarSuccess(entity); };
                 GameEvent.Send(LevelEvent.OnShowEntityInLevel, eventData);
             }
 
@@ -162,20 +159,16 @@ namespace GameLogic
 
             if (deadEffect != null)
             {
-                // TODO:Show Effect Entity
-                // int serialId = GameModule.Entity.GenerateSerialId();
-                // var eventData = new ShowEntityEventData
-                // {
-                //     EntityId = attackerData.ProjectileEntityId,
-                //     SerialId = serialId,
-                //     LogicType = typeof(EntityProjectileHitscanLogic),
-                //     UserData = EntityProjectileData.Create(target, projectileData, origin, firingPoint, firingPoint.position, firingPoint.rotation, serialId)
-                // };
-                // GameEntry.Event.Fire(this, ShowEntityInLevelEventArgs.Create(
-                //     (int)deadEffect.deadEffectEntity,
-                //     typeof(EntityParticleAutoHide),
-                //     null,
-                //     EntityDataFollower.Create(randomSound ? randomSound.GetRandomSound() : EnumSound.None, transform.position + DeadEffectOffset, transform.rotation)));
+                int serialId = GameModule.Entity.GenerateSerialId();
+                ShowEntityEventData eventData = PoolReference.Acquire<ShowEntityEventData>();
+                eventData.SerialId = serialId;
+                eventData.EntityId = (int)deadEffect.deadEffectEntity;
+                eventData.LogicType = typeof(EntityParticleAutoHideLogic);
+                eventData.UserData = EntityDataFollower.Create(
+                    randomSound ? randomSound.GetRandomSound() : EnumSound.None,
+                    transform.position + DeadEffectOffset, transform.rotation,
+                    serialId);
+                GameEvent.Send(LevelEvent.OnShowEntityInLevel, eventData);
             }
         }
 

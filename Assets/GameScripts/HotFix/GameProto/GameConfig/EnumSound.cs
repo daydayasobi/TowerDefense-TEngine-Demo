@@ -13,6 +13,7 @@ namespace GameConfig
 { 
     public enum EnumSound
     {
+        None = 0,
         GameBGM = 10001,
         MenuBGM = 10002,
         EnemyFire = 20001,
