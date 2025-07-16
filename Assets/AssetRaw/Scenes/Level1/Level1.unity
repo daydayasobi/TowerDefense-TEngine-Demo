@@ -98,7 +98,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 8e9207a980aa19342961eee754e8fbbd,
+  m_LightingDataAsset: {fileID: 112000000, guid: 4d67b1fb5adbb9c46a27c10bcd24336d,
     type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c44013f415e1f174b9cf85823f529cd9,
     type: 2}
@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 46167512}
   - component: {fileID: 46167516}
   - component: {fileID: 46167515}
+  - component: {fileID: 46167517}
   m_Layer: 0
   m_Name: GameCamera
   m_TagString: MainCamera
@@ -218,7 +219,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 35
-  field of view: 55
+  field of view: 48.411606
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -292,11 +293,19 @@ MonoBehaviour:
   zoomedCamAngle: {fileID: 44733054}
   mapSize:
     serializedVersion: 2
-    x: -10
-    y: -10
-    width: 20
-    height: 20
+    x: -26.74043
+    y: -25.689417
+    width: 33.864098
+    height: 31.31131
   springyZoom: 0
+--- !u!81 &46167517
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46167509}
+  m_Enabled: 1
 --- !u!1001 &125252139
 PrefabInstance:
   m_ObjectHideFlags: 0

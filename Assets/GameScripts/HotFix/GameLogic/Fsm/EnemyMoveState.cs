@@ -69,7 +69,7 @@ namespace GameLogic
             }
 
             // 更新导航速度，考虑减速效果
-            owner.Agent.speed = owner.EntityDataEnemy.EnemyData.Speed * owner.CurrentSlowRate;
+            owner.Agent.speed = owner.EntityEnemyData.EnemyData.Speed * owner.CurrentSlowRate;
             
             // 如果路径被阻塞，更新目标塔的位置为路径结束位置
             if (owner.isPathBlocked)
@@ -101,7 +101,7 @@ namespace GameLogic
             }
             // 如果目标塔被摧毁，清除目标塔引用
             float distanceToTower = Vector3.Distance(owner.transform.position, m_TargetTower.transform.position);
-            if (distanceToTower > owner.EntityDataEnemy.EnemyData.Range)
+            if (distanceToTower > owner.EntityEnemyData.EnemyData.Range)
             {
                 return;
             }

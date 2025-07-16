@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 537413224}
-  m_IndirectSpecularColor: {r: 0.668825, g: 0.5676578, b: 0.53452736, a: 1}
+  m_IndirectSpecularColor: {r: 0.66880584, g: 0.56764585, b: 0.53452784, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2047,10 +2047,10 @@ MonoBehaviour:
   zoomedCamAngle: {fileID: 8352016980680678822}
   mapSize:
     serializedVersion: 2
-    x: -9.964357
-    y: -10.0205555
-    width: 19.942575
-    height: 19.89478
+    x: -16.611591
+    y: -23.056908
+    width: 33.24427
+    height: 43.35114
   springyZoom: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

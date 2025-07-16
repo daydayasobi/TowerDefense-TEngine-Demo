@@ -41,7 +41,7 @@ namespace GameLogic
                     attackTimer += elapseSeconds;
                     if (attackTimer > 1)
                     {
-                        owner.TargetPlayer.Damage(owner.EntityDataEnemy.EnemyData.Damage);
+                        owner.TargetPlayer.Damage(owner.EntityEnemyData.EnemyData.Damage);
                         attacked = true;
                         owner.AfterAttack();
                     }

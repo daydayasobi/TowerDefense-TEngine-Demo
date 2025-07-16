@@ -32,17 +32,13 @@ namespace GameLogic
         private EntityTowerPreviewLogic entityPreviewLogic; // 预览塔的逻辑组件
 
         private Dictionary<int, TowerInfo> dicTowerInfo;
-        private Dictionary<int, Entity> dicEntityTower;
-        private Dictionary<int, EntityEnemyLogic> dicEntityEnemyLogic;
-        private Dictionary<int, Entity> dicEntityEnemy;
+        private Dictionary<int, Entity> dicEnemyEntityInfo;
 
         // 构造函数，初始化字典
         public LevelControl()
         {
             dicTowerInfo = new Dictionary<int, TowerInfo>(20);
-            dicEntityTower = new Dictionary<int, Entity>(20);
-            dicEntityEnemyLogic = new Dictionary<int, EntityEnemyLogic>(20);
-            dicEntityEnemy = new Dictionary<int, Entity>(20);
+            dicEnemyEntityInfo = new Dictionary<int, Entity>(20);
         }
 
         // 实体的根节点，用于存放塔和敌人的实体
@@ -143,6 +139,7 @@ namespace GameLogic
         {
             if (entityPreviewLogic != null)
             {
+                GameEvent.Send(LevelEvent.OnHidePreviewTower);
                 EntityDataControl.Instance.HideEntity(entityPreviewLogic.Entity);
                 entityPreviewLogic = null;
                 isBuilding = false;
@@ -165,7 +162,6 @@ namespace GameLogic
             {
                 EntityTowerBaseLogic entityTowerBaseLogic = entity.Logic as EntityTowerBaseLogic;
                 dicTowerInfo.Add(tower.SerialId, TowerInfo.Create(tower, entityTowerBaseLogic, placementArea, placeGrid));
-                dicEntityTower.Add(tower.SerialId, entity);
             }, EntityTowerData.Create(tower, position, rotation, entityRoot.transform, serialId));
 
             // 2. 隐藏预览塔
@@ -189,7 +185,6 @@ namespace GameLogic
             towerInfo.PlacementArea.Clear(towerInfo.PlaceGrid, towerInfo.Tower.Dimensions);
             DataTowerManager.Instance.DestroyTower(towerInfo.Tower);
             dicTowerInfo.Remove(towerSerialId);
-            dicEntityTower.Remove(towerSerialId); // 从塔实体字典中移除
             PoolReference.Release(towerInfo);
         }
 
@@ -223,9 +218,8 @@ namespace GameLogic
             int serialId = GameModule.Entity.GenerateSerialId();
             EntityDataControl.ShowEntity<EntityEnemyLogic>(enemyData.EntityId, serialId, (entity) =>
             {
-                dicEntityEnemyLogic.Add(entity.SerialId, (EntityEnemyLogic)entity.Logic);
-                dicEntityEnemy.Add(entity.SerialId, entity);
-            }, EntityDataEnemy.Create(serialId,
+                dicEnemyEntityInfo.Add(entity.SerialId, entity);
+            }, EntityEnemyData.Create(serialId,
                 enemyData,
                 levelManager.GetLevelPath(),
                 levelManager.GetStartPathNode().position - new Vector3(0, 0.2f, 0),
@@ -239,18 +233,17 @@ namespace GameLogic
         /// <param name="serialId">敌人实体的序列ID。</param>
         public void HideEnemyEntity(int serialId)
         {
-            if (dicEntityEnemy.ContainsKey(serialId))
+            if (dicEnemyEntityInfo.ContainsKey(serialId))
             {
-                EntityDataControl.Instance.HideEntity(dicEntityEnemy[serialId]);
-                dicEntityEnemy.Remove(serialId);
-                dicEntityEnemyLogic.Remove(serialId);
+                EntityDataControl.Instance.HideEntity(dicEnemyEntityInfo[serialId]);
+                dicEnemyEntityInfo.Remove(serialId);
             }
             else
             {
                 Log.Warning("Entity with serial ID '{0}' not found in tower dictionary.", serialId);
             }
 
-            if (LevelDataControl.Instance.CurrentLevel != null && LevelDataControl.Instance.CurrentLevel.Finish && dicEntityEnemy.Count <= 0)
+            if (LevelDataControl.Instance.CurrentLevel != null && LevelDataControl.Instance.CurrentLevel.Finish && dicEnemyEntityInfo.Count <= 0)
                 LevelDataControl.Instance.GameSuccess();
         }
 
@@ -259,7 +252,7 @@ namespace GameLogic
         /// </summary>
         private void HideAllEnemyEntity()
         {
-            List<int> enemyEntitySerialIds = new List<int>(dicEntityEnemy.Keys);
+            List<int> enemyEntitySerialIds = new List<int>(dicEnemyEntityInfo.Keys);
             for (int i = 0; i < enemyEntitySerialIds.Count; i++)
             {
                 HideEnemyEntity(enemyEntitySerialIds[i]);
@@ -414,9 +407,7 @@ namespace GameLogic
             isBuilding = false;
 
             dicTowerInfo.Clear();
-            dicEntityTower.Clear();
-            dicEntityEnemy.Clear();
-            dicEntityEnemyLogic.Clear();
+            dicEnemyEntityInfo.Clear();
         }
     }
 }

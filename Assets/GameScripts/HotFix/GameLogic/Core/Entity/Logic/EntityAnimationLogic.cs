@@ -11,7 +11,7 @@ namespace GameLogic
 
         protected bool pause = false;
 
-        protected EntityDataFollower entityDatafollower;
+        protected EntityFollowerData EntityFollowerDatafollower;
 
         public override void OnInit(object userData)
         {
@@ -23,14 +23,14 @@ namespace GameLogic
         {
             base.OnShow(userData);
 
-            entityDatafollower = userData as EntityDataFollower;
-            if (entityDatafollower == null)
+            EntityFollowerDatafollower = userData as EntityFollowerData;
+            if (EntityFollowerDatafollower == null)
             {
                 Log.Error("EntityParticle '{0}' entity data invaild.");
                 return;
             }
 
-            transform.localScale = entityDatafollower.Scale;
+            transform.localScale = EntityFollowerDatafollower.Scale;
 
             anim.Play();
         }
@@ -42,9 +42,9 @@ namespace GameLogic
             if (pause)
                 return;
 
-            if (entityDatafollower.Follow != null)
+            if (EntityFollowerDatafollower.Follow != null)
             {
-                transform.position = entityDatafollower.Follow.position + entityDatafollower.Offset;
+                transform.position = EntityFollowerDatafollower.Follow.position + EntityFollowerDatafollower.Offset;
             }
         }
 
@@ -52,7 +52,7 @@ namespace GameLogic
         {
             base.OnHide(isShutdown, userData);
 
-            entityDatafollower = null;
+            EntityFollowerDatafollower = null;
 
             transform.localScale = Vector3.one;
             anim.Stop();

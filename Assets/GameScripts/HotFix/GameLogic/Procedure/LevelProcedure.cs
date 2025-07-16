@@ -76,6 +76,7 @@ namespace GameLogic
         {
             base.OnLeave(procedureOwner, isShutdown);
             GameModule.UI.CloseUI<UILevelMainInfoForm>();
+            GameModule.UI.CloseUI<UITowerListForm>();
             GameEvent.RemoveEventListener(LevelEvent.OnChangeScene, OnChangeScene);
             GameEvent.RemoveEventListener<LevelDataBase>(LevelEvent.OnLoadLevel, OnLoadLevel);
             GameEvent.RemoveEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);

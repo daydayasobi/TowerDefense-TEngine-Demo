@@ -4452,10 +4452,10 @@ MonoBehaviour:
   zoomedCamAngle: {fileID: 3562846272451507055}
   mapSize:
     serializedVersion: 2
-    x: -9.989744
-    y: -10.001934
-    width: 20.008179
-    height: 20.006954
+    x: -35.301113
+    y: -9.924407
+    width: 72.28184
+    height: 54.289684
   springyZoom: 1
 --- !u!1 &3562846272451507052
 GameObject:

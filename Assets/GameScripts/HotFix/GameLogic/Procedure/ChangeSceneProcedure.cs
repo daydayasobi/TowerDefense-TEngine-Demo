@@ -40,14 +40,12 @@ namespace GameLogic
         {
             //加载关卡相关
             LevelDataControl.Instance.OnLoad();
-            
-            // TODO: 需要判空
         }
         
         private void LevelSelect(LevelDataBase level)
         {
             Log.Debug("选择场景: " + level.Id);
-            LoadLevelScene(level);
+            LoadLevelScene(level).Forget();
         }
 
         private async UniTaskVoid LoadLevelScene(LevelDataBase level)
@@ -55,7 +53,6 @@ namespace GameLogic
             LevelDataControl.Instance.LoadLevel(level.Id);
             GameEvent.Send(LevelEvent.OnLoadLevelFinish, level.Id);
             await GameModule.Scene.LoadSceneAsync(AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
-            LightProbes.Tetrahedralize();
             ChangeState<LevelProcedure>(procedureOwner);
         }
     }

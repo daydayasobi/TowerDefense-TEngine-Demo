@@ -98,7 +98,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: ee490f0b08d7da34a810230d16ca7261,
+  m_LightingDataAsset: {fileID: 112000000, guid: 0a10469a9bd0aca46af8607ee464c2cf,
     type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 8af8eaaf8b341be4d9e2fe21b01e4091,
     type: 2}
@@ -386,7 +386,7 @@ Light:
   m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 1e-44, z: 3.238e-42, w: 0}
+  m_BoundingSphereOverride: {x: 1.02e-43, y: 3.2e-44, z: 1.2188e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -1505,6 +1505,7 @@ GameObject:
   - component: {fileID: 4928086138148562442}
   - component: {fileID: 4928086138148562445}
   - component: {fileID: 4928086138148562444}
+  - component: {fileID: 4928086138148562446}
   m_Layer: 0
   m_Name: GameCamera
   m_TagString: MainCamera
@@ -1624,14 +1625,22 @@ MonoBehaviour:
   zoomLogFactor: 10
   zoomRecoverSpeed: 20
   floorY: 0
-  zoomedCamAngle: {fileID: 4928086138148562440}
+  zoomedCamAngle: {fileID: 4928086138145849772}
   mapSize:
     serializedVersion: 2
-    x: -10.001524
-    y: -10.000361
-    width: 20.022682
-    height: 20.097603
+    x: -7.8814893
+    y: -14.670312
+    width: 23.26346
+    height: 29.114403
   springyZoom: 1
+--- !u!81 &4928086138148562446
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4928086138148562439}
+  m_Enabled: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

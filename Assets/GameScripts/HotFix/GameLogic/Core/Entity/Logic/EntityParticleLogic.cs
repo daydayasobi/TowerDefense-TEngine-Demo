@@ -13,7 +13,7 @@ namespace GameLogic
         protected bool pause = false;
         private float pauseTime;
 
-        protected EntityDataFollower entityDataFollower;
+        protected EntityFollowerData EntityFollowerData;
 
         public override void OnInit(object userData)
         {
@@ -25,8 +25,8 @@ namespace GameLogic
         {
             base.OnShow(userData);
 
-            entityDataFollower = userData as EntityDataFollower;
-            if (entityDataFollower == null)
+            EntityFollowerData = userData as EntityFollowerData;
+            if (EntityFollowerData == null)
             {
                 return;
             }
@@ -35,7 +35,7 @@ namespace GameLogic
             // GameEntry.Sound.PlaySound(entityDataFollower.ShowSound, Entity);
             // GameModule.Audio.Play(AudioType.Sound,)
 
-            transform.localScale = entityDataFollower.Scale;
+            transform.localScale = EntityFollowerData.Scale;
 
             ps.Play(true);
         }
@@ -47,9 +47,9 @@ namespace GameLogic
             if (pause)
                 return;
 
-            if (entityDataFollower != null && entityDataFollower.Follow != null)
+            if (EntityFollowerData != null && EntityFollowerData.Follow != null)
             {
-                transform.position = entityDataFollower.Follow.position + entityDataFollower.Offset;
+                transform.position = EntityFollowerData.Follow.position + EntityFollowerData.Offset;
             }
         }
 
@@ -57,7 +57,7 @@ namespace GameLogic
         {
             base.OnHide(isShutdown, userData);
 
-            entityDataFollower = null;
+            EntityFollowerData = null;
 
             transform.localScale = Vector3.one;
 

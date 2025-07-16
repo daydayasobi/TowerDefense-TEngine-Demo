@@ -57,7 +57,7 @@ namespace GameLogic
                 }
             }
 
-            owner.Agent.speed = owner.EntityDataEnemy.EnemyData.Speed * owner.CurrentSlowRate;
+            owner.Agent.speed = owner.EntityEnemyData.EnemyData.Speed * owner.CurrentSlowRate;
 
 
             if (owner.isPathBlocked)

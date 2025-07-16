@@ -158,7 +158,6 @@ namespace GameLogic
         /// </summary>
         private void Start()
         {
-            mapSize = new Rect(-30, -30, 45, 45);
             RecalculateBoundingRect();
             SetZoom(furthestZoom);
         }

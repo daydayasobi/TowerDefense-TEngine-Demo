@@ -49,6 +49,8 @@ namespace GameLogic
         {
             base.OnCreate();
 
+            LevelDataControl.Instance.LevelPause();
+            
             foreach (object obj in base._userDatas)
             {
                 if (obj is Tower)
@@ -135,6 +137,7 @@ namespace GameLogic
         {
             base.Close();
 
+            LevelDataControl.Instance.LevelResume();
             m_tower = null;
             m_btnSellConfirmButton.gameObject.SetActive(false);
             GameModule.UI.HideUI<UITowerControllerForm>();

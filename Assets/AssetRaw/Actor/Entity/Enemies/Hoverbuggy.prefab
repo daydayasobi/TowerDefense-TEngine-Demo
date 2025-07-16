@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 5326483274806392708}
   - component: {fileID: 7378761553477688915}
   - component: {fileID: 1566907120997409797}
+  - component: {fileID: 6772933617130009567}
   m_Layer: 11
   m_Name: Hoverbuggy
   m_TagString: Untagged
@@ -331,6 +332,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applyEffectOffset: {x: 0, y: 0.5, z: 0}
   applyEffectScale: 1
+--- !u!114 &6772933617130009567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511114609136056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b1a8ba5e9e1764a823ce93de9a7331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightedItems:
+  - sound: 23001
+    weight: 0
+  - sound: 23002
+    weight: 0
+  - sound: 23003
+    weight: 0
+  - sound: 23004
+    weight: 0
+  - sound: 23005
+    weight: 0
 --- !u!1 &1542550302764498
 GameObject:
   m_ObjectHideFlags: 0

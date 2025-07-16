@@ -16,7 +16,7 @@ namespace GameLogic
         public Transform epicenter;
 
         public Launcher launcher;
-        private EntityDataEnemy entityData;
+        private EntityEnemyData _entityEnemyData;
 
         protected IFsm<EntityEnemyLogic> fsm;
         
@@ -45,14 +45,14 @@ namespace GameLogic
         {
             get
             {
-                if (EntityDataEnemy != null)
-                    return EntityDataEnemy.EnemyData.MaxHP;
+                if (EntityEnemyData != null)
+                    return EntityEnemyData.EnemyData.MaxHP;
                 else
                     return 0;
             }
         }
 
-        public EntityDataEnemy EntityDataEnemy { get; private set; }
+        public EntityEnemyData EntityEnemyData { get; private set; }
 
         public float CurrentSlowRate { get; private set; }
 
@@ -85,10 +85,10 @@ namespace GameLogic
             CurrentSlowRate = 1;
             if (userData != null)
             {
-                entityData = (EntityDataEnemy)userData;
-                transform.parent = entityData.Parent;
-                transform.position = entityData.Position;
-                transform.rotation = entityData.Rotation;
+                _entityEnemyData = (EntityEnemyData)userData;
+                transform.parent = _entityEnemyData.Parent;
+                transform.position = _entityEnemyData.Position;
+                transform.rotation = _entityEnemyData.Rotation;
             }
 
             Targetter = transform.Find("Targetter").GetComponent<Targetter>();
@@ -110,9 +110,9 @@ namespace GameLogic
         {
             base.OnShow(userData);
 
-            EntityDataEnemy = userData as EntityDataEnemy;
+            EntityEnemyData = userData as EntityEnemyData;
 
-            if (EntityDataEnemy == null)
+            if (EntityEnemyData == null)
             {
                 Log.Error("Entity enemy '{0}' entity data invaild.");
                 return;
@@ -120,23 +120,23 @@ namespace GameLogic
 
             hide = false;
             Agent.enabled = true;
-            LevelPath = EntityDataEnemy.LevelPath;
-            hp = EntityDataEnemy.EnemyData.MaxHP;
+            LevelPath = EntityEnemyData.LevelPath;
+            hp = EntityEnemyData.EnemyData.MaxHP;
 
             Attacker.SetOwnerEntity(Entity);
             Targetter.SetAlignment(Alignment);
             Targetter.SetTurret(turret);
-            Targetter.SetSearchRange(EntityDataEnemy.EnemyData.Range);
+            Targetter.SetSearchRange(EntityEnemyData.EnemyData.Range);
             Targetter.ResetTargetter();
 
-            AttackerDataBase attackerData = AttackerDataBase.Create(EntityDataEnemy.EnemyData.Range,
-                EntityDataEnemy.EnemyData.FireRate,
-                EntityDataEnemy.EnemyData.IsMultiAttack,
-                EntityDataEnemy.EnemyData.ProjectileType,
-                EntityDataEnemy.EnemyData.ProjectileEntityId
+            AttackerDataBase attackerData = AttackerDataBase.Create(EntityEnemyData.EnemyData.Range,
+                EntityEnemyData.EnemyData.FireRate,
+                EntityEnemyData.EnemyData.IsMultiAttack,
+                EntityEnemyData.EnemyData.ProjectileType,
+                EntityEnemyData.EnemyData.ProjectileEntityId
                 );
             
-            Attacker.SetData(attackerData, EntityDataEnemy.EnemyData.ProjectileData);
+            Attacker.SetData(attackerData, EntityEnemyData.EnemyData.ProjectileData);
             Attacker.SetTargetter(Targetter);
             Attacker.SetProjectilePoints(projectilePoints);
             Attacker.SetEpicenter(epicenter);
@@ -158,7 +158,7 @@ namespace GameLogic
             Attacker.EmptyOwnerEntity();
 
             LevelPath = null;
-            EntityDataEnemy = null;
+            EntityEnemyData = null;
             hp = 0;
             Agent.enabled = false;
             TargetPlayer = null;
@@ -183,8 +183,8 @@ namespace GameLogic
         private void CreateFsm()
         {
             AddFsmState();
-            Log.Debug("Create Fsm for enemy {0} with states count: {1}", gameObject.name + entityData.SerialId, stateList.Count);
-            fsm = GameModule.Fsm.CreateFsm<EntityEnemyLogic>(gameObject.name + entityData.SerialId, this, stateList);
+            Log.Debug("Create Fsm for enemy {0} with states count: {1}", gameObject.name + _entityEnemyData.SerialId, stateList.Count);
+            fsm = GameModule.Fsm.CreateFsm<EntityEnemyLogic>(gameObject.name + _entityEnemyData.SerialId, this, stateList);
             StartFsm();
         }
 
@@ -205,7 +205,7 @@ namespace GameLogic
             if (!hide)
             {
                 hide = true;
-                GameEvent.Send(LevelEvent.OnHideEnemyEntity,entityData.SerialId);
+                GameEvent.Send(LevelEvent.OnHideEnemyEntity,_entityEnemyData.SerialId);
             }
         }
 
@@ -213,11 +213,11 @@ namespace GameLogic
         {
             base.Dead();
 
-            PlayerDataControl.Instance.AddEnergy(EntityDataEnemy.EnemyData.AddEnergy);
+            PlayerDataControl.Instance.AddEnergy(EntityEnemyData.EnemyData.AddEnergy);
             if (!hide)
             {
                 hide = true;
-                GameEvent.Send(LevelEvent.OnHideEnemyEntity,entityData.SerialId);
+                GameEvent.Send(LevelEvent.OnHideEnemyEntity,_entityEnemyData.SerialId);
             }
         }
 
@@ -281,7 +281,7 @@ namespace GameLogic
                 eventData.SerialId = serialId;
                 eventData.LogicType = typeof(EntityAnimationLogic);
                 eventData.OnShowSuccess = OnLoadSlowEffectSuccess;
-                eventData.UserData = EntityDataFollower.Create(transform,
+                eventData.UserData = EntityFollowerData.Create(transform,
                         ApplyEffectOffset,
                         Vector3.one * ApplyEffectScale,
                         EnumSound.None,
@@ -324,7 +324,7 @@ namespace GameLogic
         public void Resume()
         {
             IsPause = false;
-            Agent.speed = EntityDataEnemy.EnemyData.Speed * CurrentSlowRate;
+            Agent.speed = EntityEnemyData.EnemyData.Speed * CurrentSlowRate;
         }
     }
 }

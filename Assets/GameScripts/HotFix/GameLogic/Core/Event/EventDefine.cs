@@ -72,6 +72,9 @@ namespace GameLogic
 
         // 显示预览塔事件ID
         public static readonly int OnShowPreviewTower = RuntimeId.ToRuntimeId("ILevel_Event.OnShowPreviewTower");
+        
+        // 隐藏预览塔事件ID
+        public static readonly int OnHidePreviewTower = RuntimeId.ToRuntimeId("ILevel_Event.OnHidePreviewTower");
 
         // 建造塔事件ID
         public static readonly int OnBuildTower = RuntimeId.ToRuntimeId("ILevel_Event.OnBuildTower");

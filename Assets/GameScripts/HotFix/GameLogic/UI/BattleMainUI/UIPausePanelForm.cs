@@ -42,8 +42,7 @@ namespace GameLogic
         
         private void OnClickRestartBtn()
         {
-            int currentLevelIndex = LevelDataControl.Instance.CurrentLevelIndex;
-            LevelDataControl.Instance.LoadLevel(currentLevelIndex);
+            LevelDataControl.Instance.LoadLevel(LevelDataControl.Instance.CurrentLevelIndex);
             GameEvent.Send(LevelEvent.OnReloadLevel);
             Close();
         }

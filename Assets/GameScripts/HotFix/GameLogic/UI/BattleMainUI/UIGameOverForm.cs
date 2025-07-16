@@ -34,8 +34,9 @@ namespace GameLogic
         #region 事件
         private void OnClickNextLevelBtn()
         {
-            // 测试用
-            OnClickMainmenuBtn();
+            int nextLevel = LevelDataControl.Instance.CurrentLevelIndex + 1;
+            if (nextLevel <= LevelDataControl.Instance.MaxLevel)
+                LevelDataControl.Instance.LoadLevel(nextLevel);
             Close();
         }
         private void OnClickMainmenuBtn()
@@ -46,6 +47,7 @@ namespace GameLogic
         private void OnClickRestartBtn()
         {
             LevelDataControl.Instance.LoadLevel(LevelDataControl.Instance.CurrentLevelIndex);
+            GameEvent.Send(LevelEvent.OnReloadLevel);
             Close();
         }
         #endregion
