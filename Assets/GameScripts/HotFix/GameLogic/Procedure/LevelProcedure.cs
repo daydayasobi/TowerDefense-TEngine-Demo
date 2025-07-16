@@ -53,6 +53,7 @@ namespace GameLogic
             GameEvent.AddEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.AddEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
             GameEvent.AddEventListener<Tower, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
+            GameEvent.AddEventListener<int>(LevelEvent.OnHideTower, OnHideTower);
             GameEvent.AddEventListener<int>(LevelEvent.OnSellTower, OnSellTower);
             GameEvent.AddEventListener<int>(LevelEvent.OnSpawnEnemy, OnSpawnEnemy);
             GameEvent.AddEventListener<int>(LevelEvent.OnHideEnemyEntity, OnHideEnemyEntity);
@@ -84,6 +85,7 @@ namespace GameLogic
             GameEvent.RemoveEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.RemoveEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
             GameEvent.RemoveEventListener<Tower, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
+            GameEvent.RemoveEventListener<int>(LevelEvent.OnHideTower, OnHideTower);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnSellTower, OnSellTower);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnSpawnEnemy, OnSpawnEnemy);
             GameEvent.RemoveEventListener<int>(LevelEvent.OnHideEnemyEntity, OnHideEnemyEntity);
@@ -164,6 +166,15 @@ namespace GameLogic
         {
             // 处理建造塔的逻辑
             levelControl.CreateTower(tower, placementArea, placeGrid, position, rotation);
+        }
+
+        /// <summary>
+        /// 处理隐藏塔事件
+        /// </summary>
+        /// <param name="entity"></param>
+        private void OnHideTower(int serialId)
+        {
+            levelControl.HideTower(serialId);
         }
 
         /// <summary>

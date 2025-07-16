@@ -31,7 +31,7 @@ namespace GameLogic
 
                 if (timer > time)
                 {
-                    GameEvent.Send(LevelEvent.OnHideEntityInLevel, Entity);
+                    GameEvent.Send(LevelEvent.OnHideTower, entityTowerData.Tower.SerialId);
                 }
             }
         }

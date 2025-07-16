@@ -34,7 +34,7 @@ namespace GameLogic
         protected override void OnCreate()
         {
             ShowLevelSelectionButtonItems();
-            mouseScroll.Init();
+            // mouseScroll.Init();
         }
         
         private async void ShowLevelSelectionButtonItems()

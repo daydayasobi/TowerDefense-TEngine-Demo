@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 208066563309428148}
   - component: {fileID: 5661719448014046955}
   - component: {fileID: 2310388227308124341}
+  - component: {fileID: 4308926253473306792}
+  - component: {fileID: 2639088863007977695}
   m_Layer: 10
   m_Name: EnergyPylon
   m_TagString: Untagged
@@ -138,6 +140,30 @@ MonoBehaviour:
     weight: 0
   - sound: 23005
     weight: 0
+--- !u!114 &4308926253473306792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281184777904054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4162026b7b9fef4ca0c118dabf23836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2639088863007977695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281184777904054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d4165c9873daa408a1cc8a993ddd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5471694052506824581
 GameObject:
   m_ObjectHideFlags: 0
