@@ -34,15 +34,16 @@ namespace GameLogic
         protected override void OnCreate()
         {
             ShowLevelSelectionButtonItems();
-            // mouseScroll.Init();
+            mouseScroll.Init();
         }
-        private void ShowLevelSelectionButtonItems()
+        
+        private async void ShowLevelSelectionButtonItems()
         {
             int index = 0;
             
             foreach (var itemdata in LevelDataControl.Instance.GetAllLevelData())
             {
-                LevelSelectionButton item = CreateWidgetByPath<LevelSelectionButton>(this.transform, "LevelSelectionButton", true);
+                LevelSelectionButton item = await CreateWidgetByPathAsync<LevelSelectionButton>(this.transform, "LevelSelectionButton", true);
 
                 item.transform.SetParent(m_tfLayout, false);
                 item.transform.localScale = Vector3.one;
