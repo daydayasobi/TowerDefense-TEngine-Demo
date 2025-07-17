@@ -49,7 +49,7 @@ namespace GameLogic
             GameEvent.AddEventListener(LevelEvent.OnChangeScene, OnChangeScene);
             GameEvent.AddEventListener<LevelDataBase>(LevelEvent.OnLoadLevel, OnLoadLevel);
             GameEvent.AddEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
-            GameEvent.AddEventListener(LevelEvent.OnGameOver, OnGameOver);
+            GameEvent.AddEventListener<int>(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.AddEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.AddEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
             GameEvent.AddEventListener<Tower, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
@@ -81,7 +81,7 @@ namespace GameLogic
             GameEvent.RemoveEventListener(LevelEvent.OnChangeScene, OnChangeScene);
             GameEvent.RemoveEventListener<LevelDataBase>(LevelEvent.OnLoadLevel, OnLoadLevel);
             GameEvent.RemoveEventListener<EnumLevelState, EnumLevelState>(LevelEvent.OnLevelStateChange, OnLevelStateChange);
-            GameEvent.RemoveEventListener(LevelEvent.OnGameOver, OnGameOver);
+            GameEvent.RemoveEventListener<int>(LevelEvent.OnGameOver, OnGameOver);
             GameEvent.RemoveEventListener(LevelEvent.OnReloadLevel, OnReloadLevel);
             GameEvent.RemoveEventListener<TowerDataBase>(LevelEvent.OnShowPreviewTower, OnShowPreviewTower);
             GameEvent.RemoveEventListener<Tower, IPlacementArea, IntVector2, Vector3, Quaternion>(LevelEvent.OnBuildTower, OnBuildTower);
@@ -135,10 +135,10 @@ namespace GameLogic
         /// <summary>
         /// 处理游戏结束事件
         /// </summary>
-        private void OnGameOver()
+        private void OnGameOver(int starCount)
         {
             // 处理游戏结束的逻辑
-            levelControl.Gameover();
+            levelControl.Gameover(starCount);
         }
 
         /// <summary>

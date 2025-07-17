@@ -87,24 +87,6 @@ public partial class Tables
             m_TbLevelData.ResolveRef(this);
         }
     }
-    private TbLocalizationData m_TbLocalizationData;
-    public TbLocalizationData TbLocalizationData 
-    {
-        get
-        {
-            if (m_TbLocalizationData == null)
-            {
-                m_TbLocalizationData = new TbLocalizationData(defaultLoader("tblocalizationdata"));
-                m_TbLocalizationData.ResolveRef(this);
-            }
-            return m_TbLocalizationData;
-        }
-        set
-        {
-            m_TbLocalizationData = value;
-            m_TbLocalizationData.ResolveRef(this);
-        }
-    }
     private TbProjectileData m_TbProjectileData;
     public TbProjectileData TbProjectileData 
     {

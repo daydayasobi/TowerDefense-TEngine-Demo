@@ -40,10 +40,9 @@ namespace GameLogic
 
         public void OnLoad()
         {
-            
-            if(IsLoaded)
+            if (IsLoaded)
                 return;
-            
+
             // 加载配置表
             MaxLevel = 0;
 
@@ -243,7 +242,6 @@ namespace GameLogic
                 ChangeLevelState(EnumLevelState.None);
                 CurrentLevelIndex = NONE_LEVEL_INDEX;
                 GameEvent.Send(LevelEvent.OnChangeScene);
-                // GameEntry.Event.Fire(this, ChangeSceneEventArgs.Create(GameEntry.Config.GetInt("Scene.Menu")));
             }
         }
 
@@ -263,7 +261,6 @@ namespace GameLogic
                 Log.Error("Gameover Only heppen when level is in Normal State,now is {0}", LevelState.ToString());
                 return;
             }
-
 
             int hp = PlayerDataControl.Instance.HP;
             int starCount = 0;
@@ -303,16 +300,16 @@ namespace GameLogic
             }
 
             ChangeLevelState(EnumLevelState.Gameover);
-            GameEvent.Send(LevelEvent.OnGameOver);
+            GameEvent.Send(LevelEvent.OnGameOver, 0);
         }
 
         private void SetLevelRecord(int levelIndex, int starCount)
         {
-            // int currentStarCount = GameEntry.Setting.GetInt(string.Format(Constant.Setting.LevelStarRecord, levelIndex), 0);
-            // if (starCount > currentStarCount)
-            // {
-            //     GameEntry.Setting.SetInt(string.Format(Constant.Setting.LevelStarRecord, levelIndex), starCount);
-            // }
+            int currentStarCount = GameModule.Save.GetInt(string.Format(LevelKey.LevelStarRecord, levelIndex), 0);
+            if (starCount > currentStarCount)
+            {
+                GameModule.Save.SetInt(string.Format(LevelKey.LevelStarRecord, levelIndex), starCount);
+            }
         }
 
         public void OnLoadLevelFinish(int levelId)

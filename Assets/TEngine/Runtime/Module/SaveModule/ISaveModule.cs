@@ -6,7 +6,7 @@ namespace TEngine
 {
     public interface ISaveModule
     {
-        public int GetInt(string key, int defaultValue);
+        public int GetInt(string key, int defaultValue = 0);
         public float GetFloat(string key, float defaultValue);
         public string GetString(string key, string defaultValue);
         public bool GetBool(string key, bool defaultValue);

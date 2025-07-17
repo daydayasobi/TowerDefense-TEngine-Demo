@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
+using TEngine.Localization;
 using UnityEngine;
 
 namespace GameLogic
@@ -25,9 +26,7 @@ namespace GameLogic
         {
             get
             {
-                // TODO: 需要多语言
-                // return GameEntry.Localization.GetString(dRLevel.NameId);
-                return dRLevel.Name;
+                return LocalizationManager.GetTermTranslation(dRLevel.Name);
             }
         }
 
@@ -35,9 +34,7 @@ namespace GameLogic
         {
             get
             {
-                // TODO: 需要多语言
-                // return GameEntry.Localization.GetString(dRLevel.DescriptionId);
-                return dRLevel.Description;
+                return LocalizationManager.GetTermTranslation(dRLevel.DescriptionName);
             }
         }
 

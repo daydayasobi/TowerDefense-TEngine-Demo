@@ -24,10 +24,8 @@ namespace GameLogic
             {
                 if (string.IsNullOrEmpty(dRTowerLevel.Desid))
                     return string.Empty;
-
-                // TODO: 这里需要根据实际情况获取本地化字符串
-                // return GameEntry.Localization.GetString(dRTowerLevel.Desid);
-                return dRTowerLevel.Desid;
+                
+                return TEngine.Localization.LocalizationManager.GetTermTranslation(dRTowerLevel.Desid);
             }
         }
 
@@ -37,10 +35,8 @@ namespace GameLogic
             {
                 if (string.IsNullOrEmpty(dRTowerLevel.UpgradeDesid))
                     return string.Empty;
-
-                // TODO: 这里需要根据实际情况获取本地化字符串
-                // return GameEntry.Localization.GetString(dRTowerLevel.UpgradeDesid);
-                return dRTowerLevel.UpgradeDesid;
+                
+                return TEngine.Localization.LocalizationManager.GetTermTranslation(dRTowerLevel.Desid);
             }
         }
 

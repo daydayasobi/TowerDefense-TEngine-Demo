@@ -62,8 +62,16 @@ namespace GameLogic
                 if (obj is int)
                 {
                     starCount = (int)obj;
+                    SetStarImages(starCount);
                 }
             }
+        }
+        
+        private void SetStarImages(int starCount)
+        {
+            m_img1.gameObject.SetActive(starCount >= 1 ? true : false);
+            m_img2.gameObject.SetActive(starCount >= 2 ? true : false);
+            m_img3.gameObject.SetActive(starCount >= 3 ? true : false);
         }
     }
 }

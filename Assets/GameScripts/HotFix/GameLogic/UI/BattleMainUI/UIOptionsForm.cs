@@ -71,12 +71,12 @@ namespace GameLogic
 
         private void OnClickChineseSimplifiedBtn()
         {
-            // GameModule.Localization.SetLanguage(Language.ChineseSimplified);
+            GameModule.Localization.SetLanguage(Language.ChineseSimplified);
         }
 
         private void OnClickEnglishBtn()
         {
-            // GameModule.Localization.SetLanguage(Language.English);
+            GameModule.Localization.SetLanguage(Language.English);
         }
 
         #endregion

@@ -16,11 +16,601 @@ MonoBehaviour:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
-    mTerms: []
+    mTerms:
+    - Term: Test
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u6D4B\u8BD5"
+      - Test
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Test2
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u6D4B\u8BD52"
+      - Test2
+      Flags: 0000
+      Languages_Touch: []
+    - Term: UpdateResource.Tips
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u6B63\u5728\u66F4\u65B0:{0}/{1}, {2}/{3}, {4:P0}, {5}/s"
+      - Updating:{0}/{1}, {2}/{3}, {4:P0}, {5}/s
+      Flags: 0000
+      Languages_Touch: []
+    - Term: TOWER DEFENSE
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5854\u9632"
+      - TOWER DEFENSE
+      Flags: 0000
+      Languages_Touch: []
+    - Term: LEVEL SELECT
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u9009\u62E9\u5173\u5361"
+      - LEVEL SELECT
+      Flags: 0000
+      Languages_Touch: []
+    - Term: OPTIONS
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u8BBE\u7F6E"
+      - OPTIONS
+      Flags: 0000
+      Languages_Touch: []
+    - Term: QUIT
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u9000\u51FA"
+      - QUIT
+      Flags: 0000
+      Languages_Touch: []
+    - Term: MUSIC VOLUME
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u97F3\u4E50\u97F3\u91CF"
+      - MUSIC VOLUME
+      Flags: 0000
+      Languages_Touch: []
+    - Term: SFX VOLUME
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7279\u6548\u97F3\u91CF"
+      - SFX VOLUME
+      Flags: 0000
+      Languages_Touch: []
+    - Term: UI VOLUME
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u754C\u9762\u97F3\u91CF"
+      - UI VOLUME
+      Flags: 0000
+      Languages_Touch: []
+    - Term: LANGUAGES
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u8BED\u8A00"
+      - LANGUAGES
+      Flags: 0000
+      Languages_Touch: []
+    - Term: CHINESE SIMPLIFIED
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B80\u4F53\u4E2D\u6587"
+      - CHINESE SIMPLIFIED
+      Flags: 0000
+      Languages_Touch: []
+    - Term: CHINESE TRADITIONAL
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7E41\u4F53\u4E2D\u6587"
+      - CHINESE TRADITIONAL
+      Flags: 0000
+      Languages_Touch: []
+    - Term: ENGLISH
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u82F1\u8BED"
+      - ENGLISH
+      Flags: 0000
+      Languages_Touch: []
+    - Term: CHANGE LANGUAGE NEED RESTART
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u66F4\u6539\u8BED\u8A00\u9700\u8981\u91CD\u542F\u6E38\u620F"
+      - CHANGE LANGUAGE NEED RESTART
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Confirm
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u786E\u8BA4"
+      - Confirm
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Cancel
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u53D6\u6D88"
+      - Cancel
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level1
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B2C\u4E00\u5173"
+      - Level 1
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level2
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B2C\u4E8C\u5173"
+      - Level 2
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level3
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B2C\u4E09\u5173"
+      - Level 3
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level4
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B2C\u56DB\u5173"
+      - Level 4
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level5
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B2C\u4E94\u5173"
+      - Level 5
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level 1 Des
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u522B\u8BA9\u654C\u4EBA\u51B2\u8FC7\u53BB"
+      - Don't allow enemies to rush through
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level 2 Des
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5236\u9020\u8FF7\u5BAB\u6765\u51CF\u7F13\u654C\u4EBA"
+      - Create mazes to slow enemies
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level 3 Des
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5229\u7528\u74F6\u9888\u4F18\u52BF"
+      - Take advantage of choke points
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level 4 Des
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u4FDD\u62A4\u957F\u5C71"
+      - Protect the long mountain pass
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level 5 Des
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u9632\u5FA1\u4E24\u8DEF"
+      - Guard both paths from enemies
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Assault Cannon
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7A81\u51FB\u52A0\u519C\u70AE"
+      - WAVE
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Rocket Platform
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u706B\u7BAD"
+      - START WAVE
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Plasma Lance
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u79BB\u5B50\u55B7\u67AA"
+      - MAIN MENU
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Energy Pylon
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u80FD\u91CF\u5854"
+      - RESTART
+      Flags: 0000
+      Languages_Touch: []
+    - Term: EMP Generator
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7535\u78C1\u8109\u51B2\u53D1\u751F\u5668"
+      - UPGRADE
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Missile Array
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5BFC\u5F39\u9635\u5217"
+      - SELL
+      Flags: 0000
+      Languages_Touch: []
+    - Term: WAVE
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u6CE2\u6B21"
+      - '{0} COMPLETE!'
+      Flags: 0000
+      Languages_Touch: []
+    - Term: START WAVE
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5F00\u59CB"
+      - '{0} FAILED!'
+      Flags: 0000
+      Languages_Touch: []
+    - Term: MAIN MENU
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u4E3B\u83DC\u5355"
+      - NEXT LEVEL
+      Flags: 0000
+      Languages_Touch: []
+    - Term: RESTART
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u91CD\u65B0\u5F00\u59CB"
+      - Assault Cannon
+      Flags: 0000
+      Languages_Touch: []
+    - Term: UPGRADE
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5347\u7EA7"
+      - Rocket Platform
+      Flags: 0000
+      Languages_Touch: []
+    - Term: SELL
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u51FA\u552E"
+      - Plasma Lance
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level Complete
+      TermType: 0
+      Description: 
+      Languages:
+      - "{0} \u5B8C\u6210!"
+      - Energy Pylon
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Level Failed
+      TermType: 0
+      Description: 
+      Languages:
+      - "{0} \u5931\u8D25!"
+      - EMP Generator
+      Flags: 0000
+      Languages_Touch: []
+    - Term: NEXT LEVEL
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u4E0B\u4E00\u5173"
+      - Missile Array
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Assault Cannon Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 1 - \u9AD8\u5C04\u901F\uFF0C\u4F4E\u4F24\u5BB3"
+      - Tier 1 - High fire rate
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Assault Cannon Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 2 - \u9AD8\u5C04\u901F\uFF0C\u4F4E\u4F24\u5BB3"
+      - Tier 2 - High fire rate
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Assault Cannon Des 3
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 3 - \u9AD8\u5C04\u901F\uFF0C\u4F4E\u4F24\u5BB3"
+      - Tier 3 - High fire rate
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Rocket Platform Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 1 - \u9AD8AOE\u4F24\u5BB3\uFF08\u4EC5\u5BF9\u5730\u9762\u654C\u4EBA\uFF09"
+      - Tier 1 - High AoE damage on ground enemies only
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Rocket Platform Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 2 - \u9AD8AOE\u4F24\u5BB3\uFF08\u4EC5\u5BF9\u5730\u9762\u654C\u4EBA\uFF09"
+      - Tier 2 - High AoE damage on ground enemies only
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Rocket Platform Des 3
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 3 - \u9AD8AOE\u4F24\u5BB3\uFF08\u4EC5\u5BF9\u5730\u9762\u654C\u4EBA\uFF09"
+      - Tier 3 - High AoE damage on ground enemies only
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Plasma Lance Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 1 - \u5927\u8303\u56F4\uFF0C\u9AD8\u4F24\u5BB3\uFF0C\u4F4E\u5C04\u901F"
+      - Tier 1 - Long range
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Plasma Lance Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 2 - \u5927\u8303\u56F4\uFF0C\u9AD8\u4F24\u5BB3\uFF0C\u4F4E\u5C04\u901F"
+      - Tier 2 - Long range
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Plasma Lance Des 3
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 3 - \u5927\u8303\u56F4\uFF0C\u9AD8\u4F24\u5BB3\uFF0C\u4F4E\u5C04\u901F"
+      - Tier 3 - Long range
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Energy Pylon Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 1 - \u751F\u4EA7\u80FD\u91CF"
+      - Tier 1 - Generates energy
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Energy Pylon Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 2 - \u751F\u4EA7\u80FD\u91CF"
+      - Tier 2 - Generates energy
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Energy Pylon Des 3
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 3 - \u751F\u4EA7\u80FD\u91CF"
+      - Tier 3 - Generates energy
+      Flags: 0000
+      Languages_Touch: []
+    - Term: EMP Generator Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 1 - \u4F7F\u9644\u8FD1\u654C\u4EBA\u51CF\u901F"
+      - Tier 1 - Slows nearby enemies down
+      Flags: 0000
+      Languages_Touch: []
+    - Term: EMP Generator Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 2 - \u4F7F\u9644\u8FD1\u654C\u4EBA\u51CF\u901F"
+      - Tier 2 - Slows nearby enemies down
+      Flags: 0000
+      Languages_Touch: []
+    - Term: EMP Generator Des 3
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u7B49\u7EA7 3 - \u4F7F\u9644\u8FD1\u654C\u4EBA\u51CF\u901F"
+      - Tier 3 - Slows nearby enemies down
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Missile Array Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u53D1\u5C04\u4E00\u8F6E\u5BFC\u5F39\u540E\u81EA\u6BC1"
+      - Self destructs after firing a missile barrage
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Assault Cannon Upgrade Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u5C04\u901F"
+      - + fire rate
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Assault Cannon Upgrade Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u5C04\u901F\u548C\u8303\u56F4"
+      - + fire rate and range
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Rocket Platform Upgrade Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u8303\u56F4\u548C\u4F24\u5BB3"
+      - + range and damage
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Rocket Platform Upgrade Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u8303\u56F4\u548C\u4F24\u5BB3"
+      - + range and damage
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Plasma Lance Upgrade Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u8303\u56F4\u548C\u4F24\u5BB3"
+      - + range and damage
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Plasma Lance Upgrade Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u8303\u56F4\u548C\u4F24\u5BB3"
+      - + range and damage
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Energy Pylon Upgrade Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u80FD\u91CF\u4EA7\u751F"
+      - + energy production
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Energy Pylon Upgrade Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u80FD\u91CF\u4EA7\u751F"
+      - + energy production
+      Flags: 0000
+      Languages_Touch: []
+    - Term: EMP Generator Upgrade Des 1
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u51CF\u901F\u7387"
+      - + slow
+      Flags: 0000
+      Languages_Touch: []
+    - Term: EMP Generator Upgrade Des 2
+      TermType: 0
+      Description: 
+      Languages:
+      - "+ \u51CF\u901F\u7387\u548C\u8303\u56F4"
+      - + slow and range
+      Flags: 0000
+      Languages_Touch: []
+    - Term: ForceUpdate.Title
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5F3A\u5236\u66F4\u65B0"
+      - FORCE UPDATE
+      Flags: 0000
+      Languages_Touch: []
+    - Term: ForceUpdate.Message
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u5F53\u524D\u6E38\u620F\u7248\u672C\u8FC7\u65E7\uFF0C\u662F\u5426\u524D\u5F80\u66F4\u65B0\uFF1F"
+      - Current version is too old. Do you want to update it?
+      Flags: 0000
+      Languages_Touch: []
+    - Term: ForceUpdate.UpdateButton
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u66F4\u65B0"
+      - Update
+      Flags: 0000
+      Languages_Touch: []
+    - Term: ForceUpdate.QuitButton
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u9000\u51FA"
+      - Quick
+      Flags: 0000
+      Languages_Touch: []
+    - Term: Download
+      TermType: 0
+      Description: 
+      Languages:
+      - "\u4E0B\u8F7D"
+      - Download
+      Flags: 0000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
-    mLanguages: []
+    mLanguages:
+    - Name: Chinese
+      Code: zh
+      Flags: 0
+    - Name: English
+      Code: en
+      Flags: 0
     IgnoreDeviceLanguage: 0
     _AllowUnloadingLanguages: 0
     Google_WebServiceURL: 
@@ -33,7 +623,7 @@ MonoBehaviour:
     GoogleUpdateSynchronization: 1
     GoogleUpdateDelay: 0
     Assets: []
-    Spreadsheet_LocalFileName: 
+    Spreadsheet_LocalFileName: AssetRaw/Configs/Localization/localizationSheets.csv
     Spreadsheet_LocalCSVSeparator: ','
     Spreadsheet_LocalCSVEncoding: utf-8
     Spreadsheet_SpecializationAsRows: 1

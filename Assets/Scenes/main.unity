@@ -300,8 +300,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6697614230421034925, guid: e38c712e7904fdf42bd0458b769718dd,
         type: 3}
+      propertyPath: useRuntimeModule
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697614230421034925, guid: e38c712e7904fdf42bd0458b769718dd,
+        type: 3}
+      propertyPath: innerLocalizationCsv
+      value: 
+      objectReference: {fileID: 4900000, guid: b5539911abe4c0b4e9f08c5a9ec958a5, type: 3}
+    - target: {fileID: 6697614230421034925, guid: e38c712e7904fdf42bd0458b769718dd,
+        type: 3}
       propertyPath: allLanguage.Array.size
-      value: 0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697614230421034925, guid: e38c712e7904fdf42bd0458b769718dd,
+        type: 3}
+      propertyPath: allLanguage.Array.data[0]
+      value: Chinese
+      objectReference: {fileID: 0}
+    - target: {fileID: 6697614230421034925, guid: e38c712e7904fdf42bd0458b769718dd,
+        type: 3}
+      propertyPath: allLanguage.Array.data[1]
+      value: English
       objectReference: {fileID: 0}
     - target: {fileID: 7696541955235861477, guid: e38c712e7904fdf42bd0458b769718dd,
         type: 3}

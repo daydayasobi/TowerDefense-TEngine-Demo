@@ -343,13 +343,12 @@ namespace GameLogic
         /// <summary>
         /// 游戏结束，处理游戏结束的逻辑。
         /// </summary>
-        public void Gameover()
+        public void Gameover(int starCount)
         {
             HidePreviewTower();
             Pause();
 
-            int testStarCount = 2;
-            GameModule.UI.ShowUI<UIGameOverForm>(testStarCount);
+            GameModule.UI.ShowUI<UIGameOverForm>(starCount);
         }
 
         /// <summary>

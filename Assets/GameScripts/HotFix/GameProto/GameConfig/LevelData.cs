@@ -19,7 +19,7 @@ public sealed partial class LevelData : Luban.BeanBase
         Id = _buf.ReadInt();
         Description = _buf.ReadString();
         Name = _buf.ReadString();
-        DescriptionId = _buf.ReadInt();
+        DescriptionName = _buf.ReadString();
         SceneId = _buf.ReadInt();
         InitHp = _buf.ReadInt();
         InitEnergy = _buf.ReadInt();
@@ -47,9 +47,9 @@ public sealed partial class LevelData : Luban.BeanBase
     /// </summary>
     public readonly string Name;
     /// <summary>
-    /// 等级
+    /// 关卡文本
     /// </summary>
-    public readonly int DescriptionId;
+    public readonly string DescriptionName;
     /// <summary>
     /// 场景Id
     /// </summary>
@@ -92,7 +92,7 @@ public sealed partial class LevelData : Luban.BeanBase
         + "id:" + Id + ","
         + "description:" + Description + ","
         + "name:" + Name + ","
-        + "DescriptionId:" + DescriptionId + ","
+        + "DescriptionName:" + DescriptionName + ","
         + "SceneId:" + SceneId + ","
         + "InitHp:" + InitHp + ","
         + "InitEnergy:" + InitEnergy + ","

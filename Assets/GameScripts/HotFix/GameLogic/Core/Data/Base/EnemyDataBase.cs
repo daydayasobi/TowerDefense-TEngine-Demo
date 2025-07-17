@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
+using TEngine.Localization;
 using UnityEngine;
 
 namespace GameLogic
@@ -22,9 +23,7 @@ namespace GameLogic
         {
             get
             {
-                // TODO: 需要多语言
-                // return GameEntry.Localization.GetString(dREnemy.NameId);
-                return dREnemy.Nameid;
+                return LocalizationManager.GetTermTranslation(dREnemy.Nameid);
             }
         }
 

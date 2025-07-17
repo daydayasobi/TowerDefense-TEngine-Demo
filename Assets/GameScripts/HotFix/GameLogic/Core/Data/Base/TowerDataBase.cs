@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
 using TEngine;
-using UnityEngine;
 
 namespace GameLogic
 {
@@ -23,9 +21,7 @@ namespace GameLogic
         {
             get
             {
-                // TODO: 这里需要根据实际的本地化实现来获取塔的名称
-                // return GameEntry.Localization.GetString(dRTower.NameId);
-                return dRTower.NameId;
+                return TEngine.Localization.LocalizationManager.GetTermTranslation(dRTower.NameId);
             }
         }
 

@@ -61,6 +61,12 @@ namespace GameLogic
             m_textLevelName.text = levelConfig.Name;
             m_textDescription.text = levelConfig.Description;
             this.levelConfig = levelConfig;
+            
+            int currentStarCount = GameModule.Save.GetInt(string.Format(LevelKey.LevelStarRecord, levelConfig.Id), 0);
+            for (int i = 0; i < stars.Length; i++)
+            {
+                stars[i].gameObject.SetActive(i < currentStarCount);
+            }
         }
     }
 }
