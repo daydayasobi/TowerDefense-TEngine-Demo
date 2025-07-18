@@ -24,24 +24,13 @@ public partial class GameApp
         _hotfixAssembly = (List<Assembly>)objects[0];
         Log.Warning("======= 看到此条日志代表你成功运行了热更新代码 =======");
         Log.Warning("======= Entrance GameApp =======");
+        Log.Warning("======= 热更新代码测试！！！！！！！！ =======");
         Utility.Unity.AddDestroyListener(Release);
         GetSave();
         ProcedureBase[] procedureBase = new ProcedureBase[] { new OnEnterGameAppProcedure(), new ChangeSceneProcedure(), new MainMenuProcedure(), new LevelProcedure() };
         GameModule.Procedure.RestartProcedure(procedureBase);
-        // OpenMainMenuScene().Forget();
     }
-
-    private static void StartGameLogic()
-    {
-        GameEvent.Get<ILoginUI>().ShowLoginUI();
-        GameModule.UI.ShowUIAsync<BattleMainUI>();
-    }
-
-    private static async UniTaskVoid OpenMainMenuScene()
-    {
-        UIModule.Instance.Active();
-        await GameModule.Scene.LoadSceneAsync("mainMenu");
-    }
+    
 
     private static void GetSave()
     {
