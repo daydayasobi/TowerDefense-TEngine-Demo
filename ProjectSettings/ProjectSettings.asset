@@ -101,7 +101,7 @@ PlayerSettings:
   xboxEnableFitness: 0
   visibleInBackground: 1
   allowFullscreenSwitch: 1
-  fullscreenMode: 1
+  fullscreenMode: 3
   xboxSpeechDB: 0
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
@@ -807,7 +807,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: TextMeshPro;ENABLE_LOG
+    Android: TextMeshPro;ENABLE_LOG;ENABLE_HYBRIDCLR
     EmbeddedLinux: TextMeshPro
     GameCoreXboxOne: TextMeshPro
     Nintendo Switch: TextMeshPro
@@ -815,16 +815,17 @@ PlayerSettings:
     PS5: TextMeshPro
     QNX: TextMeshPro
     Stadia: TextMeshPro
-    Standalone: TextMeshPro;ENABLE_LOG
+    Standalone: TextMeshPro;ENABLE_LOG;ENABLE_HYBRIDCLR
     VisionOS: TextMeshPro
-    WebGL: TextMeshPro;ENABLE_LOG
-    Windows Store Apps: ENABLE_LOG
+    WebGL: TextMeshPro;ENABLE_LOG;ENABLE_HYBRIDCLR
+    Windows Store Apps: ENABLE_LOG;ENABLE_HYBRIDCLR
     XboxOne: TextMeshPro
-    iPhone: TextMeshPro;ENABLE_LOG
+    iPhone: TextMeshPro;ENABLE_LOG;ENABLE_HYBRIDCLR
     tvOS: TextMeshPro
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:
@@ -939,4 +940,4 @@ PlayerSettings:
   hmiLoadingImage: {fileID: 0}
   platformRequiresReadableAssets: 0
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 0
+  insecureHttpOption: 2
