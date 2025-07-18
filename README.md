@@ -23,7 +23,7 @@ TE框架是一款非常优秀的Unity开源框架，目前相关的文档还不�
 本项目测试了了Windows打包运行和热更新，运用到了TE框架里大部分的模块，包括资源模块、事件模块、UI模块、流程模块、FSM模块、多语言模块、内存池和对象池模块。使用了Luban配置表工具、YooAsset打包工具和HybridCLR热更新工具。后续可能会根据该项目出一些TE框架的教程，到时候会一并贴出。
 
   ### 文件结构
-
+<pre>
 ├─ AssetArt                    // 美术产出物（非运行时直接引用）
 │  └─ Atlas                    // 图集原始文件（TexturePacker 等导出的 .tps / .png）
 ├─ AssetRaw                    // 原始资源（策划/美术直接维护）
@@ -53,6 +53,7 @@ TE框架是一款非常优秀的Unity开源框架，目前相关的文档还不�
 ├─ Scenes                      // 真正 Build Settings 里挂的入口场景
 ├─ StreamingAssets             // 随包体拷贝的只读资源
 ├─ TEngine                     // TEngine 框架本体
+</pre>
 
 ### 注意事项
 
