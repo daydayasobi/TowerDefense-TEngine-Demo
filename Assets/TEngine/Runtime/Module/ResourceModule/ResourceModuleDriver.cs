@@ -250,6 +250,7 @@ namespace TEngine
             _resourceModule.Milliseconds = milliseconds;
             _resourceModule.HostServerURL = Settings.UpdateSetting.GetResDownLoadPath();
             _resourceModule.FallbackHostServerURL = Settings.UpdateSetting.GetFallbackResDownLoadPath();
+            _resourceModule.LoadResWayWebGL=Settings.UpdateSetting.GetLoadResWayWebGL();
             _resourceModule.DownloadingMaxNum = DownloadingMaxNum;
             _resourceModule.FailedTryAgain = FailedTryAgain;
             _resourceModule.UpdatableWhilePlaying = UpdatableWhilePlaying;

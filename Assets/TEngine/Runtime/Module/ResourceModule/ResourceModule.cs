@@ -53,6 +53,11 @@ namespace TEngine
         public string HostServerURL { get; set; }
 
         public string FallbackHostServerURL { get; set; }
+        
+        /// <summary>
+        /// WebGL：加载资源方式
+        /// </summary>
+        public LoadResWayWebGL LoadResWayWebGL { get; set; }
 
         private string _applicableGameVersion;
 
@@ -207,7 +212,10 @@ namespace TEngine
                 createParameters.WebServerFileSystemParameters = WechatFileSystemCreater.CreateFileSystemParameters(packageRoot, remoteServices, webDecryptionServices);
 #else
                 Log.Info("=======================UNITY_WEBGL=======================");
-                createParameters.WebRemoteFileSystemParameters = FileSystemParameters.CreateDefaultWebRemoteFileSystemParameters(remoteServices, webDecryptionServices);
+                if (LoadResWayWebGL==LoadResWayWebGL.Remote)
+                {
+                    createParameters.WebRemoteFileSystemParameters = FileSystemParameters.CreateDefaultWebRemoteFileSystemParameters(remoteServices, webDecryptionServices);
+                }
                 createParameters.WebServerFileSystemParameters = FileSystemParameters.CreateDefaultWebServerFileSystemParameters(webDecryptionServices);
 #endif
                 initializationOperation = package.InitializeAsync(createParameters);

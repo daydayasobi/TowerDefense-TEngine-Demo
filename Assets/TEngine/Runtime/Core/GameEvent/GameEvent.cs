@@ -535,7 +535,7 @@ namespace TEngine
         /// <typeparam name="TArg4">事件参数4类型。</typeparam>
         public static void Send<TArg1, TArg2, TArg3, TArg4>(string eventType, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4)
         {
-            _eventMgr.Dispatcher.Send(RuntimeId.ToRuntimeId(eventType), arg1, arg2, arg3);
+            _eventMgr.Dispatcher.Send(RuntimeId.ToRuntimeId(eventType), arg1, arg2, arg3, arg4);
         }
 
         /// <summary>

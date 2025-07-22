@@ -87,6 +87,14 @@ namespace TEngine
         }
 
         /// <summary>
+        /// 后备方式获取解密的资源包对象
+        /// </summary>
+        DecryptResult IDecryptionServices.LoadAssetBundleFallback(DecryptFileInfo fileInfo)
+        {
+            return new DecryptResult();
+        }
+        
+        /// <summary>
         /// 获取解密的字节数据
         /// </summary>
         byte[] IDecryptionServices.ReadFileData(DecryptFileInfo fileInfo)
@@ -156,6 +164,14 @@ namespace TEngine
             decryptResult.CreateRequest =
                 AssetBundle.LoadFromFileAsync(fileInfo.FileLoadPath, 0, GetFileOffset());
             return decryptResult;
+        }
+        
+        /// <summary>
+        /// 后备方式获取解密的资源包对象
+        /// </summary>
+        DecryptResult IDecryptionServices.LoadAssetBundleFallback(DecryptFileInfo fileInfo)
+        {
+            return new DecryptResult();
         }
 
         /// <summary>

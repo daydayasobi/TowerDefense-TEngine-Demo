@@ -486,7 +486,16 @@ namespace TEngine
                 return _tweenHelper.Color(target, startValue, endValue, duration, ease, cycles, cycleMode, startDelay, endDelay, useUnscaledTime);
             }
 
-
+            public static long MaterialColor(UnityEngine.Material target, UnityEngine.Color startValue, UnityEngine.Color endValue, float duration, Ease ease = Ease.Default, int 
+                    cycles = 1,
+                CycleMode cycleMode = CycleMode.Restart, float startDelay = 0, float endDelay = 0, bool useUnscaledTime = false)
+            {
+                if (_tweenHelper == null)
+                {
+                    throw new GameFrameworkException("ITweenHelper is invalid.");
+                }
+                return _tweenHelper.MaterialColor(target, startValue, endValue, duration, ease, cycles, cycleMode, startDelay, endDelay, useUnscaledTime);
+            }
             public static long Alpha(UnityEngine.SpriteRenderer target, Single endValue, float duration, Ease ease = Ease.Default, int cycles = 1, CycleMode cycleMode = CycleMode.Restart,
                 float startDelay = 0, float endDelay = 0, bool useUnscaledTime = false)
             {

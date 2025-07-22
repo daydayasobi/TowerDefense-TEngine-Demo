@@ -98,4 +98,8 @@ package/
 package/
 yoo/
 [Aa]ssets/TEngine/AssetSetting/Resources/BuiltinFileManifest.asset
-[Aa]ssets/TEngine/AssetSetting/Resources/BuiltinFileManifest.asset.meta
+[Aa]ssets/TEngine/AssetSetting/Resources/BuiltinFileManifest.asset.metaAssets/vFavorites
+[Aa]ssets/vHierarchy
+[Aa]ssets/vInspector
+[Aa]ssets/vTabs
+[Aa]ssets/vFavorites

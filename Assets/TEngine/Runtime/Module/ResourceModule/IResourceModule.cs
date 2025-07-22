@@ -76,7 +76,12 @@ namespace TEngine
         /// 备用热更URL。
         /// </summary>
         string FallbackHostServerURL { get; set; }
-
+        
+        /// <summary>
+        /// WebGL平台加载本地资源/加载远程资源。
+        /// </summary>
+        LoadResWayWebGL LoadResWayWebGL { get; set; }
+        
         /// <summary>
         /// 获取或设置资源对象池自动释放可释放对象的间隔秒数。
         /// </summary>

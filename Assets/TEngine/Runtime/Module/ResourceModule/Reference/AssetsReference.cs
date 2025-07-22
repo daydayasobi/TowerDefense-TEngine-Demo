@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
 namespace TEngine
@@ -23,8 +22,6 @@ namespace TEngine
     [DisallowMultipleComponent]
     public sealed class AssetsReference : MonoBehaviour
     {
-        private static readonly Dictionary<GameObject, int> _gameObjectCountMap = new Dictionary<GameObject, int>();
-
         [SerializeField]
         private GameObject sourceGameObject;
 
@@ -32,6 +29,9 @@ namespace TEngine
         private List<AssetsRefInfo> refAssetInfoList;
 
         private static IResourceModule _resourceModule;
+
+        private static Dictionary<GameObject, AssetsReference> _originalRefs = new();
+
 
         private void CheckInit()
         {
@@ -52,17 +52,9 @@ namespace TEngine
 
         private void CheckRelease()
         {
-            if (_gameObjectCountMap.TryGetValue(sourceGameObject, out var count))
+            if (sourceGameObject != null)
             {
-                if (count <= 1)
-                {
-                    _gameObjectCountMap.Remove(sourceGameObject);
-                    _resourceModule.UnloadAsset(sourceGameObject);
-                }
-                else
-                {
-                    _gameObjectCountMap[sourceGameObject] = count - 1;
-                }
+                _resourceModule.UnloadAsset(sourceGameObject);
             }
             else
             {
@@ -70,24 +62,26 @@ namespace TEngine
             }
         }
 
-        private void CheckAdd()
-        {
-            if (_gameObjectCountMap.TryGetValue(sourceGameObject, out var count))
-            {
-                _gameObjectCountMap[sourceGameObject] = count + 1;
-            }
-            else
-            {
-                _gameObjectCountMap[sourceGameObject] = 1;
-            }
-        }
 
         private void Awake()
         {
-            if (sourceGameObject != null)
+            // If it is a clone, clear the reference records before cloning
+            if (!IsOriginalInstance())
             {
-                _gameObjectCountMap[sourceGameObject] = _gameObjectCountMap.TryGetValue(sourceGameObject, out var count) ? count + 1 : 1;
+                ClearCloneReferences();
             }
+        }
+
+        private bool IsOriginalInstance()
+        {
+            return _originalRefs.TryGetValue(gameObject, out var originalComponent) &&
+                   originalComponent == this;
+        }
+
+        private void ClearCloneReferences()
+        {
+            sourceGameObject = null;
+            refAssetInfoList?.Clear();
         }
 
         private void OnDestroy()
@@ -128,11 +122,16 @@ namespace TEngine
 
             _resourceModule = resourceModule;
             sourceGameObject = source;
-            CheckAdd();
+
+            if (!_originalRefs.ContainsKey(gameObject))
+            {
+                _originalRefs.Add(gameObject, this);
+            }
+
             return this;
         }
 
-        public AssetsReference Ref<T>(T source, IResourceModule resourceModule = null) where T : UnityEngine.Object
+        public AssetsReference Ref<T>(T source, IResourceModule resourceModule = null) where T : Object
         {
             if (source == null)
             {
@@ -149,7 +148,7 @@ namespace TEngine
             return this;
         }
 
-        public static AssetsReference Instantiate(GameObject source, Transform parent = null, IResourceModule resourceModule = null)
+        internal static AssetsReference Instantiate(GameObject source, Transform parent = null, IResourceModule resourceModule = null)
         {
             if (source == null)
             {
@@ -181,7 +180,7 @@ namespace TEngine
             return comp ? comp.Ref(source, resourceModule) : instance.AddComponent<AssetsReference>().Ref(source, resourceModule);
         }
 
-        public static AssetsReference Ref<T>(T source, GameObject instance, IResourceModule resourceModule = null) where T : UnityEngine.Object
+        public static AssetsReference Ref<T>(T source, GameObject instance, IResourceModule resourceModule = null) where T : Object
         {
             if (source == null)
             {
