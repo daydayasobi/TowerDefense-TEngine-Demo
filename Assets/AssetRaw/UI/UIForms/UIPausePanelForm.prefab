@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4338622588516408655}
   - component: {fileID: 4340914635753319623}
   - component: {fileID: 4520832800254886769}
-  - component: {fileID: 5945889014770142273}
+  - component: {fileID: 1239870740033932612}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -167,8 +167,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u91CD\u65B0\u5F00\u59CB"
---- !u!114 &5945889014770142273
+  m_Text: Assault Cannon
+--- !u!114 &1239870740033932612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -619,6 +619,7 @@ GameObject:
   - component: {fileID: 4338167678191967655}
   - component: {fileID: 4341236332184334473}
   - component: {fileID: 4517938905941451059}
+  - component: {fileID: 7919055932941053591}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -686,7 +687,46 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CONFIRM
+  m_Text: Confirm
+--- !u!114 &7919055932941053591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4552631981019175909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Confirm
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: TEngine.Localization.LocalizeTarget_UnityUI_Text
 --- !u!1 &4552688511100446511
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +934,7 @@ GameObject:
   - component: {fileID: 4339086088923500469}
   - component: {fileID: 4341216370599186511}
   - component: {fileID: 4520898616358053861}
-  - component: {fileID: 1461782092858921812}
+  - component: {fileID: 8562010526669098398}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -962,8 +1002,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E3B\u83DC\u5355"
---- !u!114 &1461782092858921812
+  m_Text: NEXT LEVEL
+--- !u!114 &8562010526669098398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1080,7 +1120,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LEVEL 1
+  m_Text: Level 1
 --- !u!1 &4552750721469674159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,6 +1980,7 @@ GameObject:
   - component: {fileID: 4341428162694890323}
   - component: {fileID: 4520742239298721515}
   - component: {fileID: 4521556896305011345}
+  - component: {fileID: 2123613263933375031}
   m_Layer: 5
   m_Name: MainMenuConfirm
   m_TagString: Untagged
@@ -1996,7 +2037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e3de1acb1ed3a4656bb68c4db2123bab, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2050,3 +2091,42 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2123613263933375031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553048360415714061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Confirm
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  AllowParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 0}
+  mLocalizeTargetName: TEngine.Localization.LocalizeTarget_UnityUI_Image

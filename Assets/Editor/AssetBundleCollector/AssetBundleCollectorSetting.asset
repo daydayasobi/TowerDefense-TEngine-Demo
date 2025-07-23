@@ -21,8 +21,8 @@ MonoBehaviour:
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
     AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
     Groups:
     - GroupName: Actor
       GroupDesc: 
@@ -167,8 +167,8 @@ MonoBehaviour:
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
     AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
     Groups:
     - GroupName: ModelGroup
       GroupDesc: 
@@ -180,34 +180,66 @@ MonoBehaviour:
       AssetTags: scenes
       ActiveRuleName: EnableGroup
       Collectors: []
-  - PackageName: Dlc1Package
+  - PackageName: Level3Package
     PackageDesc: 
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
     AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
     Groups:
-    - GroupName: ModelGroup
-      GroupDesc: 
-      AssetTags: models
-      ActiveRuleName: EnableGroup
-      Collectors: []
-    - GroupName: SceneGroup
+    - GroupName: Scenes
       GroupDesc: 
       AssetTags: scenes
       ActiveRuleName: EnableGroup
-      Collectors: []
-  - PackageName: Dlc2Package
+      Collectors:
+      - CollectPath: Assets/AssetRaw/OtherPackages/Level3
+        CollectorGUID: ac4bfbfb365ed5046a20de93e5db8bed
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+  - PackageName: Level4Package
     PackageDesc: 
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
     AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
     Groups:
-    - GroupName: ModelGroup
+    - GroupName: Scenes
       GroupDesc: 
-      AssetTags: models
+      AssetTags: scenes
       ActiveRuleName: EnableGroup
-      Collectors: []
+      Collectors:
+      - CollectPath: Assets/AssetRaw/OtherPackages/Level4
+        CollectorGUID: 692a117e199c9b446a8790ae58eba423
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+  - PackageName: Level5Package
+    PackageDesc: 
+    EnableAddressable: 1
+    LocationToLower: 0
+    IncludeAssetGUID: 0
+    AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
+    Groups:
+    - GroupName: Scenes
+      GroupDesc: 
+      AssetTags: scenes
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/AssetRaw/OtherPackages/Level5
+        CollectorGUID: 859105f36581f974cb2cd8ce8c65e123
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 

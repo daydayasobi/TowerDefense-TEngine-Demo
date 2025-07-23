@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TEngine;
 using UnityEngine;
+using YooAsset;
 
 namespace GameLogic
 {
-    public class ChangeSceneProcedure: ProcedureBase
+    public class ChangeSceneProcedure : ProcedureBase
     {
         IFsm<IProcedureModule> procedureOwner;
 
@@ -28,9 +29,9 @@ namespace GameLogic
             GameModule.UI.CloseUI<UILevelSelectForm>();
             GameModule.UI.CloseUI<MainMenuUI>();
             GameEvent.RemoveEventListener(ChangeSceneEvent.MenuSelect, MenuSelect);
-            GameEvent.RemoveEventListener<LevelDataBase>(ChangeSceneEvent.LevelSelect,LevelSelect);
+            GameEvent.RemoveEventListener<LevelDataBase>(ChangeSceneEvent.LevelSelect, LevelSelect);
         }
-        
+
         private void MenuSelect()
         {
             ChangeState<MainMenuProcedure>(procedureOwner);
@@ -41,7 +42,7 @@ namespace GameLogic
             //加载关卡相关
             LevelDataControl.Instance.OnLoad();
         }
-        
+
         private void LevelSelect(LevelDataBase level)
         {
             Log.Debug("选择场景: " + level.Id);
@@ -52,7 +53,15 @@ namespace GameLogic
         {
             LevelDataControl.Instance.LoadLevel(level.Id);
             GameEvent.Send(LevelEvent.OnLoadLevelFinish, level.Id);
-            await GameModule.Scene.LoadSceneAsync(AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
+            if (level.Id == 4)
+            {
+                await GameModule.Scene.LoadSceneAsync("Level4Package", AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
+            }
+            else
+            {
+                await GameModule.Scene.LoadSceneAsync(AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
+            }
+
             ChangeState<LevelProcedure>(procedureOwner);
         }
     }

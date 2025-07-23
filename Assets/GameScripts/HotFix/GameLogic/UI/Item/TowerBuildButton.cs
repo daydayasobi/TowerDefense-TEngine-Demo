@@ -12,7 +12,6 @@ namespace GameLogic
     /// 防御塔建造按钮控件
     /// 处理建造按钮的显示逻辑与交互行为
     /// </summary>
-    [Window(UILayer.UI)]
     public class TowerBuildButton : UIWidget
     {
         #region 脚本工具生成的代码

@@ -13,7 +13,7 @@ namespace TEngine
         private SceneHandle _currentMainScene;
 
         private readonly Dictionary<string, SceneHandle> _subScenes = new Dictionary<string, SceneHandle>();
-        
+
         private readonly HashSet<string> _handlingScene = new HashSet<string>();
 
         /// <summary>
@@ -54,7 +54,8 @@ namespace TEngine
         /// <param name="priority">优先级</param>
         /// <param name="gcCollect">加载主场景是否回收垃圾。</param>
         /// <param name="progressCallBack">加载进度回调。</param>
-        public async UniTask<Scene> LoadSceneAsync(string location, LoadSceneMode sceneMode = LoadSceneMode.Single, bool suspendLoad = false, uint priority = 100, bool gcCollect = true, Action<float> progressCallBack = null)
+        public async UniTask<Scene> LoadSceneAsync(string packName, string location, LoadSceneMode sceneMode = LoadSceneMode.Single, bool suspendLoad = false, uint priority = 100,
+            bool gcCollect = true, Action<float> progressCallBack = null)
         {
             if (!_handlingScene.Add(location))
             {
@@ -70,7 +71,7 @@ namespace TEngine
                 }
 
                 subScene = YooAssets.LoadSceneAsync(location, sceneMode, LocalPhysicsMode.None, suspendLoad, priority);
-                
+
                 //Fix 这里前置，subScene.IsDone在UnSupendLoad之后才会是true
                 _subScenes.Add(location, subScene);
 
@@ -86,9 +87,9 @@ namespace TEngine
                 {
                     await subScene.ToUniTask();
                 }
-                
+
                 _handlingScene.Remove(location);
-                
+
                 return subScene.SceneObject;
             }
             else
@@ -100,8 +101,9 @@ namespace TEngine
 
                 _currentMainSceneName = location;
 
-                _currentMainScene = YooAssets.LoadSceneAsync(location, sceneMode, LocalPhysicsMode.None, suspendLoad, priority);
-                
+                var package = YooAssets.GetPackage(packName);
+                _currentMainScene = package.LoadSceneAsync(location, sceneMode, LocalPhysicsMode.None, suspendLoad, priority);
+
                 if (progressCallBack != null)
                 {
                     while (!_currentMainScene.IsDone && _currentMainScene.IsValid)
@@ -114,11 +116,91 @@ namespace TEngine
                 {
                     await _currentMainScene.ToUniTask();
                 }
-                
+
                 ModuleSystem.GetModule<IResourceModule>().ForceUnloadUnusedAssets(gcCollect);
-                
+
                 _handlingScene.Remove(location);
-                
+
+                return _currentMainScene.SceneObject;
+            }
+        }
+
+
+        /// <summary>
+        /// 加载场景。
+        /// </summary>
+        /// <param name="location">场景的定位地址</param>
+        /// <param name="sceneMode">场景加载模式</param>
+        /// <param name="suspendLoad">加载完毕时是否主动挂起</param>
+        /// <param name="priority">优先级</param>
+        /// <param name="gcCollect">加载主场景是否回收垃圾。</param>
+        /// <param name="progressCallBack">加载进度回调。</param>
+        public async UniTask<Scene> LoadSceneAsync(string location, LoadSceneMode sceneMode = LoadSceneMode.Single, bool suspendLoad = false, uint priority = 100,
+            bool gcCollect = true, Action<float> progressCallBack = null)
+        {
+            if (!_handlingScene.Add(location))
+            {
+                Log.Error($"Could not load scene while loading. Scene: {location}");
+                return default;
+            }
+
+            if (sceneMode == LoadSceneMode.Additive)
+            {
+                if (_subScenes.TryGetValue(location, out SceneHandle subScene))
+                {
+                    throw new Exception($"Could not load subScene while already loaded. Scene: {location}");
+                }
+
+                subScene = YooAssets.LoadSceneAsync(location, sceneMode, LocalPhysicsMode.None, suspendLoad, priority);
+
+                //Fix 这里前置，subScene.IsDone在UnSupendLoad之后才会是true
+                _subScenes.Add(location, subScene);
+
+                if (progressCallBack != null)
+                {
+                    while (!subScene.IsDone && subScene.IsValid)
+                    {
+                        progressCallBack.Invoke(subScene.Progress);
+                        await UniTask.Yield();
+                    }
+                }
+                else
+                {
+                    await subScene.ToUniTask();
+                }
+
+                _handlingScene.Remove(location);
+
+                return subScene.SceneObject;
+            }
+            else
+            {
+                if (_currentMainScene is { IsDone: false })
+                {
+                    throw new Exception($"Could not load MainScene while loading. CurrentMainScene: {_currentMainSceneName}.");
+                }
+
+                _currentMainSceneName = location;
+
+                _currentMainScene = YooAssets.LoadSceneAsync(location, sceneMode, LocalPhysicsMode.None, suspendLoad, priority);
+
+                if (progressCallBack != null)
+                {
+                    while (!_currentMainScene.IsDone && _currentMainScene.IsValid)
+                    {
+                        progressCallBack.Invoke(_currentMainScene.Progress);
+                        await UniTask.Yield();
+                    }
+                }
+                else
+                {
+                    await _currentMainScene.ToUniTask();
+                }
+
+                ModuleSystem.GetModule<IResourceModule>().ForceUnloadUnusedAssets(gcCollect);
+
+                _handlingScene.Remove(location);
+
                 return _currentMainScene.SceneObject;
             }
         }
@@ -137,13 +219,12 @@ namespace TEngine
             Action<Scene> callBack = null,
             bool gcCollect = true, Action<float> progressCallBack = null)
         {
-            
             if (!_handlingScene.Add(location))
             {
                 Log.Error($"Could not load scene while loading. Scene: {location}");
                 return;
             }
-            
+
             if (sceneMode == LoadSceneMode.Additive)
             {
                 if (_subScenes.TryGetValue(location, out SceneHandle subScene))
@@ -271,22 +352,22 @@ namespace TEngine
         public bool IsMainScene(string location)
         {
             // 获取当前激活的场景  
-            Scene currentScene = SceneManager.GetActiveScene();  
-            
+            Scene currentScene = SceneManager.GetActiveScene();
+
             if (_currentMainSceneName.Equals(location))
             {
                 if (_currentMainScene == null)
                 {
                     return false;
                 }
+
                 // 判断当前场景是否是主场景  
                 if (currentScene.name == _currentMainScene.SceneName)
                 {
                     return true;
                 }
-                    
-                return _currentMainScene.SceneName == currentScene.name;
 
+                return _currentMainScene.SceneName == currentScene.name;
             }
 
             // 判断当前场景是否是主场景  
@@ -335,9 +416,9 @@ namespace TEngine
                 {
                     await unloadOperation.ToUniTask();
                 }
-                
+
                 _subScenes.Remove(location);
-                
+
                 _handlingScene.Remove(location);
 
                 return true;
@@ -363,7 +444,7 @@ namespace TEngine
                     Log.Error($"Could not unload Scene while not loaded. Scene: {location}");
                     return;
                 }
-                
+
                 if (!_handlingScene.Add(location))
                 {
                     Log.Warning($"Could not unload Scene while loading. Scene: {location}");
@@ -382,7 +463,7 @@ namespace TEngine
                 {
                     InvokeProgress(subScene, progressCallBack).Forget();
                 }
-                
+
                 return;
             }
 

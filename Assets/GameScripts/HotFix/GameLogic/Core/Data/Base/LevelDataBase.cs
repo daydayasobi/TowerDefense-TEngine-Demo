@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using GameConfig;
@@ -16,52 +17,40 @@ namespace GameLogic
 
         public int Id
         {
-            get
-            {
-                return dRLevel.Id;
-            }
+            get { return dRLevel.Id; }
         }
 
         public string Name
         {
-            get
-            {
-                return LocalizationManager.GetTermTranslation(dRLevel.Name);
-            }
+            get { return LocalizationManager.GetTermTranslation(dRLevel.Name); }
         }
 
         public string Description
         {
-            get
-            {
-                return LocalizationManager.GetTermTranslation(dRLevel.DescriptionName);
-            }
+            get { return LocalizationManager.GetTermTranslation(dRLevel.DescriptionName); }
         }
 
-        // public string ResourceGroupName
-        // {
-        //     get
-        //     {
-        //         return dRLevel.ResourceGroupName;
-        //     }
-        // }
+        public string PackageName
+        {
+            get
+            {
+                if (dRLevel.PackageName.Equals("Default"))
+                    return GameModule.Resource.DefaultPackageName;
+                else
+                    return dRLevel.PackageName;
+            }
+        }
 
         public int InitEnergy
         {
-            get
-            {
-                return dRLevel.InitEnergy;
-            }
+            get { return dRLevel.InitEnergy; }
         }
-        
+
         public int InitHp
         {
-            get
-            {
-                return dRLevel.InitHp;
-            }
+            get { return dRLevel.InitHp; }
         }
-        
+
         public Vector3 PlayerPosition
         {
             get
@@ -82,26 +71,17 @@ namespace GameLogic
 
         public WaveDataBase[] WaveDatas
         {
-            get
-            {
-                return waveData;
-            }
+            get { return waveData; }
         }
 
         public List<int> AllowTowers
         {
-            get
-            {
-                return dRLevel.AllowTowers;
-            }
+            get { return dRLevel.AllowTowers; }
         }
 
         public SceneDataBase SceneData
         {
-            get
-            {
-                return sceneData;
-            }
+            get { return sceneData; }
         }
 
         public LevelDataBase(LevelData dRLevel, WaveDataBase[] waveData, SceneDataBase sceneData)

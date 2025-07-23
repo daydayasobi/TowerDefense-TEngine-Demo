@@ -27,6 +27,9 @@ namespace GameLogic
 
         // 进入关卡流程
         public static readonly int LevelSelect = RuntimeId.ToRuntimeId("IChangeScene_Event.LevelSelect");
+        
+        // 关卡包下载进度
+        public static readonly int LevelDownloadProgress = RuntimeId.ToRuntimeId("IChangeScene_Event.LevelDownloadProgress");
     }
     
     public partial class PoolEvent

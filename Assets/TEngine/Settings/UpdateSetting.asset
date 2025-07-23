@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0320e56ed14c4f7981ce8f4d27b13316, type: 3}
   m_Name: UpdateSetting
   m_EditorClassIdentifier: 
-  projectName: Demo
+  projectName: TowerDefense-Demo
   HotUpdateAssemblies:
   - GameProto.dll
   - GameLogic.dll
@@ -29,8 +29,8 @@ MonoBehaviour:
   AssemblyTextAssetPath: AssetRaw/DLL
   UpdateStyle: 1
   UpdateNotice: 1
-  ResDownLoadPath: http://127.0.0.1:8081
-  FallbackResDownLoadPath: http://127.0.0.1:8082
+  ResDownLoadPath: http://172.18.0.1
+  FallbackResDownLoadPath: http://172.18.0.1
   LoadResWayWebGL: 0
   isAutoAssetCopeToBuildAddress: 0
   BuildAddress: ../../Builds/Unity_Data/StreamingAssets

@@ -18,12 +18,12 @@ EditorBuildSettings:
     path: Assets/AssetRaw/Scenes/Level2/Level2.unity
     guid: 703ea25111bccbd4db4d58a741d4699e
   - enabled: 1
-    path: Assets/AssetRaw/Scenes/Level3/Level3.unity
+    path: Assets/AssetRaw/OtherPackages/Level3/Level3.unity
     guid: b58c1ce8197772c44b235fe060b3b66d
   - enabled: 1
-    path: Assets/AssetRaw/Scenes/Level4/Level4.unity
+    path: Assets/AssetRaw/OtherPackages/Level4/Level4.unity
     guid: da411bef1885c9c4fb241d192d02f27c
   - enabled: 1
-    path: Assets/AssetRaw/Scenes/Level5/Level5.unity
+    path: Assets/AssetRaw/OtherPackages/Level5/Level5.unity
     guid: 3a8ffd16aeae9fd4091c154184e0d5d5
   m_configObjects: {}

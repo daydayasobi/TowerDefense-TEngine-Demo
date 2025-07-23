@@ -26,21 +26,21 @@ Level 2 Des,Text,,制造迷宫来减缓敌人,Create mazes to slow enemies
 Level 3 Des,Text,,利用瓶颈优势,Take advantage of choke points
 Level 4 Des,Text,,保护长山,Protect the long mountain pass
 Level 5 Des,Text,,防御两路,Guard both paths from enemies
-Assault Cannon,Text,,突击加农炮,WAVE
-Rocket Platform,Text,,火箭,START WAVE
-Plasma Lance,Text,,等离子喷枪,MAIN MENU
-Energy Pylon,Text,,能量塔,RESTART
-EMP Generator,Text,,电磁脉冲发生器,UPGRADE
-Missile Array,Text,,导弹阵列,SELL
-WAVE,Text,,波次,{0} COMPLETE!
-START WAVE,Text,,开始,{0} FAILED!
-MAIN MENU,Text,,主菜单,NEXT LEVEL
-RESTART,Text,,重新开始,Assault Cannon
-UPGRADE,Text,,升级,Rocket Platform
-SELL,Text,,出售,Plasma Lance
-Level Complete,Text,,{0} 完成!,Energy Pylon
-Level Failed,Text,,{0} 失败!,EMP Generator
-NEXT LEVEL,Text,,下一关,Missile Array
+Assault Cannon,Text,,突击加农炮,Assault Cannon
+Rocket Platform,Text,,火箭,Rocket Platform
+Plasma Lance,Text,,等离子喷枪,Plasma Lance
+Energy Pylon,Text,,能量塔,Energy Pylon
+EMP Generator,Text,,电磁脉冲发生器,EMP Generator
+Missile Array,Text,,导弹阵列,Missile Array
+WAVE,Text,,波次,WAVE
+START WAVE,Text,,开始,START WAVE
+MAIN MENU,Text,,主菜单,MAIN MENU
+RESTART,Text,,重新开始,RESTART
+UPGRADE,Text,,升级,UPGRADE
+SELL,Text,,出售,SELL
+Level Complete,Text,,{0} 完成!,{0} COMPLETE!
+Level Failed,Text,,{0} 失败!,{0} FAILED!
+NEXT LEVEL,Text,,下一关,NEXT LEVEL
 Assault Cannon Des 1,Text,,等级 1 - 高射速，低伤害,Tier 1 - High fire rate
 Assault Cannon Des 2,Text,,等级 2 - 高射速，低伤害,Tier 2 - High fire rate
 Assault Cannon Des 3,Text,,等级 3 - 高射速，低伤害,Tier 3 - High fire rate

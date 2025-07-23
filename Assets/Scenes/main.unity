@@ -340,6 +340,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7696541955235861477, guid: e38c712e7904fdf42bd0458b769718dd,
         type: 3}
+      propertyPath: packageName
+      value: DefaultPackage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7696541955235861477, guid: e38c712e7904fdf42bd0458b769718dd,
+        type: 3}
       propertyPath: encryptionType
       value: 1
       objectReference: {fileID: 0}

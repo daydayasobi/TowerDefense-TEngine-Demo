@@ -200,7 +200,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7B80\u4F53\u4E2D\u6587"
+  m_Text: CHINESE SIMPLIFIED
 --- !u!114 &3492719860525916511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,7 +492,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u82F1\u8BED"
+  m_Text: ENGLISH
 --- !u!114 &8279492393264954179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,7 +1011,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u754C\u9762\u97F3\u91CF"
+  m_Text: UI VOLUME
 --- !u!114 &2659096645703960977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1594,7 +1594,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u97F3\u4E50\u97F3\u91CF"
+  m_Text: MUSIC VOLUME
 --- !u!114 &4219775143507979245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,7 +2435,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7279\u6548\u97F3\u91CF"
+  m_Text: SFX VOLUME
 --- !u!114 &5558868987413180554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2742,7 +2742,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8BED\u8A00"
+  m_Text: LANGUAGES
 --- !u!114 &2489895680732125359
 MonoBehaviour:
   m_ObjectHideFlags: 0

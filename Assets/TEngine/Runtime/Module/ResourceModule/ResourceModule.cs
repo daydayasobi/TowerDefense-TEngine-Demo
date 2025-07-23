@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace TEngine
         /// 资源系统运行模式。
         /// </summary>
         public EPlayMode PlayMode { get; set; } = EPlayMode.OfflinePlayMode;
-        
+
         public EncryptionType EncryptionType { get; set; } = EncryptionType.None;
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace TEngine
         public string HostServerURL { get; set; }
 
         public string FallbackHostServerURL { get; set; }
-        
+
         /// <summary>
         /// WebGL：加载资源方式
         /// </summary>
@@ -125,6 +126,7 @@ namespace TEngine
                 defaultPackage = YooAssets.CreatePackage(packageName);
                 YooAssets.SetDefaultPackage(defaultPackage);
             }
+
             DefaultPackage = defaultPackage;
 
             IObjectPoolModule objectPoolManager = ModuleSystem.GetModule<IObjectPoolModule>();
@@ -174,9 +176,9 @@ namespace TEngine
                 createParameters.EditorFileSystemParameters = FileSystemParameters.CreateDefaultEditorFileSystemParameters(packageRoot);
                 initializationOperation = package.InitializeAsync(createParameters);
             }
-            
+
             IDecryptionServices decryptionServices = CreateDecryptionServices();
-            
+
             // 单机运行模式
             if (playMode == EPlayMode.OfflinePlayMode)
             {
@@ -188,8 +190,8 @@ namespace TEngine
             // 联机运行模式
             if (playMode == EPlayMode.HostPlayMode)
             {
-                string defaultHostServer = HostServerURL;
-                string fallbackHostServer = FallbackHostServerURL;
+                string defaultHostServer = Path.Combine(HostServerURL, packageName).Replace("\\", "/");
+                string fallbackHostServer = Path.Combine(FallbackHostServerURL, packageName).Replace("\\", "/");
                 IRemoteServices remoteServices = new RemoteServices(defaultHostServer, fallbackHostServer);
                 var createParameters = new HostPlayModeParameters();
                 createParameters.BuildinFileSystemParameters = FileSystemParameters.CreateDefaultBuildinFileSystemParameters(decryptionServices);
@@ -212,10 +214,11 @@ namespace TEngine
                 createParameters.WebServerFileSystemParameters = WechatFileSystemCreater.CreateFileSystemParameters(packageRoot, remoteServices, webDecryptionServices);
 #else
                 Log.Info("=======================UNITY_WEBGL=======================");
-                if (LoadResWayWebGL==LoadResWayWebGL.Remote)
+                if (LoadResWayWebGL == LoadResWayWebGL.Remote)
                 {
                     createParameters.WebRemoteFileSystemParameters = FileSystemParameters.CreateDefaultWebRemoteFileSystemParameters(remoteServices, webDecryptionServices);
                 }
+
                 createParameters.WebServerFileSystemParameters = FileSystemParameters.CreateDefaultWebServerFileSystemParameters(webDecryptionServices);
 #endif
                 initializationOperation = package.InitializeAsync(createParameters);
