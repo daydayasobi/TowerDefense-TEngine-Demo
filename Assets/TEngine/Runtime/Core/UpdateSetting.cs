@@ -55,6 +55,12 @@ namespace TEngine
         /// </summary>
         [SerializeField]
         private string projectName = "Demo";
+        
+        /// <summary>
+        /// 默认的资源标签名字
+        /// </summary>
+        [SerializeField]
+        private string defaultTagName = "Base";
 
         public bool Enable
         {

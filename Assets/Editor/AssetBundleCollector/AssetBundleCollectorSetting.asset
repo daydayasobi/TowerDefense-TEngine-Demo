@@ -26,7 +26,7 @@ MonoBehaviour:
     Groups:
     - GroupName: Actor
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/Actor
@@ -39,7 +39,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: Audios
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/Audios
@@ -52,7 +52,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: Configs
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/Configs
@@ -65,7 +65,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: DLL
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/DLL
@@ -78,7 +78,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: Effects
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/Effects
@@ -91,7 +91,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: Fonts
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/Fonts
@@ -104,7 +104,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: Materials
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/Materials
@@ -117,7 +117,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: Scenes
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/Scenes
@@ -130,7 +130,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: UI
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/UI
@@ -143,7 +143,7 @@ MonoBehaviour:
         UserData: 
     - GroupName: UIRaw
       GroupDesc: 
-      AssetTags: 
+      AssetTags: Base
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/AssetRaw/UIRaw/Atlas
@@ -159,6 +159,45 @@ MonoBehaviour:
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Level3
+      GroupDesc: 
+      AssetTags: Level3
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/AssetRaw/OtherPackages/Level3/Level3.unity
+        CollectorGUID: b58c1ce8197772c44b235fe060b3b66d
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackGroup
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Level4
+      GroupDesc: 
+      AssetTags: Level4
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/AssetRaw/OtherPackages/Level4/Level4.unity
+        CollectorGUID: da411bef1885c9c4fb241d192d02f27c
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackGroup
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Level5
+      GroupDesc: 
+      AssetTags: Level5
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/AssetRaw/OtherPackages/Level5/Level5.unity
+        CollectorGUID: 3a8ffd16aeae9fd4091c154184e0d5d5
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackGroup
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
@@ -180,48 +219,6 @@ MonoBehaviour:
       AssetTags: scenes
       ActiveRuleName: EnableGroup
       Collectors: []
-  - PackageName: Level3Package
-    PackageDesc: 
-    EnableAddressable: 1
-    LocationToLower: 0
-    IncludeAssetGUID: 0
-    AutoCollectShaders: 1
-    IgnoreRuleName: NormalIgnoreRule
-    Groups:
-    - GroupName: Scenes
-      GroupDesc: 
-      AssetTags: scenes
-      ActiveRuleName: EnableGroup
-      Collectors:
-      - CollectPath: Assets/AssetRaw/OtherPackages/Level3
-        CollectorGUID: ac4bfbfb365ed5046a20de93e5db8bed
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackDirectory
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
-  - PackageName: Level4Package
-    PackageDesc: 
-    EnableAddressable: 1
-    LocationToLower: 0
-    IncludeAssetGUID: 0
-    AutoCollectShaders: 1
-    IgnoreRuleName: NormalIgnoreRule
-    Groups:
-    - GroupName: Scenes
-      GroupDesc: 
-      AssetTags: scenes
-      ActiveRuleName: EnableGroup
-      Collectors:
-      - CollectPath: Assets/AssetRaw/OtherPackages/Level4
-        CollectorGUID: 692a117e199c9b446a8790ae58eba423
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackDirectory
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
   - PackageName: Level5Package
     PackageDesc: 
     EnableAddressable: 1
@@ -230,13 +227,13 @@ MonoBehaviour:
     AutoCollectShaders: 1
     IgnoreRuleName: NormalIgnoreRule
     Groups:
-    - GroupName: Scenes
+    - GroupName: Level5
       GroupDesc: 
-      AssetTags: scenes
+      AssetTags: Level5
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/AssetRaw/OtherPackages/Level5
-        CollectorGUID: 859105f36581f974cb2cd8ce8c65e123
+      - CollectPath: Assets/AssetRaw/OtherPackages/Level5/Level5.unity
+        CollectorGUID: 3a8ffd16aeae9fd4091c154184e0d5d5
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory

@@ -19,6 +19,7 @@ public sealed partial class LevelData : Luban.BeanBase
         Id = _buf.ReadInt();
         Description = _buf.ReadString();
         Name = _buf.ReadString();
+        GroupName = _buf.ReadString();
         PackageName = _buf.ReadString();
         DescriptionName = _buf.ReadString();
         SceneId = _buf.ReadInt();
@@ -47,6 +48,10 @@ public sealed partial class LevelData : Luban.BeanBase
     /// 名称
     /// </summary>
     public readonly string Name;
+    /// <summary>
+    /// 资源组
+    /// </summary>
+    public readonly string GroupName;
     /// <summary>
     /// 资源包
     /// </summary>
@@ -97,6 +102,7 @@ public sealed partial class LevelData : Luban.BeanBase
         + "id:" + Id + ","
         + "description:" + Description + ","
         + "name:" + Name + ","
+        + "groupName:" + GroupName + ","
         + "packageName:" + PackageName + ","
         + "DescriptionName:" + DescriptionName + ","
         + "SceneId:" + SceneId + ","

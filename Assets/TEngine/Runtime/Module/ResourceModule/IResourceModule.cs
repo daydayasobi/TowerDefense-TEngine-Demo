@@ -25,7 +25,7 @@ namespace TEngine
         /// 获取或设置运行模式。
         /// </summary>
         EPlayMode PlayMode { get; set; }
-        
+
         /// <summary>
         /// 资源加密方式。
         /// </summary>
@@ -63,6 +63,11 @@ namespace TEngine
         string DefaultPackageName { get; set; }
 
         /// <summary>
+        /// 默认标签名称。
+        /// </summary>
+        string[] DefaultTagName { get; set; }
+
+        /// <summary>
         /// 获取或设置异步系统参数，每帧执行消耗的最大时间切片（单位：毫秒）。
         /// </summary>
         long Milliseconds { get; set; }
@@ -71,17 +76,17 @@ namespace TEngine
         /// 热更链接URL。
         /// </summary>
         string HostServerURL { get; set; }
-        
+
         /// <summary>
         /// 备用热更URL。
         /// </summary>
         string FallbackHostServerURL { get; set; }
-        
+
         /// <summary>
         /// WebGL平台加载本地资源/加载远程资源。
         /// </summary>
         LoadResWayWebGL LoadResWayWebGL { get; set; }
-        
+
         /// <summary>
         /// 获取或设置资源对象池自动释放可释放对象的间隔秒数。
         /// </summary>
@@ -277,6 +282,14 @@ namespace TEngine
         ResourceDownloaderOperation CreateResourceDownloader(string customPackageName = "");
 
         /// <summary>
+        /// 创建资源下载器，用于下载当前资源版本所有的资源包文件。
+        /// </summary>
+        /// <param name="customPackageName">指定资源包的名称。不传使用默认资源包</param>
+        ResourceDownloaderOperation CreateResourceDownloader(string[] tags, string customPackageName = "");
+
+        public bool IsTagResourcesExist(string tag, string packageName = "");
+
+        /// <summary>
         /// 当前最新的包裹版本。
         /// </summary>
         string PackageVersion { set; get; }
@@ -316,7 +329,7 @@ namespace TEngine
         /// 低内存行为。
         /// </summary>
         void OnLowMemory();
-        
+
         /// <summary>
         /// 低内存回调保护。
         /// </summary>

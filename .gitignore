@@ -103,3 +103,453 @@ yoo/
 [Aa]ssets/vInspector
 [Aa]ssets/vTabs
 [Aa]ssets/vFavorites
+Assets/vFavorites.meta
+Assets/vHierarchy.meta
+Assets/vInspector.meta
+Assets/vTabs.meta
+Assets/Plugins/Easy Save 3.meta
+Assets/Plugins/Easy Save 3/Change Log.meta
+Assets/Plugins/Easy Save 3/Editor.meta
+Assets/Plugins/Easy Save 3/PlayMaker.meta
+Assets/Plugins/Easy Save 3/Resources.meta
+Assets/Plugins/Easy Save 3/Scripts.meta
+Assets/Plugins/Easy Save 3/Web.meta
+Assets/Plugins/Easy Save 3/Change Log/Change Log.txt
+Assets/Plugins/Easy Save 3/Change Log/Change Log.txt.meta
+Assets/Plugins/Easy Save 3/Editor/AddES3Prefab.cs
+Assets/Plugins/Easy Save 3/Editor/AddES3Prefab.cs.meta
+Assets/Plugins/Easy Save 3/Editor/AutoSaveWindow.cs
+Assets/Plugins/Easy Save 3/Editor/AutoSaveWindow.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ChangeReferenceID.cs
+Assets/Plugins/Easy Save 3/Editor/ChangeReferenceID.cs.meta
+Assets/Plugins/Easy Save 3/Editor/checkmark.png
+Assets/Plugins/Easy Save 3/Editor/checkmark.png.meta
+Assets/Plugins/Easy Save 3/Editor/checkmarkSmall.png
+Assets/Plugins/Easy Save 3/Editor/checkmarkSmall.png.meta
+Assets/Plugins/Easy Save 3/Editor/EasySave3.asmdef.disabled
+Assets/Plugins/Easy Save 3/Editor/EasySave3.asmdef.disabled.meta
+Assets/Plugins/Easy Save 3/Editor/EasySave3Editor.asmdef.disabled
+Assets/Plugins/Easy Save 3/Editor/EasySave3Editor.asmdef.disabled.meta
+Assets/Plugins/Easy Save 3/Editor/EnableES3AssemblyDefinitions.cs
+Assets/Plugins/Easy Save 3/Editor/EnableES3AssemblyDefinitions.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3Asmdefs.unitypackage.meta
+Assets/Plugins/Easy Save 3/Editor/ES3AutoSaveEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3AutoSaveEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3AutoSaveMgrEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3AutoSaveMgrEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3ClassTypeTemplate.txt
+Assets/Plugins/Easy Save 3/Editor/ES3ClassTypeTemplate.txt.meta
+Assets/Plugins/Easy Save 3/Editor/ES3ComponentTypeTemplate.txt
+Assets/Plugins/Easy Save 3/Editor/ES3ComponentTypeTemplate.txt.meta
+Assets/Plugins/Easy Save 3/Editor/ES3EditorStyle.cs
+Assets/Plugins/Easy Save 3/Editor/ES3EditorStyle.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3EditorUtility.cs
+Assets/Plugins/Easy Save 3/Editor/ES3EditorUtility.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3GameObjectEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3GameObjectEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3GlobalReferencesEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3GlobalReferencesEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3InspectorInfoEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3InspectorInfoEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/es3Logo16x16.png
+Assets/Plugins/Easy Save 3/Editor/es3Logo16x16.png.meta
+Assets/Plugins/Easy Save 3/Editor/es3Logo16x16-bw.png
+Assets/Plugins/Easy Save 3/Editor/es3Logo16x16-bw.png.meta
+Assets/Plugins/Easy Save 3/Editor/ES3PlayMakerEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3PlayMakerEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3Postprocessor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3Postprocessor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3PrefabEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3PrefabEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3ReferenceMgrEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3ReferenceMgrEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3ScriptableObjectTypeTemplate.txt
+Assets/Plugins/Easy Save 3/Editor/ES3ScriptableObjectTypeTemplate.txt.meta
+Assets/Plugins/Easy Save 3/Editor/ES3ScriptingDefineSymbols.cs
+Assets/Plugins/Easy Save 3/Editor/ES3ScriptingDefineSymbols.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3SettingsEditor.cs
+Assets/Plugins/Easy Save 3/Editor/ES3SettingsEditor.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ES3Type_MaterialTemplate.txt
+Assets/Plugins/Easy Save 3/Editor/ES3Type_MaterialTemplate.txt.meta
+Assets/Plugins/Easy Save 3/Editor/ES3TypeTemplate.txt
+Assets/Plugins/Easy Save 3/Editor/ES3TypeTemplate.txt.meta
+Assets/Plugins/Easy Save 3/Editor/ES3ValueTypeTemplate.txt
+Assets/Plugins/Easy Save 3/Editor/ES3ValueTypeTemplate.txt.meta
+Assets/Plugins/Easy Save 3/Editor/ES3Window.cs
+Assets/Plugins/Easy Save 3/Editor/ES3Window.cs.meta
+Assets/Plugins/Easy Save 3/Editor/HomeWindow.cs
+Assets/Plugins/Easy Save 3/Editor/HomeWindow.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ReferencesWindow.cs
+Assets/Plugins/Easy Save 3/Editor/ReferencesWindow.cs.meta
+Assets/Plugins/Easy Save 3/Editor/SettingsWindow.cs
+Assets/Plugins/Easy Save 3/Editor/SettingsWindow.cs.meta
+Assets/Plugins/Easy Save 3/Editor/ToolsWindow.cs
+Assets/Plugins/Easy Save 3/Editor/ToolsWindow.cs.meta
+Assets/Plugins/Easy Save 3/Editor/TypesWindow.cs
+Assets/Plugins/Easy Save 3/Editor/TypesWindow.cs.meta
+Assets/Plugins/Easy Save 3/PlayMaker/ES3PlayMaker.cs
+Assets/Plugins/Easy Save 3/PlayMaker/ES3PlayMaker.cs.meta
+Assets/Plugins/Easy Save 3/Resources/ES3.meta
+Assets/Plugins/Easy Save 3/Resources/ES3/ES3Defaults.asset
+Assets/Plugins/Easy Save 3/Resources/ES3/ES3Defaults.asset.meta
+Assets/Plugins/Easy Save 3/Scripts/Attributes.meta
+Assets/Plugins/Easy Save 3/Scripts/Auto Save.meta
+Assets/Plugins/Easy Save 3/Scripts/Debugging.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3Crypto.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3Crypto.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3File.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3File.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3GameObject.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3GameObject.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3GlobalManager.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3GlobalManager.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3InspectorInfo.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3InspectorInfo.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3IO.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3IO.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3Prefab.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3Prefab.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3ReferenceMgr.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3ReferenceMgr.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3ReferenceMgrBase.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3ReferenceMgrBase.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3Reflection.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3Reflection.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3SerializableDictionary.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3SerializableDictionary.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/ES3Spreadsheet.cs
+Assets/Plugins/Easy Save 3/Scripts/ES3Spreadsheet.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Readers.meta
+Assets/Plugins/Easy Save 3/Scripts/Referencing.meta
+Assets/Plugins/Easy Save 3/Scripts/Save Slots.meta
+Assets/Plugins/Easy Save 3/Scripts/Settings.meta
+Assets/Plugins/Easy Save 3/Scripts/Streams.meta
+Assets/Plugins/Easy Save 3/Scripts/Types.meta
+Assets/Plugins/Easy Save 3/Scripts/Web.meta
+Assets/Plugins/Easy Save 3/Scripts/Writers.meta
+Assets/Plugins/Easy Save 3/Scripts/Attributes/ES3Attributes.cs
+Assets/Plugins/Easy Save 3/Scripts/Attributes/ES3Attributes.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Auto Save/ES3AutoSave.cs
+Assets/Plugins/Easy Save 3/Scripts/Auto Save/ES3AutoSave.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Auto Save/ES3AutoSaveMgr.cs
+Assets/Plugins/Easy Save 3/Scripts/Auto Save/ES3AutoSaveMgr.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Debugging/ES3Debug.cs
+Assets/Plugins/Easy Save 3/Scripts/Debugging/ES3Debug.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Readers/ES3JSONReader.cs
+Assets/Plugins/Easy Save 3/Scripts/Readers/ES3JSONReader.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Readers/ES3Reader.cs
+Assets/Plugins/Easy Save 3/Scripts/Readers/ES3Reader.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Readers/ES3XMLReader.cs
+Assets/Plugins/Easy Save 3/Scripts/Readers/ES3XMLReader.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Referencing/ES3GlobalReferences.cs
+Assets/Plugins/Easy Save 3/Scripts/Referencing/ES3GlobalReferences.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/Easy Save Slots Canvas.prefab
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/Easy Save Slots Canvas.prefab.meta
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/ES3CreateSlot.cs
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/ES3CreateSlot.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/ES3Slot.cs
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/ES3Slot.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/ES3SlotDialog.cs
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/ES3SlotDialog.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/ES3SlotManager.cs
+Assets/Plugins/Easy Save 3/Scripts/Save Slots/ES3SlotManager.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Settings/ES3Defaults.cs
+Assets/Plugins/Easy Save 3/Scripts/Settings/ES3Defaults.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Settings/ES3DefaultSettings.cs
+Assets/Plugins/Easy Save 3/Scripts/Settings/ES3DefaultSettings.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Settings/ES3Settings.cs
+Assets/Plugins/Easy Save 3/Scripts/Settings/ES3Settings.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Streams/ES3FileStream.cs
+Assets/Plugins/Easy Save 3/Scripts/Streams/ES3FileStream.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Streams/ES3PlayerPrefsStream.cs
+Assets/Plugins/Easy Save 3/Scripts/Streams/ES3PlayerPrefsStream.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Streams/ES3ResourcesStream.cs
+Assets/Plugins/Easy Save 3/Scripts/Streams/ES3ResourcesStream.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Streams/ES3Stream.cs
+Assets/Plugins/Easy Save 3/Scripts/Streams/ES3Stream.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3ComponentType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3ComponentType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3GenericType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3GenericType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3IListGenericType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3IListGenericType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3ObjectType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3ObjectType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3Property.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3Property.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3ScriptableObjectType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3ScriptableObjectType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3Type.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3Type.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3TypeMgr.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3TypeMgr.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3UnityObjectType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/ES3UnityObjectType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES32DArrayType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES32DArrayType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES33DArrayType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES33DArrayType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3ArrayType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3ArrayType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3CollectionType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3CollectionType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3ConcurrentDictionaryType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3ConcurrentDictionaryType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3DictionaryType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3DictionaryType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3HashSetType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3HashSetType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3ListType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3ListType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3NativeArrayType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3NativeArrayType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3ObservableListType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3ObservableListType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3QueueType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3QueueType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3StackType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3StackType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3TupleType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3TupleType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3Type_ArrayList.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Collection Types/ES3Type_ArrayList.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types/ES3Type_BigInteger.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types/ES3Type_BigInteger.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types/ES3Type_Nullable.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types/ES3Type_Nullable.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types/ES3Type_Random.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types/ES3Type_Random.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types/ES3Type_Type.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/NET Types/ES3Type_Type.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_bool.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_bool.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_byte.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_byte.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_byteArray.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_byteArray.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_char.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_char.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_DateTime.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_DateTime.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_decimal.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_decimal.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_double.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_double.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_enum.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_enum.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_ES3Ref.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_ES3Ref.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_float.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_float.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_int.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_int.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_intptr.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_intptr.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_long.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_long.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_sbyte.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_sbyte.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_short.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_short.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_string.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_string.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_uint.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_uint.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_UIntPtr.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_UIntPtr.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_ulong.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_ulong.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_ushort.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Primitive Types/ES3Type_ushort.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedComponentType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedComponentType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedObjectType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedObjectType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedScriptableObjectType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedScriptableObjectType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedUnityObjectType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedUnityObjectType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedValueType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Reflected Types/ES3ReflectedValueType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_AnimationCurve.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_AnimationCurve.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_AudioClip.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_AudioClip.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_BoneWeight.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_BoneWeight.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Bounds.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Bounds.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Burst.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Burst.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_CollisionModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_CollisionModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Color.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Color.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Color32.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Color32.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ColorBySpeedModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ColorBySpeedModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ColorOverLifetimeModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ColorOverLifetimeModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_EmissionModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_EmissionModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ExternalForcesModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ExternalForcesModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Flare.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Flare.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Font.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Font.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ForceOverLifetimeModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ForceOverLifetimeModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_GameObject.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_GameObject.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Gradient.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Gradient.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_GradientAlphaKey.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_GradientAlphaKey.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_GradientColorKey.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_GradientColorKey.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Guid.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Guid.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_InheritVelocityModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_InheritVelocityModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Keyframe.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Keyframe.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_LayerMask.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_LayerMask.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Light.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Light.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_LightsModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_LightsModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_LimitVelocityOverLifetimeModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_LimitVelocityOverLifetimeModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_MainModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_MainModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Material.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Material.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Matrix4x4.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Matrix4x4.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Mesh.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Mesh.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_MinMaxCurve.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_MinMaxCurve.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_MinMaxGradient.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_MinMaxGradient.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_NoiseModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_NoiseModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_PhysicMaterial.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_PhysicMaterial.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_PhysicsMaterial2D.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_PhysicsMaterial2D.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Quaternion.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Quaternion.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Rect.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Rect.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_RectTransform.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_RectTransform.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_RenderTexture.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_RenderTexture.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_RotationBySpeedModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_RotationBySpeedModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_RotationOverLifetimeModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_RotationOverLifetimeModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Shader.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Shader.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ShapeModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_ShapeModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SizeBySpeedModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SizeBySpeedModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SizeOverLifetimeModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SizeOverLifetimeModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SkinnedMeshRenderer.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SkinnedMeshRenderer.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Sprite.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Sprite.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SpriteRenderer.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SpriteRenderer.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SubEmittersModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_SubEmittersModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Texture.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Texture.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Texture2D.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Texture2D.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_TextureSheetAnimationModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_TextureSheetAnimationModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_TrailModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_TrailModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_TriggerModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_TriggerModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector2.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector2.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector2Int.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector2Int.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector3.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector3.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector3Int.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector3Int.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector4.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_Vector4.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_VelocityOverLifetimeModule.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/ES3Type_VelocityOverLifetimeModule.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/UnityObjectType.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/UnityObjectType.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_BoxCollider.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_BoxCollider.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_BoxCollider2D.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_BoxCollider2D.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Camera.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Camera.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_CapsuleCollider.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_CapsuleCollider.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_EventSystem.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_EventSystem.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Image.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Image.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_MeshCollider.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_MeshCollider.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_MeshFilter.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_MeshFilter.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_MeshRenderer.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_MeshRenderer.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_ParticleSystem.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_ParticleSystem.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_PolygonCollider2D.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_PolygonCollider2D.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_RawImage.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_RawImage.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Rigidbody.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Rigidbody.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_SphereCollider.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_SphereCollider.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Text.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Text.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Transform.cs
+Assets/Plugins/Easy Save 3/Scripts/Types/Unity Types/Component Types/ES3Type_Transform.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Web/ES3Cloud.cs
+Assets/Plugins/Easy Save 3/Scripts/Web/ES3Cloud.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Web/ES3WebClass.cs
+Assets/Plugins/Easy Save 3/Scripts/Web/ES3WebClass.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3Binary.cs
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3Binary.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3BinaryWriter.cs
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3BinaryWriter.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3CacheWriter.cs
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3CacheWriter.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3JSONWriter.cs
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3JSONWriter.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3Writer.cs
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3Writer.cs.meta
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3XMLWriter.cs
+Assets/Plugins/Easy Save 3/Scripts/Writers/ES3XMLWriter.cs.meta
+Assets/Plugins/Easy Save 3/Web/ES3Cloud.php
+Assets/Plugins/Easy Save 3/Web/ES3Cloud.php.meta

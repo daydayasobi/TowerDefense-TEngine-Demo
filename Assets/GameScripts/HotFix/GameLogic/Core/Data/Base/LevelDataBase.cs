@@ -40,6 +40,14 @@ namespace GameLogic
                     return dRLevel.PackageName;
             }
         }
+        
+        public string GroupName
+        {
+            get
+            {
+                return dRLevel.GroupName;
+            }
+        }
 
         public int InitEnergy
         {

@@ -23,6 +23,11 @@ namespace TEngine
         public string DefaultPackageName { get; set; } = "DefaultPackage";
 
         /// <summary>
+        /// 默认资源标签名称。
+        /// </summary>
+        public string[] DefaultTagName { get; set; }
+
+        /// <summary>
         /// 资源系统运行模式。
         /// </summary>
         public EPlayMode PlayMode { get; set; } = EPlayMode.OfflinePlayMode;
@@ -73,6 +78,7 @@ namespace TEngine
         /// 获取当前内部资源版本号。
         /// </summary>
         public int InternalResourceVersion => _internalResourceVersion;
+        
 
         /// <summary>
         /// 当前最新的包裹版本。
@@ -334,6 +340,63 @@ namespace TEngine
 
             Downloader = package.CreateResourceDownloader(DownloadingMaxNum, FailedTryAgain);
             return Downloader;
+        }
+        
+        /// <summary>
+        /// 创建资源下载器，根据tag下载当前资源版本所有的资源包文件。
+        /// </summary>
+        /// <param name="tags"></param>
+        /// <param name="customPackageName"></param>
+        /// <returns></returns>
+        public ResourceDownloaderOperation CreateResourceDownloader(string[] tags, string customPackageName = "")
+        {
+            ResourcePackage package = null;
+            if (string.IsNullOrEmpty(customPackageName))
+            {
+                package = YooAssets.GetPackage(this.DefaultPackageName);
+            }
+            else
+            {
+                package = YooAssets.GetPackage(customPackageName);
+            }
+            Downloader = package.CreateResourceDownloader(tags, DownloadingMaxNum, FailedTryAgain);
+            return Downloader;
+        }
+
+        public bool IsTagResourcesExist(string tag, string packageName = "")
+        {
+            var package = string.IsNullOrEmpty(packageName)
+                ? YooAssets.GetPackage(DefaultPackageName)
+                : YooAssets.GetPackage(packageName);
+    
+            // 1. 获取标签对应的所有资源包信息
+            var bundleInfos = package.GetAssetInfo(tag);
+    
+            if (bundleInfos == null)
+            {
+                Log.Warning($"No resources found for tag: {tag}");
+                return false;
+            }
+    
+            // // 2. 检查每个资源包的状态
+            // foreach (var bundleInfo in bundleInfos)
+            // {
+            //     // 资源包未下载且需要从远程下载
+            //     if (!bundleInfo.IsInvalid && package.IsNeedDownloadFromRemote(bundleInfo))
+            //     {
+            //         Log.Info($"Resource bundle not downloaded: {bundleInfo.BundleName}");
+            //         return false;
+            //     }
+            //
+            //     // 资源包已下载但文件不存在（可能被误删）
+            //     if (bundleInfo.IsInvalid && !File.Exists(bundleInfo.LocalPath))
+            //     {
+            //         Log.Warning($"Downloaded file missing: {bundleInfo.LocalPath}");
+            //         return false;
+            //     }
+            // }
+    
+            return true;
         }
 
         /// <summary>

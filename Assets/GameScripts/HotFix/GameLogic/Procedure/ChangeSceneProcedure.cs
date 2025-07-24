@@ -53,14 +53,10 @@ namespace GameLogic
         {
             LevelDataControl.Instance.LoadLevel(level.Id);
             GameEvent.Send(LevelEvent.OnLoadLevelFinish, level.Id);
-            if (level.Id == 4)
-            {
-                await GameModule.Scene.LoadSceneAsync("Level4Package", AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
-            }
-            else
-            {
-                await GameModule.Scene.LoadSceneAsync(AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
-            }
+
+            await GameModule.Scene.LoadSceneAsync(level.PackageName, AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
+            
+            await GameModule.Scene.LoadSceneAsync(AssetsDataLoader.Instance.GetItemConfig(level.SceneData.AssetPath).ResourcesName);
 
             ChangeState<LevelProcedure>(procedureOwner);
         }

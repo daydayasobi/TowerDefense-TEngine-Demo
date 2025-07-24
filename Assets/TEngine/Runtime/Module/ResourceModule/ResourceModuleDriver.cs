@@ -48,12 +48,27 @@ namespace TEngine
         private string packageName = "DefaultPackage";
 
         /// <summary>
+        /// 默认补丁名称。
+        /// </summary>
+        [SerializeField]
+        private string[] tagName = new string[] { "Base" };
+
+        /// <summary>
         /// 资源包名称。
         /// </summary>
         public string PackageName
         {
             get => packageName;
             set => packageName = value;
+        }
+
+        /// <summary>
+        /// 资源包名称。
+        /// </summary>
+        public string[] TagName
+        {
+            get => tagName;
+            set => tagName = value;
         }
 
         /// <summary>
@@ -89,10 +104,10 @@ namespace TEngine
 #endif
             }
         }
-        
+
         [SerializeField]
         private EncryptionType encryptionType = EncryptionType.None;
-        
+
         /// <summary>
         /// 资源模块的加密类型。
         /// </summary>
@@ -245,12 +260,13 @@ namespace TEngine
             }
 
             _resourceModule.DefaultPackageName = PackageName;
+            _resourceModule.DefaultTagName = tagName;
             _resourceModule.PlayMode = PlayMode;
             _resourceModule.EncryptionType = encryptionType;
             _resourceModule.Milliseconds = milliseconds;
             _resourceModule.HostServerURL = Settings.UpdateSetting.GetResDownLoadPath();
             _resourceModule.FallbackHostServerURL = Settings.UpdateSetting.GetFallbackResDownLoadPath();
-            _resourceModule.LoadResWayWebGL=Settings.UpdateSetting.GetLoadResWayWebGL();
+            _resourceModule.LoadResWayWebGL = Settings.UpdateSetting.GetLoadResWayWebGL();
             _resourceModule.DownloadingMaxNum = DownloadingMaxNum;
             _resourceModule.FailedTryAgain = FailedTryAgain;
             _resourceModule.UpdatableWhilePlaying = UpdatableWhilePlaying;
