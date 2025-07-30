@@ -112,7 +112,6 @@ namespace GameLogic
                     Log.Error($"资源包 {packageName} 下载失败！");
                     GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, -1f));
                 }
-                
             }
             else
             {

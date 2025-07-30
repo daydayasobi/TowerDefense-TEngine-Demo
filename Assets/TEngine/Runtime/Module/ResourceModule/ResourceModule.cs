@@ -378,24 +378,6 @@ namespace TEngine
                 return false;
             }
     
-            // // 2. 检查每个资源包的状态
-            // foreach (var bundleInfo in bundleInfos)
-            // {
-            //     // 资源包未下载且需要从远程下载
-            //     if (!bundleInfo.IsInvalid && package.IsNeedDownloadFromRemote(bundleInfo))
-            //     {
-            //         Log.Info($"Resource bundle not downloaded: {bundleInfo.BundleName}");
-            //         return false;
-            //     }
-            //
-            //     // 资源包已下载但文件不存在（可能被误删）
-            //     if (bundleInfo.IsInvalid && !File.Exists(bundleInfo.LocalPath))
-            //     {
-            //         Log.Warning($"Downloaded file missing: {bundleInfo.LocalPath}");
-            //         return false;
-            //     }
-            // }
-    
             return true;
         }
 

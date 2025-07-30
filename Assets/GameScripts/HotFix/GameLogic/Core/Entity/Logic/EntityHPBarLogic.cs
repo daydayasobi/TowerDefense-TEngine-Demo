@@ -7,7 +7,7 @@ namespace GameLogic
 {
     public class EntityHPBarLogic : EntityLogic
     {
-         public Transform healthBar;
+        public Transform healthBar;
         public Transform backgroundBar;
         private Transform cameraToFace;
 

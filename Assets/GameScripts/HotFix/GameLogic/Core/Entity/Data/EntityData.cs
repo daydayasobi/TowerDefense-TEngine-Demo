@@ -89,16 +89,6 @@ namespace GameLogic
             return entityData;
         }
 
-        // public static EntityData Create(Vector3 position, Quaternion quaternion, Transform parent, int serialId, object userData = null)
-        // {
-        //     EntityData entityData = PoolReference.Acquire<EntityData>();
-        //     entityData.Position = position;
-        //     entityData.Rotation = quaternion;
-        //     entityData.UserData = userData;
-        //     entityData.Parent = parent;
-        //     return entityData;
-        // }
-
         public static EntityData Create(Vector3 position, Quaternion quaternion, Transform parent, int serialId, object userData = null)
         {
             EntityData entityData = PoolReference.Acquire<EntityData>();
