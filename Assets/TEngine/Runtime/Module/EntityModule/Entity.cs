@@ -153,8 +153,6 @@ namespace TEngine
         }
 
         /*
-
-
         /// <summary>
         /// 实体附加子实体。
         /// </summary>
@@ -228,7 +226,6 @@ namespace TEngine
                 Log.Error("Entity '[{0}]{1}' OnDetachFrom with exception '{2}'.", m_Id.ToString(), m_EntityAssetName, exception.ToString());
             }
         }
-
          */
 
         /// <summary>

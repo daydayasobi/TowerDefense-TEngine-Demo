@@ -135,7 +135,7 @@ namespace TEngine
         /// <param name="location">资源定位地址。</param>
         /// <param name="packageName">资源包名称。</param>
         /// <returns>检查资源是否存在的结果。</returns>
-        public HasAssetResult HasAsset(string location, string packageName = "");
+        public HasAssetResult HasAsset(string location, string packageName);
 
         /// <summary>
         /// 检查资源定位地址是否有效。
@@ -287,7 +287,7 @@ namespace TEngine
         /// <param name="customPackageName">指定资源包的名称。不传使用默认资源包</param>
         ResourceDownloaderOperation CreateResourceDownloader(string[] tags, string customPackageName = "");
 
-        public bool IsTagResourcesExist(string tag, string packageName = "");
+        public bool IsTagResourcesExist(string tag, string packageName);
 
         /// <summary>
         /// 当前最新的包裹版本。

@@ -42,7 +42,10 @@ namespace Procedure
         {
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
 
-            _downloader = _resourceModule.CreateResourceDownloader(GameModule.Resource.DefaultTagName);
+            // _downloader = _resourceModule.CreateResourceDownloader(GameModule.Resource.DefaultTagName);
+            // 直接从 ResourceModule 获取默认标签
+            _downloader = _resourceModule.CreateResourceDownloader(_resourceModule.DefaultTagName);
+            
 
             if (_downloader.TotalDownloadCount == 0)
             {
@@ -67,6 +70,14 @@ namespace Procedure
                     LoadStyle.StyleEnum.Style_StartUpdate_Notice
                     , StartDownFile, Application.Quit);
             }
+        }
+        
+        private ResourceDownloaderOperation CreateFallbackDownloader()
+        {
+            // 创建一个简单的下载器实现
+            // 这里需要根据你的 YooAsset 版本调整
+            var package = YooAssets.GetPackage("DefaultPackage");
+            return package.CreateResourceDownloader(10, 60);
         }
 
         void StartDownFile()

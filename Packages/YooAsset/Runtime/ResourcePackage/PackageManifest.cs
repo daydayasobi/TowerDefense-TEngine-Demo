@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +20,11 @@ namespace YooAsset
         /// 启用可寻址资源定位
         /// </summary>
         public bool EnableAddressable;
+
+        /// <summary>
+        /// 支持无后缀名的资源定位地址
+        /// </summary>
+        public bool SupportExtensionless;
 
         /// <summary>
         /// 资源定位地址大小写不敏感
@@ -117,6 +121,7 @@ namespace YooAsset
             PackageDetails details = new PackageDetails();
             details.FileVersion = FileVersion;
             details.EnableAddressable = EnableAddressable;
+            details.SupportExtensionless = SupportExtensionless;
             details.LocationToLower = LocationToLower;
             details.IncludeAssetGUID = IncludeAssetGUID;
             details.OutputNameStyle = OutputNameStyle;
@@ -171,10 +176,10 @@ namespace YooAsset
         }
 
         /// <summary>
-        /// 获取依赖列表
+        /// 获取资源对象的依赖列表（框架层查询结果）
         /// 注意：传入的资源对象一定合法有效！
         /// </summary>
-        public PackageBundle[] GetAllDependencies(PackageAsset packageAsset)
+        public List<PackageBundle> GetAssetAllDependencies(PackageAsset packageAsset)
         {
             List<PackageBundle> result = new List<PackageBundle>(packageAsset.DependBundleIDs.Length);
             foreach (var dependID in packageAsset.DependBundleIDs)
@@ -182,14 +187,14 @@ namespace YooAsset
                 var dependBundle = GetMainPackageBundle(dependID);
                 result.Add(dependBundle);
             }
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>
-        /// 获取依赖列表
+        /// 获取资源包的依赖列表（引擎层查询结果）
         /// 注意：传入的资源包对象一定合法有效！
         /// </summary>
-        public PackageBundle[] GetAllDependencies(PackageBundle packageBundle)
+        public List<PackageBundle> GetBundleAllDependencies(PackageBundle packageBundle)
         {
             List<PackageBundle> result = new List<PackageBundle>(packageBundle.DependBundleIDs.Length);
             foreach (var dependID in packageBundle.DependBundleIDs)
@@ -197,7 +202,7 @@ namespace YooAsset
                 var dependBundle = GetMainPackageBundle(dependID);
                 result.Add(dependBundle);
             }
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>
@@ -211,17 +216,17 @@ namespace YooAsset
         /// <summary>
         /// 尝试获取包裹的资源包
         /// </summary>
-        public bool TryGetPackageBundleByBundleName(string bundleName, out PackageBundle result)
+        public bool TryGetPackageBundleByFileName(string fileName, out PackageBundle result)
         {
-            return BundleDic1.TryGetValue(bundleName, out result);
+            return BundleDic2.TryGetValue(fileName, out result);
         }
 
         /// <summary>
         /// 尝试获取包裹的资源包
         /// </summary>
-        public bool TryGetPackageBundleByFileName(string fileName, out PackageBundle result)
+        public bool TryGetPackageBundleByBundleName(string bundleName, out PackageBundle result)
         {
-            return BundleDic2.TryGetValue(fileName, out result);
+            return BundleDic1.TryGetValue(bundleName, out result);
         }
 
         /// <summary>
@@ -245,13 +250,14 @@ namespace YooAsset
         /// </summary>
         public AssetInfo[] GetAllAssetInfos()
         {
-            List<AssetInfo> result = new List<AssetInfo>(AssetList.Count);
-            foreach (var packageAsset in AssetList)
+            AssetInfo[] result = new AssetInfo[AssetList.Count];
+            for (int i = 0; i < AssetList.Count; i++)
             {
+                var packageAsset = AssetList[i];
                 AssetInfo assetInfo = new AssetInfo(PackageName, packageAsset, null);
-                result.Add(assetInfo);
+                result[i] = assetInfo;
             }
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>
@@ -259,7 +265,7 @@ namespace YooAsset
         /// </summary>
         public AssetInfo[] GetAssetInfosByTags(string[] tags)
         {
-            List<AssetInfo> result = new List<AssetInfo>(100);
+            List<AssetInfo> result = new List<AssetInfo>(AssetList.Count);
             foreach (var packageAsset in AssetList)
             {
                 if (packageAsset.HasTag(tags))

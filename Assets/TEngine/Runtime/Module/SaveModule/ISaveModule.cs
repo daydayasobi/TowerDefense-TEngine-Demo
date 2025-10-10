@@ -6,6 +6,8 @@ namespace TEngine
 {
     public interface ISaveModule
     {
+        public void RemoveAllKey();
+        
         public int GetInt(string key, int defaultValue = 0);
         public float GetFloat(string key, float defaultValue);
         public string GetString(string key, string defaultValue);
@@ -15,5 +17,18 @@ namespace TEngine
         public void SetFloat(string key, float value);
         public void SetString(string key, string value);
         public void SetBool(string key, bool value);
+        public void RemoveKey(string key);
+        
+        
+        public int GetIntLocal(string key, int defaultValue = 0);
+        public float GetFloatLocal(string key, float defaultValue);
+        public string GetStringLocal(string key, string defaultValue);
+        public bool GetBoolLocal(string key, bool defaultValue);
+        public void SetIntLocal(string key, int value);
+        public void SetFloatLocal(string key, float value);
+        public void SetStringLocal(string key, string value);
+        public void SetBoolLocal(string key, bool value);
+        
+        public void RemoveKeyLocal(string key);
     }
 }

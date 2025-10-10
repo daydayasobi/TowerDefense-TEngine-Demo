@@ -15,7 +15,10 @@ namespace YooAsset
         private long _sceneCreateIndex = 0;
         private IBundleQuery _bundleQuery;
         private int _bundleLoadingMaxConcurrency;
-        private bool _webGLForceSyncLoadAsset;
+
+        // 开发者配置选项
+        public bool WebGLForceSyncLoadAsset { private set; get; }
+        public bool UseWeakReferenceHandle { private set; get; }
 
         /// <summary>
         /// 所属包裹
@@ -44,7 +47,8 @@ namespace YooAsset
         public void Initialize(InitializeParameters parameters, IBundleQuery bundleServices)
         {
             _bundleLoadingMaxConcurrency = parameters.BundleLoadingMaxConcurrency;
-            _webGLForceSyncLoadAsset = parameters.WebGLForceSyncLoadAsset;
+            WebGLForceSyncLoadAsset = parameters.WebGLForceSyncLoadAsset;
+            UseWeakReferenceHandle = parameters.UseWeakReferenceHandle;
             _bundleQuery = bundleServices;
             SceneManager.sceneUnloaded += OnSceneUnloaded;
         }
@@ -62,6 +66,11 @@ namespace YooAsset
         /// </summary>
         public void TryUnloadUnusedAsset(AssetInfo assetInfo, int loopCount)
         {
+            if (assetInfo == null)
+            {
+                YooLogger.Error($"{nameof(AssetInfo)} is null !");
+                return;
+            }
             if (assetInfo.IsInvalid)
             {
                 YooLogger.Error($"Failed to unload asset ! {assetInfo.Error}");
@@ -73,31 +82,29 @@ namespace YooAsset
                 loopCount--;
 
                 // 卸载主资源包加载器
-                string mainBundleName = _bundleQuery.GetMainBundleName(assetInfo);
+                string mainBundleName = _bundleQuery.GetMainBundleName(assetInfo.Asset.BundleID);
                 var mainLoader = TryGetBundleFileLoader(mainBundleName);
                 if (mainLoader != null)
                 {
                     mainLoader.TryDestroyProviders();
                     if (mainLoader.CanDestroyLoader())
                     {
-                        string bundleName = mainLoader.LoadBundleInfo.Bundle.BundleName;
                         mainLoader.DestroyLoader();
-                        LoaderDic.Remove(bundleName);
+                        LoaderDic.Remove(mainBundleName);
                     }
                 }
 
                 // 卸载依赖资源包加载器
-                string[] dependBundleNames = _bundleQuery.GetDependBundleNames(assetInfo);
-                foreach (var dependBundleName in dependBundleNames)
+                foreach (var dependID in assetInfo.Asset.DependBundleIDs)
                 {
+                    string dependBundleName = _bundleQuery.GetMainBundleName(dependID);
                     var dependLoader = TryGetBundleFileLoader(dependBundleName);
                     if (dependLoader != null)
                     {
                         if (dependLoader.CanDestroyLoader())
                         {
-                            string bundleName = dependLoader.LoadBundleInfo.Bundle.BundleName;
                             dependLoader.DestroyLoader();
-                            LoaderDic.Remove(bundleName);
+                            LoaderDic.Remove(dependBundleName);
                         }
                     }
                 }
@@ -296,8 +303,8 @@ namespace YooAsset
         }
         internal List<LoadBundleFileOperation> CreateDependBundleFileLoaders(AssetInfo assetInfo)
         {
-            BundleInfo[] bundleInfos = _bundleQuery.GetDependBundleInfos(assetInfo);
-            List<LoadBundleFileOperation> result = new List<LoadBundleFileOperation>(bundleInfos.Length);
+            List<BundleInfo> bundleInfos = _bundleQuery.GetDependBundleInfos(assetInfo);
+            List<LoadBundleFileOperation> result = new List<LoadBundleFileOperation>(bundleInfos.Count);
             foreach (var bundleInfo in bundleInfos)
             {
                 var bundleLoader = CreateBundleFileLoaderInternal(bundleInfo);
@@ -327,10 +334,6 @@ namespace YooAsset
         internal bool BundleLoadingIsBusy()
         {
             return BundleLoadingCounter >= _bundleLoadingMaxConcurrency;
-        }
-        internal bool WebGLForceSyncLoadAsset()
-        {
-            return _webGLForceSyncLoadAsset;
         }
 
         private LoadBundleFileOperation CreateBundleFileLoaderInternal(BundleInfo bundleInfo)
