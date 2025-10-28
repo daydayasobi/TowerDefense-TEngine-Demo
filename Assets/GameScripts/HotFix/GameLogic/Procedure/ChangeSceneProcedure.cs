@@ -10,6 +10,7 @@ namespace GameLogic
     public class ChangeSceneProcedure : ProcedureBase
     {
         IFsm<IProcedureModule> procedureOwner;
+        private bool lockBtn = false;
 
         protected override void OnEnter(IFsm<IProcedureModule> procedureOwner)
         {
@@ -41,11 +42,14 @@ namespace GameLogic
         {
             //加载关卡相关
             LevelDataControl.Instance.OnLoad();
+            lockBtn = false;
         }
 
         private void LevelSelect(LevelDataBase level)
         {
+            if(lockBtn) return;
             Log.Debug("选择场景: " + level.Id);
+            lockBtn = true;
             LoadLevelScene(level).Forget();
         }
 

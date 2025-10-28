@@ -63,13 +63,13 @@ namespace GameLogic
         {
             if (LevelDataControl.Instance.CurrentLevel == null)
             {
-                Log.Info("Level is null, please check if LevelControl is initialized properly.");
+                // Log.Info("Level is null, please check if LevelControl is initialized properly.");
                 return;
             }
 
             if (LevelDataControl.Instance.LevelState != EnumLevelState.Prepare && LevelDataControl.Instance.LevelState != EnumLevelState.Normal)
             {
-                Log.Info("Level is not in a valid state for processing. Current state: " + LevelDataControl.Instance.LevelState);
+                // Log.Info("Level is not in a valid state for processing. Current state: " + LevelDataControl.Instance.LevelState);
                 return;
             }
 
