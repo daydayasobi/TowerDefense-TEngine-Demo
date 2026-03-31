@@ -147,21 +147,25 @@ namespace GameLogic
                 return;
             }
 
-            // if (dataLevel.LevelState != EnumLevelState.Prepare && dataLevel.LevelState != EnumLevelState.Normal)
-            // {
-            //     return;
-            // }
-
             Tower tower = dicTower[serialId];
-            PlayerDataControl.Instance.AddEnergy(tower.SellEnergy);
-            if (LevelDataControl.Instance.LevelState == EnumLevelState.Prepare)
+            int refundEnergy;
+            EnumLevelState currentLevelState = LevelDataControl.Instance.LevelState;
+            EnumLevelState effectiveLevelState = LevelDataControl.Instance.EffectiveLevelState;
+            if (effectiveLevelState == EnumLevelState.Prepare)
             {
-                PlayerDataControl.Instance.AddEnergy(tower.TotalCostEnergy);
+                refundEnergy = tower.TotalCostEnergy;
             }
-            else if (LevelDataControl.Instance.LevelState == EnumLevelState.Normal)
+            else if (effectiveLevelState == EnumLevelState.Normal)
             {
-                PlayerDataControl.Instance.AddEnergy(tower.SellEnergy);
+                refundEnergy = tower.SellEnergy;
             }
+            else
+            {
+                Log.Warning("Can not sell tower when level state is '{0}' and effective level state is '{1}'.", currentLevelState, effectiveLevelState);
+                return;
+            }
+
+            PlayerDataControl.Instance.AddEnergy(refundEnergy);
 
             GameEvent.Send(LevelEvent.OnSellTower, tower.SerialId);
         }

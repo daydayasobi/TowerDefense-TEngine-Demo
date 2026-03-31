@@ -19,6 +19,14 @@ namespace GameLogic
 
         public EnumLevelState LevelState { get; private set; }
 
+        internal EnumLevelState EffectiveLevelState
+        {
+            get
+            {
+                return LevelState == EnumLevelState.Pause ? stateBeforePause : LevelState;
+            }
+        }
+
         public Level CurrentLevel { get; private set; }
 
         public int CurrentLevelIndex { get; private set; }
@@ -312,7 +320,7 @@ namespace GameLogic
             }
         }
 
-        public void OnLoadLevelFinish(int levelId)
+        public void OnLoadLevelFinish(int sceneId)
         {
             if (LevelState != EnumLevelState.Loading)
             {
@@ -320,13 +328,13 @@ namespace GameLogic
             }
 
             LevelDataBase levelData = GetLevelData(CurrentLevelIndex);
-            if (levelData != null && levelData.SceneData.Id == levelId)
+            if (levelData != null && levelData.SceneData.Id == sceneId)
             {
                 ChangeLevelState(EnumLevelState.Prepare);
             }
             else
             {
-                Log.Error("Load level finish but level data is null or scene id not match,levelId:{0},currentLevelIndex:{1}", levelId, CurrentLevelIndex);
+                Log.Error("Load level finish but level data is null or scene id not match,sceneId:{0},currentLevelIndex:{1}", sceneId, CurrentLevelIndex);
             }
         }
 

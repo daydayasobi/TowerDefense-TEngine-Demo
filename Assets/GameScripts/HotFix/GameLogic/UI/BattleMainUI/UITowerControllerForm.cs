@@ -13,6 +13,7 @@ namespace GameLogic
 
         private Tower m_tower;
         private bool click = false;
+        private bool canSellTower = false;
         
         #endregion
         
@@ -50,6 +51,7 @@ namespace GameLogic
             base.OnCreate();
 
             LevelDataControl.Instance.LevelPause();
+            ResetSellConfirmButton();
             
             foreach (object obj in base._userDatas)
             {
@@ -80,6 +82,12 @@ namespace GameLogic
             m_textDescription.text = m_tower.Des;
             m_textDps.text = m_tower.DPS.ToString();
             m_textUpgradeDescriptionText.text = m_tower.UpgradeDes;
+
+            EnumLevelState effectiveLevelState = LevelDataControl.Instance.EffectiveLevelState;
+            canSellTower = effectiveLevelState == EnumLevelState.Prepare || effectiveLevelState == EnumLevelState.Normal;
+            m_btnSellButton.interactable = canSellTower;
+            m_btnSellConfirmButton.interactable = canSellTower;
+            m_textEnergyTextSell.text = GetSellRefundEnergy(effectiveLevelState).ToString();
         }
 
         protected override void OnRefresh()
@@ -111,15 +119,15 @@ namespace GameLogic
         
         private void OnClickSellButtonBtn()
         {
-            if (m_tower == null)
+            if (m_tower == null || !canSellTower)
                 return;
             
-            click = true;
+            m_btnSellConfirmButton.gameObject.SetActive(true);
         }
 
         private void OnClickSellConfirmButtonBtn()
         {
-            if (m_tower == null)
+            if (m_tower == null || !canSellTower)
                 return;
             
             DataTowerManager.Instance.SellTower(m_tower.SerialId);
@@ -135,12 +143,31 @@ namespace GameLogic
 
         protected override void Close()
         {
-            base.Close();
-
             LevelDataControl.Instance.LevelResume();
+            canSellTower = false;
             m_tower = null;
-            m_btnSellConfirmButton.gameObject.SetActive(false);
+            ResetSellConfirmButton();
+            base.Close();
             GameModule.UI.HideUI<UITowerControllerForm>();
+        }
+
+        private int GetSellRefundEnergy(EnumLevelState effectiveLevelState)
+        {
+            if (m_tower == null)
+                return 0;
+
+            if (effectiveLevelState == EnumLevelState.Prepare)
+                return m_tower.TotalCostEnergy;
+
+            return m_tower.SellEnergy;
+        }
+
+        private void ResetSellConfirmButton()
+        {
+            if (m_btnSellConfirmButton != null)
+            {
+                m_btnSellConfirmButton.gameObject.SetActive(false);
+            }
         }
     }
 }

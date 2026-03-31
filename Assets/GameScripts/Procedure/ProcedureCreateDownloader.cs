@@ -42,10 +42,8 @@ namespace Procedure
         {
             await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
 
-            // _downloader = _resourceModule.CreateResourceDownloader(GameModule.Resource.DefaultTagName);
-            // 直接从 ResourceModule 获取默认标签
-            _downloader = _resourceModule.CreateResourceDownloader(_resourceModule.DefaultTagName);
-            
+            _downloader = ResourceDownloadCompat.CreateDefaultPackageDownloader();
+
 
             if (_downloader.TotalDownloadCount == 0)
             {

@@ -27,7 +27,7 @@ namespace TEngine
         private readonly HashSet<string> _assetLoadingList = new HashSet<string>();
 
         /// <summary>
-        /// 检查是否可以释放间隔
+        /// 检查是否可以释放间隔。
         /// </summary>
         [SerializeField]
         private float checkCanReleaseInterval = 30f;
@@ -35,13 +35,27 @@ namespace TEngine
         private float _checkCanReleaseTime = 0.0f;
 
         /// <summary>
-        /// 对象池自动释放时间间隔
+        /// 对象池自动释放时间间隔。
         /// </summary>
         [SerializeField]
         private float autoReleaseInterval = 60f;
 
         /// <summary>
-        /// 保存加载的图片对象
+        /// 每帧最大处理资源数量，用于分帧处理避免卡顿。
+        /// </summary>
+        [SerializeField]
+        private int maxProcessPerFrame = 50;
+
+        /// <summary>
+        /// 当前正在处理的节点，用于分帧处理。
+        /// </summary>
+#if ODIN_INSPECTOR
+        [ShowInInspector]
+#endif
+        private LinkedListNode<LoadAssetObject> _currentProcessNode;
+
+        /// <summary>
+        /// 保存加载的图片对象。
         /// </summary>
 #if ODIN_INSPECTOR
         [ShowInInspector]
@@ -49,7 +63,7 @@ namespace TEngine
         private LinkedList<LoadAssetObject> _loadAssetObjectsLinkedList;
 
         /// <summary>
-        /// 散图集合对象池
+        /// 散图集合对象池。
         /// </summary>
         private IObjectPool<AssetItemObject> _assetItemPool;
 
@@ -87,21 +101,34 @@ namespace TEngine
 
         /// <summary>
         /// 回收无引用的缓存资产。
+        /// 使用分帧处理优化性能，避免一次性处理大量资源导致卡顿。
         /// </summary>
 #if ODIN_INSPECTOR
         [Button("Release Unused")]
 #endif
         public void ReleaseUnused()
         {
-            if (_loadAssetObjectsLinkedList == null)
+            if (_loadAssetObjectsLinkedList == null || _loadAssetObjectsLinkedList.Count == 0)
             {
+                _currentProcessNode = null;
+                _checkCanReleaseTime = 0f;
                 return;
             }
 
-            LinkedListNode<LoadAssetObject> current = _loadAssetObjectsLinkedList.First;
-            while (current != null)
+            // 如果当前没有正在处理的节点，从头开始
+            if (_currentProcessNode == null)
+            {
+                _currentProcessNode = _loadAssetObjectsLinkedList.First;
+            }
+
+            int processedCount = 0;
+            LinkedListNode<LoadAssetObject> current = _currentProcessNode;
+
+            // 分帧处理：每帧最多处理 maxProcessPerFrame 个资源
+            while (current != null && processedCount < maxProcessPerFrame)
             {
                 var next = current.Next;
+                
                 if (current.Value.AssetObject.IsCanRelease())
                 {
                     _assetItemPool.Unspawn(current.Value.AssetTarget);
@@ -110,9 +137,17 @@ namespace TEngine
                 }
 
                 current = next;
+                processedCount++;
             }
 
-            _checkCanReleaseTime = 0f;
+            // 更新当前处理节点
+            _currentProcessNode = current;
+
+            // 如果已经处理完所有节点，重置状态
+            if (_currentProcessNode == null)
+            {
+                _checkCanReleaseTime = 0f;
+            }
         }
 
         private void SetAsset(ISetAssetObject setAssetObject, Object assetObject)

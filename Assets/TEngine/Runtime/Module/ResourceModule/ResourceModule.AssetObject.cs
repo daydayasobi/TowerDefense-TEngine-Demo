@@ -52,7 +52,7 @@ namespace TEngine
                     {
                         handle.Dispose();
                     }
-                    handle = null;
+                    _assetHandle = null;
                 }
             }
         }

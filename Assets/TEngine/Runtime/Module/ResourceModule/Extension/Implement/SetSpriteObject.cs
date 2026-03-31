@@ -37,6 +37,8 @@ namespace TEngine
         [ShowInInspector]
 #endif
         private Sprite _sprite;
+        
+        public Object TargetObject { get; set; }
 
         public string Location { get; private set; }
 
@@ -92,6 +94,7 @@ namespace TEngine
             _sprite = null;
             _setType = SetType.None;
             _setNativeSize = false;
+            TargetObject = null;
         }
 
         public static SetSpriteObject Create(Image image, string location, bool setNativeSize = false, Action<Image> callback = null, CancellationToken cancellationToken = default)
@@ -103,6 +106,7 @@ namespace TEngine
             item._cancellationToken = cancellationToken;
             item._setType = SetType.Image;
             item._imageCallback = callback;
+            item.TargetObject = image;
             return item;
         }
 
@@ -114,6 +118,7 @@ namespace TEngine
             item._cancellationToken = cancellationToken;
             item._setType = SetType.SpriteRender;
             item._spriteCallback = callback;
+            item.TargetObject = spriteRenderer;
             return item;
         }
     }

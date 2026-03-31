@@ -6,6 +6,11 @@ namespace TEngine
         /// 资源定位地址。
         /// </summary>
         string Location { get; }
+        
+        /// <summary>
+        /// Unity资源对象。
+        /// </summary>
+        public UnityEngine.Object TargetObject { get; set; }
 
         /// <summary>
         /// 设置资源。

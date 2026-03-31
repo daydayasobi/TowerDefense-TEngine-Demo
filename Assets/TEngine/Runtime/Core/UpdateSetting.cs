@@ -124,6 +124,12 @@ namespace TEngine
         [SerializeField]
         private string BuildAddress = "../../Builds/Unity_Data/StreamingAssets";
         /// <summary>
+        /// 是否使用可寻址资源代替资源路径
+        /// 说明：开启此项可以节省运行时清单占用的内存！
+        /// </summary>
+        [SerializeField, Tooltip("是否使用可寻址资源代替资源路径 说明：开启此项可以节省运行时清单占用的内存！")]
+        private bool ReplaceAssetPathWithAddress = false;
+        /// <summary>
         /// 是否自动你讲打包资源复制到打包后的StreamingAssets地址
         /// </summary>
         /// <returns></returns>
@@ -139,6 +145,13 @@ namespace TEngine
         {
             return BuildAddress;
         }
+
+        /// <summary>
+        /// 获取是否使用可寻址资源代替资源路径
+        /// </summary>
+        /// <returns></returns>
+        public bool GetReplaceAssetPathWithAddress()
+            => ReplaceAssetPathWithAddress;
         
         /// <summary>
         /// 是否加载远程资源

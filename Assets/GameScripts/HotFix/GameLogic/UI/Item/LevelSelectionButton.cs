@@ -54,18 +54,42 @@ namespace GameLogic
 
         private void OnLevelDownloadProgress(LevelDownloadProgress data)
         {
-            if (data.LevelId == levelConfig.Id)
+            if (levelConfig == null || data.LevelId != levelConfig.Id)
             {
-                Log.Debug("关卡下载进度: " + data.LevelId + " - " + data.Progress);
+                return;
             }
-            // m_imgProgress.fillAmount = progress;
-            m_textDownloadText.gameObject.SetActive(true);
-            m_textDownloadText.text = $"{(int)(data.Progress * 100)}%";
-            // m_imgMask.gameObject.SetActive(progress < 1f);
+
+            Log.Debug("关卡下载进度: " + data.LevelId + " - " + data.Progress);
+            if (data.Progress < 0f)
+            {
+                isResLoaded = false;
+                m_btnLevelSelectionButton.interactable = false;
+                m_imgProgress.fillAmount = 0f;
+                m_imgMask.gameObject.SetActive(true);
+                m_textDownloadText.gameObject.SetActive(true);
+                m_textDownloadText.text = "下载失败";
+                return;
+            }
+
+            float progress = Mathf.Clamp01(data.Progress);
+            isResLoaded = progress >= 1f;
+            m_btnLevelSelectionButton.interactable = isResLoaded;
+            m_imgProgress.fillAmount = progress;
+            m_imgMask.gameObject.SetActive(!isResLoaded);
+            m_textDownloadText.gameObject.SetActive(!isResLoaded);
+            if (!isResLoaded)
+            {
+                m_textDownloadText.text = $"{(int)(progress * 100)}%";
+            }
         }
 
         private void OnClickLevelSelectionButtonBtn()
         {
+            if (!isResLoaded || levelConfig == null)
+            {
+                return;
+            }
+
             GameEvent.Send(ChangeSceneEvent.LevelSelect, levelConfig);
         }
 
@@ -82,9 +106,15 @@ namespace GameLogic
 
         public void SetLevelData(LevelDataBase levelConfig)
         {
+            this.levelConfig = levelConfig;
             m_textLevelName.text = levelConfig.Name;
             m_textDescription.text = levelConfig.Description;
-            this.levelConfig = levelConfig;
+            isResLoaded = false;
+            m_btnLevelSelectionButton.interactable = false;
+            m_imgProgress.fillAmount = 0f;
+            m_imgMask.gameObject.SetActive(true);
+            m_textDownloadText.gameObject.SetActive(true);
+            m_textDownloadText.text = "0%";
 
             int currentStarCount = GameModule.Save.GetInt(string.Format(LevelKey.LevelStarRecord, levelConfig.Id), 0);
             for (int i = 0; i < stars.Length; i++)

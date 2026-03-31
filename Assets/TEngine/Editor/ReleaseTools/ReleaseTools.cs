@@ -207,9 +207,10 @@ namespace TEngine
                 scriptableBuildParameters.CompressOption = ECompressOption.LZ4;
                 
                 scriptableBuildParameters.BuiltinShadersBundleName = GetBuiltinShaderBundleName("DefaultPackage");
+                scriptableBuildParameters.ReplaceAssetPathWithAddress = Settings.UpdateSetting.GetReplaceAssetPathWithAddress();
             }
-            
-            buildParameters.BuildOutputRoot = AssetBundleBuilderHelper.GetDefaultBuildOutputRoot();
+
+            buildParameters.BuildOutputRoot = outputRoot;//AssetBundleBuilderHelper.GetDefaultBuildOutputRoot();
             buildParameters.BuildinFileRoot = AssetBundleBuilderHelper.GetStreamingAssetsRoot();
             buildParameters.BuildPipeline = buildPipeline.ToString();
             buildParameters.BuildTarget = buildTarget;
@@ -225,7 +226,7 @@ namespace TEngine
             buildParameters.EncryptionServices = CreateEncryptionInstance("DefaultPackage",buildPipeline);
             buildParameters.ClearBuildCacheFiles = false; //不清理构建缓存，启用增量构建，可以提高打包速度！
             buildParameters.UseAssetDependencyDB = true; //使用资源依赖关系数据库，可以提高打包速度！
-            
+
             var buildResult = pipeline.Run(buildParameters, true);
             if (buildResult.Success)
             {

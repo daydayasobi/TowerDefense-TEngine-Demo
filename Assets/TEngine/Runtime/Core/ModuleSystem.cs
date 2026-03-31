@@ -82,6 +82,18 @@ namespace TEngine
             Type moduleType = Type.GetType(moduleName);
             if (moduleType == null)
             {
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    moduleType = assembly.GetType(moduleName);
+                    if (moduleType != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (moduleType == null)
+            {
                 throw new GameFrameworkException(Utility.Text.Format("Can not find Game Framework module type '{0}'.", moduleName));
             }
 

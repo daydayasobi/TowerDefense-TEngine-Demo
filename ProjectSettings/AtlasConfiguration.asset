@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outputAtlasDir: Assets/AssetArt/Atlas
-  sourceAtlasRoot: Assets/AssetRaw/UIRaw/Atlas
-  excludeFolder: Assets/AssetRaw/UIRaw/Raw
+  sourceAtlasRootDir:
+  - Assets/AssetRaw/UIRaw/Atlas
+  rootChildAtlasDir: []
+  singleAtlasDir: []
+  excludeFolder:
+  - Assets/AssetRaw/UIRaw/Raw
   androidFormat: 50
   iosFormat: 49
   webglFormat: 50
@@ -26,6 +30,8 @@ MonoBehaviour:
   autoGenerate: 1
   enableLogging: 1
   enableV2: 1
+  checkMipmaps: 1
+  enableMipmaps: 0
   excludeKeywords:
   - _Delete
   - _Temp

@@ -92,7 +92,7 @@ PlayerSettings:
   useFlipModelSwapchain: 1
   resizableWindow: 0
   useMacAppStoreValidation: 0
-  macAppStoreCategory: public.app-category.games
+  macAppStoreCategory: Tower-Demo
   gpuSkinning: 0
   xboxPIXTextureCapture: 0
   xboxEnableAvatar: 0
@@ -157,14 +157,14 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.tfbgames.towerdefense
-    Standalone: com.DefaultCompany.Unity
+    Standalone: TEngine
     iPhone: com.tfbgames.towerdefense
   buildNumber:
     Standalone: 0
     VisionOS: 0
     iPhone: 0
     tvOS: 0
-  overrideDefaultApplicationIdentifier: 0
+  overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 0
@@ -807,21 +807,23 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: TextMeshPro;ENABLE_LOG;ENABLE_HYBRIDCLR
-    EmbeddedLinux: TextMeshPro
+    Android: TextMeshPro;ENABLE_LOG;ES3_TMPRO;ES3_UGUI;ENABLE_HYBRIDCLR
+    EmbeddedLinux: TextMeshPro;ES3_TMPRO;ES3_UGUI
     GameCoreXboxOne: TextMeshPro
-    Nintendo Switch: TextMeshPro
-    PS4: TextMeshPro
+    LinuxHeadlessSimulation: ES3_TMPRO;ES3_UGUI
+    Nintendo Switch: TextMeshPro;ES3_TMPRO;ES3_UGUI
+    PS4: TextMeshPro;ES3_TMPRO;ES3_UGUI
     PS5: TextMeshPro
-    QNX: TextMeshPro
+    QNX: TextMeshPro;ES3_TMPRO;ES3_UGUI
+    Server: ES3_TMPRO;ES3_UGUI
     Stadia: TextMeshPro
-    Standalone: TextMeshPro;ENABLE_LOG;ENABLE_HYBRIDCLR
-    VisionOS: TextMeshPro
-    WebGL: TextMeshPro;ENABLE_LOG;ENABLE_HYBRIDCLR
-    Windows Store Apps: ENABLE_LOG;ENABLE_HYBRIDCLR
-    XboxOne: TextMeshPro
-    iPhone: TextMeshPro;ENABLE_LOG;ENABLE_HYBRIDCLR
-    tvOS: TextMeshPro
+    Standalone: TextMeshPro;ENABLE_LOG;ES3_TMPRO;ES3_UGUI;ENABLE_HYBRIDCLR
+    VisionOS: TextMeshPro;ES3_TMPRO;ES3_UGUI
+    WebGL: TextMeshPro;ENABLE_LOG;ES3_TMPRO;ES3_UGUI;ENABLE_HYBRIDCLR
+    Windows Store Apps: ENABLE_LOG;ES3_TMPRO;ES3_UGUI;ENABLE_HYBRIDCLR
+    XboxOne: TextMeshPro;ES3_TMPRO;ES3_UGUI
+    iPhone: TextMeshPro;ENABLE_LOG;ES3_TMPRO;ES3_UGUI;ENABLE_HYBRIDCLR
+    tvOS: TextMeshPro;ES3_TMPRO;ES3_UGUI
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

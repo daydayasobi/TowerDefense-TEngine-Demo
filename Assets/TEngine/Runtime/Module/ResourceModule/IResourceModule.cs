@@ -55,7 +55,8 @@ namespace TEngine
         /// 初始化操作。
         /// </summary>
         /// <param name="customPackageName">资源包名称。</param>
-        UniTask<InitializationOperation> InitPackage(string customPackageName);
+        /// <param name="needInitMainFest">是否需要直接初始化资源清单。（单机OtherPackage使用）</param>
+        UniTask<InitializationOperation> InitPackage(string customPackageName, bool needInitMainFest = false);
 
         /// <summary>
         /// 默认资源包名称。
@@ -63,14 +64,14 @@ namespace TEngine
         string DefaultPackageName { get; set; }
 
         /// <summary>
-        /// 默认标签名称。
-        /// </summary>
-        string[] DefaultTagName { get; set; }
-
-        /// <summary>
         /// 获取或设置异步系统参数，每帧执行消耗的最大时间切片（单位：毫秒）。
         /// </summary>
         long Milliseconds { get; set; }
+
+        /// <summary>
+        /// 自动释放资源引用计数为0的资源包
+        /// </summary>
+        bool AutoUnloadBundleWhenUnused { get; set; }
 
         /// <summary>
         /// 热更链接URL。
@@ -135,7 +136,7 @@ namespace TEngine
         /// <param name="location">资源定位地址。</param>
         /// <param name="packageName">资源包名称。</param>
         /// <returns>检查资源是否存在的结果。</returns>
-        public HasAssetResult HasAsset(string location, string packageName);
+        public HasAssetResult HasAsset(string location, string packageName = "");
 
         /// <summary>
         /// 检查资源定位地址是否有效。
@@ -199,6 +200,15 @@ namespace TEngine
         T LoadAsset<T>(string location, string packageName = "") where T : UnityEngine.Object;
 
         /// <summary>
+        /// 同步加载资源。
+        /// </summary>
+        /// <param name="location">资源的定位地址。</param>
+        /// <param name="assetType">要加载的资源类型。</param>
+        /// <param name="packageName">指定资源包的名称。不传使用默认资源包</param>
+        /// <returns>资源实例。</returns>
+        UnityEngine.Object LoadAsset(string location, Type assetType, string packageName = "");
+
+        /// <summary>
         /// 同步加载游戏物体并实例化。
         /// </summary>
         /// <param name="location">资源的定位地址。</param>
@@ -228,6 +238,16 @@ namespace TEngine
         UniTask<T> LoadAssetAsync<T>(string location, CancellationToken cancellationToken = default, string packageName = "") where T : UnityEngine.Object;
 
         /// <summary>
+        /// 异步加载资源。
+        /// </summary>
+        /// <param name="location">资源定位地址。</param>
+        /// <param name="assetType">要加载的资源类型。</param>
+        /// <param name="cancellationToken">取消操作Token。</param>
+        /// <param name="packageName">指定资源包的名称。不传使用默认资源包</param>
+        /// <returns>异步资源实例。</returns>
+        UniTask<UnityEngine.Object> LoadAssetAsync(string location, Type assetType, CancellationToken cancellationToken = default, string packageName = "");
+
+        /// <summary>
         /// 异步加载游戏物体并实例化。
         /// </summary>
         /// <param name="location">资源定位地址。</param>
@@ -247,6 +267,8 @@ namespace TEngine
         /// <returns>资源操作句柄。</returns>
         AssetHandle LoadAssetSyncHandle<T>(string location, string packageName = "") where T : UnityEngine.Object;
 
+        AssetHandle LoadAssetSyncHandle(string location, Type assetType, string packageName = "");
+
         /// <summary>
         /// 获取异步加载的资源操作句柄。
         /// </summary>
@@ -255,6 +277,8 @@ namespace TEngine
         /// <typeparam name="T">资源类型。</typeparam>
         /// <returns>资源操作句柄。</returns>
         AssetHandle LoadAssetAsyncHandle<T>(string location, string packageName = "") where T : UnityEngine.Object;
+
+        AssetHandle LoadAssetAsyncHandle(string location, Type type, string packageName = "");
 
         /// <summary>
         /// 清理包裹未使用的缓存文件。
@@ -280,14 +304,6 @@ namespace TEngine
         /// </summary>
         /// <param name="customPackageName">指定资源包的名称。不传使用默认资源包</param>
         ResourceDownloaderOperation CreateResourceDownloader(string customPackageName = "");
-
-        /// <summary>
-        /// 创建资源下载器，用于下载当前资源版本所有的资源包文件。
-        /// </summary>
-        /// <param name="customPackageName">指定资源包的名称。不传使用默认资源包</param>
-        ResourceDownloaderOperation CreateResourceDownloader(string[] tags, string customPackageName = "");
-
-        public bool IsTagResourcesExist(string tag, string packageName);
 
         /// <summary>
         /// 当前最新的包裹版本。

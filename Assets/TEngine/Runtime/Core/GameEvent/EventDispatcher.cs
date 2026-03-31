@@ -11,7 +11,7 @@ namespace TEngine
         /// <summary>
         /// 事件Table。
         /// </summary>
-        private static readonly Dictionary<int, EventDelegateData> _eventTable = new Dictionary<int, EventDelegateData>();
+        private readonly Dictionary<int, EventDelegateData> _eventTable = new Dictionary<int, EventDelegateData>();
 
         /// <summary>
         /// 清空事件表。

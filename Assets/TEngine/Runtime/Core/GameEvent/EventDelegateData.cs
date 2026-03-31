@@ -91,6 +91,7 @@ namespace TEngine
                 }
 
                 _deleteList.Clear();
+                _dirty = false;
             }
         }
 

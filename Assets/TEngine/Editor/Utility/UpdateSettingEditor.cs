@@ -1,4 +1,3 @@
-#if ENABLE_HYBRIDCLR
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -10,6 +9,7 @@ namespace TEngine.Editor
     [CustomEditor(typeof(UpdateSetting), true)]
     public class UpdateSettingEditor : UnityEditor.Editor
     {
+#if ENABLE_HYBRIDCLR
         public List<string> HotUpdateAssemblies = new() {};
         public List<string> AOTMetaAssemblies = new() {};
         
@@ -64,14 +64,15 @@ namespace TEngine.Editor
                 {
                     // 在修改HybridCLRSettings后添加
                     EditorUtility.SetDirty(HybridCLRSettings.Instance);
+                    HybridCLRSettings.Save();
                     AssetDatabase.SaveAssets();
                 }
             }
         }
+#endif
 
         public static void ForceUpdateAssemblies()
         {
-
             UpdateSetting updateSetting = null;
             string[] guids = AssetDatabase.FindAssets("t:UpdateSetting");
             if (guids.Length >= 1)
@@ -95,9 +96,11 @@ namespace TEngine.Editor
             }
             
             HybridCLRSettings.Instance.patchAOTAssemblies = updateSetting.AOTMetaAssemblies.ToArray();
+            HybridCLRSettings.Save();
+            EditorUtility.SetDirty(HybridCLRSettings.Instance);
+            AssetDatabase.SaveAssets();
             
             Debug.Log("HotUpdateAssemblies changed");
         }
     }
 }
-#endif

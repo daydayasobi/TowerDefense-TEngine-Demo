@@ -113,8 +113,12 @@ namespace GameLogic
         /// </summary>
         private void OnLoadLevel(LevelDataBase levelData)
         {
-            // 处理加载关卡的逻辑
-            LevelDataControl.Instance.OnLoadLevelFinish(levelData.Id);
+            if (levelData == null)
+            {
+                return;
+            }
+
+            LevelDataControl.Instance.OnLoadLevelFinish(levelData.SceneData.Id);
         }
 
         /// <summary>

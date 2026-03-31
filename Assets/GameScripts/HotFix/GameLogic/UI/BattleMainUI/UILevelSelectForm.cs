@@ -41,7 +41,7 @@ namespace GameLogic
 
         protected override void OnCreate()
         {
-            ShowLevelSelectionButtonItems();
+            ShowLevelSelectionButtonItems().Forget();
             // mouseScroll.Init();
         }
 
@@ -78,46 +78,74 @@ namespace GameLogic
         /// <param name="levelId"></param>
         private async UniTask HandleLevelDownloadAsync(string tag, string packageName, int levelId)
         {
-            // 获取并更新远端版本
-            var versionOp = GameModule.Resource.RequestPackageVersionAsync(false, 60, packageName);
-            await versionOp.ToUniTask();
-
-            await GameModule.Resource.UpdatePackageManifestAsync(versionOp.PackageVersion, 60, packageName);
-            var downloader = GameModule.Resource.CreateResourceDownloader(new string[] { tag }, packageName);
-
-            if (downloader.TotalDownloadCount > 0)
+            try
             {
-                Log.Debug("开始下载关卡资源包: {0} - {1}", packageName, levelId);
-                downloader.DownloadUpdateCallback = (downloadUpdateData) =>
+                // 获取并更新远端版本
+                var versionOp = GameModule.Resource.RequestPackageVersionAsync(false, 60, packageName);
+                await versionOp.ToUniTask();
+                if (versionOp.Status != EOperationStatus.Succeed)
                 {
-                    Log.Debug("download update {0}", downloader.Progress);
-                    GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, downloader.Progress));
-                };
+                    NotifyLevelDownloadFailed(levelId, packageName, versionOp.Error);
+                    return;
+                }
 
-                downloader.DownloadErrorCallback = (error) =>
+                var manifestOp = GameModule.Resource.UpdatePackageManifestAsync(versionOp.PackageVersion, 60, packageName);
+                await manifestOp.ToUniTask();
+                if (manifestOp.Status != EOperationStatus.Succeed)
                 {
-                    Log.Error($"下载出错 [{packageName}] : {error}");
-                    GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, -1f));
-                };
+                    NotifyLevelDownloadFailed(levelId, packageName, manifestOp.Error);
+                    return;
+                }
 
-                downloader.BeginDownload();
-                await downloader.ToUniTask();
-
-                if (downloader.IsDone)
+                var downloader = ResourceDownloadCompat.CreateResourceDownloaderByTags(new[] { tag }, packageName);
+                if (downloader == null)
                 {
-                    GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, 1f));
+                    NotifyLevelDownloadFailed(levelId, packageName, "CreateResourceDownloader returned null.");
+                    return;
+                }
+
+                if (downloader.TotalDownloadCount > 0)
+                {
+                    Log.Debug("开始下载关卡资源包: {0} - {1}", packageName, levelId);
+                    downloader.DownloadUpdateCallback = (downloadUpdateData) =>
+                    {
+                        Log.Debug("download update {0}", downloader.Progress);
+                        GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, downloader.Progress));
+                    };
+
+                    downloader.DownloadErrorCallback = error =>
+                    {
+                        NotifyLevelDownloadFailed(levelId, packageName, error.ToString());
+                    };
+
+                    downloader.BeginDownload();
+                    await downloader.ToUniTask();
+
+                    if (downloader.Status == EOperationStatus.Succeed && downloader.IsDone)
+                    {
+                        GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, 1f));
+                    }
+                    else
+                    {
+                        NotifyLevelDownloadFailed(levelId, packageName, "Downloader did not complete successfully.");
+                    }
                 }
                 else
                 {
-                    Log.Error($"资源包 {packageName} 下载失败！");
-                    GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, -1f));
+                    // 已经有资源就直接标记完成
+                    GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, 1f));
                 }
             }
-            else
+            catch (Exception exception)
             {
-                // 已经有资源就直接标记完成
-                GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, 1f));
+                NotifyLevelDownloadFailed(levelId, packageName, exception.ToString());
             }
+        }
+
+        private static void NotifyLevelDownloadFailed(int levelId, string packageName, string error)
+        {
+            Log.Error("关卡资源包下载失败 [{0}] : {1}", packageName, error);
+            GameEvent.Send(ChangeSceneEvent.LevelDownloadProgress, new LevelDownloadProgress(levelId, -1f));
         }
     }
 }

@@ -10,11 +10,19 @@ TE框架是一款非常优秀的Unity开源框架，目前相关的文档还不�
 
 * Unity: 2022.3.10f1
 
-* TEngine: 6.1.3
+* TEngine 基线: `Alex-Rachel/TEngine main@ccc51c3ac7f1a7e7761e85a1c2d1adab8a487962`（2026-01-13）
 
-* YooAsset: 2.3.16
+* TEngine release 对照: `TEngine6.1.4@9d7b5d9`
 
-* HybridCLR: 8.6.0
+* TEngine `Assets/TEngine/package.json` 标记版本: `6.0.0`
+
+* YooAsset: 2.3.17（`Packages/YooAsset` 内嵌包）
+
+* HybridCLR: 8.8.0（`https://github.com/focus-creative-games/hybridclr_unity.git#4df417e56ad827cd7e70a54662f0e8bab90aafe9`）
+
+* UniTask: 2.5.10
+
+* Package 兼容差异：因项目固定 `Unity 2022.3.10f1`，移除 upstream `manifest` 里的 `com.unity.modules.accessibility`，并将 `com.unity.ugui` 对齐到当前编辑器实际提供的 `1.0.0`
 
 * Tower Defense Template: 1.4.1
 
@@ -53,7 +61,71 @@ TE框架是一款非常优秀的Unity开源框架，目前相关的文档还不�
 ├─ Scenes                      // 真正 Build Settings 里挂的入口场景
 ├─ StreamingAssets             // 随包体拷贝的只读资源
 ├─ TEngine                     // TEngine 框架本体
+│  └─ Extension
+│     └─ TowerDefenseCompat    // 项目兼容层（Entity / Save / Resource）
+├─ Packages
+│  ├─ YooAsset                 // YooAsset 内嵌包
+│  └─ UniTask                  // UniTask 内嵌包
 </pre>
+
+## 升级与兼容层说明
+
+### TEngine 升级策略
+
+本项目当前不再以 `Assets/TEngine/package.json` 的 `6.0.0` 作为版本依据，而是以 **上游 commit pin** 作为框架版本依据。
+
+本次升级基线固定为：
+
+* `Alex-Rachel/TEngine main@ccc51c3ac7f1a7e7761e85a1c2d1adab8a487962`
+
+这是一个主线提交，不是 release tag。为了便于和上游 release 对齐，README 同时记录了最近的 release 对照 `TEngine6.1.4@9d7b5d9`。
+
+HybridCLR 源地址与上游略有不同：上游 `manifest.json` 使用的是 Gitee 地址，但本项目为了保持现有拉取方式，继续使用 GitHub 地址，并且将 commit 精确 pin 到与上游一致的 `4df417e`。
+
+由于项目固定在 `Unity 2022.3.10f1`，Package Manager 依赖不完全照搬 upstream `main`：`com.unity.modules.accessibility` 已移除，`com.unity.ugui` 以当前编辑器可解析的 built-in 版本 `1.0.0` 为准。
+
+### 默认标签下载 / 关卡按 tag 下载
+
+这两个功能仍然保留，玩家侧行为没有变化：
+
+* 进入游戏时仍然只下载默认标签资源，当前默认标签仍为 `Base`
+* 进入关卡选择后，仍然会按照关卡配置下载 `Level3`、`Level4` 等按 tag 拆分的资源
+
+但是业务调用入口已经从旧 fork 的 vendor 接口迁移到兼容层：
+
+* 默认标签下载：`ResourceDownloadCompat.CreateDefaultPackageDownloader()`
+* 关卡按 tag 下载：`ResourceDownloadCompat.CreateResourceDownloaderByTags(new[] { tag }, packageName)`
+* 默认标签配置资产：`Assets/TEngine/Extension/TowerDefenseCompat/Resources/GameResourceDownloadSettings.asset`
+
+不再继续使用旧版客制化接口：
+
+* `IResourceModule.DefaultTagName`
+* `IResourceModule.CreateResourceDownloader(string[] tags, string packageName)`
+* `IResourceModule.IsTagResourcesExist(...)`
+
+### 场景与模块接口变化
+
+为了保持 `Assets/TEngine` 尽量接近上游，原先直接改 vendor 接口的做法已经收口到 extension 兼容层：
+
+* 分包场景加载：由旧的 `GameModule.Scene.LoadSceneAsync(packageName, location)` 改为 `PackageSceneLoader.LoadSceneAsync(packageName, location)`
+* `IEntityModule` / `ISaveModule` 不再放在 vendor `Runtime/Module` 下，迁移到 `Assets/TEngine/Extension/TowerDefenseCompat`
+* 兼容层命名空间仍然保持 `TEngine`，因此业务层类型名基本不需要改
+
+为保证 extension 程序集里的 `EntityModule` 和 `SaveModule` 仍能被 `ModuleSystem.GetModule<T>()` 自动创建，`ModuleSystem` 增加了跨程序集查找 fallback。
+
+### 兼容层位置与职责
+
+兼容层现在统一位于：
+
+* `Assets/TEngine/Extension/TowerDefenseCompat/Entity`
+* `Assets/TEngine/Extension/TowerDefenseCompat/Save`
+* `Assets/TEngine/Extension/TowerDefenseCompat/Resource`
+
+设计原则：
+
+* `Assets/TEngine` 主体保留上游 vendor 代码
+* 项目定制尽量只放在 `Extension/TowerDefenseCompat`
+* 兼容层不依赖 `GameModule` 或 `GameLogic` 程序集，便于后续继续跟随上游升级
 
 ### 注意事项
 
@@ -61,9 +133,9 @@ TE框架是一款非常优秀的Unity开源框架，目前相关的文档还不�
 
 工程里已经包含了配置表和Luban的依赖，如上图所示点击`Gen_Bin-Custom.bat`即可生成配置文件和代码到工程中。
 
-在原资源模块基础上添加了分包下载的逻辑，进入游戏只有下载`Base`标签的资源，进入关卡选择后会根据表格下载`Level3`、`Level4`等关卡资源。
+项目保留了分包下载逻辑，进入游戏只有下载`Base`标签的资源，进入关卡选择后会根据表格下载`Level3`、`Level4`等关卡资源。当前这套逻辑已经迁移到 `Assets/TEngine/Extension/TowerDefenseCompat/Resource`，不再继续侵入修改 vendor `IResourceModule`。
 
-新增了存档模块，使用Sqlite作为数据持续化的方式，具体可以看TEngine下的SaveModule。
+存档模块仍然使用 Sqlite 作为数据持久化方案，但实现已经迁移到 `Assets/TEngine/Extension/TowerDefenseCompat/Save`，不再放在 vendor `TEngine/Runtime/Module/SaveModule`。
 
 ### 待完善的地方
 

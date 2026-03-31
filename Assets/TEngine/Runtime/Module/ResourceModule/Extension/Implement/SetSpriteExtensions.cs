@@ -17,7 +17,7 @@ public static class SetSpriteExtensions
     /// <param name="cancellationToken">取消设置资源的Token。</param>
     public static void SetSprite(this Image image, string location, bool setNativeSize = false, Action<Image> callback = null, CancellationToken cancellationToken = default)
     {
-        ResourceExtComponent.Instance.SetAssetByResources<Sprite>(SetSpriteObject.Create(image, location, setNativeSize, callback, cancellationToken)).Forget();
+        ResourceExtComponent.Instance.SetAssetByResources<Sprite>(SetSpriteObject.Create(image, location, setNativeSize, callback, cancellationToken), cancellationToken).Forget();
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ public static class SetSpriteExtensions
     /// <param name="cancellationToken">取消设置资源的Token。</param>
     public static void SetSprite(this SpriteRenderer spriteRenderer, string location, Action<SpriteRenderer> callback = null, CancellationToken cancellationToken = default)
     {
-        ResourceExtComponent.Instance.SetAssetByResources<Sprite>(SetSpriteObject.Create(spriteRenderer, location, callback, cancellationToken)).Forget();
+        ResourceExtComponent.Instance.SetAssetByResources<Sprite>(SetSpriteObject.Create(spriteRenderer, location, callback, cancellationToken), cancellationToken).Forget();
     }
 
     /// <summary>

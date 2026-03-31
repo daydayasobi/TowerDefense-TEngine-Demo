@@ -24,9 +24,15 @@ namespace GameLogic
                 totalWeight += levelPathConfigs[i].weight;
             }
         }
-        
-        public LevelPath GetLevelPath()
+
+        private bool TryGetRandomLevelPath(out LevelPath levelPath)
         {
+            levelPath = null;
+            if (levelPathConfigs == null || levelPathConfigs.Length <= 0 || totalWeight <= 0f)
+            {
+                return false;
+            }
+
             float random = Random.Range(0f, totalWeight);
 
             float sum = 0;
@@ -36,20 +42,41 @@ namespace GameLogic
                 sum += levelPathConfigs[i].weight;
 
                 if (sum > random)
-                    return levelPathConfigs[i].levelPath;
+                {
+                    levelPath = levelPathConfigs[i].levelPath;
+                    return levelPath != null;
+                }
             }
 
-            return null;
+            return false;
+        }
+
+        public LevelPath GetLevelPath()
+        {
+            return TryGetRandomLevelPath(out LevelPath levelPath) ? levelPath : null;
+        }
+
+        public bool TryGetLevelPath(out LevelPath levelPath, out Transform startPathNode)
+        {
+            startPathNode = null;
+            if (!TryGetRandomLevelPath(out levelPath))
+            {
+                return false;
+            }
+
+            if (levelPath.PathNodes == null || levelPath.PathNodes.Length <= 0)
+            {
+                levelPath = null;
+                return false;
+            }
+
+            startPathNode = levelPath.PathNodes[0];
+            return true;
         }
 
         public Transform GetStartPathNode()
         {
-            LevelPath levelPath = GetLevelPath();
-
-            if (levelPath == null || levelPath.PathNodes.Length <= 0)
-                return null;
-
-            return levelPath.PathNodes[0];
+            return TryGetLevelPath(out _, out Transform startPathNode) ? startPathNode : null;
         }
     }
 }

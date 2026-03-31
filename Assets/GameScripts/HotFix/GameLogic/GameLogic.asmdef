@@ -2,6 +2,7 @@
     "name": "GameLogic",
     "rootNamespace": "GameLogic",
     "references": [
+        "TEngine.Extension",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:24c092aee38482f4e80715eaa8148782",
         "GUID:af760644fe07b7945b1afa1ccb7cff14",

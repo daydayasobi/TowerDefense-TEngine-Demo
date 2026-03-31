@@ -30,6 +30,7 @@ namespace GameLogic
         // 预览塔相关数据
         // private TowerDataBase previewTowerData; // 当前预览的塔数据
         private EntityTowerPreviewLogic entityPreviewLogic; // 预览塔的逻辑组件
+        private Tower previewTower;
 
         private Dictionary<int, TowerInfo> dicTowerInfo;
         private Dictionary<int, Entity> dicEnemyEntityInfo;
@@ -122,9 +123,14 @@ namespace GameLogic
             if (towerData == null)
                 return;
 
+            HidePreviewTower();
+
             Tower tower = DataTowerManager.Instance.CreateTower(towerData.Id);
+            if (tower == null)
+                return;
+
+            previewTower = tower;
             int serialId = GameModule.Entity.GenerateSerialId();
-            float radius = tower.GetRange(1);
             EntityDataControl.ShowEntity<EntityTowerPreviewLogic>(towerData.PreviewEntityId, serialId, (entity) =>
             {
                 entityPreviewLogic = entity.Logic as EntityTowerPreviewLogic;
@@ -137,13 +143,25 @@ namespace GameLogic
         /// </summary>
         public void HidePreviewTower()
         {
+            HidePreviewTower(true);
+        }
+
+        private void HidePreviewTower(bool destroyPreviewTower)
+        {
             if (entityPreviewLogic != null)
             {
                 GameEvent.Send(LevelEvent.OnHidePreviewTower);
                 EntityDataControl.Instance.HideEntity(entityPreviewLogic.Entity);
-                entityPreviewLogic = null;
-                isBuilding = false;
             }
+
+            if (destroyPreviewTower && previewTower != null)
+            {
+                DataTowerManager.Instance.DestroyTower(previewTower);
+            }
+
+            entityPreviewLogic = null;
+            previewTower = null;
+            isBuilding = false;
         }
 
         /// <summary>
@@ -152,7 +170,10 @@ namespace GameLogic
         public void CreateTower(Tower tower, IPlacementArea placementArea, IntVector2 placeGrid, Vector3 position, Quaternion rotation)
         {
             if (PlayerDataControl.Instance.Energy < tower.BuildEnergy)
+            {
+                placementArea.Clear(placeGrid, tower.Dimensions);
                 return;
+            }
 
             PlayerDataControl.Instance.AddEnergy(-tower.BuildEnergy);
 
@@ -165,7 +186,7 @@ namespace GameLogic
             }, EntityTowerData.Create(tower, position, rotation, entityRoot.transform, serialId));
 
             // 2. 隐藏预览塔
-            HidePreviewTower();
+            HidePreviewTower(false);
 
             // 3. 记录调试日志
             Log.Debug($"创建塔 [{tower.EntityId}] 在位置 {position}");
@@ -215,14 +236,20 @@ namespace GameLogic
                 return;
             }
 
+            if (!levelManager.TryGetLevelPath(out LevelPath levelPath, out Transform startPathNode))
+            {
+                Log.Error("Can not get a valid level path for enemy '{0}'.", enemyId);
+                return;
+            }
+
             int serialId = GameModule.Entity.GenerateSerialId();
             EntityDataControl.ShowEntity<EntityEnemyLogic>(enemyData.EntityId, serialId, (entity) =>
             {
                 dicEnemyEntityInfo.Add(entity.SerialId, entity);
             }, EntityEnemyData.Create(serialId,
                 enemyData,
-                levelManager.GetLevelPath(),
-                levelManager.GetStartPathNode().position - new Vector3(0, 0.2f, 0),
+                levelPath,
+                startPathNode.position - new Vector3(0, 0.2f, 0),
                 Quaternion.identity,
                 entityRoot.transform));
         }
@@ -362,6 +389,7 @@ namespace GameLogic
                 pause = false;
             }
 
+            HidePreviewTower();
             HideAllTower(); // 隐藏所有塔
             HideAllEnemyEntity(); // 隐藏所有敌人
             EntityDataControl.Instance.HideAllEntities();
@@ -396,6 +424,12 @@ namespace GameLogic
         /// </summary>
         public void Clear()
         {
+            if (previewTower != null)
+            {
+                DataTowerManager.Instance.DestroyTower(previewTower);
+                previewTower = null;
+            }
+
             entityPreviewLogic = null;
             isBuilding = false;
 
